@@ -10,15 +10,12 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AnimeStatus {
-//	@JsonProperty("All") // TODO: needed?
-//	ALL,
-
 	@JsonProperty("Airing")
 	@JsonAlias("Currently Airing")
 	AIRING,
 
 	@JsonProperty("Completed")
-	@JsonAlias("Complete")
+	@JsonAlias({ "Complete", "Finished Airing" })
 	COMPLETED,
 
 	@JsonProperty("Upcoming")

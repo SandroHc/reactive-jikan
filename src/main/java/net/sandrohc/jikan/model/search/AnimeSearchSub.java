@@ -45,7 +45,7 @@ public class AnimeSearchSub extends MalEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeSearch[" +
+		return "AnimeSearchSub[" +
 			   "id=" + malId +
 			   ", title='" + title + '\'' +
 			   ']';

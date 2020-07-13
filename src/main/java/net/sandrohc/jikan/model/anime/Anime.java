@@ -55,9 +55,9 @@ public class Anime extends MalEntity {
 	public float score;
 
 	@JsonProperty("scored_by")
-	public Object scoredBy; // TODO
+	public int scoredBy;
 
-	public Object rank; // TODO
+	public int rank;
 
 	public int popularity;
 
@@ -73,7 +73,6 @@ public class Anime extends MalEntity {
 
 	public String broadcast;
 
-//	public Map<String, List<Related>> related;
 	public RelatedAnime related;
 
 	public List<Object> producers; // TODO
