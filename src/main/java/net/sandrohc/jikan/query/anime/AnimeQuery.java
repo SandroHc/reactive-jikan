@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.query.anime;
 
+import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
 
@@ -13,8 +14,8 @@ public class AnimeQuery extends Query<Anime> {
 
 	private final int id;
 
-
-	public AnimeQuery(int id) {
+	public AnimeQuery(Jikan jikan, int id) {
+		super(jikan);
 		this.id = id;
 	}
 

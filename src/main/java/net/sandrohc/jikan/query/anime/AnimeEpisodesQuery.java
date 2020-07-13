@@ -6,7 +6,8 @@
 
 package net.sandrohc.jikan.query.anime;
 
-import net.sandrohc.jikan.model.anime.AnimeEpisodes;
+import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
 
 public class AnimeEpisodesQuery extends Query<AnimeEpisodes> {
@@ -17,8 +18,8 @@ public class AnimeEpisodesQuery extends Query<AnimeEpisodes> {
 	/** The page. Each page contains up to 100 episodes. */
 	private final int page;
 
-
-	public AnimeEpisodesQuery(int id, int page) {
+	public AnimeEpisodesQuery(Jikan jikan, int id, int page) {
+		super(jikan);
 		this.id = id;
 		this.page = page;
 	}

@@ -9,12 +9,21 @@ package net.sandrohc.jikan.query;
 import java.util.*;
 import java.util.stream.*;
 
+import net.sandrohc.jikan.Jikan;
+import reactor.core.publisher.Mono;
+
 public abstract class Query<T> {
 
+	protected final Jikan jikan;
 	protected final Map<String, Object> queryParams;
 
-	public Query() {
+	public Query(Jikan jikan) {
+		this.jikan = jikan;
 		this.queryParams = new HashMap<>();
+	}
+
+	public Mono<T> execute() {
+		return jikan.query(this);
 	}
 
 	public abstract Class<T> getRequestClass();

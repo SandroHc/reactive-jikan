@@ -16,6 +16,7 @@ import java.time.temporal.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
 import org.slf4j.*;
 import reactor.core.publisher.Mono;
@@ -45,6 +46,10 @@ public class Jikan {
 				.headers(h -> h
 						.add("Accept", "application/json")
 						.add("User-Agent", builder.userAgent));
+	}
+
+	public QueryFactory query() {
+		return new QueryFactory(this);
 	}
 
 	public <T> Mono<T> query(Query<T> query) {

@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.query.search;
 
+import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.Query;
 
@@ -15,7 +16,8 @@ public abstract class SearchQuery<C extends SearchQuery<C,R>, R> extends Query<R
 	protected final Type type;
 
 
-	protected SearchQuery(Type type) {
+	protected SearchQuery(Jikan jikan, Type type) {
+		super(jikan);
 		this.type = type;
 	}
 

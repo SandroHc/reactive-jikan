@@ -46,15 +46,19 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 Jikan jikan = new Jikan();
 
 // Fetch the anime with ID 1
-Anime anime = jikan.getAnime(1).block();
+Anime anime = jikan.query().anime()
+        .get(1)
+        .execute()
+        .block();
 
 // Search for 'sword art online'
-AnimeSearch animeSearch = jikan.request(new AnimeSearchQuery()
+AnimeSearch animeSearch = jikan.query().anime().search()
         .query("sword art online")
         .limit(5)
         .status(AnimeStatus.AIRING)
         .orderBy(AnimeOrderBy.MEMBERS)
-).block();
+        .execute()
+        .block();
 ```
 
 ### Query list

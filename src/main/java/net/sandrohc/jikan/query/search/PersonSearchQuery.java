@@ -6,13 +6,14 @@
 
 package net.sandrohc.jikan.query.search;
 
+import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.*;
 
 public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch> {
 
-	public PersonSearchQuery() {
-		super(Type.PERSON);
+	public PersonSearchQuery(Jikan jikan) {
+		super(jikan, Type.PERSON);
 	}
 
 	@Override

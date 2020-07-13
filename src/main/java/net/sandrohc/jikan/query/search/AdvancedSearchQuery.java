@@ -12,6 +12,7 @@ import java.nio.charset.*;
 import java.time.*;
 import java.time.format.*;
 
+import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 
@@ -19,8 +20,8 @@ import net.sandrohc.jikan.model.enums.*;
 public abstract class AdvancedSearchQuery<C extends SearchQuery<C,R>, R> extends SearchQuery<C, R> {
 
 
-	protected AdvancedSearchQuery(Type type) {
-		super(type);
+	protected AdvancedSearchQuery(Jikan jikan, Type type) {
+		super(jikan, type);
 	}
 
 	public C query(String val) throws UnsupportedEncodingException, JikanInvalidArgumentException {

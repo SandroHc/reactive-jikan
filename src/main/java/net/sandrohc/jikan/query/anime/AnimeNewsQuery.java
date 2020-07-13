@@ -6,16 +6,16 @@
 
 package net.sandrohc.jikan.query.anime;
 
-import net.sandrohc.jikan.model.anime.AnimeCharactersAndStaff;
-import net.sandrohc.jikan.model.anime.AnimeNews;
+import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
 
 public class AnimeNewsQuery extends Query<AnimeNews> {
 
 	private final int id;
 
-
-	public AnimeNewsQuery(int id) {
+	public AnimeNewsQuery(Jikan jikan, int id) {
+		super(jikan);
 		this.id = id;
 	}
 

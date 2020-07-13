@@ -8,13 +8,14 @@ package net.sandrohc.jikan.query.search;
 
 import java.util.*;
 
+import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.*;
 
 public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch> {
 
-	public MangaSearchQuery() {
-		super(Type.MANGA);
+	public MangaSearchQuery(Jikan jikan) {
+		super(jikan, Type.MANGA);
 	}
 
 	public MangaSearchQuery status(MangaStatus status) {
