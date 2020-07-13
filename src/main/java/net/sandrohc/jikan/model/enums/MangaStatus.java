@@ -10,10 +10,14 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum MangaStatus {
-	@JsonProperty("all")        ALL,
-	@JsonProperty("publishing") PUBLISHING,
-	@JsonProperty("completed")
-	@JsonAlias("complete")      COMPLETED,
-	@JsonProperty("to_be_published")
-	@JsonAlias({ "tbp", "upcoming" }) TO_BE_PUBLISHED,
+	@JsonProperty("Publishing")
+	PUBLISHING,
+
+	@JsonProperty("Completed")
+	@JsonAlias("Complete")
+	COMPLETED,
+
+	@JsonProperty("To be published")
+	@JsonAlias({ "TBP", "Upcoming" })
+	TO_BE_PUBLISHED,
 }

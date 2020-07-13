@@ -6,11 +6,20 @@
 
 package net.sandrohc.jikan.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Type {
-	@JsonProperty("anime")     ANIME,
-	@JsonProperty("manga")     MANGA,
-	@JsonProperty("person")    PERSON,
-	@JsonProperty("character") CHARACTER,
+	@JsonProperty("anime")
+	ANIME,
+
+	@JsonProperty("manga")
+	MANGA,
+
+	@JsonProperty("person")
+	@JsonAlias("people")
+	PERSON,
+
+	@JsonProperty("character")
+	CHARACTER,
 }

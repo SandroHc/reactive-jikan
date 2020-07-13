@@ -9,15 +9,13 @@ package net.sandrohc.jikan.model;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
-public class Genre extends MalEntity {
+public class Genre<T> extends MalEntity {
 
 	public Type type;
 
-	public net.sandrohc.jikan.model.enums.Genre name;
+	public T name;
 
 	public String url;
-
-
 
 	@Override
 	public String toString() {

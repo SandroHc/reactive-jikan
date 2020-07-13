@@ -18,4 +18,8 @@ public class QueryFactory extends Factory {
         return new AnimeQueryFactory(this.jikan);
     }
 
+    public MangaQueryFactory manga() {
+        return new MangaQueryFactory(this.jikan);
+    }
+
 }

@@ -33,7 +33,7 @@ public enum MangaGenre {
 	@JsonProperty("Samurai")       SAMURAI,
 	@JsonProperty("Romance")       ROMANCE,
 	@JsonProperty("School")        SCHOOL,
-	@JsonProperty("SciFi")         SCI_FI,
+	@JsonProperty("Sci-Fi")        SCI_FI,
 	@JsonProperty("Shoujo")        SHOUJO,
 	@JsonProperty("ShoujoAi")      SHOUJO_AI,
 	@JsonProperty("Shounen")       SHOUNEN,

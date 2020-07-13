@@ -79,7 +79,7 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/recommendations            	|                              	|             	|
 | /{id}/userupdates/{page}         	|                              	|             	|
 | **Manga**                        |                              	|             	|
-| /{id}                            	|                              	|             	|
+| /{id}                            	| MangaQuery                    | Manga                     |
 | /{id}/characters                 	|                              	|             	|
 | /{id}/news                       	|                              	|             	|
 | /{id}/pictures                   	|                              	|             	|

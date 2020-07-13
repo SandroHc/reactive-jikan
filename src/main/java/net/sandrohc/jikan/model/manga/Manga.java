@@ -4,28 +4,21 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.manga;
 
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.Genre;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
 /**
- * An anime object with all its details.
+ * A manga object with all its details.
  */
-public class Anime extends MalEntity {
+public class Manga extends MalEntity {
 
 	public String url;
-
-	@JsonProperty("image_url")
-	public String imageUrl;
-
-	@JsonProperty("trailer_url")
-	public String trailerUrl;
 
 	public String title;
 
@@ -38,26 +31,27 @@ public class Anime extends MalEntity {
 	@JsonProperty("title_synonyms")
 	public List<String> titleSynonyms;
 
-	public AnimeType type;
+	public MangaStatus status;
 
-	public String source;
+	@JsonProperty("image_url")
+	public String imageUrl;
 
-	public int episodes;
+	public MangaType type;
 
-	public AnimeStatus status;
+	public int volumes;
 
-	public DateRange aired;
+	public int chapters;
 
-	public String duration;
+	public boolean publishing;
 
-	public AgeRating rating;
+	public DateRange published;
+
+	public int rank;
 
 	public float score;
 
 	@JsonProperty("scored_by")
 	public int scoredBy;
-
-	public int rank;
 
 	public int popularity;
 
@@ -69,31 +63,17 @@ public class Anime extends MalEntity {
 
 	public String background;
 
-	public String premiered;
-
-	public String broadcast;
-
 	public Related related;
 
-	public List<Object> producers; // TODO
+	public List<Genre<MangaGenre>> genres;
 
-	public List<Licensor> licensors;
+	public List<MalSubEntity> authors;
 
-	public List<Studio> studios;
-
-	public List<Genre<AnimeGenre>> genres;
-
-	@JsonProperty("opening_themes")
-	public List<String> openingThemes;
-
-	@JsonProperty("ending_themes")
-	public List<String> endingThemes;
-
-
+	public List<Object> serializations; // TODO
 
 	@Override
 	public String toString() {
-		return "Anime[" +
+		return "Manga[" +
 			   "id=" + malId +
 			   ", title='" + title + '\'' +
 			   ']';
