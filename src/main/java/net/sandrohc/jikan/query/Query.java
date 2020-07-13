@@ -9,19 +9,20 @@ package net.sandrohc.jikan.query;
 import java.util.*;
 import java.util.stream.*;
 
-public interface Query<T> {
+public abstract class Query<T> {
 
-	Map<String, Object> queryParams = new HashMap<>();
+	protected final Map<String, Object> queryParams;
 
+	public Query() {
+		this.queryParams = new HashMap<>();
+	}
 
-	Class<T> getRequestClass();
+	public abstract Class<T> getRequestClass();
 
-	String getBaseUri();
+	protected abstract String getBaseUri();
 
-	default String getUri() {
-		StringBuilder sb = new StringBuilder();
-
-		sb.append(getBaseUri());
+	public String getUri() {
+		StringBuilder sb = new StringBuilder(getBaseUri());
 
 		if (!queryParams.isEmpty()) {
 			String params = this.queryParams.entrySet().stream()

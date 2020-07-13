@@ -10,7 +10,7 @@ import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.Query;
 
 @SuppressWarnings("unchecked")
-public abstract class SearchQuery<C extends SearchQuery<C,R>, R> implements Query<R> {
+public abstract class SearchQuery<C extends SearchQuery<C,R>, R> extends Query<R> {
 
 	protected final Type type;
 

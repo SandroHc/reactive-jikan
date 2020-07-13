@@ -14,6 +14,9 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
+/**
+ * An anime object with all its details.
+ */
 public class Anime extends MalEntity {
 
 	public String url;

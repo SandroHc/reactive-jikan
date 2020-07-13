@@ -9,7 +9,7 @@ package net.sandrohc.jikan.query.anime;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimeQuery implements Query<Anime> {
+public class AnimeQuery extends Query<Anime> {
 
 	private final int id;
 
