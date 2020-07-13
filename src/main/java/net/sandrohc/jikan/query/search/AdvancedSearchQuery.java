@@ -23,7 +23,10 @@ public abstract class AdvancedSearchQuery<C extends SearchQuery<C,R>, R> extends
 		super(type);
 	}
 
-	public C query(String val) throws UnsupportedEncodingException {
+	public C query(String val) throws UnsupportedEncodingException, JikanInvalidArgumentException {
+		if (val.length() < 3)
+			throw new JikanInvalidArgumentException("query must be a minimum of 3 characters");
+
 		// encode the string, as per the RFC3986 - http://tools.ietf.org/html/rfc3986#section-2.1 (percent encoding)
 		String encoded = URLEncoder.encode(val, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
 

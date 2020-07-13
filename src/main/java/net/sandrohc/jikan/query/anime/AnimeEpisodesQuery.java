@@ -11,7 +11,10 @@ import net.sandrohc.jikan.query.Query;
 
 public class AnimeEpisodesQuery extends Query<AnimeEpisodes> {
 
+	/** The anime ID. */
 	private final int id;
+
+	/** The page. Each page contains up to 100 episodes. */
 	private final int page;
 
 

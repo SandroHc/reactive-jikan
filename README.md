@@ -57,3 +57,60 @@ AnimeSearch animeSearch = jikan.request(new AnimeSearchQuery()
         .orderBy(AnimeOrderBy.MEMBERS)
 ).block();
 ```
+
+### Query list
+
+| Endpoint                         	| Query                        	| Result      	            |
+|----------------------------------	|------------------------------	|-------------------------- |
+| **Anime**                        |                              	|             	            |
+| /{id}                            	| AnimeSearchQuery              | AnimeSearch 	            |
+| /{id}/characters_staff           	| AnimeCharactersAndStaffQuery	| AnimeCharactersAndStaff   |
+| /{id}/episodes/{page}            	| AnimeEpisodesQuery            | AnimeEpisodes             |
+| /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
+| /{id}/pictures                   	| AnimePicturesQuery            | AnimePictures            	|
+| /{id}/videos                     	| AnimeVideosQuery              | AnimeVideos            	|
+| /{id}/stats                      	| AnimeStatsQuery               | AnimeStats            	|
+| /{id}/forum                      	| AnimeForumQuery               | AnimeForum            	|
+| /{id}/moreinfo                   	| AnimeMoreInfoQuery            | AnimeMoreInfo            	|
+| /{id}/reviews/{page}             	|                              	|             	|
+| /{id}/recommendations            	|                              	|             	|
+| /{id}/userupdates/{page}         	|                              	|             	|
+| **Manga**                        |                              	|             	|
+| /{id}                            	|                              	|             	|
+| /{id}/characters                 	|                              	|             	|
+| /{id}/news                       	|                              	|             	|
+| /{id}/pictures                   	|                              	|             	|
+| /{id}/stats                      	|                              	|             	|
+| /{id}/forum                      	|                              	|             	|
+| /{id}/moreinfo                   	|                              	|             	|
+| /{id}/reviews/{page}             	|                              	|             	|
+| /{id}/recommendations            	|                              	|             	|
+| /{id}/userupdates/{page}         	|                              	|             	|
+| **Person**                           	|                              	|             	|
+| /{id}                            	|                              	|             	|
+| /{id}/pictures                   	|                              	|             	|
+| **Character**                        	|                              	|             	|
+| /{id}                            	|                              	|             	|
+| /{id}/pictures                   	|                              	|             	|
+| **Search**                           	|                              	|             	|
+|                                  	|                              	|             	|
+| **Season**                           	|                              	|             	|
+| /{year}/{season}          	    |                              	|             	|
+| /archive                  	    |                              	|             	|
+| /later                    	    |                              	|             	|
+| **Schedule**                     |                              	|             	|
+| /{day}                  	        |                              	|             	|
+| **Top**                          |                               	|             	|
+| /{type}/{page}/{subtype}   	    |                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+|                                  	|                              	|             	|
+
+## Suggestions
+* anime search sortBy doesn't seem ot be working
+* anime/{id}/characters_staff - split into /characters and /staff
+* manga/{id}/characters - split into /characters and /staff

@@ -8,21 +8,18 @@ package net.sandrohc.jikan.model.anime;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.CacheEntity;
 
-public class AnimeEpisodes extends CacheEntity {
+public class AnimeVideos extends CacheEntity {
 
-	public List<AnimeEpisodesSub> episodes;
+	public List<AnimeVideosPromo> promo;
 
-	/** The last page of the paginated results. */
-	@JsonProperty("episodes_last_page")
-	public int lastPage;
+	public List<AnimeVideosEpisode> episodes;
 
 
 	@Override
 	public String toString() {
-		return "AnimeEpisodes[" + // TODO
+		return "AnimeVideos[" + // TODO
 			   ']';
 	}
 
