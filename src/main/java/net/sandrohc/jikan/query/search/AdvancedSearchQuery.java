@@ -71,7 +71,7 @@ public abstract class AdvancedSearchQuery<C extends SearchQuery<C,R>, R> extends
 	}
 
 	public C sort(Sort sort) {
-		queryParams.put("sort", sort.name().toLowerCase());
+		queryParams.put("sort", sort.key);
 		return (C) this;
 	}
 

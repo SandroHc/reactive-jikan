@@ -1,7 +1,6 @@
 # Reactive Jikan
 
-[![](https://jitpack.io/v/SandroHc/reactive-jikan.svg?style=flat-square)]
-(https://jitpack.io/#net.sandrohc/reactive-jikan)
+[![](https://jitpack.io/v/SandroHc/reactive-jikan.svg?style=flat-square)](https://jitpack.io/#net.sandrohc/reactive-jikan)
 
 API wrapper for the [Jikan API](https://jikan.moe), with the power of Project Reactor and reactive streams.
 

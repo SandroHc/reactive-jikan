@@ -7,6 +7,17 @@ version '0.1.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
+}
+
+jar {
+    manifest {
+        attributes(
+                'Implementation-Title': 'reactive-jikan',
+                'Implementation-Version': project.version
+        )
+    }
 }
 
 repositories {
@@ -23,6 +34,8 @@ dependencies {
 
     // Logging
     api 'org.slf4j:slf4j-api:2.0.0-alpha1'
+    testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.0-alpha1'
 
-    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'junit:junit:4.12'
+    testImplementation 'io.projectreactor.tools:blockhound:1.0.4.RELEASE'
 }

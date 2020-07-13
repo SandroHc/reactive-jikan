@@ -12,9 +12,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum Sort {
 	@JsonProperty("ascending")
 	@JsonAlias("asc")
-	ASCENDING,
+	ASCENDING("asc"),
 
 	@JsonProperty("descending")
 	@JsonAlias("desc")
-	DESCENDING,
+	DESCENDING("desc"),
+	;
+
+	public final String key;
+
+	Sort(String key) {
+		this.key = key;
+	}
+
 }
