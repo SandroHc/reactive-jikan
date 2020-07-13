@@ -1,0 +1,29 @@
+plugins {
+    id 'java-library'
+}
+
+group 'net.sandrohc'
+version '0.1.0'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+}
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.spring.io/milestone' }
+}
+
+dependencies {
+    // Project Reactor
+    implementation 'io.projectreactor.netty:reactor-netty:1.0.0-M1'
+
+    // Jackson (JSON serializer)
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
+
+    // Logging
+    api 'org.slf4j:slf4j-api:2.0.0-alpha1'
+
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+}
