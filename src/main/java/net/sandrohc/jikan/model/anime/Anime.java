@@ -19,22 +19,29 @@ import net.sandrohc.jikan.model.enums.*;
  */
 public class Anime extends MalEntity {
 
+	/** The anime page URL on MyAnimeList. */
 	public String url;
 
+	/** The banner image URL. */
 	@JsonProperty("image_url")
 	public String imageUrl;
 
+	/** The official trailer URL. */
 	@JsonProperty("trailer_url")
 	public String trailerUrl;
 
+	/** The official title. */
 	public String title;
 
+	/** The official title in english. */
 	@JsonProperty("title_english")
 	public String titleEnglish;
 
+	/** The official title in japanese. */
 	@JsonProperty("title_japanese")
 	public String titleJapanese;
 
+	/** The title synonyms. */
 	@JsonProperty("title_synonyms")
 	public List<String> titleSynonyms;
 
@@ -50,8 +57,10 @@ public class Anime extends MalEntity {
 
 	public String duration;
 
+	/** The anime age rating. */
 	public AgeRating rating;
 
+	/** The anime score, in the range of 0.00 to 10.00. */
 	public float score;
 
 	@JsonProperty("scored_by")
@@ -69,17 +78,19 @@ public class Anime extends MalEntity {
 
 	public String background;
 
+	/** The season the anime was premiered in. e.g. "Summer 2010" */
 	public String premiered;
 
+	/** The broadcast times for when the anime as airing. e.g. "Sundays at 00:00 (JST)" */
 	public String broadcast;
 
 	public Related related;
 
-	public List<Object> producers; // TODO
+	public List<MalSubEntity> producers;
 
-	public List<Licensor> licensors;
+	public List<MalSubEntity> licensors;
 
-	public List<Studio> studios;
+	public List<MalSubEntity> studios;
 
 	public List<Genre<AnimeGenre>> genres;
 
@@ -90,13 +101,9 @@ public class Anime extends MalEntity {
 	public List<String> endingThemes;
 
 
-
 	@Override
 	public String toString() {
-		return "Anime[" +
-			   "id=" + malId +
-			   ", title='" + title + '\'' +
-			   ']';
+		return "Anime[id=" + malId + ", title='" + title + "']";
 	}
 
 }

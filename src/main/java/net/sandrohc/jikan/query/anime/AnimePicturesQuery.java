@@ -21,7 +21,7 @@ public class AnimePicturesQuery extends Query<AnimePictures> {
 
 	@Override
 	public String getBaseUri() {
-		return "anime/" + id + "/pictures";
+		return "/anime/" + id + "/pictures";
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public class AnimeNewsQuery extends Query<AnimeNews> {
 
 	@Override
 	public String getBaseUri() {
-		return "anime/" + id + "/news";
+		return "/anime/" + id + "/news";
 	}
 
 	@Override

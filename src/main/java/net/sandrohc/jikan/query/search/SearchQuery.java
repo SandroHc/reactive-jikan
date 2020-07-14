@@ -28,7 +28,7 @@ public abstract class SearchQuery<C extends SearchQuery<C,R>, R> extends Query<R
 
 	@Override
 	public String getBaseUri() {
-		return "search/" + type.name().toLowerCase();
+		return "/search/" + type.name().toLowerCase();
 	}
 
 }

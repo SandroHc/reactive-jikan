@@ -26,7 +26,7 @@ public class AnimeEpisodesQuery extends Query<AnimeEpisodes> {
 
 	@Override
 	public String getBaseUri() {
-		return "anime/" + id + "/episodes/" + page;
+		return "/anime/" + id + "/episodes/" + page;
 	}
 
 	@Override

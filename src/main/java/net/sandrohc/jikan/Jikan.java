@@ -16,6 +16,8 @@ import java.time.temporal.*;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import io.netty.handler.codec.http.HttpHeaderNames;
+import io.netty.handler.codec.http.HttpHeaderValues;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
 import org.slf4j.*;
@@ -30,22 +32,21 @@ public class Jikan {
 			.registerModule(new JavaTimeModule())
 			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-	private final String baseUrl;
-	private final boolean debug;
 	private final HttpClient httpClient;
+	private final boolean debug;
 
 	public Jikan() {
 		this(new JikanBuilder()); // use builder defaults
 	}
 
 	public Jikan(JikanBuilder builder) {
-		this.baseUrl = builder.baseUrl;
 		this.debug   = builder.debug;
 
 		this.httpClient = HttpClient.create()
+				.baseUrl(builder.baseUrl)
 				.headers(h -> h
-						.add("Accept", "application/json")
-						.add("User-Agent", builder.userAgent));
+						.add(HttpHeaderNames.ACCEPT, HttpHeaderValues.APPLICATION_JSON)
+						.add(HttpHeaderNames.USER_AGENT, builder.userAgent));
 	}
 
 	public QueryFactory query() {
@@ -53,10 +54,10 @@ public class Jikan {
 	}
 
 	public <T> Mono<T> query(Query<T> query) {
-		final String url = baseUrl + query.getUri();
-		LOG.atDebug().addArgument(url).log("Fetching request: {}");
+		final String uri = query.getUri();
+		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
-		return httpClient.get().uri(baseUrl + query.getUri())
+		return httpClient.get().uri(uri)
 				.responseContent()
 				.aggregate()
 				.asByteArray()
@@ -103,7 +104,7 @@ public class Jikan {
 			writer.newLine();
 			writer.write("Class: " + query.getRequestClass().getName());
 			writer.newLine();
-			writer.write("URL: " + baseUrl + query.getUri());
+			writer.write("URI: " + query.getUri());
 			writer.newLine(); writer.newLine(); writer.flush();
 
 			/* Exception */
@@ -132,7 +133,7 @@ public class Jikan {
 
 	public static class JikanBuilder {
 
-		private String baseUrl = "https://api.jikan.moe/v3/";
+		private String baseUrl = "https://api.jikan.moe/v3";
 		private String userAgent = getDefaultUserAgent();
 		private boolean debug  = false;
 
@@ -141,7 +142,6 @@ public class Jikan {
 
 		public JikanBuilder baseUrl(String baseUrl) {
 			this.baseUrl = baseUrl;
-			if (!this.baseUrl.endsWith("/")) this.baseUrl += '/';
 			return this;
 		}
 
