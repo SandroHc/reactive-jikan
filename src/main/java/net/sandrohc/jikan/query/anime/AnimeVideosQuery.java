@@ -20,7 +20,7 @@ public class AnimeVideosQuery extends Query<AnimeVideos> {
 	}
 
 	@Override
-	public String getBaseUri() {
+	public String getUri() {
 		return "/anime/" + id + "/videos";
 	}
 

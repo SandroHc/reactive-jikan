@@ -20,7 +20,7 @@ public class MangaQuery extends Query<Manga> {
 	}
 
 	@Override
-	public String getBaseUri() {
+	public String getUri() {
 		return "/manga/" + id;
 	}
 

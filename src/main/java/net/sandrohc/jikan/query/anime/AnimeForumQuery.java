@@ -20,7 +20,7 @@ public class AnimeForumQuery extends Query<AnimeForum> {
 	}
 
 	@Override
-	public String getBaseUri() {
+	public String getUri() {
 		return "/anime/" + id + "/forum";
 	}
 

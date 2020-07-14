@@ -20,7 +20,7 @@ public class AnimeCharactersAndStaffQuery extends Query<AnimeCharactersAndStaff>
 	}
 
 	@Override
-	public String getBaseUri() {
+	public String getUri() {
 		return "/anime/" + id + "/characters_staff";
 	}
 

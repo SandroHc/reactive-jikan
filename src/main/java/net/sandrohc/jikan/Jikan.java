@@ -12,6 +12,8 @@ import java.nio.file.*;
 import java.time.*;
 import java.time.format.*;
 import java.time.temporal.*;
+import java.util.*;
+import java.util.stream.*;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +30,9 @@ import reactor.netty.ByteBufMono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.http.client.HttpClientResponse;
 
+/**
+ * The Jikan instance is responsible for executing queries and deserializing the response into POJOs.
+ */
 public class Jikan {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Jikan.class);
@@ -53,24 +58,64 @@ public class Jikan {
 						.add(HttpHeaderNames.USER_AGENT, builder.userAgent));
 	}
 
+	/**
+	 * Build a query factory using this instance of Jikan.
+	 *
+	 * @return the query factory
+	 */
 	public QueryFactory query() {
 		return new QueryFactory(this);
 	}
 
+	/**
+	 * Executes the desired query and returns the parsed entity.
+	 *
+	 * @param query the query
+	 * @param <T> the expected entity type
+	 * @return the parsed entity, or {@code null} if the entity was not found
+	 */
 	public <T> Mono<T> query(Query<T> query) {
-		final String uri = query.getUri();
+		final String uri = buildUri(query);
 		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
 		return httpClient.get().uri(uri).responseSingle((res, content) -> handleResponse(res, content, query));
 	}
 
+	private <T> String buildUri(Query<T> query) {
+		StringBuilder sb = new StringBuilder(query.getUri());
+
+		Map<String, Object> queryParameters = query.getQueryParameters();
+		if (!queryParameters.isEmpty()) {
+			String params = queryParameters.entrySet().stream()
+					.map(entry -> {
+						final String key;
+						final String value;
+						if (entry.getValue() instanceof Collection) {
+							key = entry.getKey() + "[]";
+							value = ((Collection<?>) entry.getValue()).stream().map(String::valueOf).collect(Collectors.joining(","));
+						} else {
+							key = entry.getKey();
+							value = String.valueOf(entry.getValue());
+						}
+						return key + "=" + value;
+					})
+					.collect(Collectors.joining("&"));
+
+			sb.append('?').append(params);
+		}
+
+		return sb.toString();
+	}
+
 	private <T> Mono<T> handleResponse(HttpClientResponse res, ByteBufMono content, Query<T> query) {
-		if (res.status() != HttpResponseStatus.OK) {
-			return content.asString()
-					.flatMap(str -> Mono.error(new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + query.getClass().getSimpleName() + ": " + str)));
+		if (res.status() == HttpResponseStatus.OK) {
+			return content.asByteArray().flatMap(bytes -> decode(query, bytes));
+		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
+			return Mono.empty();
 		} else {
-			return content.asByteArray()
-					.flatMap(bytes -> decode(query, bytes));
+			return content.asString().flatMap(str -> Mono.error(
+					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + query.getClass().getSimpleName() + ": " + str)
+			));
 		}
 	}
 
@@ -115,6 +160,8 @@ public class Jikan {
 			writer.write("Class: " + query.getRequestClass().getName());
 			writer.newLine();
 			writer.write("URI: " + query.getUri());
+			writer.newLine();
+			writer.write("Query parameters: " + query.getQueryParameters());
 			writer.newLine(); writer.newLine(); writer.flush();
 
 			/* Exception */
@@ -141,6 +188,9 @@ public class Jikan {
 	}
 
 
+	/**
+	 * A builder for the {@link Jikan} class.
+	 */
 	public static class JikanBuilder {
 
 		private String baseUrl = "https://api.jikan.moe/v3";
@@ -150,25 +200,59 @@ public class Jikan {
 		public JikanBuilder() {
 		}
 
+		/**
+		 * Defines the base URL for all the queries.
+		 * <p>
+		 * By default uses the official Jikan API endpoint.
+		 *
+		 * @param baseUrl the base URL
+		 * @return the builder
+		 */
 		public JikanBuilder baseUrl(String baseUrl) {
 			this.baseUrl = baseUrl;
 			return this;
 		}
 
+		/**
+		 * Defines the user agent for all the queries.
+		 * <p>
+		 * By default is: {@code reactive-jikan/<version>}
+		 *
+		 * @param userAgent the user agent
+		 * @return the builder
+		 */
 		public JikanBuilder userAgent(String userAgent) {
 			this.userAgent = userAgent;
 			return this;
 		}
 
+		/**
+		 * Defines the debug mode.
+		 *
+		 * @param debug the debug mode
+		 * @return the builder
+		 */
 		public JikanBuilder debug(boolean debug) {
 			this.debug = debug;
 			return this;
 		}
 
+		/**
+		 * Build the Jikan instance.
+		 *
+		 * @return the Jikan instance
+		 */
 		public Jikan build() {
 			return new Jikan(this);
 		}
 
+		/**
+		 * Retrieves the user agent from the JAR manifest.
+		 * <p>
+		 * Usually is: {@code reactive-jikan/<version>}
+		 *
+		 * @return the default user agent
+		 */
 		public String getDefaultUserAgent() {
 			Package pck = getClass().getPackage();
 			if (pck.getImplementationTitle() == null) {
