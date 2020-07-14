@@ -18,11 +18,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
 import org.slf4j.*;
 import reactor.core.publisher.Mono;
+import reactor.netty.ByteBufMono;
 import reactor.netty.http.client.HttpClient;
+import reactor.netty.http.client.HttpClientResponse;
 
 public class Jikan {
 
@@ -57,24 +61,30 @@ public class Jikan {
 		final String uri = query.getUri();
 		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
-		return httpClient.get().uri(uri)
-				.responseContent()
-				.aggregate()
-				.asByteArray()
-				.flatMap(response -> decode(query, response));
+		return httpClient.get().uri(uri).responseSingle((res, content) -> handleResponse(res, content, query));
 	}
 
-	private <T> Mono<T> decode(Query<T> query, byte[] response) {
+	private <T> Mono<T> handleResponse(HttpClientResponse res, ByteBufMono content, Query<T> query) {
+		if (res.status() != HttpResponseStatus.OK) {
+			return content.asString()
+					.flatMap(str -> Mono.error(new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + query.getClass().getSimpleName() + ": " + str)));
+		} else {
+			return content.asByteArray()
+					.flatMap(bytes -> decode(query, bytes));
+		}
+	}
+
+	private <T> Mono<T> decode(Query<T> query, byte[] content) {
 		try {
-			return Mono.just(JSON_PARSER.readValue(response, query.getRequestClass()));
+			return Mono.just(JSON_PARSER.readValue(content, query.getRequestClass()));
 		} catch (IOException e) {
-			return Mono.error(dumpStacktrace(query, response, e));
+			return Mono.error(dumpStacktrace(query, content, e));
 		}
 	}
 
 	private <T> Exception dumpStacktrace(Query<T> query, byte[] response, Exception e) {
 		if (!debug) {
-			return new JikanException("Error parsing JSON for query: " + query.getClass().getName(), e);
+			return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName(), e);
 		}
 
 		// formatter that prints: YYYYMMDDHH'T'MMSSNNN
@@ -126,7 +136,7 @@ public class Jikan {
 			LOG.atError().setCause(ex).addArgument(query).addArgument(reportPath).log("Error dumping contents of {} to: {}");
 		}
 
-		return new JikanException("Error parsing JSON for query: " + query.getClass().getName() +
+		return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName() +
 				". A report file was generated at: " + reportPath, e);
 	}
 

@@ -14,39 +14,39 @@ import net.sandrohc.jikan.model.base.*;
 public class Related {
 
 	@JsonProperty("Prequel")
-	public List<MalSubEntity> prequels;
+	public List<MalSubEntity> prequels = Collections.emptyList();
 
 	@JsonProperty("Alternative version")
-	public List<MalSubEntity> alternativeVersions;
+	public List<MalSubEntity> alternativeVersions = Collections.emptyList();
 
 	@JsonProperty("Alternative setting")
-	public List<MalSubEntity> alternativeSettings;
+	public List<MalSubEntity> alternativeSettings = Collections.emptyList();
 
 	@JsonProperty("Character")
-	public List<MalSubEntity> characters;
+	public List<MalSubEntity> characters = Collections.emptyList();
 
 	@JsonProperty("Spin-off")
-	public List<MalSubEntity> spinOffs;
+	public List<MalSubEntity> spinOffs = Collections.emptyList();
 
 	@JsonProperty("Adaptation")
-	public List<MalSubEntity> adaptations;
+	public List<MalSubEntity> adaptations = Collections.emptyList();
 
 	@JsonProperty("Summary")
-	public List<MalSubEntity> summaries;
+	public List<MalSubEntity> summaries = Collections.emptyList();
 
 	@JsonProperty("Sequel")
-	public List<MalSubEntity> sequels;
+	public List<MalSubEntity> sequels = Collections.emptyList();
 
 	@JsonProperty("Side story")
-	public List<MalSubEntity> sideStories;
+	public List<MalSubEntity> sideStories = Collections.emptyList();
 
 	@JsonProperty("Other")
-	public List<MalSubEntity> others;
+	public List<MalSubEntity> others = Collections.emptyList();
 
 	@JsonProperty("Parent story")
-	public List<MalSubEntity> parentStories;
+	public List<MalSubEntity> parentStories = Collections.emptyList();
 
 	@JsonProperty("Full story")
-	public List<MalSubEntity> fullStories;
+	public List<MalSubEntity> fullStories = Collections.emptyList();
 
 }

@@ -46,8 +46,7 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 Jikan jikan = new Jikan();
 
 // Fetch the anime with ID 1
-Anime anime = jikan.query().anime()
-        .get(1)
+Anime anime = jikan.query().anime().get(1)
         .execute()
         .block();
 

@@ -4,9 +4,9 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan;
+package net.sandrohc.jikan.exception;
 
-public class JikanInvalidArgumentException extends Exception {
+public class JikanInvalidArgumentException extends JikanException {
 
 	public JikanInvalidArgumentException() {
 	}

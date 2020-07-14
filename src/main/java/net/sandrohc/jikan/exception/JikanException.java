@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan;
+package net.sandrohc.jikan.exception;
 
 public class JikanException extends Exception {
 

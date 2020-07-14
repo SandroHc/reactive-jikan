@@ -13,7 +13,7 @@ import java.time.*;
 import java.time.format.*;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.JikanInvalidArgumentException;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 
 @SuppressWarnings("unchecked")
