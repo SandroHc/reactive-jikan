@@ -2,15 +2,10 @@ package net.sandrohc.jikan.test;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.Jikan.JikanBuilder;
-import net.sandrohc.jikan.model.anime.Anime;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.mockserver.integration.ClientAndServer;
 
-import static net.sandrohc.jikan.test.MockUtils.mock;
-import static org.junit.jupiter.api.Assertions.*;
-
+@TestMethodOrder(MethodOrderer.DisplayName.class)
 public class RequestTest {
 
 	protected static Jikan jikan;
@@ -19,7 +14,7 @@ public class RequestTest {
 	@BeforeAll
 	public static void setup() {
 		mockServer = MockUtils.createMockServer();
-		jikan = new JikanBuilder().baseUrl(MockUtils.MOCK_HOST).build();
+		jikan = new JikanBuilder().baseUrl(MockUtils.MOCK_URL).build();
 	}
 
 	@AfterAll
