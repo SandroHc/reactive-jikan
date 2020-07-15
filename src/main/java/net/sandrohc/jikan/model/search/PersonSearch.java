@@ -6,6 +6,26 @@
 
 package net.sandrohc.jikan.model.search;
 
-public class PersonSearch {
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.person.*;
+
+public class PersonSearch extends CacheEntity {
+
+    public List<PersonSub> results;
+
+    @JsonProperty("last_page")
+    public int lastPage;
+
+
+    @Override
+    public String toString() {
+        return "PersonSearch[" +
+                "results=" + (results == null ? null : (results.size() + " results")) +
+                ", lastPage=" + lastPage +
+                ']';
+    }
 
 }

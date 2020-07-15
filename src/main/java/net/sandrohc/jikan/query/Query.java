@@ -33,4 +33,9 @@ public abstract class Query<T> {
 
 	public abstract Class<T> getRequestClass();
 
+	@Override
+	public String toString() {
+		return getClass().getSimpleName() + "[uri='" + getUri() + "']";
+	}
+
 }

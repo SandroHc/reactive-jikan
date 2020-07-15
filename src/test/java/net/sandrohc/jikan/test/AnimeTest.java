@@ -14,10 +14,10 @@ import static net.sandrohc.jikan.test.MockUtils.mock;
 import static net.sandrohc.jikan.test.MockUtils.mockError;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RequestAnimeTest extends RequestTest {
+public class AnimeTest extends BaseTest {
 
 	@Test
-	void fetchAnimeById() {
+	void fetchById() {
 		String response = "{" +
 						  "  \"mal_id\": 1," +
 						  "  \"url\": \"https://example.com/url\"," +

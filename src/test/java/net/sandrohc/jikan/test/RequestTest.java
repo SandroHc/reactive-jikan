@@ -1,25 +1,33 @@
 package net.sandrohc.jikan.test;
 
-import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.Jikan.JikanBuilder;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import net.sandrohc.jikan.model.anime.*;
 import org.junit.jupiter.api.*;
-import org.mockserver.integration.ClientAndServer;
 
-@TestMethodOrder(MethodOrderer.DisplayName.class)
-public class RequestTest {
+import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockError;
+import static org.junit.jupiter.api.Assertions.*;
 
-	protected static Jikan jikan;
-	protected static ClientAndServer mockServer;
+public class RequestTest extends BaseTest {
 
-	@BeforeAll
-	public static void setup() {
-		mockServer = MockUtils.createMockServer();
-		jikan = new JikanBuilder().baseUrl(MockUtils.MOCK_URL).build();
+	@Test
+	void testBadRequest() {
+		mockError(mockServer, HttpResponseStatus.BAD_REQUEST);
+		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
 	}
 
-	@AfterAll
-	public static void stopServer() {
-		mockServer.stop();
+	@Test
+	void testNotFound() {
+		mockError(mockServer, HttpResponseStatus.NOT_FOUND);
+
+		Anime anime = jikan.query().anime().get(1).execute().block();
+		assertNull(anime);
+	}
+
+	@Test
+	void testInvalidJson() {
+		mock(mockServer, "/anime/1", "{ invalid }");
+		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
 	}
 
 }

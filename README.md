@@ -42,8 +42,17 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 ## Usage
 
+The way you fetch data is through the `Query` classes.
+
+Once you create your desired query (you can use the `QueryFactory` to help you navigating the list of queries), you can pass it to your `Jikan` instance. While building the query, you may specify optional parameters.
+
+With the query setup with your desired paramers, you may now execute it by calling `query.execute()` (or use `jikan.query()`). The method returned is a reactive stream of type `Mono<T>`. To convert it into your desired result, you must call `subscribe()` or `block()`.
+
+Here are some examples on how to use it:
 ```java
-Jikan jikan = new Jikan();
+// Create the Jikan instance with default parameters.
+// You can also use the builder, JikanBuilder, if you desire different parameters.
+Jikan jikan = new Jikan(); 
 
 // Fetch the anime with ID 1
 Anime anime = jikan.query().anime().get(1)
@@ -64,8 +73,8 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 
 | Endpoint                         	| Query                        	| Result      	            |
 |----------------------------------	|------------------------------	|-------------------------- |
-| **Anime**                        |                              	|             	            |
-| /{id}                            	| AnimeSearchQuery              | AnimeSearch 	            |
+| **Anime**                         |                              	|             	            |
+| /{id}                            	| AnimeQuery                    | Anime      	            |
 | /{id}/characters_staff           	| AnimeCharactersAndStaffQuery	| AnimeCharactersAndStaff   |
 | /{id}/episodes/{page}            	| AnimeEpisodesQuery            | AnimeEpisodes             |
 | /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
@@ -77,7 +86,7 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/reviews/{page}             	|                              	|             	|
 | /{id}/recommendations            	|                              	|             	|
 | /{id}/userupdates/{page}         	|                              	|             	|
-| **Manga**                        |                              	|             	|
+| **Manga**                         |                              	|             	|
 | /{id}                            	| MangaQuery                    | Manga                     |
 | /{id}/characters                 	|                              	|             	|
 | /{id}/news                       	|                              	|             	|
@@ -88,21 +97,21 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/reviews/{page}             	|                              	|             	|
 | /{id}/recommendations            	|                              	|             	|
 | /{id}/userupdates/{page}         	|                              	|             	|
-| **Person**                           	|                              	|             	|
-| /{id}                            	|                              	|             	|
-| /{id}/pictures                   	|                              	|             	|
-| **Character**                        	|                              	|             	|
-| /{id}                            	|                              	|             	|
-| /{id}/pictures                   	|                              	|             	|
-| **Search**                           	|                              	|             	|
+| **Person**                        |                              	|             	            |
+| /{id}                            	| PersonQuery                   | Person            	    |
+| /{id}/pictures                   	| PersonPicturesQuery           | Pictures            	    |
+| **Character**                     |                              	|             	            |
+| /{id}                            	| CharacterQuery                | Character                 |
+| /{id}/pictures                   	| CharacterPicturesQuery        | Pictures                 	|
+| **Search**                        |                              	|             	            |
 |                                  	|                              	|             	|
-| **Season**                           	|                              	|             	|
+| **Season**                        |                              	|             	|
 | /{year}/{season}          	    |                              	|             	|
 | /archive                  	    |                              	|             	|
 | /later                    	    |                              	|             	|
-| **Schedule**                     |                              	|             	|
+| **Schedule**                      |                              	|             	|
 | /{day}                  	        |                              	|             	|
-| **Top**                          |                               	|             	|
+| **Top**                           |                             	|             	|
 | /{type}/{page}/{subtype}   	    |                              	|             	|
 |                                  	|                              	|             	|
 |                                  	|                              	|             	|

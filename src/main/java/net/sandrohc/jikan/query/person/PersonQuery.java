@@ -4,29 +4,29 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.person;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimePicturesQuery extends Query<Pictures> {
+public class PersonQuery extends Query<Person> {
 
 	private final int id;
 
-	public AnimePicturesQuery(Jikan jikan, int id) {
+	public PersonQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUri() {
-		return "/anime/" + id + "/pictures";
+		return "/person/" + id;
 	}
 
 	@Override
-	public Class<Pictures> getRequestClass() {
-		return Pictures.class;
+	public Class<Person> getRequestClass() {
+		return Person.class;
 	}
 
 }

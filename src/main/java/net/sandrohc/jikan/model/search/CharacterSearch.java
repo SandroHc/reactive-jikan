@@ -6,6 +6,26 @@
 
 package net.sandrohc.jikan.model.search;
 
-public class CharacterSearch {
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.character.CharacterSub;
+
+public class CharacterSearch extends CacheEntity {
+
+    public List<CharacterSub> results;
+
+    @JsonProperty("last_page")
+    public int lastPage;
+
+
+    @Override
+    public String toString() {
+        return "CharacterSearch[" +
+                "results=" + (results == null ? null : (results.size() + " results")) +
+                ", lastPage=" + lastPage +
+                ']';
+    }
 
 }

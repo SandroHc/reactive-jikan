@@ -47,3 +47,8 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.withType(JavaCompile) {
+    // force UTF-8 encoding on Windows machines
+    options.encoding = 'UTF-8'
+}

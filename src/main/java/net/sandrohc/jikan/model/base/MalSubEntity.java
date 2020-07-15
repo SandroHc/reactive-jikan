@@ -17,13 +17,9 @@ public class MalSubEntity extends MalEntity {
 	public String url;
 
 
-
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName() + "[" +
-			   "id=" + malId +
-			   ", name='" + name + '\'' +
-			   ']';
+		return this.getClass().getSimpleName() + "[id=" + malId + ", name='" + name + "']";
 	}
 
 }

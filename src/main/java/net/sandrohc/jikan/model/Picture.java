@@ -4,9 +4,9 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model;
 
-public class AnimePicturesSub {
+public class Picture {
 
 	public String large;
 
@@ -15,10 +15,7 @@ public class AnimePicturesSub {
 
 	@Override
 	public String toString() {
-		return "AnimePicturesSub[" +
-			   "large='" + large + '\'' +
-			   ", small='" + small + '\'' +
-			   ']';
+		return "Picture[large='" + large + "', small='" + small + "']";
 	}
 
 }

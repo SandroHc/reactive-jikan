@@ -6,6 +6,26 @@
 
 package net.sandrohc.jikan.model.search;
 
-public class MangaSearch {
+import java.util.*;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.manga.*;
+
+public class MangaSearch extends CacheEntity {
+
+    public List<Manga> results;
+
+    @JsonProperty("last_page")
+    public int lastPage;
+
+
+    @Override
+    public String toString() {
+        return "MangaSearch[" +
+                "results=" + (results != null ? (results.size() + " results") : null) +
+                ", lastPage=" + lastPage +
+                ']';
+    }
 
 }
