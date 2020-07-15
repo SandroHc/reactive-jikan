@@ -34,7 +34,7 @@ jobs:
       - name: Build
         run: |
           chmod +x gradlew
-          ./gradlew build --stacktrace --debug
+          ./gradlew build
       - name: Test
         run: ./gradlew test
       - uses: actions/upload-artifact@v1

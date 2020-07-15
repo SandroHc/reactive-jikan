@@ -41,21 +41,26 @@ public class Jikan {
 			.registerModule(new JavaTimeModule())
 			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
+	public final boolean debug;
+	public final String baseUrl;
+	public final String userAgent;
+
 	private final HttpClient httpClient;
-	private final boolean debug;
 
 	public Jikan() {
 		this(new JikanBuilder()); // use builder defaults
 	}
 
 	public Jikan(JikanBuilder builder) {
-		this.debug   = builder.debug;
+		this.debug = builder.debug;
+		this.baseUrl = builder.baseUrl;
+		this.userAgent = builder.userAgent;
 
 		this.httpClient = HttpClient.create()
-				.baseUrl(builder.baseUrl)
+				.baseUrl(this.baseUrl)
 				.headers(h -> h
 						.add(HttpHeaderNames.ACCEPT, HttpHeaderValues.APPLICATION_JSON)
-						.add(HttpHeaderNames.USER_AGENT, builder.userAgent));
+						.add(HttpHeaderNames.USER_AGENT, this.userAgent));
 	}
 
 	/**

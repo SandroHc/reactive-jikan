@@ -143,10 +143,4 @@ public class AnimeTest extends BaseTest {
 		assertEquals("https://example.com/studio", studio.url);
 	}
 
-	@Test
-	void fetchAnimeById_badRequest() {
-		mockError(mockServer, HttpResponseStatus.BAD_REQUEST);
-		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
-	}
-
 }
