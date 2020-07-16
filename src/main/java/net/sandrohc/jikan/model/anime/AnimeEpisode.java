@@ -10,7 +10,7 @@ import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AnimeEpisodesSub {
+public class AnimeEpisode {
 
 	@JsonProperty("episode_id")
 	public int episodeId;
@@ -38,10 +38,7 @@ public class AnimeEpisodesSub {
 
 	@Override
 	public String toString() {
-		return "AnimeEpisodesSub[" +
-			   "id=" + episodeId +
-			   ", title='" + title + '\'' +
-			   ']';
+		return "AnimeEpisode[id=" + episodeId + ", title='" + title + "']";
 	}
 
 }

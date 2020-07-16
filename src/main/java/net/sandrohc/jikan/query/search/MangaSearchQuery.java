@@ -12,7 +12,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.*;
 
-public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch> {
+public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch> { // TODO: create a MangaSub variant
 
 	public MangaSearchQuery(Jikan jikan) {
 		super(jikan, Type.MANGA);

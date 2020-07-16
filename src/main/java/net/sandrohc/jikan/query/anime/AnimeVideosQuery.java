@@ -12,6 +12,7 @@ import net.sandrohc.jikan.query.Query;
 
 public class AnimeVideosQuery extends Query<AnimeVideos> {
 
+	/** The anime ID. */
 	private final int id;
 
 	public AnimeVideosQuery(Jikan jikan, int id) {

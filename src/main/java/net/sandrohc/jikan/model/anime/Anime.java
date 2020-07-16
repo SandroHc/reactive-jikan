@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.Genre;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 
 /**

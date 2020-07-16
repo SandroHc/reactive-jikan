@@ -4,13 +4,13 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AnimeNewsSub {
+public class NewsArticle {
 
 	public String url;
 
@@ -37,10 +37,7 @@ public class AnimeNewsSub {
 
 	@Override
 	public String toString() {
-		return "AnimeNewsSub[" +
-			   "url='" + url + '\'' +
-			   ", title='" + title + '\'' +
-			   ']';
+		return "NewsArticle[url='" + url + "', title='" + title + "']";
 	}
 
 }

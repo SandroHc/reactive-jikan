@@ -4,9 +4,9 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
-public class AnimeStatsScore {
+public class StatsScore {
 
 	/** The total votes for this score */
 	public int votes;
@@ -17,7 +17,7 @@ public class AnimeStatsScore {
 
 	@Override
 	public String toString() {
-		return "AnimeStatsScore[votes=" + votes + ", percentage=" + percentage + ']';
+		return "StatsScore[votes=" + votes + ", percentage=" + percentage + ']';
 	}
 
 }

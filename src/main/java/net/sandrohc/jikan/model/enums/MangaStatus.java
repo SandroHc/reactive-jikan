@@ -14,7 +14,7 @@ public enum MangaStatus {
 	PUBLISHING,
 
 	@JsonProperty("Completed")
-	@JsonAlias("Complete")
+	@JsonAlias({ "Complete", "Finished" })
 	COMPLETED,
 
 	@JsonProperty("To be published")

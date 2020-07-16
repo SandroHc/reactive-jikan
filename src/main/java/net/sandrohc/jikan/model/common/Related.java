@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model;
+package net.sandrohc.jikan.model.common;
 
 import java.util.*;
 

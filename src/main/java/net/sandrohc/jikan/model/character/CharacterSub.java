@@ -21,11 +21,11 @@ public class CharacterSub extends MalEntity {
     public String name;
 
     @JsonProperty("alternative_names")
-    public List<String> alternativeNames;
+    public List<String> alternativeNames = Collections.emptyList();
 
-    public List<MalSubEntity> anime;
+    public List<MalSubEntity> anime = Collections.emptyList();
 
-    public List<MalSubEntity> manga;
+    public List<MalSubEntity> manga = Collections.emptyList();
 
 
     @Override

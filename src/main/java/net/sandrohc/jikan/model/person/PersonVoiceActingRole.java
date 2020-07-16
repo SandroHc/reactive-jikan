@@ -10,7 +10,7 @@ import net.sandrohc.jikan.model.base.*;
 
 public class PersonVoiceActingRole {
 
-    public String role;
+    public String role; // TODO: convert into an enum. { Main, Supporting }
 
     public MalSubEntity anime;
 

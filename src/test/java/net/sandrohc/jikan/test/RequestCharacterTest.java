@@ -1,14 +1,13 @@
 package net.sandrohc.jikan.test;
 
 import java.io.UnsupportedEncodingException;
-import java.time.OffsetDateTime;
 import java.util.Iterator;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.character.Character;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.CharacterSearch;
 import org.junit.jupiter.api.*;

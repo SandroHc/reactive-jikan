@@ -30,12 +30,12 @@ public class Character extends MalEntity {
     @JsonProperty("image_url")
     public String imageUrl;
 
-    public List<RoleSubEntity> animeography;
+    public List<RoleSubEntity> animeography = Collections.emptyList();
 
-    public List<RoleSubEntity> mangaography;
+    public List<RoleSubEntity> mangaography = Collections.emptyList();
 
     @JsonProperty("voice_actors")
-    public List<CharacterVoiceActor> voiceActors;
+    public List<CharacterVoiceActor> voiceActors = Collections.emptyList();
 
 
     @Override

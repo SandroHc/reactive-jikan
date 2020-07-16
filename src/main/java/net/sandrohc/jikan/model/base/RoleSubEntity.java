@@ -17,7 +17,7 @@ public class RoleSubEntity extends MalEntity {
 	@JsonProperty("image_url")
 	public String imageUrl;
 
-	public String role;
+	public String role; // TODO: convert to enum (Main, Support)
 
 
 	@Override

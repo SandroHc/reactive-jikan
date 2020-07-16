@@ -7,27 +7,31 @@
 package net.sandrohc.jikan.query.manga;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.manga.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 
-public class MangaQuery extends Query<Manga> {
+public class MangaReviewsQuery extends Query<Reviews> {
 
 	/** The manga ID. */
 	private final int id;
 
-	public MangaQuery(Jikan jikan, int id) {
+	/** The page. Each page contains up to 20 reviews. */
+	private final int page;
+
+	public MangaReviewsQuery(Jikan jikan, int id, int page) {
 		super(jikan);
 		this.id = id;
+		this.page = page;
 	}
 
 	@Override
 	public String getUri() {
-		return "/manga/" + id;
+		return "/manga/" + id + "/reviews/" + page;
 	}
 
 	@Override
-	public Class<Manga> getRequestClass() {
-		return Manga.class;
+	public Class<Reviews> getRequestClass() {
+		return Reviews.class;
 	}
 
 }

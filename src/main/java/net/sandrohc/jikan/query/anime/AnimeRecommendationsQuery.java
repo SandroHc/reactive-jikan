@@ -10,24 +10,24 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimePicturesQuery extends Query<Pictures> {
+public class AnimeRecommendationsQuery extends Query<Recommendations> {
 
 	/** The anime ID. */
 	private final int id;
 
-	public AnimePicturesQuery(Jikan jikan, int id) {
+	public AnimeRecommendationsQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUri() {
-		return "/anime/" + id + "/pictures";
+		return "/anime/" + id + "/recommendations";
 	}
 
 	@Override
-	public Class<Pictures> getRequestClass() {
-		return Pictures.class;
+	public Class<Recommendations> getRequestClass() {
+		return Recommendations.class;
 	}
 
 }

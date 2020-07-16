@@ -7,7 +7,7 @@
 package net.sandrohc.jikan.query.character;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.Pictures;
+import net.sandrohc.jikan.model.common.Pictures;
 import net.sandrohc.jikan.query.Query;
 
 public class CharacterPicturesQuery extends Query<Pictures> {

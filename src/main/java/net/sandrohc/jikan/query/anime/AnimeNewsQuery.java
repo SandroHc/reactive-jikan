@@ -7,11 +7,12 @@
 package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimeNewsQuery extends Query<AnimeNews> {
+public class AnimeNewsQuery extends Query<News> {
 
+	/** The anime ID. */
 	private final int id;
 
 	public AnimeNewsQuery(Jikan jikan, int id) {
@@ -25,8 +26,8 @@ public class AnimeNewsQuery extends Query<AnimeNews> {
 	}
 
 	@Override
-	public Class<AnimeNews> getRequestClass() {
-		return AnimeNews.class;
+	public Class<News> getRequestClass() {
+		return News.class;
 	}
 
 }

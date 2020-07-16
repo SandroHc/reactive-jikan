@@ -4,13 +4,13 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AnimeForumTopicPost {
+public class ForumTopicPost {
 
 	public String url;
 
@@ -26,11 +26,7 @@ public class AnimeForumTopicPost {
 
 	@Override
 	public String toString() {
-		return "AnimeForumTopicPost[" +
-			   "url='" + url + '\'' +
-			   ", authorName='" + authorName + '\'' +
-			   ", datePosted=" + datePosted +
-			   ']';
+		return "ForumTopicPost[url='" + url + "', authorName='" + authorName + "', datePosted=" + datePosted + ']';
 	}
 
 }

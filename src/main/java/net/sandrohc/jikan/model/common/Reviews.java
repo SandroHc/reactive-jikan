@@ -4,20 +4,19 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model;
+package net.sandrohc.jikan.model.common;
 
 import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
-public class Pictures extends CacheEntity {
+public class Reviews extends CacheEntity {
 
-    public List<Picture> pictures = Collections.emptyList();
+    public List<Review> reviews = Collections.emptyList();
 
 
     @Override
     public String toString() {
-        return "Pictures[pictures=" + (pictures.size() + " pictures") + ']';
+        return "Reviews[reviews=" + reviews.size() + " reviews]";
     }
-
 }

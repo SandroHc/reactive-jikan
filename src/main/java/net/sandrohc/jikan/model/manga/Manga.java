@@ -11,6 +11,7 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 
 /**
@@ -65,18 +66,16 @@ public class Manga extends MalEntity {
 
 	public Related related;
 
-	public List<Genre<MangaGenre>> genres;
+	public List<Genre<MangaGenre>> genres = Collections.emptyList();
 
-	public List<MalSubEntity> authors;
+	public List<MalSubEntity> authors = Collections.emptyList();
 
-	public List<Object> serializations; // TODO
+	public List<MalSubEntity> serializations = Collections.emptyList();
+
 
 	@Override
 	public String toString() {
-		return "Manga[" +
-			   "id=" + malId +
-			   ", title='" + title + '\'' +
-			   ']';
+		return "Manga[id=" + malId + ", title='" + title + "']";
 	}
 
 }

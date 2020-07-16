@@ -7,11 +7,12 @@
 package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimeMoreInfoQuery extends Query<AnimeMoreInfo> {
+public class AnimeMoreInfoQuery extends Query<MoreInfo> {
 
+	/** The anime ID. */
 	private final int id;
 
 	public AnimeMoreInfoQuery(Jikan jikan, int id) {
@@ -25,8 +26,8 @@ public class AnimeMoreInfoQuery extends Query<AnimeMoreInfo> {
 	}
 
 	@Override
-	public Class<AnimeMoreInfo> getRequestClass() {
-		return AnimeMoreInfo.class;
+	public Class<MoreInfo> getRequestClass() {
+		return MoreInfo.class;
 	}
 
 }

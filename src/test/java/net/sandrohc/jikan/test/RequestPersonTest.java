@@ -4,13 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.Picture;
-import net.sandrohc.jikan.model.Pictures;
-import net.sandrohc.jikan.model.base.MalSubEntity;
-import net.sandrohc.jikan.model.character.CharacterSub;
-import net.sandrohc.jikan.model.enums.Type;
+import net.sandrohc.jikan.model.common.Picture;
+import net.sandrohc.jikan.model.common.Pictures;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.model.search.CharacterSearch;
 import net.sandrohc.jikan.model.search.PersonSearch;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -22,11 +18,8 @@ public class RequestPersonTest extends RequestTest {
 
 	@Test
 	void fetchPerson() {
-		// https://api.jikan.moe/v3/character/36765
+		// https://api.jikan.moe/v3/person/11817
 		String response = "{\n" +
-				"    \"request_hash\": \"request:person:cbd59b95af90c14277375ca57503ca9d3cd54278\",\n" +
-				"    \"request_cached\": true,\n" +
-				"    \"request_cache_expiry\": 3935,\n" +
 				"    \"mal_id\": 11817,\n" +
 				"    \"url\": \"https://myanimelist.net/people/11817/Yoshitsugu_Matsuoka\",\n" +
 				"    \"image_url\": \"https://cdn.myanimelist.net/images/voiceactors/2/40132.jpg\",\n" +
@@ -55,7 +48,7 @@ public class RequestPersonTest extends RequestTest {
 				"            }\n" +
 				"        },\n" +
 				"        {\n" +
-				"            \"role\": \"Main\",\n" +
+				"            \"role\": \"Supporting\",\n" +
 				"            \"anime\": {\n" +
 				"                \"mal_id\": 31765,\n" +
 				"                \"url\": \"https://myanimelist.net/anime/31765/Sword_Art_Online_Movie__Ordinal_Scale\",\n" +
@@ -102,6 +95,39 @@ public class RequestPersonTest extends RequestTest {
 		assertNotNull(person.toString());
 		assertEquals(11817, person.malId);
 		assertEquals("Yoshitsugu Matsuoka", person.name);
+
+
+		Iterator<PersonVoiceActingRole> voiceActingRolesIt = person.voiceActingRoles.iterator();
+
+		PersonVoiceActingRole va1 = voiceActingRolesIt.next();
+		assertNotNull(va1.toString());
+		assertEquals("Main", va1.role);
+		assertEquals(11757, va1.anime.malId);
+		assertEquals("Sword Art Online", va1.anime.name);
+		assertEquals(36765, va1.character.malId);
+		assertEquals("Kirigaya, Kazuto", va1.character.name);
+
+		PersonVoiceActingRole va2 = voiceActingRolesIt.next();
+		assertNotNull(va2.toString());
+		assertEquals("Supporting", va2.role);
+		assertEquals(31765, va2.anime.malId);
+		assertEquals("Sword Art Online Movie: Ordinal Scale", va2.anime.name);
+		assertEquals(36765, va2.character.malId);
+		assertEquals("Kirigaya, Kazuto", va2.character.name);
+
+
+		PersonAnimePosition a1 = person.animeStaffPositions.iterator().next();
+		assertNotNull(a1.toString());
+		assertEquals("Theme Song Performance", a1.position);
+		assertEquals(30205, a1.anime.malId);
+		assertEquals("Aoharu x Kikanjuu", a1.anime.name);
+
+
+		PersonMangaPosition m1 = person.publishedManga.iterator().next();
+		assertNotNull(m1.toString());
+		assertEquals("Story", m1.position);
+		assertEquals(98568, m1.manga.malId);
+		assertEquals("CV. Ore!", m1.manga.name);
 	}
 
 	@Test

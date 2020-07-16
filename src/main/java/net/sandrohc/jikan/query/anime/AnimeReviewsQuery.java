@@ -10,24 +10,28 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimePicturesQuery extends Query<Pictures> {
+public class AnimeReviewsQuery extends Query<Reviews> {
 
 	/** The anime ID. */
 	private final int id;
 
-	public AnimePicturesQuery(Jikan jikan, int id) {
+	/** The page. Each page contains up to 20 reviews. */
+	private final int page;
+
+	public AnimeReviewsQuery(Jikan jikan, int id, int page) {
 		super(jikan);
 		this.id = id;
+		this.page = page;
 	}
 
 	@Override
 	public String getUri() {
-		return "/anime/" + id + "/pictures";
+		return "/anime/" + id + "/reviews/" + page;
 	}
 
 	@Override
-	public Class<Pictures> getRequestClass() {
-		return Pictures.class;
+	public Class<Reviews> getRequestClass() {
+		return Reviews.class;
 	}
 
 }

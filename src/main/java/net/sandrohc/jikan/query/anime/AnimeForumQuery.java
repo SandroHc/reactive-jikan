@@ -7,11 +7,12 @@
 package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.anime.AnimeForum;
+import net.sandrohc.jikan.model.common.Forum;
 import net.sandrohc.jikan.query.Query;
 
-public class AnimeForumQuery extends Query<AnimeForum> {
+public class AnimeForumQuery extends Query<Forum> {
 
+	/** The anime ID. */
 	private final int id;
 
 	public AnimeForumQuery(Jikan jikan, int id) {
@@ -25,8 +26,8 @@ public class AnimeForumQuery extends Query<AnimeForum> {
 	}
 
 	@Override
-	public Class<AnimeForum> getRequestClass() {
-		return AnimeForum.class;
+	public Class<Forum> getRequestClass() {
+		return Forum.class;
 	}
 
 }

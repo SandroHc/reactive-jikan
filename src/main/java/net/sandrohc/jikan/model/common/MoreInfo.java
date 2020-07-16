@@ -4,12 +4,12 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.CacheEntity;
 
-public class AnimeMoreInfo extends CacheEntity {
+public class MoreInfo extends CacheEntity {
 
 	@JsonProperty("moreinfo")
 	public String moreInfo;
@@ -17,9 +17,7 @@ public class AnimeMoreInfo extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeMoreInfo[" +
-			   "moreInfo=" + moreInfo +
-			   ']';
+		return "AnimeMoreInfo[moreInfo=" + moreInfo + ']';
 	}
 
 }

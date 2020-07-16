@@ -23,10 +23,7 @@ public class AnimeVideosEpisode {
 
 	@Override
 	public String toString() {
-		return "AnimeVideosPromo[" +
-			   "title='" + title + '\'' +
-			   "episode='" + title + '\'' +
-			   ']';
+		return "AnimeVideosEpisode[title='" + title + "', episode='" + title + "']";
 	}
 
 }

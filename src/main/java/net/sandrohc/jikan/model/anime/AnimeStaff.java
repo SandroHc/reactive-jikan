@@ -19,10 +19,7 @@ public class AnimeStaff extends MalEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeStaff[" +
-			   "id=" + malId +
-			   ", name='" + name + '\'' +
-			   ']';
+		return "AnimeStaff[id=" + malId + ", name='" + name + "']";
 	}
 
 }

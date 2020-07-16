@@ -10,10 +10,4 @@ public class PersonPosition {
 
     public String position;
 
-
-    @Override
-    public String toString() {
-        return getClass().getSimpleName() + "[position='" + position + "']";
-    }
-
 }

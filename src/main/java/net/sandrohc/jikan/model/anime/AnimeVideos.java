@@ -6,21 +6,20 @@
 
 package net.sandrohc.jikan.model.anime;
 
-import java.util.List;
+import java.util.*;
 
 import net.sandrohc.jikan.model.base.CacheEntity;
 
 public class AnimeVideos extends CacheEntity {
 
-	public List<AnimeVideosPromo> promo;
+	public List<AnimeVideosPromo> promo = Collections.emptyList();
 
-	public List<AnimeVideosEpisode> episodes;
+	public List<AnimeVideosEpisode> episodes = Collections.emptyList();
 
 
 	@Override
 	public String toString() {
-		return "AnimeVideos[" + // TODO
-			   ']';
+		return "AnimeVideos[promo=" + promo.size() + " promos, episodes=" + episodes.size() + " episodes]";
 	}
 
 }

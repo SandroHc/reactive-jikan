@@ -19,10 +19,7 @@ public class Genre<T> extends MalEntity {
 
 	@Override
 	public String toString() {
-		return "Genre[" +
-			   "id=" + malId +
-			   ", genre=" + name +
-			   ']';
+		return "Genre[id=" + malId + ", genre=" + name + ']';
 	}
 
 }

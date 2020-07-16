@@ -9,7 +9,7 @@ package net.sandrohc.jikan.model.anime;
 import java.util.Collections;
 import java.util.List;
 
-import net.sandrohc.jikan.model.base.CacheEntity;
+import net.sandrohc.jikan.model.base.*;
 
 public class AnimeCharactersAndStaff extends CacheEntity {
 
@@ -20,8 +20,7 @@ public class AnimeCharactersAndStaff extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeCharactersAndStaff[characters=" + (characters.size() + " characters") +
-			   ", staff=" + (staff.size() + " staff") + ']';
+		return "AnimeCharactersAndStaff[characters=" + characters.size() + " characters, staff=" + staff.size() + " staff]";
 	}
 
 }

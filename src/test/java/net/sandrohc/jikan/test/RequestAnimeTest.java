@@ -9,8 +9,10 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.character.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.*;
+import net.sandrohc.jikan.query.anime.AnimeQuery;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -78,7 +80,11 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/1", response);
 
-		Anime anime = jikan.query().anime().get(1).execute().block();
+		AnimeQuery query = jikan.query().anime().get(1);
+		assertNotNull(query);
+		assertNotNull(query.toString());
+
+		Anime anime = query.execute().block();
 
 		assertNotNull(anime);
 		assertNotNull(anime.toString());
@@ -125,8 +131,12 @@ public class RequestAnimeTest extends RequestTest {
 		assertTrue(anime.related.fullStories.isEmpty());
 
 		Iterator<Genre<AnimeGenre>> genresIt = anime.genres.iterator();
-		assertEquals(AnimeGenre.ACTION, genresIt.next().name);
-		assertEquals(AnimeGenre.ADVENTURE, genresIt.next().name);
+		Genre<AnimeGenre> genre1 = genresIt.next();
+		Genre<AnimeGenre> genre2 = genresIt.next();
+		assertFalse(genresIt.hasNext());
+		assertNotNull(genre1.toString());
+		assertEquals(AnimeGenre.ACTION, genre1.name);
+		assertEquals(AnimeGenre.ADVENTURE, genre2.name);
 
 		MalSubEntity producer = anime.producers.iterator().next();
 		assertEquals(1000, producer.malId);
@@ -331,9 +341,9 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(1, episodes.lastPage);
 
 		/* Episodes */
-		Iterator<AnimeEpisodesSub> episodesIt = episodes.episodes.iterator();
+		Iterator<AnimeEpisode> episodesIt = episodes.episodes.iterator();
 
-		AnimeEpisodesSub ep1 = episodesIt.next();
+		AnimeEpisode ep1 = episodesIt.next();
 		assertNotNull(ep1.toString());
 		assertEquals(1, ep1.episodeId);
 		assertEquals("The World of Swords", ep1.title);
@@ -341,7 +351,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertFalse(ep1.filler);
 		assertFalse(ep1.recap);
 
-		AnimeEpisodesSub ep2 = episodesIt.next();
+		AnimeEpisode ep2 = episodesIt.next();
 		assertNotNull(ep2.toString());
 		assertEquals(2, ep2.episodeId);
 		assertEquals("Beater", ep2.title);
@@ -382,16 +392,16 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/news", response);
 
-		AnimeNews news = jikan.query().anime().news(11757).execute().block();
+		News news = jikan.query().anime().news(11757).execute().block();
 
 		assertNotNull(news);
 		assertNotNull(news.toString());
 		assertNotNull(news.articles);
 
 		/* Articles */
-		Iterator<AnimeNewsSub> articlesIt = news.articles.iterator();
+		Iterator<NewsArticle> articlesIt = news.articles.iterator();
 
-		AnimeNewsSub a1 = articlesIt.next();
+		NewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
 		assertEquals("https://myanimelist.net/news/56114579", a1.url);
 		assertEquals("Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri", a1.title);
@@ -401,7 +411,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(5, a1.comments);
 		assertEquals("Since making her international debut...", a1.intro);
 
-		AnimeNewsSub a2 = articlesIt.next();
+		NewsArticle a2 = articlesIt.next();
 		assertNotNull(a2.toString());
 		assertEquals("https://myanimelist.net/news/50992876", a2.url);
 		assertEquals("North American Anime & Manga Releases for June", a2.title);
@@ -522,15 +532,15 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/stats", response);
 
-		AnimeStats stats = jikan.query().anime().stats(11757).execute().block();
+		Stats stats = jikan.query().anime().stats(11757).execute().block();
 
 		assertNotNull(stats);
 		assertNotNull(stats.toString());
-		assertEquals(68292,   stats.watching);
+		assertEquals(68292,   stats.seeing);
 		assertEquals(1624882, stats.completed);
 		assertEquals(21722,   stats.onHold);
 		assertEquals(75644,   stats.dropped);
-		assertEquals(87594,   stats.planToWatch);
+		assertEquals(87594,   stats.planToSee);
 		assertEquals(1878134, stats.total);
 		assertEquals(19669,  stats.scores.get(1).votes);  assertEquals(1.5F,  stats.scores.get(1).percentage);
 		assertEquals(21048,  stats.scores.get(2).votes);  assertEquals(1.6F,  stats.scores.get(2).percentage);
@@ -573,16 +583,16 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/forum", response);
 
-		AnimeForum forum = jikan.query().anime().forum(11757).execute().block();
+		Forum forum = jikan.query().anime().forum(11757).execute().block();
 
 		assertNotNull(forum);
 		assertNotNull(forum.toString());
 		assertNotNull(forum.topics);
 
 		/* Topics */
-		Iterator<AnimeForumTopic> topicsIt = forum.topics.iterator();
+		Iterator<ForumTopic> topicsIt = forum.topics.iterator();
 
-		AnimeForumTopic t1 = topicsIt.next();
+		ForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
 		assertEquals(1797514, t1.topicId);
 		assertEquals("https://myanimelist.net/forum/?topicid=1797514", t1.url);
@@ -591,7 +601,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals("AUTHOR", t1.authorName);
 		assertEquals(54, t1.replies);
 
-		AnimeForumTopicPost t1Last = t1.lastPost;
+		ForumTopicPost t1Last = t1.lastPost;
 		assertNotNull(t1Last.toString());
 		assertEquals("https://myanimelist.net/forum/?topicid=1797514&goto=lastpost", t1Last.url);
 		assertEquals("LAST POST", t1Last.authorName);
@@ -609,11 +619,160 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/moreinfo", response);
 
-		AnimeMoreInfo moreInfo = jikan.query().anime().moreInfo(11757).execute().block();
+		MoreInfo moreInfo = jikan.query().anime().moreInfo(11757).execute().block();
 
 		assertNotNull(moreInfo);
 		assertNotNull(moreInfo.toString());
 		assertNull(moreInfo.moreInfo);
+	}
+
+	@Test
+	void fetchReviews() {
+		// https://api.jikan.moe/v3/anime/11757/reviews/1
+		String response = "{\n" +
+				"    \"reviews\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 138911,\n" +
+				"            \"url\": \"https://myanimelist.net/reviews.php?id=138911\",\n" +
+				"            \"type\": null,\n" +
+				"            \"helpful_count\": 4426,\n" +
+				"            \"date\": \"2014-04-06T02:33:00+00:00\",\n" +
+				"            \"reviewer\": {\n" +
+				"                \"url\": \"https://myanimelist.net/profile/LordAura\",\n" +
+				"                \"image_url\": \"https://cdn.myanimelist.net/images/userimages/3441293.jpg?t=1594695000\",\n" +
+				"                \"username\": \"LordAura\",\n" +
+				"                \"episodes_seen\": 25,\n" +
+				"                \"scores\": {\n" +
+				"                    \"overall\": 4,\n" +
+				"                    \"story\": 4,\n" +
+				"                    \"animation\": 8,\n" +
+				"                    \"sound\": 8,\n" +
+				"                    \"character\": 1,\n" +
+				"                    \"enjoyment\": 3\n" +
+				"                }\n" +
+				"            },\n" +
+				"            \"content\": \"The review contains minor spoilers...\"\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/anime/11757/reviews/1", response);
+
+		Reviews reviews = jikan.query().anime().reviews(11757, 1).execute().block();
+
+		assertNotNull(reviews);
+		assertNotNull(reviews.toString());
+		assertNotNull(reviews.reviews);
+
+		/* Reviews */
+		Iterator<Review> reviewsIt = reviews.reviews.iterator();
+
+		Review review = reviewsIt.next();
+		assertNotNull(review.toString());
+		assertEquals(138911, review.malId);
+		assertEquals("https://myanimelist.net/reviews.php?id=138911", review.url);
+		assertEquals(4426, review.helpfulCount);
+		assertEquals(OffsetDateTime.parse("2014-04-06T02:33:00+00:00"), review.date);
+		assertEquals("The review contains minor spoilers...", review.content);
+
+		Reviewer reviewer = review.reviewer;
+		assertNotNull(reviewer.toString());
+		assertEquals("https://myanimelist.net/profile/LordAura", reviewer.url);
+		assertEquals("LordAura", reviewer.username);
+		assertEquals(25, reviewer.read);
+
+		ReviewerScores scores = reviewer.scores;
+		assertNotNull(scores);
+		assertNotNull(scores.toString());
+		assertEquals(4, scores.overall);
+		assertEquals(4, scores.story);
+		assertEquals(8, scores.animation);
+		assertEquals(8, scores.sound);
+		assertEquals(1, scores.character);
+		assertEquals(3, scores.enjoyment);
+
+		assertFalse(reviewsIt.hasNext());
+	}
+
+	@Test
+	void fetchRecommendations() {
+		// https://api.jikan.moe/v3/anime/11757/recommendations
+		String response = "{\n" +
+				"    \"recommendations\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 17265,\n" +
+				"            \"url\": \"https://myanimelist.net/anime/17265/Log_Horizon\",\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/5/84004.jpg?s=73d4b44ed253ca5c865ef6e026cec99f\",\n" +
+				"            \"recommendation_url\": \"https://myanimelist.net/recommendations/anime/11757-17265\",\n" +
+				"            \"title\": \"Log Horizon\",\n" +
+				"            \"recommendation_count\": 160\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/anime/11757/recommendations", response);
+
+		Recommendations recommendations = jikan.query().anime().recommendations(11757).execute().block();
+
+		assertNotNull(recommendations);
+		assertNotNull(recommendations.toString());
+		assertNotNull(recommendations.recommendations);
+
+		/* Recommendations */
+		Iterator<Recommendation> recommendationsIt = recommendations.recommendations.iterator();
+
+		Recommendation recommendation = recommendationsIt.next();
+		assertNotNull(recommendation.toString());
+		assertEquals(17265, recommendation.malId);
+		assertEquals("https://myanimelist.net/anime/17265/Log_Horizon", recommendation.url);
+		assertEquals("https://cdn.myanimelist.net/images/anime/5/84004.jpg?s=73d4b44ed253ca5c865ef6e026cec99f", recommendation.imageUrl);
+		assertEquals("https://myanimelist.net/recommendations/anime/11757-17265", recommendation.recommendationUrl);
+		assertEquals("Log Horizon", recommendation.title);
+		assertEquals(160, recommendation.recommendationCount);
+
+		assertFalse(recommendationsIt.hasNext());
+	}
+
+	@Test
+	void fetchUserUpdates() {
+		// https://api.jikan.moe/v3/anime/11757/userupdates/1
+		String response = "{\n" +
+				"    \"users\": [\n" +
+				"        {\n" +
+				"            \"username\": \"Vincent1307\",\n" +
+				"            \"url\": \"https://myanimelist.net/profile/Vincent1307\",\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/questionmark_50.gif\",\n" +
+				"            \"score\": 8.5,\n" +
+				"            \"status\": \"Completed\",\n" +
+				"            \"episodes_seen\": 25,\n" +
+				"            \"episodes_total\": 25,\n" +
+				"            \"date\": \"2020-07-16T20:15:05+00:00\"\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/anime/11757/userupdates/1", response);
+
+		UserUpdates userUpdates = jikan.query().anime().userUpdates(11757, 1).execute().block();
+
+		assertNotNull(userUpdates);
+		assertNotNull(userUpdates.toString());
+		assertNotNull(userUpdates.users);
+
+		/* User Updates */
+		Iterator<UserUpdate> usersIt = userUpdates.users.iterator();
+
+		UserUpdate userUpdate = usersIt.next();
+		assertNotNull(userUpdate.toString());
+		assertEquals("Vincent1307", userUpdate.username);
+		assertEquals("https://myanimelist.net/profile/Vincent1307", userUpdate.url);
+		assertEquals(8.5F, userUpdate.score);
+		assertEquals("Completed", userUpdate.status);
+		assertEquals(25, userUpdate.seen);
+		assertEquals(25, userUpdate.total);
+		assertEquals(OffsetDateTime.parse("2020-07-16T20:15:05+00:00"), userUpdate.date);
+
+		assertFalse(usersIt.hasNext());
 	}
 
 	@Test

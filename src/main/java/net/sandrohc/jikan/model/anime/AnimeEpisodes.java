@@ -6,14 +6,14 @@
 
 package net.sandrohc.jikan.model.anime;
 
-import java.util.List;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.CacheEntity;
 
 public class AnimeEpisodes extends CacheEntity {
 
-	public List<AnimeEpisodesSub> episodes;
+	public List<AnimeEpisode> episodes = Collections.emptyList();
 
 	/** The last page of the paginated results. */
 	@JsonProperty("episodes_last_page")
@@ -22,8 +22,7 @@ public class AnimeEpisodes extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeEpisodes[" + // TODO
-			   ']';
+		return "AnimeEpisodes[episodes=" + episodes.size() + " episodes]";
 	}
 
 }

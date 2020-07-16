@@ -40,13 +40,13 @@ If using Maven (`pom.xml`):
 </dependency>
 ```
 
+If you want to use the development version, place `master-SNAPSHOT` in the version.
+
 For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 ## Usage
 
-The way you fetch data is through the `Query` classes.
-
-Once you create your desired query (you can use the `QueryFactory` to help you navigating the list of queries), you can pass it to your `Jikan` instance. While building the query, you may specify optional parameters.
+The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigating the list of queries), you can pass it to your `Jikan` instance. While building the query, you may specify optional parameters.
 
 With the query setup with your desired paramers, you may now execute it by calling `query.execute()` (or use `jikan.query()`). The method returned is a reactive stream of type `Mono<T>`. To convert it into your desired result, you must call `subscribe()` or `block()`.
 
@@ -82,23 +82,23 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
 | /{id}/pictures                   	| AnimePicturesQuery            | AnimePictures            	|
 | /{id}/videos                     	| AnimeVideosQuery              | AnimeVideos            	|
-| /{id}/stats                      	| AnimeStatsQuery               | AnimeStats            	|
-| /{id}/forum                      	| AnimeForumQuery               | AnimeForum            	|
-| /{id}/moreinfo                   	| AnimeMoreInfoQuery            | AnimeMoreInfo            	|
-| /{id}/reviews/{page}             	|                              	|             	|
-| /{id}/recommendations            	|                              	|             	|
-| /{id}/userupdates/{page}         	|                              	|             	|
-| **Manga**                         |                              	|             	|
+| /{id}/stats                      	| AnimeStatsQuery               | Stats            	        |
+| /{id}/forum                      	| AnimeForumQuery               | Forum            	        |
+| /{id}/moreinfo                   	| AnimeMoreInfoQuery            | MoreInfo            	    |
+| /{id}/reviews/{page}             	| AnimeReviewsQuery             | Reviews            	    |
+| /{id}/recommendations            	| AnimeRecommendationsQuery     | Recommendations           |
+| /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | UserUpdates            	|
+| **Manga**                         |                              	|             	            |
 | /{id}                            	| MangaQuery                    | Manga                     |
-| /{id}/characters                 	|                              	|             	|
-| /{id}/news                       	|                              	|             	|
-| /{id}/pictures                   	|                              	|             	|
-| /{id}/stats                      	|                              	|             	|
-| /{id}/forum                      	|                              	|             	|
-| /{id}/moreinfo                   	|                              	|             	|
-| /{id}/reviews/{page}             	|                              	|             	|
-| /{id}/recommendations            	|                              	|             	|
-| /{id}/userupdates/{page}         	|                              	|             	|
+| /{id}/characters                 	| MangaCharactersQuery          | MangaCharacters           |
+| /{id}/news                       	| MangaNewsQuery                | News            	        |
+| /{id}/pictures                   	| MangaPicturesQuery            | Pictures            	    |
+| /{id}/stats                      	| MangaStatsQuery               | Stats            	        |
+| /{id}/forum                      	| MangaForumQuery               | Forum            	        |
+| /{id}/moreinfo                   	| MangaMoreInfoQuery            | MoreInfo            	    |
+| /{id}/reviews/{page}             	| MangaReviewsQuery             | Reviews              	    |
+| /{id}/recommendations            	| MangaRecommendationsQuery     | Recommendations           |
+| /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | UserUpdates            	|
 | **Person**                        |                              	|             	            |
 | /{id}                            	| PersonQuery                   | Person            	    |
 | /{id}/pictures                   	| PersonPicturesQuery           | Pictures            	    |
@@ -106,7 +106,10 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}                            	| CharacterQuery                | Character                 |
 | /{id}/pictures                   	| CharacterPicturesQuery        | Pictures                 	|
 | **Search**                        |                              	|             	            |
-|                                  	|                              	|             	|
+| /anime                            | AnimeSearchQuery              | AnimeSearch             	|
+| /manga                            | MangaSearchQuery              | MangaSearch            	|
+| /person                           | PersonSearchQuery             | PersonSearch            	|
+| /character                        | CharacterSearchQuery          | CharacterSearch           |
 | **Season**                        |                              	|             	|
 | /{year}/{season}          	    |                              	|             	|
 | /archive                  	    |                              	|             	|
@@ -115,13 +118,6 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{day}                  	        |                              	|             	|
 | **Top**                           |                             	|             	|
 | /{type}/{page}/{subtype}   	    |                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
-|                                  	|                              	|             	|
 
 ## Suggestions
 * anime search sortBy doesn't seem ot be working

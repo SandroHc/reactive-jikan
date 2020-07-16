@@ -4,13 +4,13 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AnimeForumTopic {
+public class ForumTopic {
 
 	@JsonProperty("topic_id")
 	public int topicId;
@@ -31,15 +31,12 @@ public class AnimeForumTopic {
 	public int replies;
 
 	@JsonProperty("last_post")
-	public AnimeForumTopicPost lastPost;
+	public ForumTopicPost lastPost;
 
 
 	@Override
 	public String toString() {
-		return "AnimeForumTopic[" +
-			   "id='" + topicId + '\'' +
-			   ", title='" + title + '\'' +
-			   ']';
+		return "ForumTopic[id=" + topicId + ", title='" + title + "']";
 	}
 
 }

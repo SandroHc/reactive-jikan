@@ -10,24 +10,24 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.Query;
 
-public class MangaQuery extends Query<Manga> {
+public class MangaCharactersQuery extends Query<MangaCharacters> {
 
 	/** The manga ID. */
 	private final int id;
 
-	public MangaQuery(Jikan jikan, int id) {
+	public MangaCharactersQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUri() {
-		return "/manga/" + id;
+		return "/manga/" + id + "/characters";
 	}
 
 	@Override
-	public Class<Manga> getRequestClass() {
-		return Manga.class;
+	public Class<MangaCharacters> getRequestClass() {
+		return MangaCharacters.class;
 	}
 
 }

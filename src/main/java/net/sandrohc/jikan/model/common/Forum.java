@@ -4,21 +4,20 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
-import java.util.List;
+import java.util.*;
 
 import net.sandrohc.jikan.model.base.CacheEntity;
 
-public class AnimeNews extends CacheEntity {
+public class Forum extends CacheEntity {
 
-	public List<AnimeNewsSub> articles;
+	public List<ForumTopic> topics = Collections.emptyList();
 
 
 	@Override
 	public String toString() {
-		return "AnimeNews[" + // TODO
-			   ']';
+		return "Forum[topics=" + topics.size() + " topics]";
 	}
 
 }

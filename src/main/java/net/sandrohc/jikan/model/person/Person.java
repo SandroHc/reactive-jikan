@@ -43,8 +43,10 @@ public class Person extends MalEntity {
     @JsonProperty("voice_acting_roles")
     public List<PersonVoiceActingRole> voiceActingRoles;
 
+    @JsonProperty("anime_staff_positions")
     public List<PersonAnimePosition> animeStaffPositions;
 
+    @JsonProperty("published_manga")
     public List<PersonMangaPosition> publishedManga;
 
 
