@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AnimeType {
@@ -16,4 +17,6 @@ public enum AnimeType {
 	@JsonProperty("Movie")   MOVIE,
 	@JsonProperty("Special") SPECIAL,
 	@JsonProperty("Music")   MUSIC,
+
+	@JsonAlias("-") UNKNOWN,
 }

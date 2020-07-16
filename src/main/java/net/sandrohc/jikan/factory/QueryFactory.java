@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.query.schedule.ScheduleQuery;
 
 public class QueryFactory extends Factory {
 
@@ -28,6 +29,14 @@ public class QueryFactory extends Factory {
 
     public PersonQueryFactory person() {
         return new PersonQueryFactory(this.jikan);
+    }
+
+    public SeasonQueryFactory season() {
+        return new SeasonQueryFactory(this.jikan);
+    }
+
+    public ScheduleQuery schedule() {
+        return new ScheduleQuery(this.jikan);
     }
 
 }

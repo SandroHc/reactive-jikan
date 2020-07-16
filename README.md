@@ -111,15 +111,10 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /person                           | PersonSearchQuery             | PersonSearch            	|
 | /character                        | CharacterSearchQuery          | CharacterSearch           |
 | **Season**                        |                              	|             	|
-| /{year}/{season}          	    |                              	|             	|
-| /archive                  	    |                              	|             	|
-| /later                    	    |                              	|             	|
+| /{year}/{season}          	    | SeasonQuery                   | SeasonList            	|
+| /archive                  	    | SeasonArchiveQuery            | SeasonArchive            	|
+| /later                    	    | SeasonLaterQuery              | SeasonList            	|
 | **Schedule**                      |                              	|             	|
-| /{day}                  	        |                              	|             	|
+| /{day}                  	        | ScheduleQuery                 | Schedule            	    |
 | **Top**                           |                             	|             	|
 | /{type}/{page}/{subtype}   	    |                              	|             	|
-
-## Suggestions
-* anime search sortBy doesn't seem ot be working
-* anime/{id}/characters_staff - split into /characters and /staff
-* manga/{id}/characters - split into /characters and /staff

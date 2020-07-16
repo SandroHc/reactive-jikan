@@ -130,9 +130,9 @@ public class RequestAnimeTest extends RequestTest {
 		assertTrue(anime.related.parentStories.isEmpty());
 		assertTrue(anime.related.fullStories.isEmpty());
 
-		Iterator<Genre<AnimeGenre>> genresIt = anime.genres.iterator();
-		Genre<AnimeGenre> genre1 = genresIt.next();
-		Genre<AnimeGenre> genre2 = genresIt.next();
+		Iterator<GenreEntity<AnimeGenre>> genresIt = anime.genres.iterator();
+		GenreEntity<AnimeGenre> genre1 = genresIt.next();
+		GenreEntity<AnimeGenre> genre2 = genresIt.next();
 		assertFalse(genresIt.hasNext());
 		assertNotNull(genre1.toString());
 		assertEquals(AnimeGenre.ACTION, genre1.name);

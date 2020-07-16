@@ -133,7 +133,7 @@ public class RequestMangaTest extends RequestTest {
 		assertTrue(manga.related.fullStories.isEmpty());
 
 
-		Genre<MangaGenre> genre = manga.genres.iterator().next();
+		GenreEntity<MangaGenre> genre = manga.genres.iterator().next();
 		assertEquals(1, genre.malId);
 		assertEquals(MangaGenre.ACTION, genre.name);
 		assertEquals(Type.MANGA, genre.type);

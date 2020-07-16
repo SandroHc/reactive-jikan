@@ -9,7 +9,7 @@ package net.sandrohc.jikan.model;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
-public class Genre<T> extends MalEntity {
+public class GenreEntity<T> extends MalEntity {
 
 	public Type type;
 

@@ -66,7 +66,7 @@ public class Manga extends MalEntity {
 
 	public Related related;
 
-	public List<Genre<MangaGenre>> genres = Collections.emptyList();
+	public List<GenreEntity<MangaGenre>> genres = Collections.emptyList();
 
 	public List<MalSubEntity> authors = Collections.emptyList();
 

@@ -9,7 +9,7 @@ package net.sandrohc.jikan.model.anime;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.Genre;
+import net.sandrohc.jikan.model.GenreEntity;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.common.*;
@@ -93,7 +93,7 @@ public class Anime extends MalEntity {
 
 	public List<MalSubEntity> studios;
 
-	public List<Genre<AnimeGenre>> genres;
+	public List<GenreEntity<AnimeGenre>> genres;
 
 	@JsonProperty("opening_themes")
 	public List<String> openingThemes;
