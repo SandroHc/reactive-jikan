@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.character.person;
+package net.sandrohc.jikan.query.character;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.character.Character;

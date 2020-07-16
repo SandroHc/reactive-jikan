@@ -6,15 +6,14 @@
 
 package net.sandrohc.jikan.model.enums;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum MangaType {
-	@JsonProperty("All")     ALL,
-	@JsonProperty("Manga")   MANGA,
-	@JsonProperty("Novel")   NOVEL,
-	@JsonProperty("Oneshot") ONESHOT,
-	@JsonProperty("Doujin")  DOUJIN,
-	@JsonProperty("Manhwa")
-	@JsonAlias("Manhua")     MANWHA,
+	@JsonProperty("All")      ALL,
+	@JsonProperty("Manga")    MANGA,
+	@JsonProperty("Novel")    NOVEL,
+	@JsonProperty("One-shot") ONESHOT,
+	@JsonProperty("Doujin")   DOUJIN,
+	@JsonProperty("Manhwa")   MANWHA, // Korean comics
+	@JsonProperty("Manhua")   MANUHA, // Chinese comics
 }

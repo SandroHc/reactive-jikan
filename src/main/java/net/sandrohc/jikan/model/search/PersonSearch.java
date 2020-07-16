@@ -14,7 +14,7 @@ import net.sandrohc.jikan.model.person.*;
 
 public class PersonSearch extends CacheEntity {
 
-    public List<PersonSub> results;
+    public List<PersonSub> results = Collections.emptyList();
 
     @JsonProperty("last_page")
     public int lastPage;
@@ -22,10 +22,7 @@ public class PersonSearch extends CacheEntity {
 
     @Override
     public String toString() {
-        return "PersonSearch[" +
-                "results=" + (results == null ? null : (results.size() + " results")) +
-                ", lastPage=" + lastPage +
-                ']';
+        return "PersonSearch[results=" + (results.size() + " results") + ", lastPage=" + lastPage + ']';
     }
 
 }

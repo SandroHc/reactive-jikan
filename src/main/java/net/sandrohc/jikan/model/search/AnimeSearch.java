@@ -13,7 +13,7 @@ import net.sandrohc.jikan.model.base.*;
 
 public class AnimeSearch extends CacheEntity {
 
-	public List<AnimeSearchSub> results;
+	public List<AnimeSearchSub> results = Collections.emptyList();
 
 	@JsonProperty("last_page")
 	public int lastPage;
@@ -21,10 +21,7 @@ public class AnimeSearch extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeSearch[" +
-			   "results=" + (results == null ? null : (results.size() + " results")) +
-			   ", lastPage=" + lastPage +
-			   ']';
+		return "AnimeSearch[results=" + (results.size() + " results") + ", lastPage=" + lastPage + ']';
 	}
 
 }

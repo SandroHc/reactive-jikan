@@ -1,19 +1,23 @@
 package net.sandrohc.jikan.test;
 
+import java.io.UnsupportedEncodingException;
 import java.time.*;
 import java.util.*;
 
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.search.*;
 import org.junit.jupiter.api.*;
+import org.mockserver.model.Parameter;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AnimeTest extends BaseTest {
+public class RequestAnimeTest extends RequestTest {
 
 	@Test
 	void fetchAnime() {
@@ -77,6 +81,7 @@ public class AnimeTest extends BaseTest {
 		Anime anime = jikan.query().anime().get(1).execute().block();
 
 		assertNotNull(anime);
+		assertNotNull(anime.toString());
 		assertEquals(1, anime.malId);
 		assertEquals("https://example.com/url", anime.url);
 		assertEquals("https://example.com/image_url", anime.imageUrl);
@@ -224,35 +229,43 @@ public class AnimeTest extends BaseTest {
 		mock(mockServer, "/anime/11757/characters_staff", response);
 
 		AnimeCharactersAndStaff charactersAndStaff = jikan.query().anime().charactersAndStaff(11757).execute().block();
+
 		assertNotNull(charactersAndStaff);
+		assertNotNull(charactersAndStaff.toString());
 
 		/* Characters */
 		Iterator<AnimeCharacter> charactersIt = charactersAndStaff.characters.iterator();
 
 		AnimeCharacter character1 = charactersIt.next();
+		assertNotNull(character1.toString());
 		assertEquals(36765, character1.malId);
 		assertEquals("Kirigaya, Kazuto", character1.name);
 		assertEquals("Main", character1.role);
 		Iterator<CharacterVoiceActor> character1VoiceActorsIt = character1.voiceActors.iterator();
 		CharacterVoiceActor cha1va1 = character1VoiceActorsIt.next();
+		assertNotNull(cha1va1.toString());
 		assertEquals(732, cha1va1.malId);
 		assertEquals("Papenbrook, Bryce", cha1va1.name);
 		assertEquals("English", cha1va1.language);
 		CharacterVoiceActor cha1va2 = character1VoiceActorsIt.next();
+		assertNotNull(cha1va2.toString());
 		assertEquals(11817, cha1va2.malId);
 		assertEquals("Matsuoka, Yoshitsugu", cha1va2.name);
 		assertEquals("Japanese", cha1va2.language);
 
 		AnimeCharacter character2 = charactersIt.next();
+		assertNotNull(character2.toString());
 		assertEquals(36828, character2.malId);
 		assertEquals("Yuuki, Asuna", character2.name);
 		assertEquals("Main", character2.role);
 		Iterator<CharacterVoiceActor> character2VoiceActorsIt = character2.voiceActors.iterator();
 		CharacterVoiceActor cha2va1 = character2VoiceActorsIt.next();
+		assertNotNull(cha2va1.toString());
 		assertEquals(890, cha2va1.malId);
 		assertEquals("Tomatsu, Haruka", cha2va1.name);
 		assertEquals("Japanese", cha2va1.language);
 		CharacterVoiceActor cha2va2 = character2VoiceActorsIt.next();
+		assertNotNull(cha2va2.toString());
 		assertEquals(1650, cha2va2.malId);
 		assertEquals("Leigh, Cherami", cha2va2.name);
 		assertEquals("English", cha2va2.language);
@@ -263,11 +276,13 @@ public class AnimeTest extends BaseTest {
 		Iterator<AnimeStaff> staffIt = charactersAndStaff.staff.iterator();
 
 		AnimeStaff staff1 = staffIt.next();
+		assertNotNull(staff1.toString());
 		assertEquals(10801, staff1.malId);
 		assertEquals("Itou, Tomohiko", staff1.name);
 		assertTrue(staff1.positions.containsAll(Arrays.asList("Director", "Episode Director", "Storyboard")));
 
 		AnimeStaff staff2 = staffIt.next();
+		assertNotNull(staff2.toString());
 		assertEquals(19775, staff2.malId);
 		assertEquals("Fujiwara, Yoshiyuki", staff2.name);
 		assertTrue(staff2.positions.containsAll(Arrays.asList("Episode Director", "Storyboard", "2nd Key Animation", "Key Animation")));
@@ -311,6 +326,7 @@ public class AnimeTest extends BaseTest {
 		AnimeEpisodes episodes = jikan.query().anime().episodes(11757, 1).execute().block();
 
 		assertNotNull(episodes);
+		assertNotNull(episodes.toString());
 		assertNotNull(episodes.episodes);
 		assertEquals(1, episodes.lastPage);
 
@@ -318,6 +334,7 @@ public class AnimeTest extends BaseTest {
 		Iterator<AnimeEpisodesSub> episodesIt = episodes.episodes.iterator();
 
 		AnimeEpisodesSub ep1 = episodesIt.next();
+		assertNotNull(ep1.toString());
 		assertEquals(1, ep1.episodeId);
 		assertEquals("The World of Swords", ep1.title);
 		assertEquals(OffsetDateTime.parse("2012-07-08T00:00:00+00:00"), ep1.aired);
@@ -325,6 +342,7 @@ public class AnimeTest extends BaseTest {
 		assertFalse(ep1.recap);
 
 		AnimeEpisodesSub ep2 = episodesIt.next();
+		assertNotNull(ep2.toString());
 		assertEquals(2, ep2.episodeId);
 		assertEquals("Beater", ep2.title);
 		assertEquals(OffsetDateTime.parse("2012-07-15T00:00:00+00:00"), ep2.aired);
@@ -367,12 +385,14 @@ public class AnimeTest extends BaseTest {
 		AnimeNews news = jikan.query().anime().news(11757).execute().block();
 
 		assertNotNull(news);
+		assertNotNull(news.toString());
 		assertNotNull(news.articles);
 
 		/* Articles */
 		Iterator<AnimeNewsSub> articlesIt = news.articles.iterator();
 
 		AnimeNewsSub a1 = articlesIt.next();
+		assertNotNull(a1.toString());
 		assertEquals("https://myanimelist.net/news/56114579", a1.url);
 		assertEquals("Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri", a1.title);
 		assertEquals(OffsetDateTime.parse("2018-10-31T20:00:00+00:00"), a1.date);
@@ -382,6 +402,7 @@ public class AnimeTest extends BaseTest {
 		assertEquals("Since making her international debut...", a1.intro);
 
 		AnimeNewsSub a2 = articlesIt.next();
+		assertNotNull(a2.toString());
 		assertEquals("https://myanimelist.net/news/50992876", a2.url);
 		assertEquals("North American Anime & Manga Releases for June", a2.title);
 		assertEquals(OffsetDateTime.parse("2017-06-05T11:01:00+00:00"), a2.date);
@@ -412,16 +433,19 @@ public class AnimeTest extends BaseTest {
 		Pictures pictures = jikan.query().anime().pictures(11757).execute().block();
 
 		assertNotNull(pictures);
+		assertNotNull(pictures.toString());
 		assertNotNull(pictures.pictures);
 
 		/* Pictures */
 		Iterator<Picture> picturesIt = pictures.pictures.iterator();
 
 		Picture p1 = picturesIt.next();
+		assertNotNull(p1.toString());
 		assertEquals("https://cdn.myanimelist.net/images/anime/8/36343l.jpg", p1.large);
 		assertEquals("https://cdn.myanimelist.net/images/anime/8/36343.jpg", p1.small);
 
 		Picture p2 = picturesIt.next();
+		assertNotNull(p2.toString());
 		assertEquals("https://cdn.myanimelist.net/images/anime/11/39717l.jpg", p2.large);
 		assertEquals("https://cdn.myanimelist.net/images/anime/11/39717.jpg", p2.small);
 	}
@@ -452,17 +476,20 @@ public class AnimeTest extends BaseTest {
 		AnimeVideos videos = jikan.query().anime().videos(1).execute().block();
 
 		assertNotNull(videos);
+		assertNotNull(videos.toString());
 		assertNotNull(videos.promo);
 		assertNotNull(videos.episodes);
 
 		/* Promo */
 		AnimeVideosPromo promo = videos.promo.iterator().next();
+		assertNotNull(promo.toString());
 		assertEquals("PV English dub version", promo.title);
 		assertEquals("https://i.ytimg.com/vi/6ohYYtxfDCg/mqdefault.jpg", promo.imageUrl);
 		assertEquals("https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1", promo.videoUrl);
 
 		/* Episode */
 		AnimeVideosEpisode episode = videos.episodes.iterator().next();
+		assertNotNull(episode.toString());
 		assertEquals("The World of Swords", episode.title);
 		assertEquals("Episode 1", episode.episode);
 		assertEquals("https://myanimelist.net/anime/11757/Sword_Art_Online/episode/1", episode.url);
@@ -498,6 +525,7 @@ public class AnimeTest extends BaseTest {
 		AnimeStats stats = jikan.query().anime().stats(11757).execute().block();
 
 		assertNotNull(stats);
+		assertNotNull(stats.toString());
 		assertEquals(68292,   stats.watching);
 		assertEquals(1624882, stats.completed);
 		assertEquals(21722,   stats.onHold);
@@ -514,6 +542,7 @@ public class AnimeTest extends BaseTest {
 		assertEquals(264412, stats.scores.get(8).votes);  assertEquals(19.8F, stats.scores.get(8).percentage);
 		assertEquals(212935, stats.scores.get(9).votes);  assertEquals(15.9F, stats.scores.get(9).percentage);
 		assertEquals(219496, stats.scores.get(10).votes); assertEquals(16.4F, stats.scores.get(10).percentage);
+		assertNotNull(stats.scores.values().iterator().next().toString());
 
 		int totalScores = stats.scores.values().stream().mapToInt(s -> s.votes).sum();
 		assertTrue(stats.total >= totalScores);
@@ -547,12 +576,14 @@ public class AnimeTest extends BaseTest {
 		AnimeForum forum = jikan.query().anime().forum(11757).execute().block();
 
 		assertNotNull(forum);
+		assertNotNull(forum.toString());
 		assertNotNull(forum.topics);
 
 		/* Topics */
 		Iterator<AnimeForumTopic> topicsIt = forum.topics.iterator();
 
 		AnimeForumTopic t1 = topicsIt.next();
+		assertNotNull(t1.toString());
 		assertEquals(1797514, t1.topicId);
 		assertEquals("https://myanimelist.net/forum/?topicid=1797514", t1.url);
 		assertEquals("Is Kirito an UNLIKABLE character?", t1.title);
@@ -561,6 +592,7 @@ public class AnimeTest extends BaseTest {
 		assertEquals(54, t1.replies);
 
 		AnimeForumTopicPost t1Last = t1.lastPost;
+		assertNotNull(t1Last.toString());
 		assertEquals("https://myanimelist.net/forum/?topicid=1797514&goto=lastpost", t1Last.url);
 		assertEquals("LAST POST", t1Last.authorName);
 		assertEquals(OffsetDateTime.parse("2020-07-14T08:46:00+00:00"), t1Last.datePosted);
@@ -580,7 +612,117 @@ public class AnimeTest extends BaseTest {
 		AnimeMoreInfo moreInfo = jikan.query().anime().moreInfo(11757).execute().block();
 
 		assertNotNull(moreInfo);
+		assertNotNull(moreInfo.toString());
 		assertNull(moreInfo.moreInfo);
+	}
+
+	@Test
+	void fetchSearch() throws UnsupportedEncodingException, JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/search/anime?q=test&page=1&limit=2
+		String response = "{\n" +
+						  "    \"results\": [\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 6347,\n" +
+						  "            \"url\": \"https://myanimelist.net/anime/6347/Baka_to_Test_to_Shoukanjuu\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/anime/3/50389.jpg?s=bb898c33476da7c587e8ec82afecee57\",\n" +
+						  "            \"title\": \"Baka to Test to Shoukanjuu\",\n" +
+						  "            \"airing\": false,\n" +
+						  "            \"synopsis\": \"Fumizuki Academy isn't a typical Japanese high school...\",\n" +
+						  "            \"type\": \"TV\",\n" +
+						  "            \"episodes\": 13,\n" +
+						  "            \"score\": 7.65,\n" +
+						  "            \"start_date\": \"2010-01-07T00:00:00+00:00\",\n" +
+						  "            \"end_date\": \"2010-04-01T00:00:00+00:00\",\n" +
+						  "            \"members\": 484011,\n" +
+						  "            \"rated\": \"PG-13\"\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 9471,\n" +
+						  "            \"url\": \"https://myanimelist.net/anime/9471/Baka_to_Test_to_Shoukanjuu__Matsuri\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/anime/3/67303.jpg?s=048fca5bdfb21cefa072a303fe8047ad\",\n" +
+						  "            \"title\": \"Baka to Test to Shoukanjuu: Matsuri\",\n" +
+						  "            \"airing\": false,\n" +
+						  "            \"synopsis\": \"OVA of Baka to Test to Shoukanjuu...\",\n" +
+						  "            \"type\": \"OVA\",\n" +
+						  "            \"episodes\": 2,\n" +
+						  "            \"score\": 7.66,\n" +
+						  "            \"start_date\": \"2011-02-23T00:00:00+00:00\",\n" +
+						  "            \"end_date\": \"2011-03-30T00:00:00+00:00\",\n" +
+						  "            \"members\": 101901,\n" +
+						  "            \"rated\": \"PG-13\"\n" +
+						  "        }\n" +
+						  "    ],\n" +
+						  "    \"last_page\": 20\n" +
+						  "}";
+
+		mock(mockServer, "/search/anime", response,
+				Parameter.param("q", "test"),
+				Parameter.param("page", "1"),
+				Parameter.param("limit", "1"),
+				Parameter.param("genre[]", "1,2"),
+				Parameter.param("status", "completed"),
+				Parameter.param("orderBy", "id"),
+				Parameter.param("sort", "asc"),
+				Parameter.param("rated", "pg"),
+				Parameter.param("score", "1.0"),
+				Parameter.param("startDate", "2020-01-01"),
+				Parameter.param("endDate", "2020-12-31"));
+
+		AnimeSearch search = jikan.query().anime().search()
+				.query("test")
+				.page(1)
+				.limit(1)
+				.genres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE)
+				.status(AnimeStatus.COMPLETED)
+				.orderBy(AnimeOrderBy.ID)
+				.sort(Sort.ASCENDING)
+				.rated(AgeRating.PG)
+				.score(1.0F)
+				.startDate(LocalDate.parse("2020-01-01"))
+				.endDate(LocalDate.parse("2020-12-31"))
+				.execute().block();
+
+		assertNotNull(search);
+		assertNotNull(search.toString());
+		assertNotNull(search.results);
+		assertEquals(20, search.lastPage);
+
+		/* Results */
+		Iterator<AnimeSearchSub> resultsIt = search.results.iterator();
+
+		AnimeSearchSub r1 = resultsIt.next();
+		assertNotNull(r1.toString());
+		assertEquals(6347, r1.malId);
+		assertEquals("https://myanimelist.net/anime/6347/Baka_to_Test_to_Shoukanjuu", r1.url);
+		assertEquals("https://cdn.myanimelist.net/images/anime/3/50389.jpg?s=bb898c33476da7c587e8ec82afecee57", r1.imageUrl);
+		assertEquals("Baka to Test to Shoukanjuu", r1.title);
+		assertFalse(r1.airing);
+		assertEquals("Fumizuki Academy isn't a typical Japanese high school...", r1.synopsis);
+		assertEquals(AnimeType.TV, r1.type);
+		assertEquals(13, r1.episodes);
+		assertEquals(7.65F, r1.score);
+		assertEquals(OffsetDateTime.parse("2010-01-07T00:00:00+00:00"), r1.startDate);
+		assertEquals(OffsetDateTime.parse("2010-04-01T00:00:00+00:00"), r1.endDate);
+		assertEquals(484011, r1.members);
+		assertEquals(AgeRating.PG13, r1.rated);
+
+		AnimeSearchSub r2 = resultsIt.next();
+		assertNotNull(r2.toString());
+		assertEquals(9471, r2.malId);
+		assertEquals("https://myanimelist.net/anime/9471/Baka_to_Test_to_Shoukanjuu__Matsuri", r2.url);
+		assertEquals("https://cdn.myanimelist.net/images/anime/3/67303.jpg?s=048fca5bdfb21cefa072a303fe8047ad", r2.imageUrl);
+		assertEquals("Baka to Test to Shoukanjuu: Matsuri", r2.title);
+		assertFalse(r2.airing);
+		assertEquals("OVA of Baka to Test to Shoukanjuu...", r2.synopsis);
+		assertEquals(AnimeType.OVA, r2.type);
+		assertEquals(2, r2.episodes);
+		assertEquals(7.66F, r2.score);
+		assertEquals(OffsetDateTime.parse("2011-02-23T00:00:00+00:00"), r2.startDate);
+		assertEquals(OffsetDateTime.parse("2011-03-30T00:00:00+00:00"), r2.endDate);
+		assertEquals(101901, r2.members);
+		assertEquals(AgeRating.PG13, r2.rated);
+
+		assertFalse(resultsIt.hasNext());
 	}
 
 }

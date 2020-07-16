@@ -12,12 +12,12 @@ import net.sandrohc.jikan.model.base.*;
 
 public class Pictures extends CacheEntity {
 
-    public List<Picture> pictures;
+    public List<Picture> pictures = Collections.emptyList();
 
 
     @Override
     public String toString() {
-        return "Pictures[pictures=" + (pictures == null ? null : (pictures.size() + " pictures")) + ']';
+        return "Pictures[pictures=" + (pictures.size() + " pictures") + ']';
     }
 
 }

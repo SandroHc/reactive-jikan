@@ -14,7 +14,7 @@ import net.sandrohc.jikan.model.manga.*;
 
 public class MangaSearch extends CacheEntity {
 
-    public List<Manga> results;
+    public List<Manga> results = Collections.emptyList();
 
     @JsonProperty("last_page")
     public int lastPage;
@@ -22,10 +22,7 @@ public class MangaSearch extends CacheEntity {
 
     @Override
     public String toString() {
-        return "MangaSearch[" +
-                "results=" + (results != null ? (results.size() + " results") : null) +
-                ", lastPage=" + lastPage +
-                ']';
+        return "MangaSearch[results=" + (results.size() + " results") + ", lastPage=" + lastPage + ']';
     }
 
 }

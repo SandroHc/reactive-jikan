@@ -7,8 +7,8 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.character.person.CharacterPicturesQuery;
-import net.sandrohc.jikan.query.character.person.CharacterQuery;
+import net.sandrohc.jikan.query.character.CharacterPicturesQuery;
+import net.sandrohc.jikan.query.character.CharacterQuery;
 import net.sandrohc.jikan.query.search.CharacterSearchQuery;
 
 public class CharacterQueryFactory extends Factory {

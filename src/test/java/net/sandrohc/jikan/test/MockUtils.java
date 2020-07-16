@@ -7,6 +7,7 @@ import io.netty.handler.codec.http.HttpHeaderValues;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import org.mockserver.integration.ClientAndServer;
 import org.mockserver.model.Header;
+import org.mockserver.model.Parameter;
 
 import static org.mockserver.model.HttpRequest.request;
 import static org.mockserver.model.HttpResponse.response;
@@ -21,10 +22,10 @@ public class MockUtils {
 		return ClientAndServer.startClientAndServer(MOCK_PORT);
 	}
 
-	public static void mock(ClientAndServer mockServer, String uri, String json) {
+	public static void mock(ClientAndServer mockServer, String uri, String json, Parameter... queryParameters) {
 		mockServer.clear(null);
 		mockServer
-				.when(request().withMethod("GET").withPath(uri))
+				.when(request().withMethod("GET").withPath(uri).withQueryStringParameters(queryParameters))
 				.respond(response()
 						.withStatusCode(200)
 						.withHeader(new Header(HttpHeaderNames.CONTENT_TYPE.toString(), HttpHeaderValues.APPLICATION_JSON.toString()))

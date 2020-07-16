@@ -44,7 +44,7 @@ public abstract class AdvancedSearchQuery<C extends SearchQuery<C,R>, R> extends
 	}
 
 	public C sort(Sort sort) {
-		queryParams.put("sort", sort.key);
+		queryParams.put("sort", sort.key); // TODO: check if we can use the enum's name
 		return (C) this;
 	}
 

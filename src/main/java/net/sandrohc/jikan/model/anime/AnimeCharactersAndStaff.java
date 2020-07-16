@@ -20,8 +20,8 @@ public class AnimeCharactersAndStaff extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeCharactersAndStaff[characters=" + (characters == null ? null : (characters.size() + " characters")) +
-			   ", staff=" + (staff == null ? null : (staff.size() + " staff")) + ']';
+		return "AnimeCharactersAndStaff[characters=" + (characters.size() + " characters") +
+			   ", staff=" + (staff.size() + " staff") + ']';
 	}
 
 }
