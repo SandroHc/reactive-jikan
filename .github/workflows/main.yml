@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ 8, 10, 12 ]
+        java: [ 8, 11, 14 ]
 
     steps:
       - uses: actions/checkout@v2
@@ -35,9 +35,14 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build
-      - name: Test
-        run: ./gradlew test
-      - uses: actions/upload-artifact@v1
+      - name: Test & Coverage
+        run: ./gradlew test jacocoTestReport
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./build/reports/jacoco/test/jacocoTestReport.xml
+      - name: Artifacts
+        uses: actions/upload-artifact@v1
         with:
           name: Package
           path: build/libs

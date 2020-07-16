@@ -30,9 +30,7 @@ public class AnimeStats extends CacheEntity {
 
 	@Override
 	public String toString() {
-		return "AnimeStats[" +
-			   "total=" + total +
-			   ']';
+		return "AnimeStats[total=" + total + ']';
 	}
 
 }

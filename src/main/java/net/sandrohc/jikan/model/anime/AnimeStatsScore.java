@@ -6,23 +6,18 @@
 
 package net.sandrohc.jikan.model.anime;
 
-import java.time.OffsetDateTime;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class AnimeStatsScore {
 
+	/** The total votes for this score */
 	public int votes;
 
-	public float percentage;
+	/** The percentage of total votes are in this score */
+	public float percentage; // TODO: normalize to fit inside [0,1]?
 
 
 	@Override
 	public String toString() {
-		return "AnimeStatsScore[" +
-			   "votes=" + votes +
-			   ", percentage=" + percentage +
-			   ']';
+		return "AnimeStatsScore[votes=" + votes + ", percentage=" + percentage + ']';
 	}
 
 }

@@ -49,6 +49,12 @@ test {
     useJUnitPlatform()
 }
 
+jacocoTestReport {
+    reports {
+        xml.enabled true
+    }
+}
+
 tasks.withType(JavaCompile) {
     // force UTF-8 encoding on Windows machines
     options.encoding = 'UTF-8'

@@ -32,14 +32,6 @@ public class AnimeQueryFactory extends Factory {
         return new AnimeEpisodesQuery(this.jikan, id, page);
     }
 
-    public AnimeForumQuery forum(int id, int page) {
-        return new AnimeForumQuery(this.jikan, id);
-    }
-
-    public AnimeMoreInfoQuery moreInfo(int id, int page) {
-        return new AnimeMoreInfoQuery(this.jikan, id);
-    }
-
     public AnimeNewsQuery news(int id) {
         return new AnimeNewsQuery(this.jikan, id);
     }
@@ -54,6 +46,14 @@ public class AnimeQueryFactory extends Factory {
 
     public AnimeVideosQuery videos(int id) {
         return new AnimeVideosQuery(this.jikan, id);
+    }
+
+    public AnimeForumQuery forum(int id) {
+        return new AnimeForumQuery(this.jikan, id);
+    }
+
+    public AnimeMoreInfoQuery moreInfo(int id) {
+        return new AnimeMoreInfoQuery(this.jikan, id);
     }
 
 }

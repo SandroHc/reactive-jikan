@@ -3,21 +3,20 @@ package net.sandrohc.jikan.test;
 import java.time.*;
 import java.util.*;
 
-import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.enums.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
-import static net.sandrohc.jikan.test.MockUtils.mockError;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AnimeTest extends BaseTest {
 
 	@Test
-	void fetchById() {
+	void fetchAnime() {
 		String response = "{" +
 						  "  \"mal_id\": 1," +
 						  "  \"url\": \"https://example.com/url\"," +
@@ -141,6 +140,447 @@ public class AnimeTest extends BaseTest {
 		assertEquals(Type.ANIME, studio.type);
 		assertEquals("STUDIO", studio.name);
 		assertEquals("https://example.com/studio", studio.url);
+	}
+
+	@Test
+	void fetchCharactersAndStaff() {
+		// https://api.jikan.moe/v3/anime/11757/characters_staff
+		String response = "{\n" +
+						  "    \"characters\": [\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 36765,\n" +
+						  "            \"url\": \"https://myanimelist.net/character/36765/Kazuto_Kirigaya\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/characters/7/204821.jpg?s=6a96a832b35d0ff3af9292bdb082546e\",\n" +
+						  "            \"name\": \"Kirigaya, Kazuto\",\n" +
+						  "            \"role\": \"Main\",\n" +
+						  "            \"voice_actors\": [\n" +
+						  "                {\n" +
+						  "                    \"mal_id\": 732,\n" +
+						  "                    \"name\": \"Papenbrook, Bryce\",\n" +
+						  "                    \"url\": \"https://myanimelist.net/people/732/Bryce_Papenbrook\",\n" +
+						  "                    \"image_url\": \"https://cdn.myanimelist.net/r/42x62/images/voiceactors/3/29853.jpg?s=c0dded60545804ead1a1300c69236bce\",\n" +
+						  "                    \"language\": \"English\"\n" +
+						  "                },\n" +
+						  "                {\n" +
+						  "                    \"mal_id\": 11817,\n" +
+						  "                    \"name\": \"Matsuoka, Yoshitsugu\",\n" +
+						  "                    \"url\": \"https://myanimelist.net/people/11817/Yoshitsugu_Matsuoka\",\n" +
+						  "                    \"image_url\": \"https://cdn.myanimelist.net/r/42x62/images/voiceactors/2/40132.jpg?s=1c7f44d53fe3c1641b79ca5104dd7caa\",\n" +
+						  "                    \"language\": \"Japanese\"\n" +
+						  "                }\n" +
+						  "            ]\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 36828,\n" +
+						  "            \"url\": \"https://myanimelist.net/character/36828/Asuna_Yuuki\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/characters/15/262053.jpg?s=449153df46cce80307c9f8ae622b4514\",\n" +
+						  "            \"name\": \"Yuuki, Asuna\",\n" +
+						  "            \"role\": \"Main\",\n" +
+						  "            \"voice_actors\": [\n" +
+						  "                {\n" +
+						  "                    \"mal_id\": 890,\n" +
+						  "                    \"name\": \"Tomatsu, Haruka\",\n" +
+						  "                    \"url\": \"https://myanimelist.net/people/890/Haruka_Tomatsu\",\n" +
+						  "                    \"image_url\": \"https://cdn.myanimelist.net/r/42x62/images/voiceactors/2/54591.jpg?s=59d98cf69807cb64edf914f860d8eee5\",\n" +
+						  "                    \"language\": \"Japanese\"\n" +
+						  "                },\n" +
+						  "                {\n" +
+						  "                    \"mal_id\": 1650,\n" +
+						  "                    \"name\": \"Leigh, Cherami\",\n" +
+						  "                    \"url\": \"https://myanimelist.net/people/1650/Cherami_Leigh\",\n" +
+						  "                    \"image_url\": \"https://cdn.myanimelist.net/r/42x62/images/voiceactors/2/47505.jpg?s=70a4eeaa04501d3a866693fb2f80e0fb\",\n" +
+						  "                    \"language\": \"English\"\n" +
+						  "                }\n" +
+						  "            ]\n" +
+						  "        }\n" +
+						  "    ],\n" +
+						  "    \"staff\": [\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 10801,\n" +
+						  "            \"url\": \"https://myanimelist.net/people/10801/Tomohiko_Itou\",\n" +
+						  "            \"name\": \"Itou, Tomohiko\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/voiceactors/1/54737.jpg?s=671d2cead4aa20f1f4c72d141d6e1e7c\",\n" +
+						  "            \"positions\": [\n" +
+						  "                \"Director\",\n" +
+						  "                \"Episode Director\",\n" +
+						  "                \"Storyboard\"\n" +
+						  "            ]\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"mal_id\": 19775,\n" +
+						  "            \"url\": \"https://myanimelist.net/people/19775/Yoshiyuki_Fujiwara\",\n" +
+						  "            \"name\": \"Fujiwara, Yoshiyuki\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/images/questionmark_23.gif?s=f7dcbc4a4603d18356d3dfef8abd655c\",\n" +
+						  "            \"positions\": [\n" +
+						  "                \"Episode Director\",\n" +
+						  "                \"Storyboard\",\n" +
+						  "                \"2nd Key Animation\",\n" +
+						  "                \"Key Animation\"\n" +
+						  "            ]\n" +
+						  "        }\n" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/characters_staff", response);
+
+		AnimeCharactersAndStaff charactersAndStaff = jikan.query().anime().charactersAndStaff(11757).execute().block();
+		assertNotNull(charactersAndStaff);
+
+		/* Characters */
+		Iterator<AnimeCharacter> charactersIt = charactersAndStaff.characters.iterator();
+
+		AnimeCharacter character1 = charactersIt.next();
+		assertEquals(36765, character1.malId);
+		assertEquals("Kirigaya, Kazuto", character1.name);
+		assertEquals("Main", character1.role);
+		Iterator<CharacterVoiceActor> character1VoiceActorsIt = character1.voiceActors.iterator();
+		CharacterVoiceActor cha1va1 = character1VoiceActorsIt.next();
+		assertEquals(732, cha1va1.malId);
+		assertEquals("Papenbrook, Bryce", cha1va1.name);
+		assertEquals("English", cha1va1.language);
+		CharacterVoiceActor cha1va2 = character1VoiceActorsIt.next();
+		assertEquals(11817, cha1va2.malId);
+		assertEquals("Matsuoka, Yoshitsugu", cha1va2.name);
+		assertEquals("Japanese", cha1va2.language);
+
+		AnimeCharacter character2 = charactersIt.next();
+		assertEquals(36828, character2.malId);
+		assertEquals("Yuuki, Asuna", character2.name);
+		assertEquals("Main", character2.role);
+		Iterator<CharacterVoiceActor> character2VoiceActorsIt = character2.voiceActors.iterator();
+		CharacterVoiceActor cha2va1 = character2VoiceActorsIt.next();
+		assertEquals(890, cha2va1.malId);
+		assertEquals("Tomatsu, Haruka", cha2va1.name);
+		assertEquals("Japanese", cha2va1.language);
+		CharacterVoiceActor cha2va2 = character2VoiceActorsIt.next();
+		assertEquals(1650, cha2va2.malId);
+		assertEquals("Leigh, Cherami", cha2va2.name);
+		assertEquals("English", cha2va2.language);
+
+		assertFalse(charactersIt.hasNext());
+
+		/* Staff */
+		Iterator<AnimeStaff> staffIt = charactersAndStaff.staff.iterator();
+
+		AnimeStaff staff1 = staffIt.next();
+		assertEquals(10801, staff1.malId);
+		assertEquals("Itou, Tomohiko", staff1.name);
+		assertTrue(staff1.positions.containsAll(Arrays.asList("Director", "Episode Director", "Storyboard")));
+
+		AnimeStaff staff2 = staffIt.next();
+		assertEquals(19775, staff2.malId);
+		assertEquals("Fujiwara, Yoshiyuki", staff2.name);
+		assertTrue(staff2.positions.containsAll(Arrays.asList("Episode Director", "Storyboard", "2nd Key Animation", "Key Animation")));
+
+		assertFalse(staffIt.hasNext());
+	}
+
+	@Test
+	void fetchEpisodes() {
+		// https://api.jikan.moe/v3/anime/11757/episodes/1
+		String response = "{\n" +
+						  "    \"episodes_last_page\": 1,\n" +
+						  "    \"episodes\": [\n" +
+						  "        {\n" +
+						  "            \"episode_id\": 1,\n" +
+						  "            \"title\": \"The World of Swords\",\n" +
+						  "            \"title_japanese\": \"剣の世界\",\n" +
+						  "            \"title_romanji\": \"Ken no Sekai \",\n" +
+						  "            \"aired\": \"2012-07-08T00:00:00+00:00\",\n" +
+						  "            \"filler\": false,\n" +
+						  "            \"recap\": false,\n" +
+						  "            \"video_url\": \"https://myanimelist.net/anime/11757/Sword_Art_Online/episode/1\",\n" +
+						  "            \"forum_url\": \"https://myanimelist.net/forum/?topicid=459625\"\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"episode_id\": 2,\n" +
+						  "            \"title\": \"Beater\",\n" +
+						  "            \"title_japanese\": \"ビーター\",\n" +
+						  "            \"title_romanji\": \"Beater \",\n" +
+						  "            \"aired\": \"2012-07-15T00:00:00+00:00\",\n" +
+						  "            \"filler\": false,\n" +
+						  "            \"recap\": false,\n" +
+						  "            \"video_url\": \"https://myanimelist.net/anime/11757/Sword_Art_Online/episode/2\",\n" +
+						  "            \"forum_url\": \"https://myanimelist.net/forum/?topicid=463839\"\n" +
+						  "        }\n" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/episodes/1", response);
+
+		AnimeEpisodes episodes = jikan.query().anime().episodes(11757, 1).execute().block();
+
+		assertNotNull(episodes);
+		assertNotNull(episodes.episodes);
+		assertEquals(1, episodes.lastPage);
+
+		/* Episodes */
+		Iterator<AnimeEpisodesSub> episodesIt = episodes.episodes.iterator();
+
+		AnimeEpisodesSub ep1 = episodesIt.next();
+		assertEquals(1, ep1.episodeId);
+		assertEquals("The World of Swords", ep1.title);
+		assertEquals(OffsetDateTime.parse("2012-07-08T00:00:00+00:00"), ep1.aired);
+		assertFalse(ep1.filler);
+		assertFalse(ep1.recap);
+
+		AnimeEpisodesSub ep2 = episodesIt.next();
+		assertEquals(2, ep2.episodeId);
+		assertEquals("Beater", ep2.title);
+		assertEquals(OffsetDateTime.parse("2012-07-15T00:00:00+00:00"), ep2.aired);
+		assertFalse(ep2.filler);
+		assertFalse(ep2.recap);
+	}
+
+	@Test
+	void fetchNews() {
+		// https://api.jikan.moe/v3/anime/11757/news
+		String response = "{\n" +
+						  "    \"articles\": [\n" +
+						  "        {\n" +
+						  "            \"url\": \"https://myanimelist.net/news/56114579\",\n" +
+						  "            \"title\": \"Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri\",\n" +
+						  "            \"date\": \"2018-10-31T20:00:00+00:00\",\n" +
+						  "            \"author_name\": \"arsonal\",\n" +
+						  "            \"author_url\": \"https://myanimelist.net/profile/arsonal\",\n" +
+						  "            \"forum_url\": \"https://myanimelist.net/forum/?topicid=1748998\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/s/common/uploaded_files/1541039084-d87d2d92a6923a7b69e2f1775ae39c93.jpeg?s=3288e6769101fc3bc22f4728c933d9f4\",\n" +
+						  "            \"comments\": 5,\n" +
+						  "            \"intro\": \"Since making her international debut...\"\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"url\": \"https://myanimelist.net/news/50992876\",\n" +
+						  "            \"title\": \"North American Anime & Manga Releases for June\",\n" +
+						  "            \"date\": \"2017-06-05T11:01:00+00:00\",\n" +
+						  "            \"author_name\": \"Sakana-san\",\n" +
+						  "            \"author_url\": \"https://myanimelist.net/profile/Sakana-san\",\n" +
+						  "            \"forum_url\": \"https://myanimelist.net/forum/?topicid=1623111\",\n" +
+						  "            \"image_url\": \"https://cdn.myanimelist.net/s/common/uploaded_files/1496685526-62c913dabd65ccbcc2980704531918c8.jpeg?s=413df56d899170c2e81c41a54235740c\",\n" +
+						  "            \"comments\": 12,\n" +
+						  "            \"intro\": \"Here are the North American anime & manga...\"\n" +
+						  "        }\n" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/news", response);
+
+		AnimeNews news = jikan.query().anime().news(11757).execute().block();
+
+		assertNotNull(news);
+		assertNotNull(news.articles);
+
+		/* Articles */
+		Iterator<AnimeNewsSub> articlesIt = news.articles.iterator();
+
+		AnimeNewsSub a1 = articlesIt.next();
+		assertEquals("https://myanimelist.net/news/56114579", a1.url);
+		assertEquals("Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri", a1.title);
+		assertEquals(OffsetDateTime.parse("2018-10-31T20:00:00+00:00"), a1.date);
+		assertEquals("arsonal", a1.authorName);
+		assertEquals("https://myanimelist.net/forum/?topicid=1748998", a1.forumUrl);
+		assertEquals(5, a1.comments);
+		assertEquals("Since making her international debut...", a1.intro);
+
+		AnimeNewsSub a2 = articlesIt.next();
+		assertEquals("https://myanimelist.net/news/50992876", a2.url);
+		assertEquals("North American Anime & Manga Releases for June", a2.title);
+		assertEquals(OffsetDateTime.parse("2017-06-05T11:01:00+00:00"), a2.date);
+		assertEquals("Sakana-san", a2.authorName);
+		assertEquals("https://myanimelist.net/forum/?topicid=1623111", a2.forumUrl);
+		assertEquals(12, a2.comments);
+		assertEquals("Here are the North American anime & manga...", a2.intro);
+	}
+
+	@Test
+	void fetchPictures() {
+		// https://api.jikan.moe/v3/anime/11757/pictures
+		String response = "{\n" +
+						  "    \"pictures\": [\n" +
+						  "        {\n" +
+						  "            \"large\": \"https://cdn.myanimelist.net/images/anime/8/36343l.jpg\",\n" +
+						  "            \"small\": \"https://cdn.myanimelist.net/images/anime/8/36343.jpg\"\n" +
+						  "        },\n" +
+						  "        {\n" +
+						  "            \"large\": \"https://cdn.myanimelist.net/images/anime/11/39717l.jpg\",\n" +
+						  "            \"small\": \"https://cdn.myanimelist.net/images/anime/11/39717.jpg\"\n" +
+						  "        }\n" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/pictures", response);
+
+		Pictures pictures = jikan.query().anime().pictures(11757).execute().block();
+
+		assertNotNull(pictures);
+		assertNotNull(pictures.pictures);
+
+		/* Pictures */
+		Iterator<Picture> picturesIt = pictures.pictures.iterator();
+
+		Picture p1 = picturesIt.next();
+		assertEquals("https://cdn.myanimelist.net/images/anime/8/36343l.jpg", p1.large);
+		assertEquals("https://cdn.myanimelist.net/images/anime/8/36343.jpg", p1.small);
+
+		Picture p2 = picturesIt.next();
+		assertEquals("https://cdn.myanimelist.net/images/anime/11/39717l.jpg", p2.large);
+		assertEquals("https://cdn.myanimelist.net/images/anime/11/39717.jpg", p2.small);
+	}
+
+	@Test
+	void fetchVideos() {
+		// https://api.jikan.moe/v3/anime/11757/videos
+		String response = "{\n" +
+						  "    \"promo\": [\n" +
+						  "        {\n" +
+						  "            \"title\": \"PV English dub version\",\n" +
+						  "            \"image_url\": \"https://i.ytimg.com/vi/6ohYYtxfDCg/mqdefault.jpg\",\n" +
+						  "            \"video_url\": \"https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1\"\n" +
+						  "        }\n" +
+						  "    ],\n" +
+						  "    \"episodes\": [\n" +
+						  "        {\n" +
+						  "            \"title\": \"The World of Swords\",\n" +
+						  "            \"episode\": \"Episode 1\",\n" +
+						  "            \"url\": \"https://myanimelist.net/anime/11757/Sword_Art_Online/episode/1\",\n" +
+						  "            \"image_url\": \"https://img1.ak.crunchyroll.com/i/spire1-tmb/018d02b49a25a58bfd8a64416bdb69b41341616322_large.jpg\"\n" +
+						  "        }" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/1/videos", response);
+
+		AnimeVideos videos = jikan.query().anime().videos(1).execute().block();
+
+		assertNotNull(videos);
+		assertNotNull(videos.promo);
+		assertNotNull(videos.episodes);
+
+		/* Promo */
+		AnimeVideosPromo promo = videos.promo.iterator().next();
+		assertEquals("PV English dub version", promo.title);
+		assertEquals("https://i.ytimg.com/vi/6ohYYtxfDCg/mqdefault.jpg", promo.imageUrl);
+		assertEquals("https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1", promo.videoUrl);
+
+		/* Episode */
+		AnimeVideosEpisode episode = videos.episodes.iterator().next();
+		assertEquals("The World of Swords", episode.title);
+		assertEquals("Episode 1", episode.episode);
+		assertEquals("https://myanimelist.net/anime/11757/Sword_Art_Online/episode/1", episode.url);
+		assertEquals("https://img1.ak.crunchyroll.com/i/spire1-tmb/018d02b49a25a58bfd8a64416bdb69b41341616322_large.jpg", episode.imageUrl);
+	}
+
+	@Test
+	void fetchStats() {
+		// https://api.jikan.moe/v3/anime/11757/stats
+		String response = "{\n" +
+						  "    \"watching\": 68292,\n" +
+						  "    \"completed\": 1624882,\n" +
+						  "    \"on_hold\": 21722,\n" +
+						  "    \"dropped\": 75644,\n" +
+						  "    \"plan_to_watch\": 87594,\n" +
+						  "    \"total\": 1878134,\n" +
+						  "    \"scores\": {\n" +
+						  "        \"1\": { \"votes\": 19669, \"percentage\": 1.5 },\n" +
+						  "        \"2\": { \"votes\": 21048, \"percentage\": 1.6 },\n" +
+						  "        \"3\": { \"votes\": 35624, \"percentage\": 2.7 },\n" +
+						  "        \"4\": { \"votes\": 64411, \"percentage\": 4.8 },\n" +
+						  "        \"5\": { \"votes\": 98516, \"percentage\": 7.4 },\n" +
+						  "        \"6\": { \"votes\": 150171, \"percentage\": 11.2 },\n" +
+						  "        \"7\": { \"votes\": 250296, \"percentage\": 18.7 },\n" +
+						  "        \"8\": { \"votes\": 264412, \"percentage\": 19.8 },\n" +
+						  "        \"9\": { \"votes\": 212935, \"percentage\": 15.9 },\n" +
+						  "        \"10\": { \"votes\": 219496, \"percentage\": 16.4 }\n" +
+						  "    }\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/stats", response);
+
+		AnimeStats stats = jikan.query().anime().stats(11757).execute().block();
+
+		assertNotNull(stats);
+		assertEquals(68292,   stats.watching);
+		assertEquals(1624882, stats.completed);
+		assertEquals(21722,   stats.onHold);
+		assertEquals(75644,   stats.dropped);
+		assertEquals(87594,   stats.planToWatch);
+		assertEquals(1878134, stats.total);
+		assertEquals(19669,  stats.scores.get(1).votes);  assertEquals(1.5F,  stats.scores.get(1).percentage);
+		assertEquals(21048,  stats.scores.get(2).votes);  assertEquals(1.6F,  stats.scores.get(2).percentage);
+		assertEquals(35624,  stats.scores.get(3).votes);  assertEquals(2.7F,  stats.scores.get(3).percentage);
+		assertEquals(64411,  stats.scores.get(4).votes);  assertEquals(4.8F,  stats.scores.get(4).percentage);
+		assertEquals(98516,  stats.scores.get(5).votes);  assertEquals(7.4F,  stats.scores.get(5).percentage);
+		assertEquals(150171, stats.scores.get(6).votes);  assertEquals(11.2F, stats.scores.get(6).percentage);
+		assertEquals(250296, stats.scores.get(7).votes);  assertEquals(18.7F, stats.scores.get(7).percentage);
+		assertEquals(264412, stats.scores.get(8).votes);  assertEquals(19.8F, stats.scores.get(8).percentage);
+		assertEquals(212935, stats.scores.get(9).votes);  assertEquals(15.9F, stats.scores.get(9).percentage);
+		assertEquals(219496, stats.scores.get(10).votes); assertEquals(16.4F, stats.scores.get(10).percentage);
+
+		int totalScores = stats.scores.values().stream().mapToInt(s -> s.votes).sum();
+		assertTrue(stats.total >= totalScores);
+	}
+
+	@Test
+	void fetchForum() {
+		// https://api.jikan.moe/v3/anime/11757/forum
+		String response = "{\n" +
+						  "    \"topics\": [\n" +
+						  "        {\n" +
+						  "            \"topic_id\": 1797514,\n" +
+						  "            \"url\": \"https://myanimelist.net/forum/?topicid=1797514\",\n" +
+						  "            \"title\": \"Is Kirito an UNLIKABLE character?\",\n" +
+						  "            \"date_posted\": \"2019-08-15T00:00:00+00:00\",\n" +
+						  "            \"author_name\": \"AUTHOR\",\n" +
+						  "            \"author_url\": \"https://myanimelist.net/profile/AUTHOR\",\n" +
+						  "            \"replies\": 54,\n" +
+						  "            \"last_post\": {\n" +
+						  "                \"url\": \"https://myanimelist.net/forum/?topicid=1797514&goto=lastpost\",\n" +
+						  "                \"author_name\": \"LAST POST\",\n" +
+						  "                \"author_url\": \"https://myanimelist.net/profile/LAST POST\",\n" +
+						  "                \"date_posted\": \"2020-07-14T08:46:00+00:00\"\n" +
+						  "            }\n" +
+						  "        }\n" +
+						  "    ]\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/forum", response);
+
+		AnimeForum forum = jikan.query().anime().forum(11757).execute().block();
+
+		assertNotNull(forum);
+		assertNotNull(forum.topics);
+
+		/* Topics */
+		Iterator<AnimeForumTopic> topicsIt = forum.topics.iterator();
+
+		AnimeForumTopic t1 = topicsIt.next();
+		assertEquals(1797514, t1.topicId);
+		assertEquals("https://myanimelist.net/forum/?topicid=1797514", t1.url);
+		assertEquals("Is Kirito an UNLIKABLE character?", t1.title);
+		assertEquals(OffsetDateTime.parse("2019-08-15T00:00:00+00:00"), t1.datePosted);
+		assertEquals("AUTHOR", t1.authorName);
+		assertEquals(54, t1.replies);
+
+		AnimeForumTopicPost t1Last = t1.lastPost;
+		assertEquals("https://myanimelist.net/forum/?topicid=1797514&goto=lastpost", t1Last.url);
+		assertEquals("LAST POST", t1Last.authorName);
+		assertEquals(OffsetDateTime.parse("2020-07-14T08:46:00+00:00"), t1Last.datePosted);
+
+		assertFalse(topicsIt.hasNext());
+	}
+
+	@Test
+	void fetchMoreInfo() {
+		// https://api.jikan.moe/v3/anime/11757/moreinfo
+		String response = "{\n" +
+						  "    \"moreinfo\": null\n" +
+						  "}";
+
+		mock(mockServer, "/anime/11757/moreinfo", response);
+
+		AnimeMoreInfo moreInfo = jikan.query().anime().moreInfo(11757).execute().block();
+
+		assertNotNull(moreInfo);
+		assertNull(moreInfo.moreInfo);
 	}
 
 }

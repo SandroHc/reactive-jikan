@@ -15,15 +15,13 @@ public class AnimeVideosPromo {
 	@JsonProperty("image_url")
 	public String imageUrl;
 
-	@JsonProperty("image_url")
+	@JsonProperty("video_url")
 	public String videoUrl;
 
 
 	@Override
 	public String toString() {
-		return "AnimeVideosPromo[" +
-			   "title='" + title + '\'' +
-			   ']';
+		return "AnimeVideosPromo[title='" + title + "']";
 	}
 
 }

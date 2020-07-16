@@ -1,6 +1,8 @@
 # Reactive Jikan
 
-[![](https://jitpack.io/v/SandroHc/reactive-jikan.svg?style=flat-square)](https://jitpack.io/#net.sandrohc/reactive-jikan)
+[![JitPack](https://jitpack.io/v/SandroHc/reactive-jikan.svg?style=flat-square)](https://jitpack.io/#net.sandrohc/reactive-jikan)
+[![GitHub Workflow](https://img.shields.io/github/workflow/status/SandroHc/reactive-jikan/Build?style=flat-square)](https://github.com/SandroHc/reactive-jikan/actions?query=workflow:Build)
+[![Codecov](https://img.shields.io/codecov/c/github/SandroHc/reactive-jikan?style=flat-square)](https://codecov.io/gh/SandroHc/reactive-jikan)
 
 API wrapper for the [Jikan API](https://jikan.moe), with the power of Project Reactor and reactive streams.
 
