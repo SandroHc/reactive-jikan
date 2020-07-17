@@ -8,9 +8,9 @@ package net.sandrohc.jikan.query.character;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.character.Character;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class CharacterQuery extends Query<Character> {
+public class CharacterQuery extends QueryMono<Character> {
 
 	private final int id;
 

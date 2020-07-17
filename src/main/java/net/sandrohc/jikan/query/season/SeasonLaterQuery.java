@@ -8,9 +8,9 @@ package net.sandrohc.jikan.query.season;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.season.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class SeasonLaterQuery extends Query<SeasonList> {
+public class SeasonLaterQuery extends QueryMono<SeasonList> {
 
 	public SeasonLaterQuery(Jikan jikan) {
 		super(jikan);

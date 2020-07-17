@@ -7,10 +7,10 @@
 package net.sandrohc.jikan.query.person;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.common.Pictures;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class PersonPicturesQuery extends Query<Pictures> {
+public class PersonPicturesQuery extends QueryMono<Pictures> {
 
 	private final int id;
 

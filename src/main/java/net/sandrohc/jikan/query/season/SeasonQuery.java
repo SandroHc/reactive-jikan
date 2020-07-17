@@ -9,9 +9,9 @@ package net.sandrohc.jikan.query.season;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.season.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class SeasonQuery extends Query<SeasonList> {
+public class SeasonQuery extends QueryMono<SeasonList> {
 
 	/** The season year. */
 	private final int year;

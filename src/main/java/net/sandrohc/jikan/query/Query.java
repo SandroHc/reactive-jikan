@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query;
 import java.util.*;
 
 import net.sandrohc.jikan.Jikan;
+import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
-public abstract class Query<T> {
+public abstract class Query<T, P extends Publisher<T>> {
 
 	protected final Jikan jikan;
 	protected final Map<String, Object> queryParams;
@@ -21,10 +22,6 @@ public abstract class Query<T> {
 		this.queryParams = new HashMap<>();
 	}
 
-	public Mono<T> execute() {
-		return jikan.query(this);
-	}
-
 	public abstract String getUri();
 
 	public Map<String, Object> getQueryParameters() {
@@ -32,6 +29,14 @@ public abstract class Query<T> {
 	}
 
 	public abstract Class<T> getRequestClass();
+
+
+	public P execute() {
+		return jikan.query(this);
+	}
+
+	public abstract P prepareResponse(Mono<byte[]> content);
+	protected abstract P deserialize(byte[] content);
 
 	@Override
 	public String toString() {

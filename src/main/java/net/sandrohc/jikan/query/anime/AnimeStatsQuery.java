@@ -8,9 +8,9 @@ package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class AnimeStatsQuery extends Query<Stats> {
+public class AnimeStatsQuery extends QueryMono<Stats> {
 
 	/** The anime ID. */
 	private final int id;

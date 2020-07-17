@@ -24,6 +24,7 @@ import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
+import org.reactivestreams.Publisher;
 import org.slf4j.*;
 import reactor.core.publisher.Mono;
 import reactor.netty.ByteBufMono;
@@ -37,15 +38,12 @@ public class Jikan {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Jikan.class);
 
-	private static final ObjectMapper JSON_PARSER = new ObjectMapper()
-			.registerModule(new JavaTimeModule())
-			.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-
 	public final boolean debug;
 	public final String baseUrl;
 	public final String userAgent;
 
-	private final HttpClient httpClient;
+	public final HttpClient httpClient;
+	public final ObjectMapper objectMapper;
 
 	public Jikan() {
 		this(new JikanBuilder()); // use builder defaults
@@ -61,6 +59,10 @@ public class Jikan {
 				.headers(h -> h
 						.add(HttpHeaderNames.ACCEPT, HttpHeaderValues.APPLICATION_JSON)
 						.add(HttpHeaderNames.USER_AGENT, this.userAgent));
+
+		this.objectMapper = new ObjectMapper()
+				.registerModule(new JavaTimeModule())
+				.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	}
 
 	/**
@@ -79,14 +81,26 @@ public class Jikan {
 	 * @param <T> the expected entity type
 	 * @return the parsed entity, or {@code null} if the entity was not found
 	 */
-	public <T> Mono<T> query(Query<T> query) {
+	public <T,P extends Publisher<T>> P query(Query<T,P> query) {
 		final String uri = buildUri(query);
 		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
-		return httpClient.get().uri(uri).responseSingle((res, content) -> handleResponse(res, content, query));
+		return query.prepareResponse(httpClient.get().uri(uri).responseSingle(this::onResponse));
 	}
 
-	private <T> String buildUri(Query<T> query) {
+	private Mono<byte[]> onResponse(HttpClientResponse res, ByteBufMono content) {
+		if (res.status() == HttpResponseStatus.OK) {
+			return content.asByteArray();
+		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
+			return Mono.empty();
+		} else {
+			return content.asString().flatMap(str -> Mono.error(
+					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + getClass().getSimpleName() + ": " + str)
+			));
+		}
+	}
+
+	private String buildUri(Query<?,?> query) {
 		StringBuilder sb = new StringBuilder(query.getUri());
 
 		Map<String, Object> queryParameters = query.getQueryParameters();
@@ -112,27 +126,7 @@ public class Jikan {
 		return sb.toString();
 	}
 
-	private <T> Mono<T> handleResponse(HttpClientResponse res, ByteBufMono content, Query<T> query) {
-		if (res.status() == HttpResponseStatus.OK) {
-			return content.asByteArray().flatMap(bytes -> decode(query, bytes));
-		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
-			return Mono.empty();
-		} else {
-			return content.asString().flatMap(str -> Mono.error(
-					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + query.getClass().getSimpleName() + ": " + str)
-			));
-		}
-	}
-
-	private <T> Mono<T> decode(Query<T> query, byte[] content) {
-		try {
-			return Mono.just(JSON_PARSER.readValue(content, query.getRequestClass()));
-		} catch (IOException e) {
-			return Mono.error(dumpStacktrace(query, content, e));
-		}
-	}
-
-	private <T> Exception dumpStacktrace(Query<T> query, byte[] response, Exception e) {
+	public Exception dumpStacktrace(Query<?,?> query, byte[] response, Exception e) {
 		if (!debug) {
 			return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName(), e);
 		}

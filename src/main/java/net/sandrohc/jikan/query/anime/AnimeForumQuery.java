@@ -7,10 +7,10 @@
 package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.common.Forum;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class AnimeForumQuery extends Query<Forum> {
+public class AnimeForumQuery extends QueryMono<Forum> {
 
 	/** The anime ID. */
 	private final int id;

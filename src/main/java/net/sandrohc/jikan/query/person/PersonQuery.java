@@ -8,9 +8,9 @@ package net.sandrohc.jikan.query.person;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryMono;
 
-public class PersonQuery extends Query<Person> {
+public class PersonQuery extends QueryMono<Person> {
 
 	private final int id;
 
