@@ -8,9 +8,12 @@ package net.sandrohc.jikan.query.manga;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.query.QueryFlux;
 import net.sandrohc.jikan.query.QueryMono;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class MangaForumQuery extends QueryMono<Forum> {
+public class MangaForumQuery extends QueryFlux<Forum, ForumTopic> {
 
 	/** The manga ID. */
 	private final int id;
@@ -28,6 +31,11 @@ public class MangaForumQuery extends QueryMono<Forum> {
 	@Override
 	public Class<Forum> getRequestClass() {
 		return Forum.class;
+	}
+
+	@Override
+	public Flux<ForumTopic> process(Mono<Forum> content) {
+		return content.flatMapMany(results -> Flux.fromIterable(results.topics));
 	}
 
 }

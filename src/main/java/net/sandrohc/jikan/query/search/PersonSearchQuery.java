@@ -8,9 +8,12 @@ package net.sandrohc.jikan.query.search;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.model.search.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch> {
+public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch, PersonSub> {
 
 	public PersonSearchQuery(Jikan jikan) {
 		super(jikan, Type.PERSON);
@@ -20,4 +23,10 @@ public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSear
 	public Class<PersonSearch> getRequestClass() {
 		return PersonSearch.class;
 	}
+
+	@Override
+	public Flux<PersonSub> process(Mono<PersonSearch> content) {
+		return content.flatMapMany(search -> Flux.fromIterable(search.results));
+	}
+
 }

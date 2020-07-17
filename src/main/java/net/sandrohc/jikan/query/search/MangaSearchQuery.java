@@ -10,9 +10,13 @@ import java.util.*;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.model.search.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch> { // TODO: create a MangaSub variant
+// TODO: create a MangaSub variant
+public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch, Manga> {
 
 	public MangaSearchQuery(Jikan jikan) {
 		super(jikan, Type.MANGA);
@@ -42,6 +46,11 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 	@Override
 	public Class<MangaSearch> getRequestClass() {
 		return MangaSearch.class;
+	}
+
+	@Override
+	public Flux<Manga> process(Mono<MangaSearch> content) {
+		return content.flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

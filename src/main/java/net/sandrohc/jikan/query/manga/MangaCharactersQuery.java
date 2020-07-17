@@ -8,9 +8,11 @@ package net.sandrohc.jikan.query.manga;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.manga.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.QueryFlux;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class MangaCharactersQuery extends QueryMono<MangaCharacters> {
+public class MangaCharactersQuery extends QueryFlux<MangaCharacters, MangaCharacter> {
 
 	/** The manga ID. */
 	private final int id;
@@ -28,6 +30,11 @@ public class MangaCharactersQuery extends QueryMono<MangaCharacters> {
 	@Override
 	public Class<MangaCharacters> getRequestClass() {
 		return MangaCharacters.class;
+	}
+
+	@Override
+	public Flux<MangaCharacter> process(Mono<MangaCharacters> content) {
+		return content.flatMapMany(results -> Flux.fromIterable(results.characters));
 	}
 
 }

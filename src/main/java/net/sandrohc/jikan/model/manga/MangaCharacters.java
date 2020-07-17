@@ -12,7 +12,7 @@ import net.sandrohc.jikan.model.base.*;
 
 public class MangaCharacters extends CacheEntity {
 
-	public List<RoleSubEntity> characters = Collections.emptyList();
+	public List<MangaCharacter> characters = Collections.emptyList();
 
 
 	@Override

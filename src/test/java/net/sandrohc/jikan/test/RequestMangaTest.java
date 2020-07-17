@@ -177,21 +177,21 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/characters", response);
 
-		MangaCharacters characters = jikan.query().manga().characters(96792).execute().block();
+		Collection<MangaCharacter> characters = jikan.query().manga().characters(96792).execute().collectList().block();
 
 		assertNotNull(characters);
-		assertNotNull(characters.toString());
+		assertNotNull(new MangaCharacters().toString());
 
 		/* Characters */
-		Iterator<RoleSubEntity> charactersIt = characters.characters.iterator();
+		Iterator<MangaCharacter> charactersIt = characters.iterator();
 
-		RoleSubEntity character1 = charactersIt.next();
+		MangaCharacter character1 = charactersIt.next();
 		assertNotNull(character1.toString());
 		assertEquals(146157, character1.malId);
 		assertEquals("Kamado, Nezuko", character1.name);
 		assertEquals("Main", character1.role);
 
-		RoleSubEntity character2 = charactersIt.next();
+		MangaCharacter character2 = charactersIt.next();
 		assertNotNull(character2.toString());
 		assertEquals(146156, character2.malId);
 		assertEquals("Kamado, Tanjirou", character2.name);
@@ -232,14 +232,12 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/news", response);
 
-		News news = jikan.query().manga().news(96792).execute().block();
+		Collection<NewsArticle> newsArticles = jikan.query().manga().news(96792).execute().collectList().block();
 
-		assertNotNull(news);
-		assertNotNull(news.toString());
-		assertNotNull(news.articles);
+		assertNotNull(newsArticles);
 
 		/* Articles */
-		Iterator<NewsArticle> articlesIt = news.articles.iterator();
+		Iterator<NewsArticle> articlesIt = newsArticles.iterator();
 
 		NewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
@@ -280,14 +278,12 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/pictures", response);
 
-		Pictures pictures = jikan.query().manga().pictures(96792).execute().block();
+		Collection<Picture> pictures = jikan.query().manga().pictures(96792).execute().collectList().block();
 
 		assertNotNull(pictures);
-		assertNotNull(pictures.toString());
-		assertNotNull(pictures.pictures);
 
 		/* Pictures */
-		Iterator<Picture> picturesIt = pictures.pictures.iterator();
+		Iterator<Picture> picturesIt = pictures.iterator();
 
 		Picture p1 = picturesIt.next();
 		assertNotNull(p1.toString());
@@ -377,14 +373,13 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/forum", response);
 
-		Forum forum = jikan.query().manga().forum(96792).execute().block();
+		Collection<ForumTopic> forumTopics = jikan.query().manga().forum(96792).execute().collectList().block();
 
-		assertNotNull(forum);
-		assertNotNull(forum.toString());
-		assertNotNull(forum.topics);
+		assertNotNull(forumTopics);
+		assertNotNull(forumTopics.toString());
 
 		/* Topics */
-		Iterator<ForumTopic> topicsIt = forum.topics.iterator();
+		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
 
 		ForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
@@ -451,14 +446,12 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/reviews/1", response);
 
-		Reviews reviews = jikan.query().manga().reviews(96792, 1).execute().block();
+		Collection<Review> reviews = jikan.query().manga().reviews(96792, 1).execute().collectList().block();
 
 		assertNotNull(reviews);
-		assertNotNull(reviews.toString());
-		assertNotNull(reviews.reviews);
 
 		/* Reviews */
-		Iterator<Review> reviewsIt = reviews.reviews.iterator();
+		Iterator<Review> reviewsIt = reviews.iterator();
 
 		Review review = reviewsIt.next();
 		assertNotNull(review.toString());
@@ -504,14 +497,12 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/recommendations", response);
 
-		Recommendations recommendations = jikan.query().manga().recommendations(96792).execute().block();
+		Collection<Recommendation> recommendations = jikan.query().manga().recommendations(96792).execute().collectList().block();
 
 		assertNotNull(recommendations);
-		assertNotNull(recommendations.toString());
-		assertNotNull(recommendations.recommendations);
 
 		/* Recommendations */
-		Iterator<Recommendation> recommendationsIt = recommendations.recommendations.iterator();
+		Iterator<Recommendation> recommendationsIt = recommendations.iterator();
 
 		Recommendation recommendation = recommendationsIt.next();
 		assertNotNull(recommendation.toString());
@@ -545,14 +536,12 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/userupdates/1", response);
 
-		UserUpdates userUpdates = jikan.query().manga().userUpdates(96792, 1).execute().block();
+		Collection<UserUpdate> userUpdates = jikan.query().manga().userUpdates(96792, 1).execute().collectList().block();
 
 		assertNotNull(userUpdates);
-		assertNotNull(userUpdates.toString());
-		assertNotNull(userUpdates.users);
 
 		/* User Updates */
-		Iterator<UserUpdate> usersIt = userUpdates.users.iterator();
+		Iterator<UserUpdate> usersIt = userUpdates.iterator();
 
 		UserUpdate userUpdate = usersIt.next();
 		assertNotNull(userUpdate.toString());
@@ -619,7 +608,7 @@ public class RequestMangaTest extends RequestTest {
 				Parameter.param("startDate", "2020-01-01"),
 				Parameter.param("endDate", "2020-12-31"));
 
-		MangaSearch search = jikan.query().manga().search()
+		Collection<Manga> results = jikan.query().manga().search()
 				.query("test")
 				.page(1)
 				.limit(1)
@@ -631,15 +620,15 @@ public class RequestMangaTest extends RequestTest {
 				.score(1.0F)
 				.startDate(LocalDate.parse("2020-01-01"))
 				.endDate(LocalDate.parse("2020-12-31"))
-				.execute().block();
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(search);
-		assertNotNull(search.toString());
-		assertNotNull(search.results);
-		assertEquals(20, search.lastPage);
+		assertNotNull(results);
+		assertNotNull(new MangaSearch().toString());
 
 		/* Results */
-		Iterator<Manga> resultsIt = search.results.iterator();
+		Iterator<Manga> resultsIt = results.iterator();
 
 		Manga m1 = resultsIt.next();
 		assertNotNull(m1.toString());

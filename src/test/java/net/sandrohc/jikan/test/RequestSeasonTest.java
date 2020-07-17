@@ -6,7 +6,6 @@ import java.util.*;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.season.SeasonList;
 import net.sandrohc.jikan.model.season.*;
 import org.junit.jupiter.api.*;
 
@@ -78,13 +77,16 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/2020/summer", response);
 
-		SeasonList season = jikan.query().season().get(2020, net.sandrohc.jikan.model.enums.Season.SUMMER).execute().block();
+		Collection<SeasonAnime> results = jikan.query().season().get(2020, net.sandrohc.jikan.model.enums.Season.SUMMER)
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(season);
-		assertNotNull(season.toString());
+		assertNotNull(results);
+		assertNotNull(new SeasonList().toString());
 
-
-		SeasonAnime anime = season.anime.iterator().next();
+		/* Results */
+		SeasonAnime anime = results.iterator().next();
 
 		assertNotNull(anime);
 		assertNotNull(anime.toString());
@@ -152,13 +154,16 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/archive", response);
 
-		SeasonArchive seasonArchive = jikan.query().season().archive().execute().block();
+		List<SeasonArchiveYear> results = jikan.query().season().archive()
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(seasonArchive);
-		assertNotNull(seasonArchive.toString());
+		assertNotNull(results);
+		assertNotNull(new SeasonArchive().toString());
 
-
-		Iterator<SeasonArchiveYear> yearIt = seasonArchive.archive.iterator();
+		/* Results */
+		Iterator<SeasonArchiveYear> yearIt = results.iterator();
 
 		SeasonArchiveYear year1 = yearIt.next();
 		assertNotNull(year1);
@@ -266,13 +271,15 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/later", response);
 
-		SeasonList season = jikan.query().season().later().execute().block();
+		Collection<SeasonAnime> results = jikan.query().season().later()
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(season);
-		assertNotNull(season.toString());
+		assertNotNull(results);
 
-
-		SeasonAnime anime = season.anime.iterator().next();
+		/* Results */
+		SeasonAnime anime = results.iterator().next();
 
 		assertNotNull(anime);
 		assertNotNull(anime.toString());

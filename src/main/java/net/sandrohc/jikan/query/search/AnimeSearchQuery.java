@@ -11,8 +11,10 @@ import java.util.*;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.search.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
-public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, AnimeSearch> {
+public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, AnimeSearch, AnimeSearchSub> {
 
 	public AnimeSearchQuery(Jikan jikan) {
 		super(jikan, Type.ANIME);
@@ -42,6 +44,11 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 	@Override
 	public Class<AnimeSearch> getRequestClass() {
 		return AnimeSearch.class;
+	}
+
+	@Override
+	public Flux<AnimeSearchSub> process(Mono<AnimeSearch> content) {
+		return content.flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

@@ -392,14 +392,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/news", response);
 
-		News news = jikan.query().anime().news(11757).execute().block();
+		Collection<NewsArticle> newsArticles = jikan.query().anime().news(11757).execute().collectList().block();
 
-		assertNotNull(news);
-		assertNotNull(news.toString());
-		assertNotNull(news.articles);
+		assertNotNull(newsArticles);
+		assertNotNull(new News().toString());
 
 		/* Articles */
-		Iterator<NewsArticle> articlesIt = news.articles.iterator();
+		Iterator<NewsArticle> articlesIt = newsArticles.iterator();
 
 		NewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
@@ -440,14 +439,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/pictures", response);
 
-		Pictures pictures = jikan.query().anime().pictures(11757).execute().block();
+		Collection<Picture> pictures = jikan.query().anime().pictures(11757).execute().collectList().block();
 
 		assertNotNull(pictures);
-		assertNotNull(pictures.toString());
-		assertNotNull(pictures.pictures);
+		assertNotNull(new Pictures().toString());
 
 		/* Pictures */
-		Iterator<Picture> picturesIt = pictures.pictures.iterator();
+		Iterator<Picture> picturesIt = pictures.iterator();
 
 		Picture p1 = picturesIt.next();
 		assertNotNull(p1.toString());
@@ -583,14 +581,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/forum", response);
 
-		Forum forum = jikan.query().anime().forum(11757).execute().block();
+		Collection<ForumTopic> forumTopics = jikan.query().anime().forum(11757).execute().collectList().block();
 
-		assertNotNull(forum);
-		assertNotNull(forum.toString());
-		assertNotNull(forum.topics);
+		assertNotNull(forumTopics);
+		assertNotNull(new Forum().toString());
 
 		/* Topics */
-		Iterator<ForumTopic> topicsIt = forum.topics.iterator();
+		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
 
 		ForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
@@ -658,14 +655,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/reviews/1", response);
 
-		Reviews reviews = jikan.query().anime().reviews(11757, 1).execute().block();
+		Collection<Review> reviews = jikan.query().anime().reviews(11757, 1).execute().collectList().block();
 
 		assertNotNull(reviews);
-		assertNotNull(reviews.toString());
-		assertNotNull(reviews.reviews);
+		assertNotNull(new Reviews().toString());
 
 		/* Reviews */
-		Iterator<Review> reviewsIt = reviews.reviews.iterator();
+		Iterator<Review> reviewsIt = reviews.iterator();
 
 		Review review = reviewsIt.next();
 		assertNotNull(review.toString());
@@ -712,14 +708,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/recommendations", response);
 
-		Recommendations recommendations = jikan.query().anime().recommendations(11757).execute().block();
+		Collection<Recommendation> recommendations = jikan.query().anime().recommendations(11757).execute().collectList().block();
 
 		assertNotNull(recommendations);
-		assertNotNull(recommendations.toString());
-		assertNotNull(recommendations.recommendations);
+		assertNotNull(new Recommendations().toString());
 
 		/* Recommendations */
-		Iterator<Recommendation> recommendationsIt = recommendations.recommendations.iterator();
+		Iterator<Recommendation> recommendationsIt = recommendations.iterator();
 
 		Recommendation recommendation = recommendationsIt.next();
 		assertNotNull(recommendation.toString());
@@ -753,14 +748,13 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/userupdates/1", response);
 
-		UserUpdates userUpdates = jikan.query().anime().userUpdates(11757, 1).execute().block();
+		Collection<UserUpdate> userUpdates = jikan.query().anime().userUpdates(11757, 1).execute().collectList().block();
 
 		assertNotNull(userUpdates);
-		assertNotNull(userUpdates.toString());
-		assertNotNull(userUpdates.users);
+		assertNotNull(new UserUpdates().toString());
 
 		/* User Updates */
-		Iterator<UserUpdate> usersIt = userUpdates.users.iterator();
+		Iterator<UserUpdate> usersIt = userUpdates.iterator();
 
 		UserUpdate userUpdate = usersIt.next();
 		assertNotNull(userUpdate.toString());
@@ -827,7 +821,7 @@ public class RequestAnimeTest extends RequestTest {
 				Parameter.param("startDate", "2020-01-01"),
 				Parameter.param("endDate", "2020-12-31"));
 
-		AnimeSearch search = jikan.query().anime().search()
+		Collection<AnimeSearchSub> results = jikan.query().anime().search()
 				.query("test")
 				.page(1)
 				.limit(1)
@@ -839,15 +833,15 @@ public class RequestAnimeTest extends RequestTest {
 				.score(1.0F)
 				.startDate(LocalDate.parse("2020-01-01"))
 				.endDate(LocalDate.parse("2020-12-31"))
-				.execute().block();
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(search);
-		assertNotNull(search.toString());
-		assertNotNull(search.results);
-		assertEquals(20, search.lastPage);
+		assertNotNull(results);
+		assertNotNull(new AnimeSearch().toString());
 
 		/* Results */
-		Iterator<AnimeSearchSub> resultsIt = search.results.iterator();
+		Iterator<AnimeSearchSub> resultsIt = results.iterator();
 
 		AnimeSearchSub r1 = resultsIt.next();
 		assertNotNull(r1.toString());

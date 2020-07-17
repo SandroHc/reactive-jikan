@@ -48,26 +48,27 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigating the list of queries), you can pass it to your `Jikan` instance. While building the query, you may specify optional parameters.
 
-With the query setup with your desired paramers, you may now execute it by calling `query.execute()` (or use `jikan.query()`). The method returned is a reactive stream of type `Mono<T>`. To convert it into your desired result, you must call `subscribe()` or `block()`.
+After you successfully configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>`. To convert it into your desired result, you must call `subscribe()` or `block()`.
 
-Here are some examples on how to use it:
+Here are some examples on how to use this library:
 ```java
 // Create the Jikan instance with default parameters.
 // You can also use the builder, JikanBuilder, if you desire different parameters.
 Jikan jikan = new Jikan(); 
 
-// Fetch the anime with ID 1
+// Fetch the anime with ID 1 - mono response
 Anime anime = jikan.query().anime().get(1)
         .execute()
         .block();
 
-// Search for 'sword art online'
+// Search for 'sword art online' - flux response
 AnimeSearch animeSearch = jikan.query().anime().search()
         .query("sword art online")
         .limit(5)
         .status(AnimeStatus.AIRING)
         .orderBy(AnimeOrderBy.MEMBERS)
         .execute()
+        .collectList()
         .block();
 ```
 
@@ -80,41 +81,41 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/characters_staff           	| AnimeCharactersAndStaffQuery	| AnimeCharactersAndStaff   |
 | /{id}/episodes/{page}            	| AnimeEpisodesQuery            | AnimeEpisodes             |
 | /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
-| /{id}/pictures                   	| AnimePicturesQuery            | AnimePictures            	|
+| /{id}/pictures                   	| AnimePicturesQuery            | Flux<AnimePicture>        |
 | /{id}/videos                     	| AnimeVideosQuery              | AnimeVideos            	|
 | /{id}/stats                      	| AnimeStatsQuery               | Stats            	        |
-| /{id}/forum                      	| AnimeForumQuery               | Forum            	        |
+| /{id}/forum                      	| AnimeForumQuery               | Flux<ForumTopic>          |
 | /{id}/moreinfo                   	| AnimeMoreInfoQuery            | MoreInfo            	    |
-| /{id}/reviews/{page}             	| AnimeReviewsQuery             | Reviews            	    |
-| /{id}/recommendations            	| AnimeRecommendationsQuery     | Recommendations           |
-| /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | UserUpdates            	|
+| /{id}/reviews/{page}             	| AnimeReviewsQuery             | Flux<Review>            	|
+| /{id}/recommendations            	| AnimeRecommendationsQuery     | Flux<Recommendation>      |
+| /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | Flux<UserUpdate>          |
 | **Manga**                         |                              	|             	            |
 | /{id}                            	| MangaQuery                    | Manga                     |
-| /{id}/characters                 	| MangaCharactersQuery          | MangaCharacters           |
-| /{id}/news                       	| MangaNewsQuery                | News            	        |
-| /{id}/pictures                   	| MangaPicturesQuery            | Pictures            	    |
+| /{id}/characters                 	| MangaCharactersQuery          | Flux<RoleSubEntity>       |
+| /{id}/news                       	| MangaNewsQuery                | Flux<NewsArticle>         |
+| /{id}/pictures                   	| MangaPicturesQuery            | Flux<Pictures>            	|
 | /{id}/stats                      	| MangaStatsQuery               | Stats            	        |
-| /{id}/forum                      	| MangaForumQuery               | Forum            	        |
+| /{id}/forum                      	| MangaForumQuery               | Flux<ForumTopic>          |
 | /{id}/moreinfo                   	| MangaMoreInfoQuery            | MoreInfo            	    |
-| /{id}/reviews/{page}             	| MangaReviewsQuery             | Reviews              	    |
+| /{id}/reviews/{page}             	| MangaReviewsQuery             | Flux<Review>              |
 | /{id}/recommendations            	| MangaRecommendationsQuery     | Recommendations           |
-| /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | UserUpdates            	|
+| /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | Flux<UserUpdate>          |
 | **Person**                        |                              	|             	            |
 | /{id}                            	| PersonQuery                   | Person            	    |
-| /{id}/pictures                   	| PersonPicturesQuery           | Pictures            	    |
+| /{id}/pictures                   	| PersonPicturesQuery           | Flux<Picture>            	|
 | **Character**                     |                              	|             	            |
 | /{id}                            	| CharacterQuery                | Character                 |
-| /{id}/pictures                   	| CharacterPicturesQuery        | Pictures                 	|
+| /{id}/pictures                   	| CharacterPicturesQuery        | Flux<Picture>             |
 | **Search**                        |                              	|             	            |
-| /anime                            | AnimeSearchQuery              | AnimeSearch             	|
-| /manga                            | MangaSearchQuery              | MangaSearch            	|
-| /person                           | PersonSearchQuery             | PersonSearch            	|
-| /character                        | CharacterSearchQuery          | CharacterSearch           |
-| **Season**                        |                              	|             	|
-| /{year}/{season}          	    | SeasonQuery                   | SeasonList            	|
-| /archive                  	    | SeasonArchiveQuery            | SeasonArchive            	|
-| /later                    	    | SeasonLaterQuery              | SeasonList            	|
-| **Schedule**                      |                              	|             	|
+| /anime                            | AnimeSearchQuery              | Flux<AnimeSearchSub>      |
+| /manga                            | MangaSearchQuery              | Flux<Manga>            	|
+| /person                           | PersonSearchQuery             | Flux<PersonSub>           |
+| /character                        | CharacterSearchQuery          | Flux<CharacterSub>        |
+| **Season**                        |                              	|             				|
+| /{year}/{season}          	    | SeasonQuery                   | Flux<SeasonAnime>         |
+| /archive                  	    | SeasonArchiveQuery            | Flux<SeasonArchiveYear>   |
+| /later                    	    | SeasonLaterQuery              | Flux<SeasonAnime>         |
+| **Schedule**                      |                              	|             				|
 | /{day}                  	        | ScheduleQuery                 | Schedule            	    |
-| **Top**                           |                             	|             	|
-| /{type}/{page}/{subtype}   	    |                              	|             	|
+| **Top**                           |                             	|             				|
+| /{type}/{page}/{subtype}   	    |  |  |

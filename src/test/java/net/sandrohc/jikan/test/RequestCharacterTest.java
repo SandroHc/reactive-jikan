@@ -1,7 +1,7 @@
 package net.sandrohc.jikan.test;
 
 import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.base.*;
@@ -9,7 +9,7 @@ import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.character.Character;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.search.CharacterSearch;
+import net.sandrohc.jikan.model.search.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -108,14 +108,12 @@ public class RequestCharacterTest extends RequestTest {
 
 		mock(mockServer, "/character/36765/pictures", response);
 
-		Pictures pictures = jikan.query().character().pictures(36765).execute().block();
+		Collection<Picture> pictures = jikan.query().character().pictures(36765).execute().collectList().block();
 
 		assertNotNull(pictures);
-		assertNotNull(pictures.toString());
-		assertNotNull(pictures.pictures);
 
 		/* Pictures */
-		Iterator<Picture> picturesIt = pictures.pictures.iterator();
+		Iterator<Picture> picturesIt = pictures.iterator();
 
 		Picture p1 = picturesIt.next();
 		assertNotNull(p1.toString());
@@ -178,19 +176,19 @@ public class RequestCharacterTest extends RequestTest {
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"));
 
-		CharacterSearch search = jikan.query().character().search()
+		Collection<CharacterSub> results = jikan.query().character().search()
 				.query("asuna")
 				.page(1)
 				.limit(1)
-				.execute().block();
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(search);
-		assertNotNull(search.toString());
-		assertNotNull(search.results);
-		assertEquals(2, search.lastPage);
+		assertNotNull(results);
+		assertNotNull(new CharacterSearch().toString());
 
 		/* Results */
-		Iterator<CharacterSub> resultsIt = search.results.iterator();
+		Iterator<CharacterSub> resultsIt = results.iterator();
 
 		CharacterSub r1 = resultsIt.next();
 		assertNotNull(r1.toString());

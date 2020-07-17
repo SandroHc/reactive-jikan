@@ -78,14 +78,14 @@ public class Jikan {
 	 * Executes the desired query and returns the parsed entity.
 	 *
 	 * @param query the query
-	 * @param <T> the expected entity type
+	 * @param <INITIAL_TYPE> the expected entity type
 	 * @return the parsed entity, or {@code null} if the entity was not found
 	 */
-	public <T,P extends Publisher<T>> P query(Query<T,P> query) {
+	public <INITIAL_TYPE, PROCESSED_TYPE, P extends Publisher<PROCESSED_TYPE>> P query(Query<INITIAL_TYPE, PROCESSED_TYPE, P> query) {
 		final String uri = buildUri(query);
 		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
-		return query.prepareResponse(httpClient.get().uri(uri).responseSingle(this::onResponse));
+		return query.process(httpClient.get().uri(uri).responseSingle(this::onResponse).flatMap(query::deserialize));
 	}
 
 	private Mono<byte[]> onResponse(HttpClientResponse res, ByteBufMono content) {
@@ -100,7 +100,7 @@ public class Jikan {
 		}
 	}
 
-	private String buildUri(Query<?,?> query) {
+	private String buildUri(Query<?,?,?> query) {
 		StringBuilder sb = new StringBuilder(query.getUri());
 
 		Map<String, Object> queryParameters = query.getQueryParameters();
@@ -126,7 +126,7 @@ public class Jikan {
 		return sb.toString();
 	}
 
-	public Exception dumpStacktrace(Query<?,?> query, byte[] response, Exception e) {
+	public Exception dumpStacktrace(Query<?,?,?> query, byte[] response, Exception e) {
 		if (!debug) {
 			return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName(), e);
 		}

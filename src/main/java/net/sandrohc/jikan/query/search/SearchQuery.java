@@ -13,10 +13,10 @@ import java.nio.charset.*;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.QueryFlux;
 
 @SuppressWarnings("unchecked")
-public abstract class SearchQuery<C extends SearchQuery<C,R>, R> extends QueryMono<R> {
+public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends QueryFlux<TYPE_INITIAL, TYPE_FINAL> {
 
 	protected final Type type;
 

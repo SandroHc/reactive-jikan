@@ -1,13 +1,12 @@
 package net.sandrohc.jikan.test;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Iterator;
+import java.io.*;
+import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.common.Picture;
-import net.sandrohc.jikan.model.common.Pictures;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.model.search.PersonSearch;
+import net.sandrohc.jikan.model.search.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -148,14 +147,12 @@ public class RequestPersonTest extends RequestTest {
 
 		mock(mockServer, "/person/11817/pictures", response);
 
-		Pictures pictures = jikan.query().person().pictures(11817).execute().block();
+		Collection<Picture> pictures = jikan.query().person().pictures(11817).execute().collectList().block();
 
 		assertNotNull(pictures);
-		assertNotNull(pictures.toString());
-		assertNotNull(pictures.pictures);
 
 		/* Pictures */
-		Iterator<Picture> picturesIt = pictures.pictures.iterator();
+		Iterator<Picture> picturesIt = pictures.iterator();
 
 		Picture p1 = picturesIt.next();
 		assertNotNull(p1.toString());
@@ -196,19 +193,19 @@ public class RequestPersonTest extends RequestTest {
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"));
 
-		PersonSearch search = jikan.query().person().search()
+		Collection<PersonSub> results = jikan.query().person().search()
 				.query("asuna")
 				.page(1)
 				.limit(1)
-				.execute().block();
+				.execute()
+				.collectList()
+				.block();
 
-		assertNotNull(search);
-		assertNotNull(search.toString());
-		assertNotNull(search.results);
-		assertEquals(1, search.lastPage);
+		assertNotNull(results);
+		assertNotNull(new PersonSearch().toString());
 
 		/* Results */
-		Iterator<PersonSub> resultsIt = search.results.iterator();
+		Iterator<PersonSub> resultsIt = results.iterator();
 
 		PersonSub r1 = resultsIt.next();
 		assertNotNull(r1.toString());
