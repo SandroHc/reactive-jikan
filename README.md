@@ -14,7 +14,6 @@ If using Gradle (`build.gradle`):
 ```groovy
 allprojects {
     repositories {
-        ...
         maven { url 'https://jitpack.io' }
     }
 }
@@ -81,48 +80,48 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/characters_staff           	| AnimeCharactersAndStaffQuery	| AnimeCharactersAndStaff   |
 | /{id}/episodes/{page}            	| AnimeEpisodesQuery            | AnimeEpisodes             |
 | /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
-| /{id}/pictures                   	| AnimePicturesQuery            | Flux<AnimePicture>        |
+| /{id}/pictures                   	| AnimePicturesQuery            | (list) AnimePicture       |
 | /{id}/videos                     	| AnimeVideosQuery              | AnimeVideos            	|
 | /{id}/stats                      	| AnimeStatsQuery               | Stats            	        |
-| /{id}/forum                      	| AnimeForumQuery               | Flux<ForumTopic>          |
+| /{id}/forum                      	| AnimeForumQuery               | (list) ForumTopic         |
 | /{id}/moreinfo                   	| AnimeMoreInfoQuery            | MoreInfo            	    |
-| /{id}/reviews/{page}             	| AnimeReviewsQuery             | Flux<Review>            	|
-| /{id}/recommendations            	| AnimeRecommendationsQuery     | Flux<Recommendation>      |
-| /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | Flux<UserUpdate>          |
+| /{id}/reviews/{page}             	| AnimeReviewsQuery             | (list) Review            	|
+| /{id}/recommendations            	| AnimeRecommendationsQuery     | (list) Recommendation     |
+| /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | (list) UserUpdate         |
 | **Manga** | | |
 | /{id}                            	| MangaQuery                    | Manga                     |
-| /{id}/characters                 	| MangaCharactersQuery          | Flux<RoleSubEntity>       |
-| /{id}/news                       	| MangaNewsQuery                | Flux<NewsArticle>         |
-| /{id}/pictures                   	| MangaPicturesQuery            | Flux<Pictures>            	|
+| /{id}/characters                 	| MangaCharactersQuery          | (list) RoleSubEntity      |
+| /{id}/news                       	| MangaNewsQuery                | (list) NewsArticle        |
+| /{id}/pictures                   	| MangaPicturesQuery            | (list) Pictures           |
 | /{id}/stats                      	| MangaStatsQuery               | Stats            	        |
-| /{id}/forum                      	| MangaForumQuery               | Flux<ForumTopic>          |
+| /{id}/forum                      	| MangaForumQuery               | (list) ForumTopic         |
 | /{id}/moreinfo                   	| MangaMoreInfoQuery            | MoreInfo            	    |
-| /{id}/reviews/{page}             	| MangaReviewsQuery             | Flux<Review>              |
+| /{id}/reviews/{page}             	| MangaReviewsQuery             | (list) Review             |
 | /{id}/recommendations            	| MangaRecommendationsQuery     | Recommendations           |
-| /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | Flux<UserUpdate>          |
+| /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | (list) UserUpdate         |
 | **Person** | | |
 | /{id}                            	| PersonQuery                   | Person            	    |
-| /{id}/pictures                   	| PersonPicturesQuery           | Flux<Picture>            	|
+| /{id}/pictures                   	| PersonPicturesQuery           | (list) Picture            |
 | **Character** | | |
 | /{id}                            	| CharacterQuery                | Character                 |
-| /{id}/pictures                   	| CharacterPicturesQuery        | Flux<Picture>             |
+| /{id}/pictures                   	| CharacterPicturesQuery        | (list) Picture            |
 | **Search** | | |
-| /anime                            | AnimeSearchQuery              | Flux<AnimeSearchSub>      |
-| /manga                            | MangaSearchQuery              | Flux<Manga>            	|
-| /person                           | PersonSearchQuery             | Flux<PersonSub>           |
-| /character                        | CharacterSearchQuery          | Flux<CharacterSub>        |
+| /anime                            | AnimeSearchQuery              | (list) AnimeSearchSub     |
+| /manga                            | MangaSearchQuery              | (list) Manga            	|
+| /person                           | PersonSearchQuery             | (list) PersonSub          |
+| /character                        | CharacterSearchQuery          | (list) CharacterSub       |
 | **Season** | | |
-| /{year}/{season}          	    | SeasonQuery                   | Flux<SeasonAnime>         |
-| /archive                  	    | SeasonArchiveQuery            | Flux<SeasonArchiveYear>   |
-| /later                    	    | SeasonLaterQuery              | Flux<SeasonAnime>         |
+| /{year}/{season}          	    | SeasonQuery                   | (list) SeasonAnime        |
+| /archive                  	    | SeasonArchiveQuery            | (list) SeasonArchiveYear  |
+| /later                    	    | SeasonLaterQuery              | (list) SeasonAnime        |
 | **Schedule** | | |
 | /{day}                  	        | ScheduleQuery                 | Schedule            	    |
 | **Top** | | |
-| /anime/{page}/{subtype}   	    | AnimeTopQuery | Flux<AnimeTopSub>  |
-| /manga/{page}/{subtype}   	    | MangaTopQuery | Flux<MangaTopSub> |
+| /anime/{page}/{subtype}   	    | AnimeTopQuery                 | (list) AnimeTopSub        |
+| /manga/{page}/{subtype}   	    | MangaTopQuery                 | (list) MangaTopSub        |
 | **Genre** | | |
-| /anime/{page}/{subtype}   	    | AnimeGenreQuery | Flux<AnimeGenreSub> |
-| /manga/{page}/{subtype}   	    | MangaGenreQuery | Flux<MangaGenreSub> |
+| /anime/{page}/{subtype}   	    | AnimeGenreQuery               | (list) AnimeGenreSub      |
+| /manga/{page}/{subtype}   	    | MangaGenreQuery               | (list) MangaGenreSub      |
 | **Producer** | | |
 | /{id}/{page}   	                |  |  |
 | **Magazine** | | |

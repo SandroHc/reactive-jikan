@@ -22,6 +22,7 @@ import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.exception.JikanResponseException;
+import net.sandrohc.jikan.exception.JikanThrottleException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
 import org.reactivestreams.Publisher;
@@ -30,6 +31,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.ByteBufMono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.http.client.HttpClientResponse;
+import reactor.util.retry.Retry;
 
 /**
  * The Jikan instance is responsible for executing queries and deserializing the response into POJOs.
@@ -41,6 +43,7 @@ public class Jikan {
 	public final boolean debug;
 	public final String baseUrl;
 	public final String userAgent;
+	public final int maxRetries;
 
 	public final HttpClient httpClient;
 	public final ObjectMapper objectMapper;
@@ -53,6 +56,7 @@ public class Jikan {
 		this.debug = builder.debug;
 		this.baseUrl = builder.baseUrl;
 		this.userAgent = builder.userAgent;
+		this.maxRetries = builder.maxRetries;
 
 		this.httpClient = HttpClient.create()
 				.baseUrl(this.baseUrl)
@@ -85,7 +89,9 @@ public class Jikan {
 		final String uri = buildUri(query);
 		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
 
-		return query.process(httpClient.get().uri(uri).responseSingle(this::onResponse).flatMap(query::deserialize));
+		return query.process(httpClient.get().uri(uri).responseSingle(this::onResponse)
+				.retryWhen(Retry.backoff(maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
+				.flatMap(query::deserialize));
 	}
 
 	private Mono<byte[]> onResponse(HttpClientResponse res, ByteBufMono content) {
@@ -93,6 +99,8 @@ public class Jikan {
 			return content.asByteArray();
 		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
 			return Mono.empty();
+		} else if (res.status() == HttpResponseStatus.TOO_MANY_REQUESTS) {
+			return Mono.error(new JikanThrottleException());
 		} else {
 			return content.asString().flatMap(str -> Mono.error(
 					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + getClass().getSimpleName() + ": " + str)
@@ -195,6 +203,7 @@ public class Jikan {
 		private String baseUrl = "https://api.jikan.moe/v3";
 		private String userAgent = getDefaultUserAgent();
 		private boolean debug  = false;
+		private int maxRetries = 3;
 
 		public JikanBuilder() {
 		}
@@ -233,6 +242,17 @@ public class Jikan {
 		 */
 		public JikanBuilder debug(boolean debug) {
 			this.debug = debug;
+			return this;
+		}
+
+		/**
+		 * Defines the amount of retries before failing the request.
+		 *
+		 * @param maxRetries the amount of retries
+		 * @return the builder
+		 */
+		public JikanBuilder maxRetries(int maxRetries) {
+			this.maxRetries = maxRetries;
 			return this;
 		}
 

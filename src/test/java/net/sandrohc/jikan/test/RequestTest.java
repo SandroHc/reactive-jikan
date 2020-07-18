@@ -14,7 +14,7 @@ public class RequestTest {
 	@BeforeAll
 	public static void setup() {
 		mockServer = MockUtils.createMockServer();
-		jikan = new JikanBuilder().debug(true).baseUrl(MockUtils.MOCK_URL).userAgent("reactive-jikan/unit-tests").build();
+		jikan = new JikanBuilder().debug(true).baseUrl(MockUtils.MOCK_URL).maxRetries(1).userAgent("reactive-jikan/unit-tests").build();
 	}
 
 	@AfterAll

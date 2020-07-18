@@ -7,6 +7,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanException;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.exception.JikanResponseException;
+import net.sandrohc.jikan.exception.JikanThrottleException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.MalEntity;
@@ -26,11 +27,13 @@ public class CommonTest extends RequestTest {
 				.debug(true)
 				.baseUrl("https://example.com")
 				.userAgent("user-agent")
+				.maxRetries(10)
 				.build();
 
 		assertTrue(jikan.debug);
 		assertEquals("https://example.com", jikan.baseUrl);
 		assertEquals("user-agent", jikan.userAgent);
+		assertEquals(10, jikan.maxRetries);
 	}
 
 	@Test
@@ -45,6 +48,12 @@ public class CommonTest extends RequestTest {
 	@Test
 	void testBadRequest() {
 		mockError(mockServer, HttpResponseStatus.BAD_REQUEST);
+		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
+	}
+
+	@Test
+	void testTooManyRequests() {
+		mockError(mockServer, HttpResponseStatus.TOO_MANY_REQUESTS);
 		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
 	}
 
@@ -121,6 +130,7 @@ public class CommonTest extends RequestTest {
 		JikanException je;
 		JikanInvalidArgumentException jiae;
 		JikanResponseException jre;
+		JikanThrottleException jte;
 
 		je = new JikanException();
 		je = new JikanException("Message");
@@ -140,12 +150,20 @@ public class CommonTest extends RequestTest {
 		jre = new JikanResponseException("Message", new Throwable(), true, true);
 		jre = new JikanResponseException(new Throwable());
 
+		jte = new JikanThrottleException();
+		jte = new JikanThrottleException("Message");
+		jte = new JikanThrottleException("Message", new Throwable());
+		jte = new JikanThrottleException("Message", new Throwable(), true, true);
+		jte = new JikanThrottleException(new Throwable());
+
 		assertNotNull(je);
 		assertNotNull(jiae);
 		assertNotNull(jre);
+		assertNotNull(jte);
 
 		assertTrue(JikanException.class.isAssignableFrom(JikanInvalidArgumentException.class));
 		assertTrue(JikanException.class.isAssignableFrom(JikanResponseException.class));
+		assertTrue(JikanException.class.isAssignableFrom(JikanThrottleException.class));
 	}
 
 	private static class Entity extends MalEntity {
