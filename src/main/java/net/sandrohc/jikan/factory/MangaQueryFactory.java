@@ -8,6 +8,8 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.query.genre.MangaGenreQuery;
 import net.sandrohc.jikan.query.manga.*;
 import net.sandrohc.jikan.query.search.MangaSearchQuery;
 import net.sandrohc.jikan.query.top.MangaTopQuery;
@@ -28,6 +30,10 @@ public class MangaQueryFactory extends Factory {
 
     public MangaTopQuery top(int page) throws JikanInvalidArgumentException {
         return new MangaTopQuery(this.jikan, page);
+    }
+
+    public MangaGenreQuery genre(MangaGenre genre, int page) throws JikanInvalidArgumentException {
+        return new MangaGenreQuery(this.jikan, genre, page);
     }
 
     public MangaCharactersQuery characters(int id) {

@@ -956,4 +956,117 @@ public class RequestAnimeTest extends RequestTest {
 		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().top(0), "page starts at index 1");
 	}
 
+	@Test
+	void fetchGenre() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/genre/anime/1/1
+		String response = "{\n" +
+				"    \"mal_url\": {\n" +
+				"        \"mal_id\": 1,\n" +
+				"        \"type\": \"anime\",\n" +
+				"        \"name\": \"Action Anime\",\n" +
+				"        \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n" +
+				"    },\n" +
+				"    \"item_count\": 3731,\n" +
+				"    \"anime\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 16498,\n" +
+				"            \"url\": \"https://myanimelist.net/anime/16498/Shingeki_no_Kyojin\",\n" +
+				"            \"title\": \"Shingeki no Kyojin\",\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/10/47347.jpg\",\n" +
+				"            \"synopsis\": \"Centuries ago, mankind was slaughtered to near extinction...\",\n" +
+				"            \"type\": \"TV\",\n" +
+				"            \"airing_start\": \"2013-04-06T16:58:00+00:00\",\n" +
+				"            \"episodes\": 25,\n" +
+				"            \"members\": 2005593,\n" +
+				"            \"genres\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 1,\n" +
+				"                    \"type\": \"anime\",\n" +
+				"                    \"name\": \"Action\",\n" +
+				"                    \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n" +
+				"                },\n" +
+				"                {\n" +
+				"                    \"mal_id\": 38,\n" +
+				"                    \"type\": \"anime\",\n" +
+				"                    \"name\": \"Military\",\n" +
+				"                    \"url\": \"https://myanimelist.net/anime/genre/38/Military\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"source\": \"Manga\",\n" +
+				"            \"producers\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 858,\n" +
+				"                    \"type\": \"anime\",\n" +
+				"                    \"name\": \"Wit Studio\",\n" +
+				"                    \"url\": \"https://myanimelist.net/anime/producer/858/Wit_Studio\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"score\": 8.44,\n" +
+				"            \"licensors\": [\n" +
+				"                \"Funimation\"\n" +
+				"            ],\n" +
+				"            \"r18\": false,\n" +
+				"            \"kids\": false\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/genre/anime/1/1", response);
+
+		Collection<AnimeGenreSub> results = jikan.query().anime().genre(AnimeGenre.ACTION, 1)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new AnimeGenreList().toString());
+
+		/* Results */
+		AnimeGenreSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(16498, result.malId);
+		assertEquals("Shingeki no Kyojin", result.title);
+		assertEquals("https://myanimelist.net/anime/16498/Shingeki_no_Kyojin", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/anime/10/47347.jpg", result.imageUrl);
+		assertEquals("Centuries ago, mankind was slaughtered to near extinction...", result.synopsis);
+		assertEquals(AnimeType.TV, result.type);
+		assertEquals(OffsetDateTime.parse("2013-04-06T16:58:00+00:00"), result.airingStart);
+		assertEquals(25, result.episodes);
+		assertEquals(2005593, result.members);
+		assertEquals("Manga", result.source);
+		assertEquals(8.44F, result.score);
+		assertFalse(result.r18);
+		assertFalse(result.kids);
+		assertTrue(result.licensors.contains("Funimation"));
+
+
+		Iterator<MalSubEntity> genresIt = result.genres.iterator();
+
+		MalSubEntity genre1 = genresIt.next();
+		assertEquals(1, genre1.malId);
+		assertEquals(Type.ANIME, genre1.type);
+		assertEquals("Action", genre1.name);
+		assertEquals("https://myanimelist.net/anime/genre/1/Action", genre1.url);
+
+		MalSubEntity genre2 = genresIt.next();
+		assertEquals(38, genre2.malId);
+		assertEquals(Type.ANIME, genre2.type);
+		assertEquals("Military", genre2.name);
+		assertEquals("https://myanimelist.net/anime/genre/38/Military", genre2.url);
+
+		assertFalse(genresIt.hasNext());
+
+
+		MalSubEntity producer = result.producers.iterator().next();
+		assertEquals(858, producer.malId);
+		assertEquals(Type.ANIME, producer.type);
+		assertEquals("Wit Studio", producer.name);
+		assertEquals("https://myanimelist.net/anime/producer/858/Wit_Studio", producer.url);
+	}
+
+	@Test
+	void fetchGenre_invalidParameters() {
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().genre(AnimeGenre.ACTION, 0), "page starts at index 1");
+	}
+
 }

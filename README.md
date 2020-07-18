@@ -76,7 +76,7 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 
 | Endpoint                         	| Query                        	| Result      	            |
 |----------------------------------	|------------------------------	|-------------------------- |
-| **Anime**                         |                              	|             	            |
+| **Anime** | | |
 | /{id}                            	| AnimeQuery                    | Anime      	            |
 | /{id}/characters_staff           	| AnimeCharactersAndStaffQuery	| AnimeCharactersAndStaff   |
 | /{id}/episodes/{page}            	| AnimeEpisodesQuery            | AnimeEpisodes             |
@@ -89,7 +89,7 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/reviews/{page}             	| AnimeReviewsQuery             | Flux<Review>            	|
 | /{id}/recommendations            	| AnimeRecommendationsQuery     | Flux<Recommendation>      |
 | /{id}/userupdates/{page}         	| AnimeUserUpdatesQuery         | Flux<UserUpdate>          |
-| **Manga**                         |                              	|             	            |
+| **Manga** | | |
 | /{id}                            	| MangaQuery                    | Manga                     |
 | /{id}/characters                 	| MangaCharactersQuery          | Flux<RoleSubEntity>       |
 | /{id}/news                       	| MangaNewsQuery                | Flux<NewsArticle>         |
@@ -100,22 +100,44 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/reviews/{page}             	| MangaReviewsQuery             | Flux<Review>              |
 | /{id}/recommendations            	| MangaRecommendationsQuery     | Recommendations           |
 | /{id}/userupdates/{page}         	| MangaUserUpdatesQuery         | Flux<UserUpdate>          |
-| **Person**                        |                              	|             	            |
+| **Person** | | |
 | /{id}                            	| PersonQuery                   | Person            	    |
 | /{id}/pictures                   	| PersonPicturesQuery           | Flux<Picture>            	|
-| **Character**                     |                              	|             	            |
+| **Character** | | |
 | /{id}                            	| CharacterQuery                | Character                 |
 | /{id}/pictures                   	| CharacterPicturesQuery        | Flux<Picture>             |
-| **Search**                        |                              	|             	            |
+| **Search** | | |
 | /anime                            | AnimeSearchQuery              | Flux<AnimeSearchSub>      |
 | /manga                            | MangaSearchQuery              | Flux<Manga>            	|
 | /person                           | PersonSearchQuery             | Flux<PersonSub>           |
 | /character                        | CharacterSearchQuery          | Flux<CharacterSub>        |
-| **Season**                        |                              	|             				|
+| **Season** | | |
 | /{year}/{season}          	    | SeasonQuery                   | Flux<SeasonAnime>         |
 | /archive                  	    | SeasonArchiveQuery            | Flux<SeasonArchiveYear>   |
 | /later                    	    | SeasonLaterQuery              | Flux<SeasonAnime>         |
-| **Schedule**                      |                              	|             				|
+| **Schedule** | | |
 | /{day}                  	        | ScheduleQuery                 | Schedule            	    |
-| **Top**                           |                             	|             				|
-| /{type}/{page}/{subtype}   	    |  |  |
+| **Top** | | |
+| /anime/{page}/{subtype}   	    | AnimeTopQuery | Flux<AnimeTopSub>  |
+| /manga/{page}/{subtype}   	    | MangaTopQuery | Flux<MangaTopSub> |
+| **Genre** | | |
+| /anime/{page}/{subtype}   	    | AnimeGenreQuery | Flux<AnimeGenreSub> |
+| /manga/{page}/{subtype}   	    | MangaGenreQuery | Flux<MangaGenreSub> |
+| **Producer** | | |
+| /{id}/{page}   	                |  |  |
+| **Magazine** | | |
+| /{id}/{page}   	                |  |  |
+| **User** | | |
+| /{username}   	                |  |  |
+| /{username}/history   	        |  |  |
+| /{username}/history/anime   	    |  |  |
+| /{username}/history/manga   	    |  |  |
+| /{username}/friends/{page}   	    |  |  |
+| /{username}/animelist/{status}   	|  |  |
+| /{username}/mangalist/{status}   	|  |  |
+| **Club** | | |
+| /{id}   	                        |  |  |
+| /{id}/members/{page}   	        |  |  |
+| **Meta** | | |
+| /status   	                    |  |  |
+| /requests/{type}/{period}/{page}  |  |  |

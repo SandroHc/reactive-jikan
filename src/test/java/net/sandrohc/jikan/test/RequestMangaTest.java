@@ -717,4 +717,92 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(8.94F, result.score);
 	}
 
+	@Test
+	void fetchGenre() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/genre/manga/1/1
+		String response = "{\n" +
+				"    \"last_page\": 1,\n" +
+				"    \"mal_url\": {\n" +
+				"        \"mal_id\": 0,\n" +
+				"        \"type\": \"manga\",\n" +
+				"        \"name\": \"\",\n" +
+				"        \"url\": \"\"\n" +
+				"    },\n" +
+				"    \"item_count\": 14,\n" +
+				"    \"manga\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 118156,\n" +
+				"            \"url\": \"https://myanimelist.net/manga/118156/Arata_Primal\",\n" +
+				"            \"title\": \"Arata Primal\",\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/manga/1/220252.jpg\",\n" +
+				"            \"type\": \"Manga\",\n" +
+				"            \"volumes\": 4,\n" +
+				"            \"score\": 6.33,\n" +
+				"            \"members\": 761,\n" +
+				"            \"synopsis\": \"The key to save the world is in the primeval period!?\",\n" +
+				"            \"genres\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 1,\n" +
+				"                    \"type\": \"manga\",\n" +
+				"                    \"name\": \"Action\",\n" +
+				"                    \"url\": \"https://myanimelist.net/manga/genre/1/Action\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"authors\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 4640,\n" +
+				"                    \"type\": \"people\",\n" +
+				"                    \"name\": \"Murase, Katsutoshi\",\n" +
+				"                    \"url\": \"https://myanimelist.net/people/4640/Katsutoshi_Murase\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"serialization\": [\n" +
+				"                \"Shounen Jump+\"\n" +
+				"            ]\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/genre/manga/1/1", response);
+
+		Collection<MangaGenreSub> results = jikan.query().manga().genre(MangaGenre.ACTION, 1)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new MangaGenreList().toString());
+
+		/* Results */
+		MangaGenreSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(118156, result.malId);
+		assertEquals("Arata Primal", result.title);
+		assertEquals("https://myanimelist.net/manga/118156/Arata_Primal", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/manga/1/220252.jpg", result.imageUrl);
+		assertEquals("The key to save the world is in the primeval period!?", result.synopsis);
+		assertEquals(MangaType.MANGA, result.type);
+		assertEquals(4, result.volumes);
+		assertEquals(761, result.members);
+		assertEquals(6.33F, result.score);
+		assertTrue(result.serialization.contains("Shounen Jump+"));
+
+		MalSubEntity genre = result.genres.iterator().next();
+		assertEquals(1, genre.malId);
+		assertEquals(Type.MANGA, genre.type);
+		assertEquals("Action", genre.name);
+		assertEquals("https://myanimelist.net/manga/genre/1/Action", genre.url);
+
+		MalSubEntity author = result.authors.iterator().next();
+		assertEquals(4640, author.malId);
+		assertEquals(Type.PERSON, author.type);
+		assertEquals("Murase, Katsutoshi", author.name);
+		assertEquals("https://myanimelist.net/people/4640/Katsutoshi_Murase", author.url);
+	}
+
+	@Test
+	void fetchGenre_invalidParameters() {
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().manga().genre(MangaGenre.ACTION, 0), "page starts at index 1");
+	}
+
 }

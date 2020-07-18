@@ -20,7 +20,9 @@ public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FI
 
 	public static final int LIMIT_MAX = 50;
 
+	/** The type of the results. */
 	public final Type type;
+
 
 	protected SearchQuery(Jikan jikan, Type type) {
 		super(jikan);
