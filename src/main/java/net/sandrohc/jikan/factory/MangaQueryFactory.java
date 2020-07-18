@@ -7,8 +7,10 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.query.manga.*;
 import net.sandrohc.jikan.query.search.MangaSearchQuery;
+import net.sandrohc.jikan.query.top.MangaTopQuery;
 
 public class MangaQueryFactory extends Factory {
 
@@ -22,6 +24,10 @@ public class MangaQueryFactory extends Factory {
 
     public MangaSearchQuery search() {
         return new MangaSearchQuery(this.jikan);
+    }
+
+    public MangaTopQuery top(int page) throws JikanInvalidArgumentException {
+        return new MangaTopQuery(this.jikan, page);
     }
 
     public MangaCharactersQuery characters(int id) {
@@ -48,7 +54,7 @@ public class MangaQueryFactory extends Factory {
         return new MangaMoreInfoQuery(this.jikan, id);
     }
 
-    public MangaReviewsQuery reviews(int id, int page) {
+    public MangaReviewsQuery reviews(int id, int page) throws JikanInvalidArgumentException {
         return new MangaReviewsQuery(this.jikan, id, page);
     }
 
@@ -56,7 +62,7 @@ public class MangaQueryFactory extends Factory {
         return new MangaRecommendationsQuery(this.jikan, id);
     }
 
-    public MangaUserUpdatesQuery userUpdates(int id, int page) {
+    public MangaUserUpdatesQuery userUpdates(int id, int page) throws JikanInvalidArgumentException {
         return new MangaUserUpdatesQuery(this.jikan, id, page);
     }
 

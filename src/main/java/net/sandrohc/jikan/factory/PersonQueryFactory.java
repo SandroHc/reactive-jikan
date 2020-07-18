@@ -7,9 +7,11 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.query.person.PersonPicturesQuery;
 import net.sandrohc.jikan.query.person.PersonQuery;
 import net.sandrohc.jikan.query.search.PersonSearchQuery;
+import net.sandrohc.jikan.query.top.PersonTopQuery;
 
 public class PersonQueryFactory extends Factory {
 
@@ -23,6 +25,10 @@ public class PersonQueryFactory extends Factory {
 
     public PersonSearchQuery search() {
         return new PersonSearchQuery(this.jikan);
+    }
+
+    public PersonTopQuery top(int page) throws JikanInvalidArgumentException {
+        return new PersonTopQuery(this.jikan, page);
     }
 
     public PersonPicturesQuery pictures(int id) {

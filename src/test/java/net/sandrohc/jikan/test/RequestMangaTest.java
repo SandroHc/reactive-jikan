@@ -10,7 +10,6 @@ import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
-import net.sandrohc.jikan.model.search.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -416,7 +415,7 @@ public class RequestMangaTest extends RequestTest {
 	}
 
 	@Test
-	void fetchReviews() {
+	void fetchReviews() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/manga/96792/reviews/1
 		String response = "{\n" +
 				"    \"reviews\": [\n" +
@@ -445,6 +444,8 @@ public class RequestMangaTest extends RequestTest {
 				"}";
 
 		mock(mockServer, "/manga/96792/reviews/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().manga().reviews(10, 0), "page starts at index 1");
 
 		Collection<Review> reviews = jikan.query().manga().reviews(96792, 1).execute().collectList().block();
 
@@ -517,7 +518,7 @@ public class RequestMangaTest extends RequestTest {
 	}
 
 	@Test
-	void fetchUserUpdates() {
+	void fetchUserUpdates() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/manga/96792/userupdates/1
 		String response = "{\n" +
 				"    \"users\": [\n" +
@@ -535,6 +536,8 @@ public class RequestMangaTest extends RequestTest {
 				"}";
 
 		mock(mockServer, "/manga/96792/userupdates/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().manga().userUpdates(10, 0), "page starts at index 1");
 
 		Collection<UserUpdate> userUpdates = jikan.query().manga().userUpdates(96792, 1).execute().collectList().block();
 
@@ -663,6 +666,55 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(404, m2.members);
 
 		assertFalse(resultsIt.hasNext());
+	}
+
+	@Test
+	void fetchTop() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/top/manga/1/manhwa
+		String response = "{\n" +
+				"    \"top\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 121496,\n" +
+				"            \"rank\": 1,\n" +
+				"            \"title\": \"Solo Leveling\",\n" +
+				"            \"url\": \"https://myanimelist.net/manga/121496/Solo_Leveling\",\n" +
+				"            \"type\": \"Manhwa\",\n" +
+				"            \"volumes\": null,\n" +
+				"            \"start_date\": \"Mar 2018\",\n" +
+				"            \"end_date\": null,\n" +
+				"            \"members\": 88737,\n" +
+				"            \"score\": 8.94,\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/manga/3/222295.jpg?s=b3abea95ceaccea8adf223bd0e4047b6\"\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/top/manga/1/manhwa", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().manga().top(0), "page starts at index 1");
+
+		Collection<MangaTopSub> results = jikan.query().manga().top(1).subtype(MangaSubType.MANHWA)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new MangaTop().toString());
+
+		/* Results */
+		MangaTopSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(121496, result.malId);
+		assertEquals(1, result.rank);
+		assertEquals("Solo Leveling", result.title);
+		assertEquals("https://myanimelist.net/manga/121496/Solo_Leveling", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/manga/3/222295.jpg?s=b3abea95ceaccea8adf223bd0e4047b6", result.imageUrl);
+		assertEquals(MangaType.MANWHA, result.type);
+		assertEquals(0, result.volumes);
+		assertEquals("Mar 2018", result.startDate);
+		assertNull(result.endDate);
+		assertEquals(88737, result.members);
+		assertEquals(8.94F, result.score);
 	}
 
 }

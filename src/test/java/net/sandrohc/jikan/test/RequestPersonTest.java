@@ -1,12 +1,14 @@
 package net.sandrohc.jikan.test;
 
 import java.io.*;
+import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.model.search.*;
+import net.sandrohc.jikan.query.person.PersonTop;
+import net.sandrohc.jikan.query.person.PersonTopSub;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -224,6 +226,49 @@ public class RequestPersonTest extends RequestTest {
 		assertTrue(r2.alternativeNames.isEmpty());
 
 		assertFalse(resultsIt.hasNext());
+	}
+
+	@Test
+	void fetchTop() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/top/people/1
+		String response = "{\n" +
+				"    \"top\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 185,\n" +
+				"            \"rank\": 1,\n" +
+				"            \"title\": \"Hanazawa, Kana\",\n" +
+				"            \"url\": \"https://myanimelist.net/people/185/Kana_Hanazawa\",\n" +
+				"            \"name_kanji\": \"花澤 香菜\",\n" +
+				"            \"favorites\": 82202,\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/voiceactors/3/57913.jpg?s=99bd07415a909e608ece2ef9bd1867ec\",\n" +
+				"            \"birthday\": \"1989-02-25T00:00:00+00:00\"\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/top/people/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().person().top(0), "page starts at index 1");
+
+		Collection<PersonTopSub> results = jikan.query().person().top(1)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new PersonTop().toString());
+
+		/* Results */
+		PersonTopSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(185, result.malId);
+		assertEquals(1, result.rank);
+		assertEquals("Hanazawa, Kana", result.title);
+		assertEquals("https://myanimelist.net/people/185/Kana_Hanazawa", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/voiceactors/3/57913.jpg?s=99bd07415a909e608ece2ef9bd1867ec", result.imageUrl);
+		assertEquals("花澤 香菜", result.nameKanji);
+		assertEquals(82202, result.favorites);
+		assertEquals(OffsetDateTime.parse("1989-02-25T00:00:00+00:00"), result.birthday);
 	}
 
 }

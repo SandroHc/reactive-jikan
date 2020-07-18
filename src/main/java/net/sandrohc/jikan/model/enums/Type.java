@@ -11,15 +11,28 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Type {
 	@JsonProperty("anime")
-	ANIME,
+	ANIME("anime", "anime"),
 
 	@JsonProperty("manga")
-	MANGA,
+	MANGA("manga", "manga"),
 
 	@JsonProperty("person")
 	@JsonAlias("people")
-	PERSON,
+	PERSON("person", "people"),
 
 	@JsonProperty("character")
-	CHARACTER,
+	CHARACTER("character", "characters"),
+	;
+
+	/** The type used for the /search endpoint. */
+	public final String search;
+
+	/** The type used for the /top endpoint. */
+	public final String top;
+
+	Type(String search, String top) {
+		this.search = search;
+		this.top = top;
+	}
+
 }

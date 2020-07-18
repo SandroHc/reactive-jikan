@@ -14,7 +14,7 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 
 @SuppressWarnings("unchecked")
-public abstract class AdvancedSearchQuery<QUERY extends SearchQuery<QUERY, TYPE_INITIAL, TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends SearchQuery<QUERY, TYPE_INITIAL, TYPE_FINAL> {
+public abstract class AdvancedSearchQuery<QUERY extends SearchQuery<QUERY,TYPE_INITIAL,TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends SearchQuery<QUERY, TYPE_INITIAL, TYPE_FINAL> {
 
 	protected AdvancedSearchQuery(Jikan jikan, Type type) {
 		super(jikan, type);

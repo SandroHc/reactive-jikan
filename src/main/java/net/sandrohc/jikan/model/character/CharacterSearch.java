@@ -4,17 +4,17 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.search;
+package net.sandrohc.jikan.model.character;
 
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
-import net.sandrohc.jikan.model.person.*;
+import net.sandrohc.jikan.model.character.CharacterSub;
 
-public class PersonSearch extends CacheEntity {
+public class CharacterSearch extends CacheEntity {
 
-    public List<PersonSub> results = Collections.emptyList();
+    public List<CharacterSub> results = Collections.emptyList();
 
     @JsonProperty("last_page")
     public int lastPage;
@@ -22,7 +22,7 @@ public class PersonSearch extends CacheEntity {
 
     @Override
     public String toString() {
-        return "PersonSearch[results=" + (results.size() + " results") + ", lastPage=" + lastPage + ']';
+        return "CharacterSearch[results=" + (results.size() + " results") + ", lastPage=" + lastPage + ']';
     }
 
 }

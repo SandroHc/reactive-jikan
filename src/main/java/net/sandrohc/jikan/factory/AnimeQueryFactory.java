@@ -7,8 +7,10 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.query.anime.*;
 import net.sandrohc.jikan.query.search.AnimeSearchQuery;
+import net.sandrohc.jikan.query.top.AnimeTopQuery;
 
 public class AnimeQueryFactory extends Factory {
 
@@ -24,11 +26,15 @@ public class AnimeQueryFactory extends Factory {
         return new AnimeSearchQuery(this.jikan);
     }
 
+    public AnimeTopQuery top(int page) throws JikanInvalidArgumentException {
+        return new AnimeTopQuery(this.jikan, page);
+    }
+
     public AnimeCharactersAndStaffQuery charactersAndStaff(int id) {
         return new AnimeCharactersAndStaffQuery(this.jikan, id);
     }
 
-    public AnimeEpisodesQuery episodes(int id, int page) {
+    public AnimeEpisodesQuery episodes(int id, int page) throws JikanInvalidArgumentException {
         return new AnimeEpisodesQuery(this.jikan, id, page);
     }
 
@@ -56,7 +62,7 @@ public class AnimeQueryFactory extends Factory {
         return new AnimeMoreInfoQuery(this.jikan, id);
     }
 
-    public AnimeReviewsQuery reviews(int id, int page) {
+    public AnimeReviewsQuery reviews(int id, int page) throws JikanInvalidArgumentException {
         return new AnimeReviewsQuery(this.jikan, id, page);
     }
 
@@ -64,7 +70,7 @@ public class AnimeQueryFactory extends Factory {
         return new AnimeRecommendationsQuery(this.jikan, id);
     }
 
-    public AnimeUserUpdatesQuery userUpdates(int id, int page) {
+    public AnimeUserUpdatesQuery userUpdates(int id, int page) throws JikanInvalidArgumentException {
         return new AnimeUserUpdatesQuery(this.jikan, id, page);
     }
 

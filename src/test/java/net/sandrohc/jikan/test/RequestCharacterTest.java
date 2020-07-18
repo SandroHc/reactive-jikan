@@ -1,15 +1,15 @@
 package net.sandrohc.jikan.test;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.base.*;
-import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.character.Character;
+import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.search.*;
+import net.sandrohc.jikan.query.character.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -219,6 +219,75 @@ public class RequestCharacterTest extends RequestTest {
 		assertTrue(r2.manga.isEmpty());
 
 		assertFalse(resultsIt.hasNext());
+	}
+
+	@Test
+	void fetchTop() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/top/characters/1
+		String response = "{\n" +
+				"    \"top\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 417,\n" +
+				"            \"rank\": 1,\n" +
+				"            \"title\": \"Lamperouge, Lelouch\",\n" +
+				"            \"url\": \"https://myanimelist.net/character/417/Lelouch_Lamperouge\",\n" +
+				"            \"name_kanji\": \"ルルーシュ・ランペルージ\",\n" +
+				"            \"animeography\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 1575,\n" +
+				"                    \"type\": \"anime\",\n" +
+				"                    \"name\": \"Code Geass: Hangyaku no Lelouch\",\n" +
+				"                    \"url\": \"https://myanimelist.net/anime/1575/Code_Geass__Hangyaku_no_Lelouch\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"mangaography\": [\n" +
+				"                {\n" +
+				"                    \"mal_id\": 1528,\n" +
+				"                    \"type\": \"manga\",\n" +
+				"                    \"name\": \"Code Geass: Hangyaku no Lelouch\",\n" +
+				"                    \"url\": \"https://myanimelist.net/manga/1528/Code_Geass__Hangyaku_no_Lelouch\"\n" +
+				"                }\n" +
+				"            ],\n" +
+				"            \"favorites\": 118082,\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/characters/4/277146.jpg?s=11ef10f5e6fc91ca81a2345177aef5b7\"\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		mock(mockServer, "/top/characters/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().character().top(0), "page starts at index 1");
+
+		Collection<CharacterTopSub> results = jikan.query().character().top(1)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new CharacterTop().toString());
+
+		/* Results */
+		CharacterTopSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(417, result.malId);
+		assertEquals(1, result.rank);
+		assertEquals("Lamperouge, Lelouch", result.title);
+		assertEquals("https://myanimelist.net/character/417/Lelouch_Lamperouge", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/characters/4/277146.jpg?s=11ef10f5e6fc91ca81a2345177aef5b7", result.imageUrl);
+		assertEquals("ルルーシュ・ランペルージ", result.nameKanji);
+		assertEquals(118082, result.favorites);
+
+		MalSubEntity anime = result.animeography.iterator().next();
+		assertEquals(1575, anime.malId);
+		assertEquals(Type.ANIME, anime.type);
+		assertEquals("Code Geass: Hangyaku no Lelouch", anime.name);
+		assertEquals("https://myanimelist.net/anime/1575/Code_Geass__Hangyaku_no_Lelouch", anime.url);
+
+		MalSubEntity manga = result.mangaography.iterator().next();
+		assertEquals(1528, manga.malId);
+		assertEquals(Type.MANGA, manga.type);
+		assertEquals("Code Geass: Hangyaku no Lelouch", manga.name);
+		assertEquals("https://myanimelist.net/manga/1528/Code_Geass__Hangyaku_no_Lelouch", manga.url);
 	}
 
 }

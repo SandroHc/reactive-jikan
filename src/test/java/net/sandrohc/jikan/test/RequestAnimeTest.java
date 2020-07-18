@@ -11,8 +11,8 @@ import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.search.*;
 import net.sandrohc.jikan.query.anime.AnimeQuery;
+import net.sandrohc.jikan.query.search.SearchQuery;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -301,7 +301,7 @@ public class RequestAnimeTest extends RequestTest {
 	}
 
 	@Test
-	void fetchEpisodes() {
+	void fetchEpisodes() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/anime/11757/episodes/1
 		String response = "{\n" +
 						  "    \"episodes_last_page\": 1,\n" +
@@ -332,6 +332,8 @@ public class RequestAnimeTest extends RequestTest {
 						  "}";
 
 		mock(mockServer, "/anime/11757/episodes/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().episodes(10, 0), "page starts at index 1");
 
 		AnimeEpisodes episodes = jikan.query().anime().episodes(11757, 1).execute().block();
 
@@ -624,7 +626,7 @@ public class RequestAnimeTest extends RequestTest {
 	}
 
 	@Test
-	void fetchReviews() {
+	void fetchReviews() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/anime/11757/reviews/1
 		String response = "{\n" +
 				"    \"reviews\": [\n" +
@@ -654,6 +656,8 @@ public class RequestAnimeTest extends RequestTest {
 				"}";
 
 		mock(mockServer, "/anime/11757/reviews/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().reviews(10, 0), "page starts at index 1");
 
 		Collection<Review> reviews = jikan.query().anime().reviews(11757, 1).execute().collectList().block();
 
@@ -729,7 +733,7 @@ public class RequestAnimeTest extends RequestTest {
 	}
 
 	@Test
-	void fetchUserUpdates() {
+	void fetchUserUpdates() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/anime/11757/userupdates/1
 		String response = "{\n" +
 				"    \"users\": [\n" +
@@ -747,6 +751,8 @@ public class RequestAnimeTest extends RequestTest {
 				"}";
 
 		mock(mockServer, "/anime/11757/userupdates/1", response);
+
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().userUpdates(10, 0), "page starts at index 1");
 
 		Collection<UserUpdate> userUpdates = jikan.query().anime().userUpdates(11757, 1).execute().collectList().block();
 
@@ -876,6 +882,78 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(AgeRating.PG13, r2.rated);
 
 		assertFalse(resultsIt.hasNext());
+	}
+
+	@Test
+	void fetchSearch_invalidParameters() {
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().query("ab"), "query must be a minimum of 3 characters");
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().limit(-1),                        "limit must be between 0 and " + SearchQuery.LIMIT_MAX);
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().limit(SearchQuery.LIMIT_MAX + 1), "limit must be between 0 and " + SearchQuery.LIMIT_MAX);
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().score(-0.1F), "score must be between 0.0 and 10.0");
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().score(10.1F), "score must be between 0.0 and 10.0");
+	}
+
+	@Test
+	void fetchTop() throws JikanInvalidArgumentException {
+		// https://api.jikan.moe/v3/top/anime/1/airing
+		String response = "{\n" +
+				"    \"top\": [\n" +
+				"        {\n" +
+				"            \"mal_id\": 39587,\n" +
+				"            \"rank\": 3,\n" +
+				"            \"title\": \"Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season\",\n" +
+				"            \"url\": \"https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season\",\n" +
+				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/1444/108005.jpg?s=b998e66dcfad4bbd4510b9ece4c9eb99\",\n" +
+				"            \"type\": \"TV\",\n" +
+				"            \"episodes\": 13,\n" +
+				"            \"start_date\": \"Jul 2020\",\n" +
+				"            \"end_date\": null,\n" +
+				"            \"members\": 290261,\n" +
+				"            \"score\": 8.5\n" +
+				"        }\n" +
+				"    ]\n" +
+				"}";
+
+		String responseEmpty = "{\n" +
+				"    \"top\": [ ]\n" +
+				"}";
+
+		// without subtype
+		mock(mockServer, "/top/anime/1", responseEmpty);
+		Collection<AnimeTopSub> resultsNoSubtype = jikan.query().anime().top(1).execute().collectList().block();
+		assertNotNull(resultsNoSubtype);
+		assertTrue(resultsNoSubtype.isEmpty());
+
+
+		// with subtype
+		mock(mockServer, "/top/anime/1/airing", response);
+		Collection<AnimeTopSub> results = jikan.query().anime().top(1).subtype(AnimeSubType.AIRING)
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+		assertNotNull(new AnimeTop().toString());
+
+		/* Results */
+		AnimeTopSub result = results.iterator().next();
+		assertNotNull(result.toString());
+		assertEquals(39587, result.malId);
+		assertEquals(3, result.rank);
+		assertEquals("Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season", result.title);
+		assertEquals("https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season", result.url);
+		assertEquals("https://cdn.myanimelist.net/images/anime/1444/108005.jpg?s=b998e66dcfad4bbd4510b9ece4c9eb99", result.imageUrl);
+		assertEquals(AnimeType.TV, result.type);
+		assertEquals(13, result.episodes);
+		assertEquals("Jul 2020", result.startDate);
+		assertNull(result.endDate);
+		assertEquals(290261, result.members);
+		assertEquals(8.5F, result.score);
+	}
+
+	@Test
+	void fetchTop_invalidParameters() {
+		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().top(0), "page starts at index 1");
 	}
 
 }

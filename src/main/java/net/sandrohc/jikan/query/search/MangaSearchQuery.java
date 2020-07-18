@@ -11,7 +11,6 @@ import java.util.*;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
-import net.sandrohc.jikan.model.search.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

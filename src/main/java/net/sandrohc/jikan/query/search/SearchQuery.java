@@ -18,7 +18,9 @@ import net.sandrohc.jikan.query.QueryFlux;
 @SuppressWarnings("unchecked")
 public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends QueryFlux<TYPE_INITIAL, TYPE_FINAL> {
 
-	protected final Type type;
+	public static final int LIMIT_MAX = 50;
+
+	public final Type type;
 
 	protected SearchQuery(Jikan jikan, Type type) {
 		super(jikan);
@@ -42,8 +44,8 @@ public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FI
 	}
 
 	public C limit(int limit) throws JikanInvalidArgumentException {
-		if (limit < 0 || limit > 50)
-			throw new JikanInvalidArgumentException("limit must be between 0 and 50");
+		if (limit < 0 || limit > LIMIT_MAX)
+			throw new JikanInvalidArgumentException("limit must be between 0 and " + LIMIT_MAX);
 
 		queryParams.put("limit", limit);
 		return (C) this;
@@ -51,7 +53,7 @@ public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FI
 
 	@Override
 	public String getUri() {
-		return "/search/" + type.name().toLowerCase();
+		return "/search/" + type.search;
 	}
 
 }

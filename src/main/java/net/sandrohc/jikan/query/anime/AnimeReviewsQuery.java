@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.QueryFlux;
 import reactor.core.publisher.Flux;
@@ -20,8 +21,10 @@ public class AnimeReviewsQuery extends QueryFlux<Reviews, Review> {
 	/** The page. Each page contains up to 20 reviews. */
 	private final int page;
 
-	public AnimeReviewsQuery(Jikan jikan, int id, int page) {
+	public AnimeReviewsQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
 		super(jikan);
+		if (page < 1) throw new JikanInvalidArgumentException("page starts at index 1");
+
 		this.id = id;
 		this.page = page;
 	}

@@ -73,18 +73,6 @@ public class RequestScheduleTest extends RequestTest {
 				"    ]\n" +
 				"}";
 
-		String responseEmpty = "{\n" +
-				"    \"monday\": [],\n" +
-				"    \"tuesday\": [],\n" +
-				"    \"wednesday\": [],\n" +
-				"    \"thursday\": [],\n" +
-				"    \"friday\": [],\n" +
-				"    \"saturday\": [],\n" +
-				"    \"sunday\": [],\n" +
-				"    \"other\": [],\n" +
-				"    \"unknown\": [],\n" +
-				"}";
-
 		mock(mockServer, "/schedule/monday", response);
 
 		Schedule schedule = jikan.query().schedule().day(Day.MONDAY).execute().block();
