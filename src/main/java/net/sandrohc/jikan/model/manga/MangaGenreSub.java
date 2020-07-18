@@ -6,9 +6,11 @@
 
 package net.sandrohc.jikan.model.manga;
 
+import java.time.*;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
@@ -25,13 +27,16 @@ public class MangaGenreSub extends MalEntity {
 
     public MangaType type;
 
+    @JsonProperty("publishing_start")
+    public OffsetDateTime publishingStart;
+
     public int volumes;
 
     public float score;
 
     public int members;
 
-    public List<MalSubEntity> genres = Collections.emptyList();
+    public List<GenreEntity<MangaGenre>> genres = Collections.emptyList();
 
     public List<MalSubEntity> authors = Collections.emptyList();
 

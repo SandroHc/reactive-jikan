@@ -34,21 +34,21 @@ public class SeasonAnime extends MalEntity {
 
     public int members;
 
-    public List<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
-
-    public String source; // TODO: convert to enum. { "Light novel", "Manga" }
+    public String source;
 
     public Float score;
-
-    public List<MalSubEntity> producers = Collections.emptyList();
-
-    public List<String> licensors = Collections.emptyList();
 
     public boolean r18;
 
     public boolean kids;
 
     public boolean continuing;
+
+    public List<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
+
+    public List<MalSubEntity> producers = Collections.emptyList();
+
+    public List<String> licensors = Collections.emptyList();
 
 
     @Override

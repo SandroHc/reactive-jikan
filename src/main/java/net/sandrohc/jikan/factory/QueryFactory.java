@@ -7,6 +7,9 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.query.magazine.MagazineQuery;
+import net.sandrohc.jikan.query.producer.ProducerQuery;
 import net.sandrohc.jikan.query.schedule.ScheduleQuery;
 
 public class QueryFactory extends Factory {
@@ -37,6 +40,14 @@ public class QueryFactory extends Factory {
 
     public ScheduleQuery schedule() {
         return new ScheduleQuery(this.jikan);
+    }
+
+    public ProducerQuery producer(int id, int page) throws JikanInvalidArgumentException {
+        return new ProducerQuery(this.jikan, id, page);
+    }
+
+    public MagazineQuery magazine(int id, int page) throws JikanInvalidArgumentException {
+        return new MagazineQuery(this.jikan, id, page);
     }
 
 }

@@ -23,6 +23,7 @@ public class RequestAnimeTest extends RequestTest {
 
 	@Test
 	void fetchAnime() {
+		// https://api.jikan.moe/v3/anime/11757
 		String response = "{" +
 						  "  \"mal_id\": 1," +
 						  "  \"url\": \"https://example.com/url\"," +

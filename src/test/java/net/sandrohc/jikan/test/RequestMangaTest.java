@@ -787,10 +787,10 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(6.33F, result.score);
 		assertTrue(result.serialization.contains("Shounen Jump+"));
 
-		MalSubEntity genre = result.genres.iterator().next();
+		GenreEntity<MangaGenre> genre = result.genres.iterator().next();
 		assertEquals(1, genre.malId);
 		assertEquals(Type.MANGA, genre.type);
-		assertEquals("Action", genre.name);
+		assertEquals(MangaGenre.ACTION, genre.name);
 		assertEquals("https://myanimelist.net/manga/genre/1/Action", genre.url);
 
 		MalSubEntity author = result.authors.iterator().next();

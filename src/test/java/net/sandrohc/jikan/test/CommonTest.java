@@ -10,9 +10,9 @@ import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.exception.JikanThrottleException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
-import net.sandrohc.jikan.model.base.MalEntity;
-import net.sandrohc.jikan.model.base.MalSubEntity;
-import net.sandrohc.jikan.model.enums.Type;
+import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.query.QueryMono;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -166,6 +166,32 @@ public class CommonTest extends RequestTest {
 		assertTrue(JikanException.class.isAssignableFrom(JikanThrottleException.class));
 	}
 
+	@Test
+	public void testDumpStacktrace() {
+		Jikan jikan;
+		QueryTest query = new QueryTest(null);
+		Exception ex;
+
+		// debug mode = false
+		jikan = new Jikan.JikanBuilder().debug(false).build();
+		ex = jikan.dumpStacktrace(query, new byte[0], new RuntimeException("TEST 1"));
+		assertEquals(JikanResponseException.class, ex.getClass());
+		assertTrue(ex.getMessage().startsWith("Error parsing JSON for query:"));
+		assertFalse(ex.getMessage().contains("A report file was generated at"));
+		assertEquals(RuntimeException.class, ex.getCause().getClass());
+		assertEquals("TEST 1", ex.getCause().getMessage());
+
+		// debug mode = true
+		jikan = new Jikan.JikanBuilder().debug(true).build();
+		ex = jikan.dumpStacktrace(query, new byte[0], new RuntimeException("TEST 2"));
+		assertEquals(JikanResponseException.class, ex.getClass());
+		assertTrue(ex.getMessage().startsWith("Error parsing JSON for query"));
+		assertTrue(ex.getMessage().contains("A report file was generated at"));
+		assertEquals(RuntimeException.class, ex.getCause().getClass());
+		assertEquals("TEST 2", ex.getCause().getMessage());
+	}
+
+
 	private static class Entity extends MalEntity {
 
 		public Entity(int malId) {
@@ -179,6 +205,24 @@ public class CommonTest extends RequestTest {
 		public DateRangeTest(OffsetDateTime from, OffsetDateTime to) {
 			this.from = from;
 			this.to = to;
+		}
+
+	}
+
+	private static class QueryTest extends QueryMono<Void> {
+
+		public QueryTest(Jikan jikan) {
+			super(jikan);
+		}
+
+		@Override
+		public String getUri() {
+			return "";
+		}
+
+		@Override
+		public Class<Void> getRequestClass() {
+			return Void.class;
 		}
 
 	}
