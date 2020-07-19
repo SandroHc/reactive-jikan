@@ -8,7 +8,6 @@ package net.sandrohc.jikan.query.producer;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.producer.*;
 import net.sandrohc.jikan.query.QueryMono;
 

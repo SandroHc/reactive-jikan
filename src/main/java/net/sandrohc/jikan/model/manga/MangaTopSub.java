@@ -7,38 +7,20 @@
 package net.sandrohc.jikan.model.manga;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.*;
-import net.sandrohc.jikan.model.enums.*;
 
-public class MangaTopSub extends MalEntity {
+/**
+ * A manga object, used by the /top endpoint.
+ */
+public class MangaTopSub extends MangaBase {
 
     public int rank;
 
-    public String title;
-
-    public String url;
-
-    @JsonProperty("image_url")
-    public String imageUrl;
-
-    public MangaType type;
-
-    public int volumes;
-
+    /** The publishing start date, in the format "Mon YYYY". i.e. "Jan 2020" */
     @JsonProperty("start_date")
     public String startDate;
 
+    /** The publishing end date, in the format "Mon YYYY". i.e. "Jan 2020" */
     @JsonProperty("end_date")
     public String endDate;
-
-    public int members;
-
-    public float score;
-
-
-    @Override
-    public String toString() {
-        return "MangaTopSub[id=" + malId + ", title='" + title + "']";
-    }
 
 }

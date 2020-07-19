@@ -14,27 +14,10 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
-public class MangaGenreSub extends MalEntity {
-
-    public String title;
-
-    public String url;
-
-    @JsonProperty("image_url")
-    public String imageUrl;
-
-    public String synopsis;
-
-    public MangaType type;
-
-    @JsonProperty("publishing_start")
-    public OffsetDateTime publishingStart;
-
-    public int volumes;
-
-    public float score;
-
-    public int members;
+/**
+ * A manga object, used by the /genre endpoint.
+ */
+public class MangaGenreSub extends MangaBase {
 
     public List<GenreEntity<MangaGenre>> genres = Collections.emptyList();
 
@@ -43,9 +26,9 @@ public class MangaGenreSub extends MalEntity {
     public List<String> serialization = Collections.emptyList();
 
 
-    @Override
-    public String toString() {
-        return "MangaGenreSub[id=" + malId + ", title='" + title + "']";
+    @JsonProperty("publishing_start")
+    public void setPublishingStart(OffsetDateTime startDate) {
+        published.setFrom(startDate);
     }
 
 }

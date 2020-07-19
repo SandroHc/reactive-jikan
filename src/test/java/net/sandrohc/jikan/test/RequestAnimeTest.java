@@ -1,6 +1,6 @@
 package net.sandrohc.jikan.test;
 
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.time.*;
 import java.util.*;
 
@@ -101,8 +101,8 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals("SOURCE", anime.source);
 		assertEquals(10, anime.episodes);
 		assertEquals(AnimeStatus.COMPLETED, anime.status);
-		assertEquals(OffsetDateTime.parse("2010-01-01T00:00:00+00:00"), anime.aired.from);
-		assertEquals(OffsetDateTime.parse("2010-12-01T00:00:00+00:00"), anime.aired.to);
+		assertEquals(LocalDate.parse("2010-01-01"), anime.aired.from);
+		assertEquals(LocalDate.parse("2010-12-01"), anime.aired.to);
 		assertEquals("DURATION", anime.duration);
 		assertEquals(AgeRating.PG13, anime.rating);
 		assertEquals(10.0F, anime.score);
@@ -861,10 +861,10 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(AnimeType.TV, r1.type);
 		assertEquals(13, r1.episodes);
 		assertEquals(7.65F, r1.score);
-		assertEquals(OffsetDateTime.parse("2010-01-07T00:00:00+00:00"), r1.startDate);
-		assertEquals(OffsetDateTime.parse("2010-04-01T00:00:00+00:00"), r1.endDate);
+		assertEquals(LocalDate.parse("2010-01-07"), r1.aired.from);
+		assertEquals(LocalDate.parse("2010-04-01"), r1.aired.to);
 		assertEquals(484011, r1.members);
-		assertEquals(AgeRating.PG13, r1.rated);
+		assertEquals(AgeRating.PG13, r1.rating);
 
 		AnimeSearchSub r2 = resultsIt.next();
 		assertNotNull(r2.toString());
@@ -877,10 +877,10 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(AnimeType.OVA, r2.type);
 		assertEquals(2, r2.episodes);
 		assertEquals(7.66F, r2.score);
-		assertEquals(OffsetDateTime.parse("2011-02-23T00:00:00+00:00"), r2.startDate);
-		assertEquals(OffsetDateTime.parse("2011-03-30T00:00:00+00:00"), r2.endDate);
+		assertEquals(LocalDate.parse("2011-02-23"), r2.aired.from);
+		assertEquals(LocalDate.parse("2011-03-30"), r2.aired.to);
 		assertEquals(101901, r2.members);
-		assertEquals(AgeRating.PG13, r2.rated);
+		assertEquals(AgeRating.PG13, r2.rating);
 
 		assertFalse(resultsIt.hasNext());
 	}
@@ -1031,7 +1031,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals("https://cdn.myanimelist.net/images/anime/10/47347.jpg", result.imageUrl);
 		assertEquals("Centuries ago, mankind was slaughtered to near extinction...", result.synopsis);
 		assertEquals(AnimeType.TV, result.type);
-		assertEquals(OffsetDateTime.parse("2013-04-06T16:58:00+00:00"), result.airingStart);
+		assertEquals(LocalDate.parse("2013-04-06"), result.aired.from);
 		assertEquals(25, result.episodes);
 		assertEquals(2005593, result.members);
 		assertEquals("Manga", result.source);

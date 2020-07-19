@@ -102,8 +102,8 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(1, manga.volumes);
 		assertEquals(207, manga.chapters);
 		assertFalse(manga.publishing);
-		assertEquals(OffsetDateTime.parse("2016-02-15T00:00:00+00:00"), manga.published.from);
-		assertEquals(OffsetDateTime.parse("2020-05-18T00:00:00+00:00"), manga.published.to);
+		assertEquals(LocalDate.parse("2016-02-15"), manga.published.from);
+		assertEquals(LocalDate.parse("2020-05-18"), manga.published.to);
 		assertEquals(185, manga.rank);
 		assertEquals(8.38F, manga.score);
 		assertEquals(62398, manga.scoredBy);
@@ -611,7 +611,7 @@ public class RequestMangaTest extends RequestTest {
 				Parameter.param("startDate", "2020-01-01"),
 				Parameter.param("endDate", "2020-12-31"));
 
-		Collection<Manga> results = jikan.query().manga().search()
+		Collection<MangaSearchSub> results = jikan.query().manga().search()
 				.query("test")
 				.page(1)
 				.limit(1)
@@ -631,9 +631,9 @@ public class RequestMangaTest extends RequestTest {
 		assertNotNull(new MangaSearch().toString());
 
 		/* Results */
-		Iterator<Manga> resultsIt = results.iterator();
+		Iterator<MangaSearchSub> resultsIt = results.iterator();
 
-		Manga m1 = resultsIt.next();
+		MangaSearchSub m1 = resultsIt.next();
 		assertNotNull(m1.toString());
 		assertEquals(2915, m1.malId);
 		assertEquals("https://myanimelist.net/manga/2915/Testarotho", m1.url);
@@ -645,11 +645,11 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(26, m1.chapters);
 		assertEquals(4, m1.volumes);
 		assertEquals(6.60F, m1.score);
-//		assertEquals(OffsetDateTime.parse("2000-06-09T00:00:00+00:00"), m1.startDate); // TODO
-//		assertEquals(OffsetDateTime.parse("2002-10-09T00:00:00+00:00"), m1.endDate);
+		assertEquals(LocalDate.parse("2000-06-09"), m1.published.from);
+		assertEquals(LocalDate.parse("2002-10-09"), m1.published.to);
 		assertEquals(612, m1.members);
 
-		Manga m2 = resultsIt.next();
+		MangaSearchSub m2 = resultsIt.next();
 		assertNotNull(m2.toString());
 		assertEquals(12087, m2.malId);
 		assertEquals("https://myanimelist.net/manga/12087/Testify", m2.url);
@@ -661,8 +661,8 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(1, m2.chapters);
 		assertEquals(0, m2.volumes);
 		assertEquals(5.73F, m2.score);
-//		assertEquals(OffsetDateTime.parse("2004-11-17T00:00:00+00:00"), m2.startDate); // TODO
-//		assertEquals(OffsetDateTime.parse("2004-11-17T00:00:00+00:00"), m2.endDate);
+		assertEquals(LocalDate.parse("2004-11-17"), m2.published.from);
+		assertEquals(LocalDate.parse("2004-11-17"), m2.published.to);
 		assertEquals(404, m2.members);
 
 		assertFalse(resultsIt.hasNext());

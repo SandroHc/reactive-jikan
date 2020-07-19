@@ -107,9 +107,9 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /{id}/pictures                   	| CharacterPicturesQuery        | (list) Picture            |
 | **Search** | | |
 | /anime                            | AnimeSearchQuery              | (list) AnimeSearchSub     |
-| /manga                            | MangaSearchQuery              | (list) Manga            	|
-| /person                           | PersonSearchQuery             | (list) PersonSub          |
-| /character                        | CharacterSearchQuery          | (list) CharacterSub       |
+| /manga                            | MangaSearchQuery              | (list) MangaSearchSub     |
+| /person                           | PersonSearchQuery             | (list) PersonSearchSub    |
+| /character                        | CharacterSearchQuery          | (list) CharacterSearchSub |
 | **Season** | | |
 | /{year}/{season}          	    | SeasonQuery                   | (list) SeasonAnime        |
 | /archive                  	    | SeasonArchiveQuery            | (list) SeasonArchiveYear  |
@@ -123,9 +123,9 @@ AnimeSearch animeSearch = jikan.query().anime().search()
 | /anime/{page}/{subtype}   	    | AnimeGenreQuery               | (list) AnimeGenreSub      |
 | /manga/{page}/{subtype}   	    | MangaGenreQuery               | (list) MangaGenreSub      |
 | **Producer** | | |
-| /{id}/{page}   	                |  |  |
+| /{id}/{page}   	                | ProducerQuery                 | Producer                  |
 | **Magazine** | | |
-| /{id}/{page}   	                |  |  |
+| /{id}/{page}   	                | MagazineQuery                 | Magazine                  |
 | **User** | | |
 | /{username}   	                |  |  |
 | /{username}/history   	        |  |  |

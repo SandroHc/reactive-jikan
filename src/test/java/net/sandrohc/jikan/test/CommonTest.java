@@ -122,6 +122,13 @@ public class CommonTest extends RequestTest {
 
 		assertEquals(e1, e4);
 		assertEquals(e4, e1);
+
+		DateRange rangeNull = new DateRangeTest(null, null);
+		assertNull(rangeNull.from);
+		assertNull(rangeNull.to);
+
+		assertNotNull(e1.from);
+		assertNotNull(e1.to);
 	}
 
 	@SuppressWarnings("UnusedAssignment")
@@ -203,8 +210,8 @@ public class CommonTest extends RequestTest {
 	private static class DateRangeTest extends DateRange {
 
 		public DateRangeTest(OffsetDateTime from, OffsetDateTime to) {
-			this.from = from;
-			this.to = to;
+			setFrom(from);
+			setTo(to);
 		}
 
 	}

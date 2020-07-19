@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 // TODO: create a MangaSub variant
-public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch, Manga> {
+public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch, MangaSearchSub> {
 
 	public MangaSearchQuery(Jikan jikan) {
 		super(jikan, Type.MANGA);
@@ -48,7 +48,7 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 	}
 
 	@Override
-	public Flux<Manga> process(Mono<MangaSearch> content) {
+	public Flux<MangaSearchSub> process(Mono<MangaSearch> content) {
 		return content.flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 

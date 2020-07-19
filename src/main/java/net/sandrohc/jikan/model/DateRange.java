@@ -11,8 +11,17 @@ import java.util.*;
 
 public class DateRange {
 
-	public OffsetDateTime from;
-	public OffsetDateTime to;
+	public LocalDate from;
+	public LocalDate to;
+
+
+	public void setFrom(OffsetDateTime from) {
+		this.from = from != null ? from.toLocalDate() : null;
+	}
+
+	public void setTo(OffsetDateTime to) {
+		this.to = to != null ? to.toLocalDate() : null;
+	}
 
 	@Override
 	public boolean equals(Object o) {
@@ -32,10 +41,7 @@ public class DateRange {
 
 	@Override
 	public String toString() {
-		return "DateRange[" +
-			   "from=" + from +
-			   ", to=" + to +
-			   ']';
+		return "DateRange[from=" + from + ", to=" + to + ']';
 	}
 
 }

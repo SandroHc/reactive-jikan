@@ -10,11 +10,10 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
-import net.sandrohc.jikan.model.character.CharacterSub;
 
 public class CharacterSearch extends CacheEntity {
 
-    public List<CharacterSub> results = Collections.emptyList();
+    public List<CharacterSearchSub> results = Collections.emptyList();
 
     @JsonProperty("last_page")
     public int lastPage;

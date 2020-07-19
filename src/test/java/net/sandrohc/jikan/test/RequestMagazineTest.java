@@ -82,7 +82,7 @@ public class RequestMagazineTest extends RequestTest {
 		assertEquals("https://cdn.myanimelist.net/images/manga/3/117681.jpg?s=c0ee4733879676bb2ab708f8c983dec8", manga.imageUrl);
 		assertEquals("Whenever Naruto Uzumaki proclaims that he will someday become the Hokage...", manga.synopsis);
 		assertEquals(MangaType.MANGA, manga.type);
-		assertEquals(OffsetDateTime.parse("1999-09-20T00:00:00+00:00"), manga.publishingStart);
+		assertEquals(LocalDate.parse("1999-09-20"), manga.published.from);
 		assertEquals(72, manga.volumes);
 		assertEquals(306486, manga.members);
 		assertEquals(8.07F, manga.score);

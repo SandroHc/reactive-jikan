@@ -176,7 +176,7 @@ public class RequestCharacterTest extends RequestTest {
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"));
 
-		Collection<CharacterSub> results = jikan.query().character().search()
+		Collection<CharacterSearchSub> results = jikan.query().character().search()
 				.query("asuna")
 				.page(1)
 				.limit(1)
@@ -188,9 +188,9 @@ public class RequestCharacterTest extends RequestTest {
 		assertNotNull(new CharacterSearch().toString());
 
 		/* Results */
-		Iterator<CharacterSub> resultsIt = results.iterator();
+		Iterator<CharacterSearchSub> resultsIt = results.iterator();
 
-		CharacterSub r1 = resultsIt.next();
+		CharacterSearchSub r1 = resultsIt.next();
 		assertNotNull(r1.toString());
 		assertEquals(92639, r1.malId);
 		assertEquals("https://myanimelist.net/character/92639/Asuna", r1.url);
@@ -204,7 +204,7 @@ public class RequestCharacterTest extends RequestTest {
 		assertEquals("Dragons Rioting", r1Manga.name);
 		assertEquals("https://myanimelist.net/manga/49361/Dragons_Rioting", r1Manga.url);
 
-		CharacterSub r2 = resultsIt.next();
+		CharacterSearchSub r2 = resultsIt.next();
 		assertNotNull(r2.toString());
 		assertEquals(12127, r2.malId);
 		assertEquals("https://myanimelist.net/character/12127/Asuna", r2.url);

@@ -11,12 +11,22 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A character object with all its details.
+ */
 public class Character extends MalEntity {
 
+    /** The page URL on MyAnimeList. */
     public String url;
 
+    /** The banner image URL. */
+    @JsonProperty("image_url")
+    public String imageUrl;
+
+    /** The official name. */
     public String name;
 
+    /** The official name, in kanji. */
     @JsonProperty("name_kanji")
     public String nameKanji;
 
@@ -26,9 +36,6 @@ public class Character extends MalEntity {
 
     @JsonProperty("member_favourites")
     public int memberFavourites;
-
-    @JsonProperty("image_url")
-    public String imageUrl;
 
     public List<RoleSubEntity> animeography = Collections.emptyList();
 

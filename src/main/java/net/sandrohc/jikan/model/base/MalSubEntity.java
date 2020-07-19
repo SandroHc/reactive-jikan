@@ -14,6 +14,7 @@ public class MalSubEntity extends MalEntity {
 
 	public String name;
 
+	/** The page URL on MyAnimeList. */
 	public String url;
 
 

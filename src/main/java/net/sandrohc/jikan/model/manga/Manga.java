@@ -17,33 +17,18 @@ import net.sandrohc.jikan.model.enums.*;
 /**
  * A manga object with all its details.
  */
-public class Manga extends MalEntity {
+public class Manga extends MangaBase {
 
-	public String url;
-
-	public String title;
-
+	/** The official title, in english. */
 	@JsonProperty("title_english")
 	public String titleEnglish;
 
+	/** The official title, in japanese. */
 	@JsonProperty("title_japanese")
 	public String titleJapanese;
 
 	@JsonProperty("title_synonyms")
 	public List<String> titleSynonyms;
-
-	public MangaStatus status;
-
-	@JsonProperty("image_url")
-	public String imageUrl;
-
-	public MangaType type;
-
-	public int volumes;
-
-	public int chapters;
-
-	public boolean publishing;
 
 	public DateRange published;
 
@@ -60,8 +45,6 @@ public class Manga extends MalEntity {
 
 	public int favorites;
 
-	public String synopsis;
-
 	public String background;
 
 	public Related related;
@@ -71,11 +54,5 @@ public class Manga extends MalEntity {
 	public List<MalSubEntity> authors = Collections.emptyList();
 
 	public List<MalSubEntity> serializations = Collections.emptyList();
-
-
-	@Override
-	public String toString() {
-		return "Manga[id=" + malId + ", title='" + title + "']";
-	}
 
 }

@@ -9,7 +9,6 @@ package net.sandrohc.jikan.model.anime;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.GenreEntity;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.common.*;
@@ -18,21 +17,11 @@ import net.sandrohc.jikan.model.enums.*;
 /**
  * An anime object with all its details.
  */
-public class Anime extends MalEntity {
-
-	/** The anime page URL on MyAnimeList. */
-	public String url;
-
-	/** The banner image URL. */
-	@JsonProperty("image_url")
-	public String imageUrl;
+public class Anime extends AnimeBase {
 
 	/** The official trailer URL. */
 	@JsonProperty("trailer_url")
 	public String trailerUrl;
-
-	/** The official title. */
-	public String title;
 
 	/** The official title in english. */
 	@JsonProperty("title_english")
@@ -46,23 +35,11 @@ public class Anime extends MalEntity {
 	@JsonProperty("title_synonyms")
 	public List<String> titleSynonyms;
 
-	public AnimeType type;
-
 	public String source;
-
-	public int episodes;
 
 	public AnimeStatus status;
 
-	public DateRange aired;
-
 	public String duration;
-
-	/** The anime age rating. */
-	public AgeRating rating;
-
-	/** The anime score, in the range of 0.00 to 10.00. */
-	public float score;
 
 	@JsonProperty("scored_by")
 	public int scoredBy;
@@ -71,11 +48,7 @@ public class Anime extends MalEntity {
 
 	public int popularity;
 
-	public int members;
-
 	public int favorites;
-
-	public String synopsis;
 
 	public String background;
 
@@ -100,11 +73,5 @@ public class Anime extends MalEntity {
 
 	@JsonProperty("ending_themes")
 	public List<String> endingThemes;
-
-
-	@Override
-	public String toString() {
-		return "Anime[id=" + malId + ", title='" + title + "']";
-	}
 
 }

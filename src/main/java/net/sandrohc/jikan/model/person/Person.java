@@ -12,21 +12,30 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A person object with all its details.
+ */
 public class Person extends MalEntity {
 
+    /** The page URL on MyAnimeList. */
     public String url;
 
+    /** The banner image URL. */
     @JsonProperty("image_url")
     public String imageUrl;
 
+    /** The official website URL. */
     @JsonProperty("website_url")
     public String websiteUrl;
 
+    /** The name. */
     public String name;
 
+    /** The given (first) name. */
     @JsonProperty("given_name")
     public String givenName;
 
+    /** The family (last) name. */
     @JsonProperty("family_name")
     public String familyName;
 

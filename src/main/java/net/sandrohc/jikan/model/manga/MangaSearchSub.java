@@ -4,28 +4,26 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.manga;
 
 import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * An anime object, used by the /search endpoint.
+ * A manga object, used by the /search endpoint.
  */
-public class AnimeSearchSub extends AnimeBase {
-
-	public boolean airing;
+public class MangaSearchSub extends MangaBase {
 
 
 	@JsonProperty("start_date")
 	public void setStartDate(OffsetDateTime startDate) {
-		aired.setFrom(startDate);
+		published.setFrom(startDate);
 	}
 
 	@JsonProperty("end_date")
 	public void setEndDate(OffsetDateTime endDate) {
-		aired.setTo(endDate);
+		published.setTo(endDate);
 	}
 
 }

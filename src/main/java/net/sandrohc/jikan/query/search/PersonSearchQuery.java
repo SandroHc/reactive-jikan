@@ -12,7 +12,7 @@ import net.sandrohc.jikan.model.person.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch, PersonSub> {
+public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch, PersonSearchSub> {
 
 	public PersonSearchQuery(Jikan jikan) {
 		super(jikan, Type.PERSON);
@@ -24,7 +24,7 @@ public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSear
 	}
 
 	@Override
-	public Flux<PersonSub> process(Mono<PersonSearch> content) {
+	public Flux<PersonSearchSub> process(Mono<PersonSearch> content) {
 		return content.flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 

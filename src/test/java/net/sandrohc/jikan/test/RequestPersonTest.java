@@ -195,7 +195,7 @@ public class RequestPersonTest extends RequestTest {
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"));
 
-		Collection<PersonSub> results = jikan.query().person().search()
+		Collection<PersonSearchSub> results = jikan.query().person().search()
 				.query("asuna")
 				.page(1)
 				.limit(1)
@@ -207,9 +207,9 @@ public class RequestPersonTest extends RequestTest {
 		assertNotNull(new PersonSearch().toString());
 
 		/* Results */
-		Iterator<PersonSub> resultsIt = results.iterator();
+		Iterator<PersonSearchSub> resultsIt = results.iterator();
 
-		PersonSub r1 = resultsIt.next();
+		PersonSearchSub r1 = resultsIt.next();
 		assertNotNull(r1.toString());
 		assertEquals(2209, r1.malId);
 		assertEquals("https://myanimelist.net/people/2209/Kei_Yasunaga", r1.url);
@@ -217,7 +217,7 @@ public class RequestPersonTest extends RequestTest {
 		assertEquals("Yasunaga, Kei", r1.name);
 		assertTrue(r1.alternativeNames.isEmpty());
 
-		PersonSub r2 = resultsIt.next();
+		PersonSearchSub r2 = resultsIt.next();
 		assertNotNull(r2.toString());
 		assertEquals(41501, r2.malId);
 		assertEquals("https://myanimelist.net/people/41501/Asuna_Tomari", r2.url);

@@ -11,7 +11,10 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
-public class CharacterSub extends MalEntity {
+/**
+ * A character object, used by the /search endpoint.
+ */
+public class CharacterSearchSub extends MalEntity {
 
     public String url;
 
