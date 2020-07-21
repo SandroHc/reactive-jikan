@@ -19,7 +19,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:master-SNAPSHOT'
+    implementation 'net.sandrohc:reactive-jikan:0.1.0'
 }
 ```
 
@@ -35,7 +35,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>master-SNAPSHOT</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -45,23 +45,23 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 ## Usage
 
-The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigating the list of queries), you can pass it to your `Jikan` instance. While building the query, you may specify optional parameters.
+The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigate through all the available queries), you can pass it to your `Jikan` instance. Some queries may allow you to specify optional parameters, like the search queries.
 
-After you successfully configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>`. To convert it into your desired result, you must call `subscribe()` or `block()`.
+After you configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>` or `Flux<T>` depending on the query. To convert it into your desired result, you must call `subscribe()` or `block()`. For more information of reactive queries, please read the [relevant documentation](https://projectreactor.io/docs/core/release/reference/).
 
 Here are some examples on how to use this library:
 ```java
 // Create the Jikan instance with default parameters.
-// You can also use the builder, JikanBuilder, if you desire different parameters.
+// You can also use the builder, JikanBuilder, to specify custom parameters.
 Jikan jikan = new Jikan(); 
 
-// Fetch the anime with ID 1 - mono response
+// Fetch the anime with ID 1. Returns a single value, a mono.
 Anime anime = jikan.query().anime().get(1)
         .execute()
         .block();
 
-// Search for 'sword art online' - flux response
-AnimeSearch animeSearch = jikan.query().anime().search()
+// Search for 'sword art online'. Returns a list of values, a flux.
+Collection<AnimeSearchSub> results = jikan.query().anime().search()
         .query("sword art online")
         .limit(5)
         .status(AnimeStatus.AIRING)
