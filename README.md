@@ -47,7 +47,7 @@ For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigate through all the available queries), you can pass it to your `Jikan` instance. Some queries may allow you to specify optional parameters, like the search queries.
 
-After you configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>` or `Flux<T>` depending on the query. To convert it into your desired result, you must call `subscribe()` or `block()`. For more information of reactive queries, please read the [relevant documentation](https://projectreactor.io/docs/core/release/reference/).
+After you configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>` or `Flux<T>` depending on the query. To convert it into your desired result, you must call `subscribe()` or `block()`. For more information on reactive queries, please read the [relevant documentation](https://projectreactor.io/docs/core/release/reference/).
 
 Here are some examples on how to use this library:
 ```java

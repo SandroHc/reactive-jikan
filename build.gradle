@@ -1,6 +1,9 @@
 plugins {
     id 'java-library'
     id 'jacoco'
+    id 'maven-publish'
+    id 'signing'
+    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group 'net.sandrohc'
@@ -18,6 +21,12 @@ jar {
                 'Implementation-Title': 'reactive-jikan',
                 'Implementation-Version': project.version
         )
+    }
+}
+
+javadoc {
+    if(JavaVersion.current().isJava9Compatible()) {
+        options.addBooleanOption('html5', true)
     }
 }
 
@@ -57,4 +66,76 @@ jacocoTestReport {
 tasks.withType(JavaCompile) {
     // force UTF-8 encoding on Windows machines
     options.encoding = 'UTF-8'
+}
+
+
+bintray {
+    user = findProperty('bintray.user')
+    key = findProperty('bintray.apikey')
+
+    publications = ['maven']
+    pkg {
+        repo = 'reactive-jikan'
+        name = 'reactive-jikan'
+        desc = 'API wrapper for Jikan - an unofficial MyAnimeList API - with the power of Project Reactor and reactive streams. ⚡'
+        githubRepo = 'SandroHc/reactive-jikan'
+        websiteUrl      = 'https://github.com/SandroHc/reactive-jikan'
+        issueTrackerUrl = 'https://github.com/SandroHc/reactive-jikan/issues'
+        vcsUrl          = 'https://github.com/SandroHc/reactive-jikan.git'
+        licenses = ['LGPL-2.1']
+        labels = ['jikan', 'project reactor', 'reactive streams', 'reactive programming', 'myanimelist']
+
+        dryRun = false
+        publish = true
+        override = false
+        publicDownloadNumbers = true
+
+        version {
+            name = project.version
+            desc = "Reactive Jikan v${project.version}"
+            released = new Date()
+            vcsTag = project.version
+
+            gpg {
+                sign = true
+            }
+        }
+    }
+}
+
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+            pom {
+                name = 'Reactive Jikan'
+                description = 'API wrapper for Jikan - an unofficial MyAnimeList API - with the power of Project Reactor and reactive streams. ⚡'
+                url = 'https://github.com/SandroHc/reactive-jikan'
+                licenses {
+                    license {
+                        name = 'GNU Lesser General Public License v2.1'
+                        url = 'https://gnu.org/licenses/old-licenses/lgpl-2.1.en.html'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'SandroHc'
+                        name = 'Sandro Marques'
+                        email = 'sandro123iv@gmail.com'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:git://github.com/SandroHc/reactive-jikan.git'
+                    developerConnection = 'scm:git:ssh://github.com/SandroHc/reactive-jikan.git'
+                    url = 'https://github.com/SandroHc/reactive-jikan'
+                }
+            }
+        }
+    }
+}
+
+signing {
+    useGpgCmd()
+    sign publishing.publications.maven
 }
