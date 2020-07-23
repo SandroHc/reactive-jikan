@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'net.sandrohc'
-version '0.1.0'
+version '0.1.1'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -36,11 +36,11 @@ repositories {
 
 dependencies {
     // Project Reactor
-    implementation 'io.projectreactor.netty:reactor-netty:0.9.9.RELEASE'
+    api 'io.projectreactor.netty:reactor-netty:0.9.10.RELEASE'
 
     // Jackson (JSON serializer)
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
 
     // Logging
     api 'org.slf4j:slf4j-api:2.0.0-alpha1'
@@ -98,6 +98,7 @@ bintray {
 
             gpg {
                 sign = true
+                passphrase = findProperty('bintray.gpg.password')
             }
         }
     }

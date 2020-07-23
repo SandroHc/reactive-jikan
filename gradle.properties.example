@@ -4,3 +4,4 @@ signing.gnupg.passphrase=secret
 
 bintray.user=USERNAME
 bintray.apikey=API_KEY
+bintray.gpg.password=secret

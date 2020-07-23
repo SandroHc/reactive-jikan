@@ -14,12 +14,12 @@ If using Gradle (`build.gradle`):
 ```groovy
 allprojects {
     repositories {
-        maven { url 'https://jitpack.io' }
+        jcenter()
     }
 }
 
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:0.1.0'
+    implementation 'net.sandrohc:reactive-jikan:0.1.1'
 }
 ```
 
@@ -27,21 +27,20 @@ If using Maven (`pom.xml`):
 ```xml
 <repositories>
     <repository>
-        <id>jitpack.io</id>
-        <url>https://jitpack.io</url>
+        <id>central</id>
+        <name>bintray</name>
+        <url>https://jcenter.bintray.com</url>
     </repository>
 </repositories>
 
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1</version>
 </dependency>
 ```
 
-If you want to use the development version, place `master-SNAPSHOT` in the version.
-
-For other building tools, see: https://jitpack.io/#net.sandrohc/reactive-jikan
+If you want to use development versions, see: https://jitpack.io/#net.sandrohc/reactive-jikan
 
 ## Usage
 
