@@ -30,7 +30,10 @@ public enum AgeRating {
 	R17,
 
 	@JsonProperty("R+")
-	@JsonAlias("R+ - Mild Nudity (may also contain violence & profanity)")
+	@JsonAlias({
+			"R+ - Mild Nudity",
+			"R+ - Mild Nudity (may also contain violence & profanity)"
+	})
 	R,
 
 	@JsonProperty("Rx")
