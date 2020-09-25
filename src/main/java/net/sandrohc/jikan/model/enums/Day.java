@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Day {
@@ -17,5 +18,6 @@ public enum Day {
 	@JsonProperty("saturday")  SATURDAY,
 	@JsonProperty("sunday")    SUNDAY,
 	@JsonProperty("other")     OTHER,
+	@JsonEnumDefaultValue
 	@JsonProperty("unknown")   UNKNOWN,
 }
