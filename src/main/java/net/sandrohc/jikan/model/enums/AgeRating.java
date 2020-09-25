@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AgeRating {
+
+	@JsonProperty("NONE")
+	@JsonAlias("None")
+	NONE,
+
 	@JsonProperty("G")
 	@JsonAlias("G - All Ages")
 	G,
