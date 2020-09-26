@@ -26,7 +26,7 @@ public enum AnimeStatus {
 	@JsonAlias({
 			"tba",
 			"to be aired",
-			"not aired yet)"
+			"Not yet aired"
 	})
 	TO_BE_AIRED,
 
