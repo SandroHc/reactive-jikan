@@ -33,5 +33,5 @@ public enum AnimeStatus {
 	@JsonEnumDefaultValue
 	@JsonProperty("Unknown")
 	@JsonAlias("Unknown")
-	UNKONWN
+	UNKNOWN
 }
