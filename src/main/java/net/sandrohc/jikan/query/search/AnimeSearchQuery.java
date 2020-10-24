@@ -27,12 +27,29 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 
 	@SuppressWarnings("unchecked")
 	public AnimeSearchQuery genres(AnimeGenre... genres) {
-		// TODO: check if we need to include the 'gender_exclude' in the request
 		Set<Integer> genreList = (Set<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
 
 		for (AnimeGenre genre : genres)
 			genreList.add(genre.ordinal());
 
+		return this;
+	}
+
+	/**
+	 * To exclude the genre you added in your request.
+	 * @return anime search query
+	 */
+	public AnimeSearchQuery excludeGivenGenres() {
+		queryParams.putIfAbsent("genre_exclude", 0);
+		return this;
+	}
+
+	/**
+	 * To include the genre you added in your request.
+	 * @return anime search query
+	 */
+	public AnimeSearchQuery includeGivenGenres() {
+		queryParams.putIfAbsent("genre_exclude", 1);
 		return this;
 	}
 
