@@ -23,7 +23,6 @@ public class MockUtils {
 	}
 
 	public static void mock(ClientAndServer mockServer, String uri, String json, Parameter... queryParameters) {
-		mockServer.clear(null);
 		mockServer
 				.when(request().withMethod("GET").withPath(uri).withQueryStringParameters(queryParameters))
 				.respond(response()
@@ -41,7 +40,6 @@ public class MockUtils {
 				" \"type\": \"ErrorException\"" +
 				" }";
 
-		mockServer.clear(null);
 		mockServer
 				.when(request())
 				.respond(response()
