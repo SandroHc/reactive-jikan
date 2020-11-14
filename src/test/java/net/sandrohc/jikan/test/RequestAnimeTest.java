@@ -1031,6 +1031,48 @@ public class RequestAnimeTest extends RequestTest {
 	}
 
 	@Test
+	void fetchSearch_excludeGenres() {
+		// https://api.jikan.moe/v3/search/anime?genre_exclude=0
+		String response = "{\n" +
+				"    \"results\": [],\n" +
+				"    \"last_page\": 0\n" +
+				"}";
+
+		mock(mockServer, "/search/anime", response,
+				Parameter.param("genre_exclude", "0"));
+
+		Collection<AnimeSearchSub> results = jikan.query().anime().search()
+				.genres(AnimeGenre.ACTION)
+				.excludeGivenGenres()
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+	}
+
+	@Test
+	void fetchSearch_includeGenres() {
+		// https://api.jikan.moe/v3/search/anime?genre_exclude=1
+		String response = "{\n" +
+				"    \"results\": [],\n" +
+				"    \"last_page\": 0\n" +
+				"}";
+
+		mock(mockServer, "/search/anime", response,
+				Parameter.param("genre_exclude", "1"));
+
+		Collection<AnimeSearchSub> results = jikan.query().anime().search()
+				.genres(AnimeGenre.ACTION)
+				.includeGivenGenres()
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+	}
+
+	@Test
 	void fetchTop() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/top/anime/1/airing
 		String response = "{\n" +
