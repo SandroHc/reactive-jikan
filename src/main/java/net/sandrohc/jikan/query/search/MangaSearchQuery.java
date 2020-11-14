@@ -28,12 +28,29 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 
 	@SuppressWarnings("unchecked")
 	public MangaSearchQuery genres(MangaGenre... genres) {
-		// TODO: check if we need to include the 'gender_exclude' in the request
 		Set<Integer> genreList = (Set<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
 
 		for (MangaGenre genre : genres)
 			genreList.add(genre.ordinal());
 
+		return this;
+	}
+
+	/**
+	 * To exclude the genre you added in your request.
+	 * @return manga search query
+	 */
+	public MangaSearchQuery excludeGivenGenres() {
+		queryParams.putIfAbsent("genre_exclude", 0);
+		return this;
+	}
+
+	/**
+	 * To include the genre you added in your request.
+	 * @return manga search query
+	 */
+	public MangaSearchQuery includeGivenGenres() {
+		queryParams.putIfAbsent("genre_exclude", 1);
 		return this;
 	}
 

@@ -159,6 +159,142 @@ public class RequestAnimeTest extends RequestTest {
 	}
 
 	@Test
+	void fetchAnimeWithUnknownAgeRating() {
+		// https://api.jikan.moe/v3/anime/11757
+		String response = "{" +
+				"  \"mal_id\": 1," +
+				"  \"url\": \"https://example.com/url\"," +
+				"  \"image_url\": \"https://example.com/image_url\"," +
+				"  \"trailer_url\": \"https://example.com/trailer_url\"," +
+				"  \"title\": \"TITLE\"," +
+				"  \"title_english\": \"TITLE ENGLISH\"," +
+				"  \"title_japanese\": \"TITLE 日本語\"," +
+				"  \"title_synonyms\": [ \"TITLE_SYNONYM\" ]," +
+				"  \"type\": \"TV\"," +
+				"  \"source\": \"SOURCE\"," +
+				"  \"episodes\": 10," +
+				"  \"status\": \"Finished Airing\"," +
+				"  \"airing\": false," +
+				"  \"aired\": {" +
+				"    \"from\": \"2010-01-01T00:00:00+00:00\"," +
+				"    \"to\": \"2010-12-01T00:00:00+00:00\"" +
+				"  }," +
+				"  \"duration\": \"DURATION\"," +
+				"  \"rating\": \"Invalid age rating\"," + // unknown age rating
+				"  \"score\": 10.00," +
+				"  \"scored_by\": 20," +
+				"  \"rank\": 30," +
+				"  \"popularity\": 40," +
+				"  \"members\": 50," +
+				"  \"favorites\": 60," +
+				"  \"synopsis\": \"SYNOPSIS\"," +
+				"  \"background\": \"BACKGROUND\"," +
+				"  \"premiered\": \"Summer 2012\"," +
+				"  \"broadcast\": \"Sundays at 00:00 (JST)\"," +
+				"  \"related\": {" +
+				"    \"Other\": [" +
+				"      { \"mal_id\": 10000, \"type\": \"anime\", \"name\": \"RELATED_OTHER\", \"url\": \"https://example.com/related_other\" }" +
+				"    ]," +
+				"    \"Sequel\": [" +
+				"      { \"mal_id\": 11000, \"type\": \"anime\", \"name\": \"RELATED_SEQUEL\", \"url\": \"https://example.com/related_sequel\" }" +
+				"    ]" +
+				"  }," +
+				"  \"producers\": [" +
+				"    { \"mal_id\": 1000, \"type\": \"anime\", \"name\": \"PRODUCER\", \"url\": \"https://example.com/producer\" }" +
+				"  ]," +
+				"  \"licensors\": [" +
+				"    { \"mal_id\": 2000, \"type\": \"anime\", \"name\": \"LICENSOR\", \"url\": \"https://example.com/licensor\" }" +
+				"  ]," +
+				"  \"studios\": [" +
+				"    { \"mal_id\": 3000, \"type\": \"anime\", \"name\": \"STUDIO\", \"url\": \"https://example.com/studio\" }" +
+				"  ]," +
+				"  \"genres\": [" +
+				"    { \"mal_id\": 1, \"type\": \"anime\", \"name\": \"Action\", \"url\": \"https://myanimelist.net/anime/genre/1/Action\" }," +
+				"    { \"mal_id\": 2, \"type\": \"anime\", \"name\": \"Adventure\", \"url\": \"https://myanimelist.net/anime/genre/2/Adventure\" }" +
+				"  ]," +
+				"  \"opening_themes\": [ \"OPENING THEME\" ]," +
+				"  \"ending_themes\":  [ \"ENDING THEME\" ]" +
+				"}";
+
+		mock(mockServer, "/anime/1", response);
+
+		AnimeQuery query = jikan.query().anime().get(1);
+		assertNotNull(query);
+		assertNotNull(query.toString());
+		Anime anime = query.execute().block();
+		assertNotNull(anime);
+		assertEquals(AgeRating.NONE, anime.rating);
+	}
+
+	@Test
+	void fetchAnimeWithUnknownType() {
+		// https://api.jikan.moe/v3/anime/11757
+		String response = "{" +
+				"  \"mal_id\": 1," +
+				"  \"url\": \"https://example.com/url\"," +
+				"  \"image_url\": \"https://example.com/image_url\"," +
+				"  \"trailer_url\": \"https://example.com/trailer_url\"," +
+				"  \"title\": \"TITLE\"," +
+				"  \"title_english\": \"TITLE ENGLISH\"," +
+				"  \"title_japanese\": \"TITLE 日本語\"," +
+				"  \"title_synonyms\": [ \"TITLE_SYNONYM\" ]," +
+				"  \"type\": \"INVALID TYPE\"," +
+				"  \"source\": \"SOURCE\"," +
+				"  \"episodes\": 10," +
+				"  \"status\": \"Finished Airing\"," +
+				"  \"airing\": false," +
+				"  \"aired\": {" +
+				"    \"from\": \"2010-01-01T00:00:00+00:00\"," +
+				"    \"to\": \"2010-12-01T00:00:00+00:00\"" +
+				"  }," +
+				"  \"duration\": \"DURATION\"," +
+				"  \"rating\": \"Invalid age rating\"," + // unknown age rating
+				"  \"score\": 10.00," +
+				"  \"scored_by\": 20," +
+				"  \"rank\": 30," +
+				"  \"popularity\": 40," +
+				"  \"members\": 50," +
+				"  \"favorites\": 60," +
+				"  \"synopsis\": \"SYNOPSIS\"," +
+				"  \"background\": \"BACKGROUND\"," +
+				"  \"premiered\": \"Summer 2012\"," +
+				"  \"broadcast\": \"Sundays at 00:00 (JST)\"," +
+				"  \"related\": {" +
+				"    \"Other\": [" +
+				"      { \"mal_id\": 10000, \"type\": \"anime\", \"name\": \"RELATED_OTHER\", \"url\": \"https://example.com/related_other\" }" +
+				"    ]," +
+				"    \"Sequel\": [" +
+				"      { \"mal_id\": 11000, \"type\": \"anime\", \"name\": \"RELATED_SEQUEL\", \"url\": \"https://example.com/related_sequel\" }" +
+				"    ]" +
+				"  }," +
+				"  \"producers\": [" +
+				"    { \"mal_id\": 1000, \"type\": \"anime\", \"name\": \"PRODUCER\", \"url\": \"https://example.com/producer\" }" +
+				"  ]," +
+				"  \"licensors\": [" +
+				"    { \"mal_id\": 2000, \"type\": \"anime\", \"name\": \"LICENSOR\", \"url\": \"https://example.com/licensor\" }" +
+				"  ]," +
+				"  \"studios\": [" +
+				"    { \"mal_id\": 3000, \"type\": \"anime\", \"name\": \"STUDIO\", \"url\": \"https://example.com/studio\" }" +
+				"  ]," +
+				"  \"genres\": [" +
+				"    { \"mal_id\": 1, \"type\": \"anime\", \"name\": \"Action\", \"url\": \"https://myanimelist.net/anime/genre/1/Action\" }," +
+				"    { \"mal_id\": 2, \"type\": \"anime\", \"name\": \"Adventure\", \"url\": \"https://myanimelist.net/anime/genre/2/Adventure\" }" +
+				"  ]," +
+				"  \"opening_themes\": [ \"OPENING THEME\" ]," +
+				"  \"ending_themes\":  [ \"ENDING THEME\" ]" +
+				"}";
+
+		mock(mockServer, "/anime/1", response);
+
+		AnimeQuery query = jikan.query().anime().get(1);
+		assertNotNull(query);
+		assertNotNull(query.toString());
+		Anime anime = query.execute().block();
+		assertNotNull(anime);
+		assertEquals(AnimeType.UNKNOWN, anime.type);
+	}
+
+	@Test
 	void fetchCharactersAndStaff() {
 		// https://api.jikan.moe/v3/anime/11757/characters_staff
 		String response = "{\n" +
