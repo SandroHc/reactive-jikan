@@ -24,6 +24,5 @@ public enum MangaStatus {
 
 	@JsonEnumDefaultValue
 	@JsonProperty("Unknown")
-	@JsonAlias("Unknown")
-	UNKNOWN
+	UNKNOWN,
 }

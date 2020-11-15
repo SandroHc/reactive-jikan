@@ -17,6 +17,7 @@ public class AnimeForumQuery extends QueryFlux<Forum, ForumTopic> {
 	/** The anime ID. */
 	private final int id;
 
+
 	public AnimeForumQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;

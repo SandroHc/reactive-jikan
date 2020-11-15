@@ -126,13 +126,13 @@ Collection<AnimeSearchSub> results = jikan.query().anime().search()
 | **Magazine** | | |
 | /{id}/{page}   	                | MagazineQuery                 | Magazine                  |
 | **User** | | |
-| /{username}   	                |  |  |
-| /{username}/history   	        |  |  |
-| /{username}/history/anime   	    |  |  |
-| /{username}/history/manga   	    |  |  |
-| /{username}/friends/{page}   	    |  |  |
-| /{username}/animelist/{status}   	|  |  |
-| /{username}/mangalist/{status}   	|  |  |
+| /{username}   	                | UserProfileQuery | UserProfile |
+| /{username}/history   	        | (not implemented) |  |
+| /{username}/history/anime   	    | UserHistoryAnimeQuery | (list) UserHistory |
+| /{username}/history/manga   	    | UserHistoryAnimeQuery | (list) UserHistory |
+| /{username}/friends/{page}   	    | UserFriendsQuery | (list) UserFriend |
+| /{username}/animelist/{status}   	| UserAnimeQuery | (list) UserAnime |
+| /{username}/mangalist/{status}   	| UserMangaQuery | (list) UserManga |
 | **Club** | | |
 | /{id}   	                        |  |  |
 | /{id}/members/{page}   	        |  |  |

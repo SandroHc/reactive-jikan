@@ -50,4 +50,8 @@ public class QueryFactory extends Factory {
         return new MagazineQuery(this.jikan, id, page);
     }
 
+    public UserQueryFactory user(String username) {
+        return new UserQueryFactory(this.jikan, username);
+    }
+
 }

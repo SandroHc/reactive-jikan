@@ -25,6 +25,7 @@ import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.exception.JikanThrottleException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.utils.Generated;
 import org.reactivestreams.Publisher;
 import org.slf4j.*;
 import reactor.core.publisher.Mono;
@@ -275,6 +276,7 @@ public class Jikan {
 		 *
 		 * @return the default user agent
 		 */
+		@Generated
 		public String getDefaultUserAgent() {
 			Package pck = getClass().getPackage();
 			if (pck.getImplementationTitle() == null) {
