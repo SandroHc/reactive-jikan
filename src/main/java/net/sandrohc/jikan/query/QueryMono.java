@@ -9,6 +9,11 @@ package net.sandrohc.jikan.query;
 import net.sandrohc.jikan.Jikan;
 import reactor.core.publisher.Mono;
 
+/**
+ * A query that returns a single element.
+ *
+ * @param <TYPE> the request result type
+ */
 public abstract class QueryMono<TYPE> extends Query<TYPE, TYPE, Mono<TYPE>> {
 
 	public QueryMono(Jikan jikan) {

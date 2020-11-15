@@ -14,6 +14,9 @@ import net.sandrohc.jikan.query.genre.AnimeGenreQuery;
 import net.sandrohc.jikan.query.search.AnimeSearchQuery;
 import net.sandrohc.jikan.query.top.AnimeTopQuery;
 
+/**
+ * Factory for the anime queries.
+ */
 public class AnimeQueryFactory extends Factory {
 
     public AnimeQueryFactory(Jikan jikan) {

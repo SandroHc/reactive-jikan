@@ -9,6 +9,9 @@ package net.sandrohc.jikan.factory;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.query.user.*;
 
+/**
+ * Factory for the user manga queries.
+ */
 public class UserMangaQueryFactory extends Factory {
 
     public final String username;
@@ -25,7 +28,6 @@ public class UserMangaQueryFactory extends Factory {
     /**
      * Returns the latest updates to the user's manga entries.
      *
-     * @param username the user name
      * @return the list of updates
      */
     public UserHistoryMangaQuery updates() {

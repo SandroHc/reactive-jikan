@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A list of pictures.
+ */
 public class Pictures extends CacheEntity {
 
     public List<Picture> pictures = Collections.emptyList();

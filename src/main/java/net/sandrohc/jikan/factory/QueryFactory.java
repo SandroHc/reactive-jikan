@@ -12,6 +12,9 @@ import net.sandrohc.jikan.query.magazine.MagazineQuery;
 import net.sandrohc.jikan.query.producer.ProducerQuery;
 import net.sandrohc.jikan.query.schedule.ScheduleQuery;
 
+/**
+ * Factory for all the queries.
+ */
 public class QueryFactory extends Factory {
 
     public QueryFactory(Jikan jikan) {

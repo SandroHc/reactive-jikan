@@ -9,6 +9,9 @@ package net.sandrohc.jikan.factory;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.query.user.*;
 
+/**
+ * Factory for the user queries.
+ */
 public class UserQueryFactory extends Factory {
 
     public final String username;
