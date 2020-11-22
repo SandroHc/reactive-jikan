@@ -195,6 +195,7 @@ public class RequestClubTest extends RequestTest {
 		int hash = m2.hashCode();
 
 		ClubMembers l = new ClubMembers();
+		assertNotNull(l.toString());
 		assertEquals(l, l);
 		assertEquals(l, SerializationUtils.clone(l));
 		assertNotEquals(l, new Object());

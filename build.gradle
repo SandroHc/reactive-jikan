@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'net.sandrohc'
-version '0.1.2'
+version '1.0.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8

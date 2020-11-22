@@ -19,7 +19,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:0.1.2'
+    implementation 'net.sandrohc:reactive-jikan:1.0.0'
 }
 ```
 
@@ -36,7 +36,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>0.1.2</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
