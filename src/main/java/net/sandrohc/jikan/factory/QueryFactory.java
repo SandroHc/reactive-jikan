@@ -57,4 +57,8 @@ public class QueryFactory extends Factory {
         return new UserQueryFactory(this.jikan, username);
     }
 
+    public ClubQueryFactory club(int id) {
+        return new ClubQueryFactory(this.jikan, id);
+    }
+
 }
