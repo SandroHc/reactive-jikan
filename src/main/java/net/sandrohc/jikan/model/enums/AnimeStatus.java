@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AnimeStatus {
@@ -22,6 +23,14 @@ public enum AnimeStatus {
 	UPCOMING,
 
 	@JsonProperty("to_be_aired")
-	@JsonAlias("tba")
+	@JsonAlias({
+			"tba",
+			"to be aired",
+			"Not yet aired"
+	})
 	TO_BE_AIRED,
+
+	@JsonEnumDefaultValue
+	@JsonProperty("Unknown")
+	UNKNOWN,
 }

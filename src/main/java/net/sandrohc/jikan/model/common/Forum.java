@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.CacheEntity;
 
+/**
+ * A forum containing a list of topics.
+ */
 public class Forum extends CacheEntity {
 
 	public List<ForumTopic> topics = Collections.emptyList();

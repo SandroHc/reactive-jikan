@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AnimeGenre {
@@ -53,4 +54,5 @@ public enum AnimeGenre {
 	@JsonProperty("Thriller")      THRILLER,
 	@JsonProperty("Seinen")        SEINEN,
 	@JsonProperty("Josei")         JOSEI,
+	@JsonEnumDefaultValue          UNKNOWN,
 }

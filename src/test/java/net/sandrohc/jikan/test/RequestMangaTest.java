@@ -6,6 +6,7 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
@@ -666,6 +667,48 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(404, m2.members);
 
 		assertFalse(resultsIt.hasNext());
+	}
+
+	@Test
+	void fetchSearch_excludeGenres() {
+		// https://api.jikan.moe/v3/search/manga?genre_exclude=0
+		String response = "{\n" +
+				"    \"results\": [],\n" +
+				"    \"last_page\": 0\n" +
+				"}";
+
+		mock(mockServer, "/search/manga", response,
+				Parameter.param("genre_exclude", "0"));
+
+		Collection<MangaSearchSub> results = jikan.query().manga().search()
+				.genres(MangaGenre.ACTION)
+				.excludeGivenGenres()
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
+	}
+
+	@Test
+	void fetchSearch_includeGenres() {
+		// https://api.jikan.moe/v3/search/manga?genre_exclude=1
+		String response = "{\n" +
+				"    \"results\": [],\n" +
+				"    \"last_page\": 0\n" +
+				"}";
+
+		mock(mockServer, "/search/manga", response,
+				Parameter.param("genre_exclude", "1"));
+
+		Collection<MangaSearchSub> results = jikan.query().manga().search()
+				.genres(MangaGenre.ACTION)
+				.includeGivenGenres()
+				.execute()
+				.collectList()
+				.block();
+
+		assertNotNull(results);
 	}
 
 	@Test

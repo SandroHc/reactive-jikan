@@ -13,13 +13,14 @@ public class RequestTest {
 
 	@BeforeAll
 	public static void setup() {
-		mockServer = MockUtils.createMockServer();
 		jikan = new JikanBuilder().debug(true).baseUrl(MockUtils.MOCK_URL).maxRetries(1).userAgent("reactive-jikan/unit-tests").build();
+		if (mockServer == null)
+			mockServer = MockUtils.createMockServer();
 	}
 
-	@AfterAll
-	public static void stopServer() {
-		mockServer.stop();
+	@BeforeEach
+	public void stopServer() {
+		mockServer.reset();
 	}
 
 }

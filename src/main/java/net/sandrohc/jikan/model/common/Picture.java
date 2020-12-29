@@ -6,6 +6,9 @@
 
 package net.sandrohc.jikan.model.common;
 
+/**
+ * A picture, containing large and small variants.
+ */
 public class Picture {
 
 	public String large;

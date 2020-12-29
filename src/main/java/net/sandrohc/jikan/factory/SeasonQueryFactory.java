@@ -12,6 +12,9 @@ import net.sandrohc.jikan.query.season.SeasonArchiveQuery;
 import net.sandrohc.jikan.query.season.SeasonLaterQuery;
 import net.sandrohc.jikan.query.season.SeasonQuery;
 
+/**
+ * Factory for the season queries.
+ */
 public class SeasonQueryFactory extends Factory {
 
     public SeasonQueryFactory(Jikan jikan) {

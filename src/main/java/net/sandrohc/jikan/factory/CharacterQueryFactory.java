@@ -13,6 +13,9 @@ import net.sandrohc.jikan.query.character.CharacterQuery;
 import net.sandrohc.jikan.query.search.CharacterSearchQuery;
 import net.sandrohc.jikan.query.top.CharacterTopQuery;
 
+/**
+ * Factory for the character queries.
+ */
 public class CharacterQueryFactory extends Factory {
 
     public CharacterQueryFactory(Jikan jikan) {

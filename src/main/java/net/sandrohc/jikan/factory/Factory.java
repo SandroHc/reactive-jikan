@@ -8,6 +8,9 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 
+/**
+ * Base factory class.
+ */
 public abstract class Factory {
 
     protected Jikan jikan;

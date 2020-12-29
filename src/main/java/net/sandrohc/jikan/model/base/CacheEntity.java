@@ -6,9 +6,11 @@
 
 package net.sandrohc.jikan.model.base;
 
+import java.io.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public abstract class CacheEntity {
+public abstract class CacheEntity implements Serializable {
 
 	@JsonProperty("request_hash")
 	public String requestHash;

@@ -7,10 +7,12 @@ plugins {
 }
 
 group 'net.sandrohc'
-version '0.1.1'
+version '1.0.0'
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
     withJavadocJar()
     withSourcesJar()
 }
@@ -36,21 +38,22 @@ repositories {
 
 dependencies {
     // Project Reactor
-    api 'io.projectreactor.netty:reactor-netty:0.9.10.RELEASE'
+    api 'io.projectreactor.netty:reactor-netty:1.0.1'
 
     // Jackson (JSON serializer)
-    api 'com.fasterxml.jackson.core:jackson-databind:2.11.1'
-    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.1'
+    api 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
+    api 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.11.3'
 
     // Logging
     api 'org.slf4j:slf4j-api:2.0.0-alpha1'
 
+    // Tests
     testRuntime 'org.slf4j:slf4j-simple:2.0.0-alpha1'
-    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.7.0-M1'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0-M1'
-    testImplementation 'org.mock-server:mockserver-client-java:5.11.0'
-    testImplementation 'org.mock-server:mockserver-netty:5.11.0'
-    testImplementation 'io.projectreactor:reactor-test:3.3.7.RELEASE'
+    testRuntime 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testImplementation 'org.mock-server:mockserver-client-java:5.11.2'
+    testImplementation 'org.mock-server:mockserver-netty:5.11.2'
+    testImplementation 'io.projectreactor:reactor-test:3.4.0'
 }
 
 test {
@@ -58,6 +61,7 @@ test {
 }
 
 jacocoTestReport {
+    dependsOn test
     reports {
         xml.enabled true
     }

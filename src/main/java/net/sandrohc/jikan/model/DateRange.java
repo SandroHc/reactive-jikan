@@ -9,6 +9,8 @@ package net.sandrohc.jikan.model;
 import java.time.*;
 import java.util.*;
 
+import net.sandrohc.jikan.utils.Generated;
+
 public class DateRange {
 
 	public LocalDate from;
@@ -23,6 +25,7 @@ public class DateRange {
 		this.to = to != null ? to.toLocalDate() : null;
 	}
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -34,6 +37,7 @@ public class DateRange {
 			   Objects.equals(to, dateRange.to);
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		return Objects.hash(from, to);

@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum Type {
@@ -22,6 +23,12 @@ public enum Type {
 
 	@JsonProperty("character")
 	CHARACTER("character", null, "characters"),
+
+	@JsonProperty("profile")
+	PROFILE(null, null, null),
+
+	@JsonEnumDefaultValue
+	UNKNOWN(null, null, null),
 	;
 
 	/** The type used for the /search endpoint. */

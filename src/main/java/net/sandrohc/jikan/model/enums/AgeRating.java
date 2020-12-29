@@ -7,9 +7,16 @@
 package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum AgeRating {
+
+	@JsonEnumDefaultValue
+	@JsonProperty("NONE")
+	@JsonAlias("None")
+	NONE,
+
 	@JsonProperty("G")
 	@JsonAlias("G - All Ages")
 	G,
@@ -30,7 +37,10 @@ public enum AgeRating {
 	R17,
 
 	@JsonProperty("R+")
-	@JsonAlias("R+ - Mild Nudity (may also contain violence & profanity)")
+	@JsonAlias({
+			"R+ - Mild Nudity",
+			"R+ - Mild Nudity (may also contain violence & profanity)"
+	})
 	R,
 
 	@JsonProperty("Rx")

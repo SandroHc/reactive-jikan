@@ -6,6 +6,9 @@
 
 package net.sandrohc.jikan.exception;
 
+/**
+ * Exception thrown when using invalid arguments.
+ */
 public class JikanInvalidArgumentException extends JikanException {
 
 	public JikanInvalidArgumentException() {

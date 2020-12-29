@@ -13,6 +13,13 @@ import net.sandrohc.jikan.Jikan;
 import org.reactivestreams.Publisher;
 import reactor.core.publisher.Mono;
 
+/**
+ * A base query.
+ *
+ * @param <TYPE_INITIAL> the initial type (the request result)
+ * @param <TYPE_FINAL> the transformed type (can be the same as the initial type)
+ * @param <PUBLISHER> the publisher (mono or flux)
+ */
 public abstract class Query<TYPE_INITIAL, TYPE_FINAL, PUBLISHER extends Publisher<TYPE_FINAL>> {
 
 	protected final Jikan jikan;

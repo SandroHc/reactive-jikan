@@ -13,6 +13,9 @@ import net.sandrohc.jikan.query.person.PersonQuery;
 import net.sandrohc.jikan.query.search.PersonSearchQuery;
 import net.sandrohc.jikan.query.top.PersonTopQuery;
 
+/**
+ * Factory for the person queries.
+ */
 public class PersonQueryFactory extends Factory {
 
     public PersonQueryFactory(Jikan jikan) {

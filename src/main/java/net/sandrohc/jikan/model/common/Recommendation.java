@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.common;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A user recommendation.
+ */
 public class Recommendation extends MalEntity {
 
     public String url;
