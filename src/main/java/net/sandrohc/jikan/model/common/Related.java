@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.Serializable;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +15,7 @@ import net.sandrohc.jikan.model.base.*;
 /**
  * A list of related anime or manga.
  */
-public class Related {
+public class Related implements Serializable {
 
 	@JsonProperty("Prequel")
 	public List<MalSubEntity> prequels = Collections.emptyList();
