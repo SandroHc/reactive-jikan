@@ -36,7 +36,7 @@ jobs:
           chmod +x gradlew
           ./gradlew build
       - name: Test & Coverage
-        run: ./gradlew test jacocoTestReport
+        run: ./gradlew jacocoTestReport
       - name: Upload to Codecov
         uses: codecov/codecov-action@v1
         with:

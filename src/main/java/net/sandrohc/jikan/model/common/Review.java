@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
 
+/**
+ * An anime or manga review.
+ */
 public class Review extends MalEntity {
 
     public String url;

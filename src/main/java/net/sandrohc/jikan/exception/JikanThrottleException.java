@@ -6,6 +6,9 @@
 
 package net.sandrohc.jikan.exception;
 
+/**
+ * Exception thrown when the request is throttled.
+ */
 public class JikanThrottleException extends JikanException {
 
 	public JikanThrottleException() {

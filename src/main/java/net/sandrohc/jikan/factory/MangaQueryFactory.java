@@ -14,6 +14,9 @@ import net.sandrohc.jikan.query.manga.*;
 import net.sandrohc.jikan.query.search.MangaSearchQuery;
 import net.sandrohc.jikan.query.top.MangaTopQuery;
 
+/**
+ * Factory for the manga queries.
+ */
 public class MangaQueryFactory extends Factory {
 
     public MangaQueryFactory(Jikan jikan) {

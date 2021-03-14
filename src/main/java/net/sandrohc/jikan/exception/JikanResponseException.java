@@ -6,6 +6,9 @@
 
 package net.sandrohc.jikan.exception;
 
+/**
+ * Exception thrown when there is an error building the response.
+ */
 public class JikanResponseException extends JikanException {
 
 	public JikanResponseException() {

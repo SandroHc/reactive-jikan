@@ -12,6 +12,9 @@ import net.sandrohc.jikan.query.magazine.MagazineQuery;
 import net.sandrohc.jikan.query.producer.ProducerQuery;
 import net.sandrohc.jikan.query.schedule.ScheduleQuery;
 
+/**
+ * Factory for all the queries.
+ */
 public class QueryFactory extends Factory {
 
     public QueryFactory(Jikan jikan) {
@@ -48,6 +51,14 @@ public class QueryFactory extends Factory {
 
     public MagazineQuery magazine(int id, int page) throws JikanInvalidArgumentException {
         return new MagazineQuery(this.jikan, id, page);
+    }
+
+    public UserQueryFactory user(String username) {
+        return new UserQueryFactory(this.jikan, username);
+    }
+
+    public ClubQueryFactory club(int id) {
+        return new ClubQueryFactory(this.jikan, id);
     }
 
 }

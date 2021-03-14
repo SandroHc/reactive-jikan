@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A list of related anime or manga.
+ */
 public class Related {
 
 	@JsonProperty("Prequel")

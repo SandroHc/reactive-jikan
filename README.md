@@ -1,6 +1,6 @@
 # Reactive Jikan
 
-[![JitPack](https://jitpack.io/v/SandroHc/reactive-jikan.svg?style=flat-square)](https://jitpack.io/#net.sandrohc/reactive-jikan)
+[![JCenter](https://img.shields.io/bintray/v/sandrohc/reactive-jikan/reactive-jikan?style=flat-square) ](https://bintray.com/sandrohc/reactive-jikan/reactive-jikan/1.0.0/link)
 [![GitHub Workflow](https://img.shields.io/github/workflow/status/SandroHc/reactive-jikan/Build?style=flat-square)](https://github.com/SandroHc/reactive-jikan/actions?query=workflow:Build)
 [![Codecov](https://img.shields.io/codecov/c/github/SandroHc/reactive-jikan?style=flat-square)](https://codecov.io/gh/SandroHc/reactive-jikan)
 
@@ -19,7 +19,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:0.1.1'
+    implementation 'net.sandrohc:reactive-jikan:1.0.0'
 }
 ```
 
@@ -36,7 +36,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>0.1.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -126,16 +126,16 @@ Collection<AnimeSearchSub> results = jikan.query().anime().search()
 | **Magazine** | | |
 | /{id}/{page}   	                | MagazineQuery                 | Magazine                  |
 | **User** | | |
-| /{username}   	                |  |  |
-| /{username}/history   	        |  |  |
-| /{username}/history/anime   	    |  |  |
-| /{username}/history/manga   	    |  |  |
-| /{username}/friends/{page}   	    |  |  |
-| /{username}/animelist/{status}   	|  |  |
-| /{username}/mangalist/{status}   	|  |  |
+| /{username}   	                | UserProfileQuery | UserProfile |
+| /{username}/history   	        | (not implemented) |  |
+| /{username}/history/anime   	    | UserHistoryAnimeQuery | (list) UserHistory |
+| /{username}/history/manga   	    | UserHistoryAnimeQuery | (list) UserHistory |
+| /{username}/friends/{page}   	    | UserFriendsQuery | (list) UserFriend |
+| /{username}/animelist/{status}   	| UserAnimeQuery | (list) UserAnime |
+| /{username}/mangalist/{status}   	| UserMangaQuery | (list) UserManga |
 | **Club** | | |
-| /{id}   	                        |  |  |
-| /{id}/members/{page}   	        |  |  |
+| /{id}   	                        | ClubQuery | Club  |
+| /{id}/members/{page}   	        | ClubMembersQuery | (list) ClubMember  |
 | **Meta** | | |
-| /status   	                    |  |  |
-| /requests/{type}/{period}/{page}  |  |  |
+| /status   	                    | (not implemented) |  |
+| /requests/{type}/{period}/{page}  | (not implemented) |  |

@@ -9,6 +9,7 @@ package net.sandrohc.jikan.model.base;
 import java.io.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import net.sandrohc.jikan.utils.Generated;
 
 public abstract class MalEntity implements Serializable {
 
@@ -16,6 +17,7 @@ public abstract class MalEntity implements Serializable {
 	public int malId;
 
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -26,6 +28,7 @@ public abstract class MalEntity implements Serializable {
 		return malId == base.malId;
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		return 31 * malId;

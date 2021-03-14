@@ -6,6 +6,9 @@
 
 package net.sandrohc.jikan.exception;
 
+/**
+ * A generic exception.
+ */
 public class JikanException extends Exception {
 
 	public JikanException() {

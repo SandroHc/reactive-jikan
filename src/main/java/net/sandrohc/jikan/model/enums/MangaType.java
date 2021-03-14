@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public enum MangaType {
@@ -17,6 +18,6 @@ public enum MangaType {
 	@JsonProperty("Doujin")   DOUJIN,
 	@JsonProperty("Manhwa")   MANWHA, // Korean comics
 	@JsonProperty("Manhua")   MANUHA, // Chinese comics
-
+	@JsonEnumDefaultValue
 	@JsonAlias("-") UNKNOWN,
 }

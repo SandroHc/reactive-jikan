@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A list of user recommendations.
+ */
 public class Recommendations extends CacheEntity {
 
     public List<Recommendation> recommendations = Collections.emptyList();
