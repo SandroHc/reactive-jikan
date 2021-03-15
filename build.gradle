@@ -3,11 +3,12 @@ plugins {
     id 'jacoco'
     id 'maven-publish'
     id 'signing'
-    id 'com.jfrog.bintray' version '1.8.5'
 }
 
 group 'net.sandrohc'
 version '1.0.0'
+
+ext.isReleaseVersion = !version.endsWith("SNAPSHOT")
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -73,43 +74,19 @@ tasks.withType(JavaCompile) {
 }
 
 
-bintray {
-    user = findProperty('bintray.user')
-    key = findProperty('bintray.apikey')
-
-    publications = ['maven']
-    pkg {
-        repo = 'reactive-jikan'
-        name = 'reactive-jikan'
-        desc = 'API wrapper for Jikan - an unofficial MyAnimeList API - with the power of Project Reactor and reactive streams. ⚡'
-        githubRepo = 'SandroHc/reactive-jikan'
-        websiteUrl      = 'https://github.com/SandroHc/reactive-jikan'
-        issueTrackerUrl = 'https://github.com/SandroHc/reactive-jikan/issues'
-        vcsUrl          = 'https://github.com/SandroHc/reactive-jikan.git'
-        licenses = ['LGPL-2.1']
-        labels = ['jikan', 'project reactor', 'reactive streams', 'reactive programming', 'myanimelist']
-
-        dryRun = false
-        publish = true
-        override = false
-        publicDownloadNumbers = true
-
-        version {
-            name = project.version
-            desc = "Reactive Jikan v${project.version}"
-            released = new Date()
-            vcsTag = project.version
-
-            gpg {
-                sign = true
-                passphrase = findProperty('bintray.gpg.password')
+publishing {
+    repositories {
+        maven {
+            def releaseRepo = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def snapshotRepo = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = isReleaseVersion ? releaseRepo : snapshotRepo
+            credentials {
+                username = ossrhUsername
+                password = ossrhPassword
             }
         }
     }
-}
 
-
-publishing {
     publications {
         maven(MavenPublication) {
             from components.java
@@ -135,6 +112,10 @@ publishing {
                     developerConnection = 'scm:git:ssh://github.com/SandroHc/reactive-jikan.git'
                     url = 'https://github.com/SandroHc/reactive-jikan'
                 }
+                issueManagement {
+                    system = 'GitHub'
+                    url = 'https://github.com/SandroHc/reactive-jikan/issues'
+                }
             }
         }
     }
@@ -143,4 +124,7 @@ publishing {
 signing {
     useGpgCmd()
     sign publishing.publications.maven
+}
+tasks.withType(Sign) {
+    onlyIf { isReleaseVersion }
 }

@@ -1,7 +1,6 @@
 signing.gnupg.executable=gpg
 signing.gnupg.keyName=12345678
-signing.gnupg.passphrase=secret
+signing.gnupg.passphrase=PASS
 
-bintray.user=USERNAME
-bintray.apikey=API_KEY
-bintray.gpg.password=secret
+ossrhUsername=USER
+ossrhPassword=PASS
