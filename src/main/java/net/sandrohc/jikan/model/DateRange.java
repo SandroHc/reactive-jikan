@@ -6,12 +6,12 @@
 
 package net.sandrohc.jikan.model;
 
+import java.io.Serializable;
 import java.time.*;
 import java.util.*;
-
 import net.sandrohc.jikan.utils.Generated;
 
-public class DateRange {
+public class DateRange implements Serializable {
 
 	public LocalDate from;
 	public LocalDate to;
