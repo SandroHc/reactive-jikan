@@ -6,13 +6,15 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
+
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * A reviewer.
  */
-public class Reviewer {
+public class Reviewer implements Serializable {
 
     public String url;
 

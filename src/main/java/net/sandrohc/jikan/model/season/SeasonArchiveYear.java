@@ -6,11 +6,12 @@
 
 package net.sandrohc.jikan.model.season;
 
+import java.io.*;
 import java.util.*;
 
 import net.sandrohc.jikan.model.enums.Season;
 
-public class SeasonArchiveYear {
+public class SeasonArchiveYear implements Serializable {
 
     public int year;
 

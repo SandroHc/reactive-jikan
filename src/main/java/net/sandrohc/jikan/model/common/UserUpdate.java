@@ -6,12 +6,13 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
 import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserUpdate {
+public class UserUpdate implements Serializable {
 
     public String username;
 

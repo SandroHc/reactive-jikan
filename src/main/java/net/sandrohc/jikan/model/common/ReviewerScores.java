@@ -6,7 +6,9 @@
 
 package net.sandrohc.jikan.model.common;
 
-public class ReviewerScores {
+import java.io.*;
+
+public class ReviewerScores implements Serializable {
 
     public int overall;
 

@@ -14,7 +14,7 @@ public class AnimeStaff extends MalEntity {
 	@JsonProperty("image_url")
 	public String imageUrl;
 
-	public List<String> positions; // TODO: convert to enum
+	public List<String> positions;
 
 
 	@Override

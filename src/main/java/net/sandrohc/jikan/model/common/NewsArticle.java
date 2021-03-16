@@ -6,11 +6,12 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class NewsArticle {
+public class NewsArticle implements Serializable {
 
 	public String url;
 

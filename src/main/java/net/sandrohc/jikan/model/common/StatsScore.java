@@ -6,7 +6,9 @@
 
 package net.sandrohc.jikan.model.common;
 
-public class StatsScore {
+import java.io.*;
+
+public class StatsScore implements Serializable {
 
 	/** The total votes for this score */
 	public int votes;

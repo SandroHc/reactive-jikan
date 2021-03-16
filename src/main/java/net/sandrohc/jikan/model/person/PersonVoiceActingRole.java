@@ -6,11 +6,13 @@
 
 package net.sandrohc.jikan.model.person;
 
+import java.io.*;
+
 import net.sandrohc.jikan.model.base.*;
 
-public class PersonVoiceActingRole {
+public class PersonVoiceActingRole implements Serializable {
 
-    public String role; // TODO: convert into an enum. { Main, Supporting }
+    public String role;
 
     public MalSubEntity anime;
 

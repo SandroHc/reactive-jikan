@@ -44,7 +44,7 @@ public abstract class AdvancedSearchQuery<QUERY extends SearchQuery<QUERY,TYPE_I
 	}
 
 	public QUERY sort(Sort sort) {
-		queryParams.put("sort", sort.key); // TODO: check if we can use the enum's name
+		queryParams.put("sort", sort.key);
 		return (QUERY) this;
 	}
 

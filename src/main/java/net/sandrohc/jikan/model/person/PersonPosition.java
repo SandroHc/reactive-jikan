@@ -6,7 +6,9 @@
 
 package net.sandrohc.jikan.model.person;
 
-public class PersonPosition {
+import java.io.*;
+
+public class PersonPosition implements Serializable {
 
     public String position;
 

@@ -6,10 +6,12 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
+
 /**
  * A picture, containing large and small variants.
  */
-public class Picture {
+public class Picture implements Serializable {
 
 	public String large;
 

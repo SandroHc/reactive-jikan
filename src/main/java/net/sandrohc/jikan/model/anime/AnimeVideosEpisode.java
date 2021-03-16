@@ -6,9 +6,11 @@
 
 package net.sandrohc.jikan.model.anime;
 
+import java.io.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class AnimeVideosEpisode {
+public class AnimeVideosEpisode implements Serializable {
 
 	public String title;
 
