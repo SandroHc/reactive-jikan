@@ -32,14 +32,10 @@ public class Manga extends MangaBase {
 
 	public int rank;
 
-	public float score;
-
 	@JsonProperty("scored_by")
 	public int scoredBy;
 
 	public int popularity;
-
-	public int members;
 
 	public int favorites;
 
