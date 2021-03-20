@@ -13,10 +13,11 @@ import java.nio.charset.*;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Flux;
 
 @SuppressWarnings("unchecked")
-public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends QueryFlux<TYPE_INITIAL, TYPE_FINAL> {
+public abstract class SearchQuery<Q extends SearchQuery<Q,T>, T> extends Query<T, Flux<T>> {
 
 	public static final int LIMIT_MAX = 50;
 
@@ -29,7 +30,7 @@ public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FI
 		this.type = type;
 	}
 
-	public C query(String val) throws UnsupportedEncodingException, JikanInvalidArgumentException {
+	public Q query(String val) throws UnsupportedEncodingException, JikanInvalidArgumentException {
 		if (val.length() < 3)
 			throw new JikanInvalidArgumentException("query must be a minimum of 3 characters");
 
@@ -37,20 +38,20 @@ public abstract class SearchQuery<C extends SearchQuery<C, TYPE_INITIAL, TYPE_FI
 		String encoded = URLEncoder.encode(val, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
 
 		queryParams.put("q", encoded);
-		return (C) this;
+		return (Q) this;
 	}
 
-	public C page(int page) {
+	public Q page(int page) {
 		queryParams.put("page", page);
-		return (C) this;
+		return (Q) this;
 	}
 
-	public C limit(int limit) throws JikanInvalidArgumentException {
+	public Q limit(int limit) throws JikanInvalidArgumentException {
 		if (limit < 0 || limit > LIMIT_MAX)
 			throw new JikanInvalidArgumentException("limit must be between 0 and " + LIMIT_MAX);
 
 		queryParams.put("limit", limit);
-		return (C) this;
+		return (Q) this;
 	}
 
 	@Override

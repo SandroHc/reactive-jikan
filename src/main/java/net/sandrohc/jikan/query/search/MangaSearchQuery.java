@@ -15,7 +15,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 // TODO: create a MangaSub variant
-public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearch, MangaSearchSub> {
+public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, MangaSearchSub> {
 
 	public MangaSearchQuery(Jikan jikan) {
 		super(jikan, Type.MANGA);
@@ -28,7 +28,7 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 
 	@SuppressWarnings("unchecked")
 	public MangaSearchQuery genres(MangaGenre... genres) {
-		Set<Integer> genreList = (Set<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
+		Collection<Integer> genreList = (Collection<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
 
 		for (MangaGenre genre : genres)
 			genreList.add(genre.ordinal());
@@ -60,13 +60,19 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 	}
 
 	@Override
-	public Class<MangaSearch> getRequestClass() {
-		return MangaSearch.class;
+	public Class<MangaSearchSub> getRequestClass() {
+		return MangaSearchSub.class;
 	}
 
 	@Override
-	public Flux<MangaSearchSub> process(Mono<MangaSearch> content) {
-		return content.flatMapMany(search -> Flux.fromIterable(search.results));
+	public Class<?> getInitialRequestClass() {
+		return MangaSearch.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<MangaSearchSub> process(Mono<?> content) {
+		return ((Mono<MangaSearch>) content).flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

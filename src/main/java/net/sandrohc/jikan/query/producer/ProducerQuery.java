@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.producer;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.producer.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class ProducerQuery extends QueryMono<Producer> {
+public class ProducerQuery extends Query<Producer, Mono<Producer>> {
 
 	/** The producer, studio, or licensor ID. */
 	private final int id;

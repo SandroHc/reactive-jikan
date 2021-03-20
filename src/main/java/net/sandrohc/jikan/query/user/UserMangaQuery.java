@@ -10,11 +10,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class UserMangaQuery extends QueryFlux<UserMangaList, UserManga> {
+public class UserMangaQuery extends Query<UserManga, Flux<UserManga>> {
 
     /**
      * The username.
@@ -52,13 +52,19 @@ public class UserMangaQuery extends QueryFlux<UserMangaList, UserManga> {
     }
 
     @Override
-    public Class<UserMangaList> getRequestClass() {
-        return UserMangaList.class;
+    public Class<UserManga> getRequestClass() {
+        return UserManga.class;
     }
 
     @Override
-    public Flux<UserManga> process(Mono<UserMangaList> content) {
-        return content.flatMapMany(results -> Flux.fromIterable(results.manga));
+    public Class<?> getInitialRequestClass() {
+        return UserMangaList.class;
+    }
+
+    @SuppressWarnings({"unchecked", "RedundantCast"})
+    @Override
+    public Flux<UserManga> process(Mono<?> content) {
+        return ((Mono<UserMangaList>) content).flatMapMany(results -> Flux.fromIterable(results.manga));
     }
 
 }

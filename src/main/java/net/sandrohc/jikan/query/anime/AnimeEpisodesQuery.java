@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.anime;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.anime.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class AnimeEpisodesQuery extends QueryMono<AnimeEpisodes> {
+public class AnimeEpisodesQuery extends Query<AnimeEpisodes, Mono<AnimeEpisodes>> {
 
 	/** The anime ID. */
 	private final int id;

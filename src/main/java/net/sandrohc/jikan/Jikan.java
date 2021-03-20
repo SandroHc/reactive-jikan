@@ -12,27 +12,19 @@ import java.nio.file.*;
 import java.time.*;
 import java.time.format.*;
 import java.time.temporal.*;
-import java.util.*;
-import java.util.stream.*;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
-import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.exception.JikanResponseException;
-import net.sandrohc.jikan.exception.JikanThrottleException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.utils.Generated;
 import org.reactivestreams.Publisher;
 import org.slf4j.*;
-import reactor.core.publisher.Mono;
-import reactor.netty.ByteBufMono;
 import reactor.netty.http.client.HttpClient;
-import reactor.netty.http.client.HttpClientResponse;
-import reactor.util.retry.Retry;
 
 /**
  * The Jikan instance is responsible for executing queries and deserializing the response into POJOs.
@@ -89,56 +81,11 @@ public class Jikan {
 	 * @param <P> the publisher type (Mono or Flux)
 	 * @return the parsed entity, or {@code null} if the entity was not found
 	 */
-	public <INITIAL_TYPE, PROCESSED_TYPE, P extends Publisher<PROCESSED_TYPE>> P query(Query<INITIAL_TYPE, PROCESSED_TYPE, P> query) {
-		final String uri = buildUri(query);
-		LOG.atDebug().addArgument(uri).log("Fetching request: {}");
-
-		return query.process(httpClient.get().uri(uri).responseSingle(this::onResponse)
-				.retryWhen(Retry.backoff(maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
-				.flatMap(query::deserialize));
+	public <T, P extends Publisher<T>> P query(Query<T, P> query) {
+		return query.execute();
 	}
 
-	private Mono<byte[]> onResponse(HttpClientResponse res, ByteBufMono content) {
-		if (res.status() == HttpResponseStatus.OK) {
-			return content.asByteArray();
-		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
-			return Mono.empty();
-		} else if (res.status() == HttpResponseStatus.TOO_MANY_REQUESTS) {
-			return Mono.error(new JikanThrottleException());
-		} else {
-			return content.asString().flatMap(str -> Mono.error(
-					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + getClass().getSimpleName() + ": " + str)
-			));
-		}
-	}
-
-	private String buildUri(Query<?,?,?> query) {
-		StringBuilder sb = new StringBuilder(query.getUri());
-
-		Map<String, Object> queryParameters = query.getQueryParameters();
-		if (!queryParameters.isEmpty()) {
-			String params = queryParameters.entrySet().stream()
-					.map(entry -> {
-						final String key;
-						final String value;
-						if (entry.getValue() instanceof Collection) {
-							key = entry.getKey() + "[]";
-							value = ((Collection<?>) entry.getValue()).stream().map(String::valueOf).collect(Collectors.joining(","));
-						} else {
-							key = entry.getKey();
-							value = String.valueOf(entry.getValue());
-						}
-						return key + "=" + value;
-					})
-					.collect(Collectors.joining("&"));
-
-			sb.append('?').append(params);
-		}
-
-		return sb.toString();
-	}
-
-	public Exception dumpStacktrace(Query<?,?,?> query, byte[] response, Exception e) {
+	public Exception dumpStacktrace(Query<?,?> query, byte[] response, Exception e) {
 		if (!debug) {
 			return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName(), e);
 		}

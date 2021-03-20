@@ -13,20 +13,26 @@ import net.sandrohc.jikan.model.enums.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeTopQuery extends AdvancedTopQuery<AnimeTopQuery, AnimeTop, AnimeTopSub, AnimeSubType> {
+public class AnimeTopQuery extends AdvancedTopQuery<AnimeTopQuery, AnimeTopSub, AnimeSubType> {
 
 	public AnimeTopQuery(Jikan jikan, int page) throws JikanInvalidArgumentException {
 		super(jikan, Type.ANIME, page);
 	}
 
 	@Override
-	public Class<AnimeTop> getRequestClass() {
-		return AnimeTop.class;
+	public Class<AnimeTopSub> getRequestClass() {
+		return AnimeTopSub.class;
 	}
 
 	@Override
-	public Flux<AnimeTopSub> process(Mono<AnimeTop> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.top));
+	public Class<?> getInitialRequestClass() {
+		return AnimeTop.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<AnimeTopSub> process(Mono<?> content) {
+		return ((Mono<AnimeTop>) content).flatMapMany(results -> Flux.fromIterable(results.top));
 	}
 
 }

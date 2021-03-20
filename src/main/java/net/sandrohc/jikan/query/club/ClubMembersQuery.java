@@ -8,11 +8,11 @@ package net.sandrohc.jikan.query.club;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.club.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class ClubMembersQuery extends QueryFlux<ClubMembers, ClubMember> {
+public class ClubMembersQuery extends Query<ClubMember, Flux<ClubMember>> {
 
 	/**
 	 * The club ID.
@@ -37,13 +37,19 @@ public class ClubMembersQuery extends QueryFlux<ClubMembers, ClubMember> {
 	}
 
 	@Override
-	public Class<ClubMembers> getRequestClass() {
-		return ClubMembers.class;
+	public Class<ClubMember> getRequestClass() {
+		return ClubMember.class;
 	}
 
 	@Override
-	public Flux<ClubMember> process(Mono<ClubMembers> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.members));
+	public Class<?> getInitialRequestClass() {
+		return ClubMembers.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<ClubMember> process(Mono<?> content) {
+		return ((Mono<ClubMembers>) content).flatMapMany(results -> Flux.fromIterable(results.members));
 	}
 
 }

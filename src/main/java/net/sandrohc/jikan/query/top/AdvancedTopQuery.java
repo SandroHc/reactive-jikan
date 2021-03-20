@@ -11,7 +11,7 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 
 @SuppressWarnings("unchecked")
-public abstract class AdvancedTopQuery<QUERY extends TopQuery<QUERY,TYPE_INITIAL,TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL, SUBTYPE> extends TopQuery<QUERY, TYPE_INITIAL, TYPE_FINAL> {
+public abstract class AdvancedTopQuery<Q extends AdvancedTopQuery<Q, T, SUBTYPE>, T, SUBTYPE> extends TopQuery<T> {
 
 	private SUBTYPE subtype;
 
@@ -19,9 +19,9 @@ public abstract class AdvancedTopQuery<QUERY extends TopQuery<QUERY,TYPE_INITIAL
 		super(jikan, type, page);
 	}
 
-	public QUERY subtype(SUBTYPE subtype) {
+	public Q subtype(SUBTYPE subtype) {
 		this.subtype = subtype;
-		return (QUERY) this;
+		return (Q) this;
 	}
 
 	@Override

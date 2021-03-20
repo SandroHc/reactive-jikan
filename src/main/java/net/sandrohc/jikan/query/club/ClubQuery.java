@@ -8,9 +8,10 @@ package net.sandrohc.jikan.query.club;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.club.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class ClubQuery extends QueryMono<Club> {
+public class ClubQuery extends Query<Club, Mono<Club>> {
 
 	private final int id;
 

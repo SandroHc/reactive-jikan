@@ -6,7 +6,6 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;

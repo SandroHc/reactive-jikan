@@ -13,20 +13,26 @@ import net.sandrohc.jikan.model.manga.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class MangaTopQuery extends AdvancedTopQuery<MangaTopQuery, MangaTop, MangaTopSub, MangaSubType> {
+public class MangaTopQuery extends AdvancedTopQuery<MangaTopQuery, MangaTopSub, MangaSubType> {
 
 	public MangaTopQuery(Jikan jikan, int page) throws JikanInvalidArgumentException {
 		super(jikan, Type.MANGA, page);
 	}
 
 	@Override
-	public Class<MangaTop> getRequestClass() {
-		return MangaTop.class;
+	public Class<MangaTopSub> getRequestClass() {
+		return MangaTopSub.class;
 	}
 
 	@Override
-	public Flux<MangaTopSub> process(Mono<MangaTop> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.top));
+	public Class<?> getInitialRequestClass() {
+		return MangaTop.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<MangaTopSub> process(Mono<?> content) {
+		return ((Mono<MangaTop>) content).flatMapMany(results -> Flux.fromIterable(results.top));
 	}
 
 }

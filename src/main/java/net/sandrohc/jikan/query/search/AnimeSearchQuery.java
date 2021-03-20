@@ -14,7 +14,7 @@ import net.sandrohc.jikan.model.enums.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, AnimeSearch, AnimeSearchSub> {
+public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, AnimeSearchSub> {
 
 	public AnimeSearchQuery(Jikan jikan) {
 		super(jikan, Type.ANIME);
@@ -27,7 +27,7 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 
 	@SuppressWarnings("unchecked")
 	public AnimeSearchQuery genres(AnimeGenre... genres) {
-		Set<Integer> genreList = (Set<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
+		Collection<Integer> genreList = (Collection<Integer>) queryParams.computeIfAbsent("genre", key -> new TreeSet<>());
 
 		for (AnimeGenre genre : genres)
 			genreList.add(genre.ordinal());
@@ -59,13 +59,19 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 	}
 
 	@Override
-	public Class<AnimeSearch> getRequestClass() {
-		return AnimeSearch.class;
+	public Class<AnimeSearchSub> getRequestClass() {
+		return AnimeSearchSub.class;
 	}
 
 	@Override
-	public Flux<AnimeSearchSub> process(Mono<AnimeSearch> content) {
-		return content.flatMapMany(search -> Flux.fromIterable(search.results));
+	public Class<?> getInitialRequestClass() {
+		return AnimeSearch.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<AnimeSearchSub> process(Mono<?> content) {
+		return ((Mono<AnimeSearch>) content).flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

@@ -8,11 +8,11 @@ package net.sandrohc.jikan.query.user;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public abstract class UserHistoryQuery extends QueryFlux<UserHistoryList, UserHistory> {
+public abstract class UserHistoryQuery extends Query<UserHistory, Flux<UserHistory>> {
 
 	private final String type;
 
@@ -32,13 +32,19 @@ public abstract class UserHistoryQuery extends QueryFlux<UserHistoryList, UserHi
 	}
 
 	@Override
-	public Class<UserHistoryList> getRequestClass() {
-		return UserHistoryList.class;
+	public Class<UserHistory> getRequestClass() {
+		return UserHistory.class;
 	}
 
 	@Override
-	public Flux<UserHistory> process(Mono<UserHistoryList> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.history));
+	public Class<?> getInitialRequestClass() {
+		return UserHistoryList.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<UserHistory> process(Mono<?> content) {
+		return ((Mono<UserHistoryList>) content).flatMapMany(results -> Flux.fromIterable(results.history));
 	}
 
 }

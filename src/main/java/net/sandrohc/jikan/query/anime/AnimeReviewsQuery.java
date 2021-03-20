@@ -9,11 +9,11 @@ package net.sandrohc.jikan.query.anime;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeReviewsQuery extends QueryFlux<Reviews, Review> {
+public class AnimeReviewsQuery extends Query<Review, Flux<Review>> {
 
 	/** The anime ID. */
 	private final int id;
@@ -35,13 +35,19 @@ public class AnimeReviewsQuery extends QueryFlux<Reviews, Review> {
 	}
 
 	@Override
-	public Class<Reviews> getRequestClass() {
-		return Reviews.class;
+	public Class<Review> getRequestClass() {
+		return Review.class;
 	}
 
 	@Override
-	public Flux<Review> process(Mono<Reviews> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.reviews));
+	public Class<?> getInitialRequestClass() {
+		return Reviews.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<Review> process(Mono<?> content) {
+		return ((Mono<Reviews>) content).flatMapMany(results -> Flux.fromIterable(results.reviews));
 	}
 
 }

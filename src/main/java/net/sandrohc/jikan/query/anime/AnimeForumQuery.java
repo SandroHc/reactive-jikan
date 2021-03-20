@@ -8,11 +8,11 @@ package net.sandrohc.jikan.query.anime;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeForumQuery extends QueryFlux<Forum, ForumTopic> {
+public class AnimeForumQuery extends Query<ForumTopic, Flux<ForumTopic>> {
 
 	/** The anime ID. */
 	private final int id;
@@ -29,13 +29,19 @@ public class AnimeForumQuery extends QueryFlux<Forum, ForumTopic> {
 	}
 
 	@Override
-	public Class<Forum> getRequestClass() {
-		return Forum.class;
+	public Class<ForumTopic> getRequestClass() {
+		return ForumTopic.class;
 	}
 
 	@Override
-	public Flux<ForumTopic> process(Mono<Forum> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.topics));
+	public Class<?> getInitialRequestClass() {
+		return Forum.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<ForumTopic> process(Mono<?> content) {
+		return ((Mono<Forum>) content).flatMapMany(results -> Flux.fromIterable(results.topics));
 	}
 
 }

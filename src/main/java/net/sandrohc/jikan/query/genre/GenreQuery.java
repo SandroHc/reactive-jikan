@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.genre;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Flux;
 
-public abstract class GenreQuery<C extends GenreQuery<C,TYPE_INITIAL,TYPE_FINAL,GENRE>, TYPE_INITIAL, TYPE_FINAL, GENRE extends Enum<?>> extends QueryFlux<TYPE_INITIAL, TYPE_FINAL> {
+public abstract class GenreQuery<T, GENRE extends Enum<?>> extends Query<T, Flux<T>> {
 
 	/** The type of the results. */
 	public final Type type;

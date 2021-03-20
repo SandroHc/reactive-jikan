@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.top;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Flux;
 
-public abstract class TopQuery<C extends TopQuery<C,TYPE_INITIAL,TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends QueryFlux<TYPE_INITIAL, TYPE_FINAL> {
+public abstract class TopQuery<T> extends Query<T, Flux<T>> {
 
 	/** The type of the results. */
 	public final Type type;

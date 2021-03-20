@@ -13,20 +13,26 @@ import net.sandrohc.jikan.model.manga.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class MangaGenreQuery extends GenreQuery<MangaGenreQuery, MangaGenreList, MangaGenreSub, MangaGenre> {
+public class MangaGenreQuery extends GenreQuery<MangaGenreSub, MangaGenre> {
 
 	public MangaGenreQuery(Jikan jikan, MangaGenre genre, int page) throws JikanInvalidArgumentException {
 		super(jikan, Type.MANGA, genre, page);
 	}
 
 	@Override
-	public Class<MangaGenreList> getRequestClass() {
-		return MangaGenreList.class;
+	public Class<MangaGenreSub> getRequestClass() {
+		return MangaGenreSub.class;
 	}
 
 	@Override
-	public Flux<MangaGenreSub> process(Mono<MangaGenreList> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.manga));
+	public Class<?> getInitialRequestClass() {
+		return MangaGenreList.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<MangaGenreSub> process(Mono<?> content) {
+		return ((Mono<MangaGenreList>) content).flatMapMany(results -> Flux.fromIterable(results.manga));
 	}
 
 }

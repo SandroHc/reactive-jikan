@@ -12,20 +12,26 @@ import net.sandrohc.jikan.model.enums.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class CharacterSearchQuery extends SearchQuery<CharacterSearchQuery, CharacterSearch, CharacterSearchSub> {
+public class CharacterSearchQuery extends SearchQuery<CharacterSearchQuery, CharacterSearchSub> {
 
 	public CharacterSearchQuery(Jikan jikan) {
 		super(jikan, Type.CHARACTER);
 	}
 
 	@Override
-	public Class<CharacterSearch> getRequestClass() {
-		return CharacterSearch.class;
+	public Class<CharacterSearchSub> getRequestClass() {
+		return CharacterSearchSub.class;
 	}
 
 	@Override
-	public Flux<CharacterSearchSub> process(Mono<CharacterSearch> content) {
-		return content.flatMapMany(search -> Flux.fromIterable(search.results));
+	public Class<?> getInitialRequestClass() {
+		return CharacterSearch.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<CharacterSearchSub> process(Mono<?> content) {
+		return ((Mono<CharacterSearch>) content).flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

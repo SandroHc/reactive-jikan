@@ -8,12 +8,11 @@ package net.sandrohc.jikan.query.manga;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.QueryFlux;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class MangaNewsQuery extends QueryFlux<News, NewsArticle> {
+public class MangaNewsQuery extends Query<NewsArticle, Flux<NewsArticle>> {
 
 	/** The manga ID. */
 	private final int id;
@@ -29,12 +28,18 @@ public class MangaNewsQuery extends QueryFlux<News, NewsArticle> {
 	}
 
 	@Override
-	public Class<News> getRequestClass() {
-		return News.class;
+	public Class<NewsArticle> getRequestClass() {
+		return NewsArticle.class;
 	}
 
 	@Override
-	public Flux<NewsArticle> process(Mono<News> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.articles));
+	public Class<?> getInitialRequestClass() {
+		return News.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<NewsArticle> process(Mono<?> content) {
+		return ((Mono<News>) content).flatMapMany(results -> Flux.fromIterable(results.articles));
 	}
 }

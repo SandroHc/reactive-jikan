@@ -14,38 +14,38 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 
 @SuppressWarnings("unchecked")
-public abstract class AdvancedSearchQuery<QUERY extends SearchQuery<QUERY,TYPE_INITIAL,TYPE_FINAL>, TYPE_INITIAL, TYPE_FINAL> extends SearchQuery<QUERY, TYPE_INITIAL, TYPE_FINAL> {
+public abstract class AdvancedSearchQuery<Q extends AdvancedSearchQuery<Q, T>, T> extends SearchQuery<Q, T> {
 
 	protected AdvancedSearchQuery(Jikan jikan, Type type) {
 		super(jikan, type);
 	}
 
-	public QUERY rated(AgeRating ageRating) {
+	public Q rated(AgeRating ageRating) {
 		queryParams.put("rated", ageRating.name().toLowerCase());
-		return (QUERY) this;
+		return (Q) this;
 	}
 
-	public QUERY score(float moreThan) throws JikanInvalidArgumentException {
+	public Q score(float moreThan) throws JikanInvalidArgumentException {
 		if (moreThan < 0 || moreThan > 10)
 			throw new JikanInvalidArgumentException("score must be between 0.0 and 10.0");
 
 		queryParams.put("score", moreThan);
-		return (QUERY) this;
+		return (Q) this;
 	}
 
-	public QUERY startDate(LocalDate startDate) {
+	public Q startDate(LocalDate startDate) {
 		queryParams.put("startDate", startDate.format(DateTimeFormatter.ISO_DATE));
-		return (QUERY) this;
+		return (Q) this;
 	}
 
-	public QUERY endDate(LocalDate endDate) {
+	public Q endDate(LocalDate endDate) {
 		queryParams.put("endDate", endDate.format(DateTimeFormatter.ISO_DATE));
-		return (QUERY) this;
+		return (Q) this;
 	}
 
-	public QUERY sort(Sort sort) {
+	public Q sort(Sort sort) {
 		queryParams.put("sort", sort.key);
-		return (QUERY) this;
+		return (Q) this;
 	}
 
 }

@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.schedule;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.schedule.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class ScheduleQuery extends QueryMono<Schedule> {
+public class ScheduleQuery extends Query<Schedule, Mono<Schedule>> {
 
 	/** The day of the week. */
 	private Day day;

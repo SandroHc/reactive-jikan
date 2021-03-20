@@ -8,9 +8,10 @@ package net.sandrohc.jikan.query.user;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class UserProfileQuery extends QueryMono<UserProfile> {
+public class UserProfileQuery extends Query<UserProfile, Mono<UserProfile>> {
 
 	private final String username;
 

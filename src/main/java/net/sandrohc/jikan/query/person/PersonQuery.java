@@ -8,9 +8,10 @@ package net.sandrohc.jikan.query.person;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class PersonQuery extends QueryMono<Person> {
+public class PersonQuery extends Query<Person, Mono<Person>> {
 
 	private final int id;
 

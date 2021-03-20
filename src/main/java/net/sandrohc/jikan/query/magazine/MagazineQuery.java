@@ -9,9 +9,10 @@ package net.sandrohc.jikan.query.magazine;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.magazine.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
 
-public class MagazineQuery extends QueryMono<Magazine> {
+public class MagazineQuery extends Query<Magazine, Mono<Magazine>> {
 
 	/** The magazine, serializer, or publisher ID. */
 	private final int id;

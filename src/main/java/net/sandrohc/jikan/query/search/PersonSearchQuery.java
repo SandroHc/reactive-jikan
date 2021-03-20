@@ -12,20 +12,26 @@ import net.sandrohc.jikan.model.person.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearch, PersonSearchSub> {
+public class PersonSearchQuery extends SearchQuery<PersonSearchQuery, PersonSearchSub> {
 
 	public PersonSearchQuery(Jikan jikan) {
 		super(jikan, Type.PERSON);
 	}
 
 	@Override
-	public Class<PersonSearch> getRequestClass() {
-		return PersonSearch.class;
+	public Class<PersonSearchSub> getRequestClass() {
+		return PersonSearchSub.class;
 	}
 
 	@Override
-	public Flux<PersonSearchSub> process(Mono<PersonSearch> content) {
-		return content.flatMapMany(search -> Flux.fromIterable(search.results));
+	public Class<?> getInitialRequestClass() {
+		return PersonSearch.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<PersonSearchSub> process(Mono<?> content) {
+		return ((Mono<PersonSearch>) content).flatMapMany(search -> Flux.fromIterable(search.results));
 	}
 
 }

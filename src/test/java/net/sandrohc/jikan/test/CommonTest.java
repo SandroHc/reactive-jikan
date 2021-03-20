@@ -12,8 +12,9 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryMono;
+import net.sandrohc.jikan.query.Query;
 import org.junit.jupiter.api.*;
+import reactor.core.publisher.Mono;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static net.sandrohc.jikan.test.MockUtils.mockError;
@@ -216,7 +217,7 @@ public class CommonTest extends RequestTest {
 
 	}
 
-	private static class QueryTest extends QueryMono<Void> {
+	private static class QueryTest extends Query<Void, Mono<Void>> {
 
 		public QueryTest(Jikan jikan) {
 			super(jikan);

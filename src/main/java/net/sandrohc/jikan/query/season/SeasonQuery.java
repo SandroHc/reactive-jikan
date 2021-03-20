@@ -9,11 +9,11 @@ package net.sandrohc.jikan.query.season;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.season.*;
-import net.sandrohc.jikan.query.QueryFlux;
+import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class SeasonQuery extends QueryFlux<SeasonList, SeasonAnime> {
+public class SeasonQuery extends Query<SeasonAnime, Flux<SeasonAnime>> {
 
 	/** The season year. */
 	private final int year;
@@ -33,13 +33,19 @@ public class SeasonQuery extends QueryFlux<SeasonList, SeasonAnime> {
 	}
 
 	@Override
-	public Class<SeasonList> getRequestClass() {
-		return SeasonList.class;
+	public Class<SeasonAnime> getRequestClass() {
+		return SeasonAnime.class;
 	}
 
 	@Override
-	public Flux<SeasonAnime> process(Mono<SeasonList> content) {
-		return content.flatMapMany(results -> Flux.fromIterable(results.anime));
+	public Class<?> getInitialRequestClass() {
+		return SeasonList.class;
+	}
+
+	@SuppressWarnings({"unchecked", "RedundantCast"})
+	@Override
+	public Flux<SeasonAnime> process(Mono<?> content) {
+		return ((Mono<SeasonList>) content).flatMapMany(results -> Flux.fromIterable(results.anime));
 	}
 
 }
