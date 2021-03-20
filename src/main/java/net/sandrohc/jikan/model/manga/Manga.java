@@ -30,18 +30,12 @@ public class Manga extends MangaBase {
 	@JsonProperty("title_synonyms")
 	public List<String> titleSynonyms;
 
-	public DateRange published;
-
 	public int rank;
-
-	public float score;
 
 	@JsonProperty("scored_by")
 	public int scoredBy;
 
 	public int popularity;
-
-	public int members;
 
 	public int favorites;
 
