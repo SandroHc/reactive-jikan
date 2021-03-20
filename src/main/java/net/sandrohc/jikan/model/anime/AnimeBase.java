@@ -20,19 +20,23 @@ public class AnimeBase extends MalEntity {
 	/** The official title. */
 	public String title;
 
-	/** The page URL on MyAnimeList. */
+	/** The URL to the anime page on MyAnimeList. */
 	public String url;
 
 	/** The banner image URL. */
 	@JsonProperty("image_url")
 	public String imageUrl;
 
+	/** The publication type. */
 	public AnimeType type;
 
+	/** The synopsis. */
 	public String synopsis;
 
-	public int episodes;
+	/** The number of episodes. Can be {@code null} if it is unknown. */
+	public Integer episodes;
 
+	/** The airing start and end dates. */
 	public DateRange aired = new DateRange();
 
 	/** The anime age rating. */
@@ -42,6 +46,7 @@ public class AnimeBase extends MalEntity {
 	/** The anime score, in the range of 0.00 to 10.00. */
 	public float score;
 
+	/** The number of users that added this anime to their list. */
 	public int members;
 
 

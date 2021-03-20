@@ -26,6 +26,7 @@ public class UserProfile extends CacheEntity implements Serializable {
 	/** The user name. */
 	public String username;
 
+	/** The URL to the user's profile on MyAnimeList. */
 	@JsonProperty("url")
 	public String url;
 

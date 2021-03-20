@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * List of manga characters.
+ */
 public class MangaCharacters extends CacheEntity {
 
 	public List<MangaCharacter> characters = Collections.emptyList();

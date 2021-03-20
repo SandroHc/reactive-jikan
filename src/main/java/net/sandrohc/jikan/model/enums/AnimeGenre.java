@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The anime genre.
+ */
 public enum AnimeGenre {
 	@JsonProperty("All")           ALL,
 	@JsonProperty("Action")        ACTION,

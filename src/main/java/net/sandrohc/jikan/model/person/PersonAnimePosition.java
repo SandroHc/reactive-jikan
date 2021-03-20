@@ -8,6 +8,9 @@ package net.sandrohc.jikan.model.person;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A person's position/role on an anime.
+ */
 public class PersonAnimePosition extends PersonPosition {
 
     public MalSubEntity anime;

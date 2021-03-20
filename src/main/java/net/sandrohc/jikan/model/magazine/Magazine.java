@@ -11,6 +11,9 @@ import java.util.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.manga.*;
 
+/**
+ * A magazine, and a list of manga published on this magazine.
+ */
 public class Magazine extends CacheEntity {
 
     public MalSubEntity meta;

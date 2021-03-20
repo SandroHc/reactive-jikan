@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the anime/manga reviews query.
+ */
 public class Reviews extends CacheEntity {
 
     public List<Review> reviews = Collections.emptyList();

@@ -8,6 +8,9 @@ package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A season.
+ */
 public enum Season {
 	@JsonProperty("Summer") SUMMER,
 	@JsonProperty("Spring") SPRING,

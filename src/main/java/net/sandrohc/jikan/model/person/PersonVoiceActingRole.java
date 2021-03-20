@@ -10,6 +10,9 @@ import java.io.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A person's voice acting role for a given character on an anime.
+ */
 public class PersonVoiceActingRole implements Serializable {
 
     public String role;

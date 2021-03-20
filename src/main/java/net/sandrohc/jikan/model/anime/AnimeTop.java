@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the top anime query.
+ */
 public class AnimeTop extends CacheEntity {
 
     public List<AnimeTopSub> top = Collections.emptyList();

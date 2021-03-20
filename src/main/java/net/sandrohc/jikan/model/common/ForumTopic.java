@@ -11,13 +11,18 @@ import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A forum topic.
+ */
 public class ForumTopic implements Serializable {
 
 	@JsonProperty("topic_id")
 	public int topicId;
 
+	/** The URL to the forum topic on MyAnimeList. */
 	public String url;
 
+	/** The topic title. */
 	public String title;
 
 	@JsonProperty("date_posted")

@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the character search query.
+ */
 public class CharacterSearch extends CacheEntity {
 
     public List<CharacterSearchSub> results = Collections.emptyList();

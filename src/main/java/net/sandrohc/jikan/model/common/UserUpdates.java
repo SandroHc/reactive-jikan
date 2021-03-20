@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A list of user updates.
+ */
 public class UserUpdates extends CacheEntity {
 
     public List<UserUpdate> users = Collections.emptyList();

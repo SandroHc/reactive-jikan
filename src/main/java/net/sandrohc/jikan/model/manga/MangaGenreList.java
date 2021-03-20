@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * List of manga by genre.
+ */
 public class MangaGenreList extends CacheEntity {
 
     @JsonProperty("mal_url")

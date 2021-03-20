@@ -11,6 +11,9 @@ import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * An anime episode
+ */
 public class AnimeEpisode implements Serializable {
 
 	@JsonProperty("episode_id")

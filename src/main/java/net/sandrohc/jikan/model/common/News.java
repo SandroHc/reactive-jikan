@@ -10,8 +10,12 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.CacheEntity;
 
+/**
+ * The base object for the anime/manga news query.
+ */
 public class News extends CacheEntity {
 
+	/** The news articles. */
 	public List<NewsArticle> articles = Collections.emptyList();
 
 

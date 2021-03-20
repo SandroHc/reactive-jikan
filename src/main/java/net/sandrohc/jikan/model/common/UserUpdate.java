@@ -12,16 +12,22 @@ import java.time.*;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A user update to a anime/manga entry.
+ */
 public class UserUpdate implements Serializable {
 
+    /** The user name. */
     public String username;
 
+    /** The URL to the user's profile on MyAnimeList. */
     public String url;
 
     @JsonProperty("image_url")
     public String imageUrl;
 
-    public float score; // range [0.0, 10.0]
+    /** The score given by the user in the range: 0.0 (inclusive) to 10.0 (inclusive) */
+    public float score;
 
     public String status;
 

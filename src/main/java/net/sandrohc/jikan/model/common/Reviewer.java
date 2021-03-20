@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Reviewer implements Serializable {
 
+    /** The URL to the reviewer's profile on MyAnimeList. */
     public String url;
 
     @JsonProperty("image_url")

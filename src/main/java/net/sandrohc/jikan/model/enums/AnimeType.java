@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The type of publication for an anime.
+ */
 public enum AnimeType {
 	@JsonProperty("All")     ALL,
 	@JsonProperty("TV")      TV,

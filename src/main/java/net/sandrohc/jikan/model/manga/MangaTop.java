@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * Base object for the Top Manga query.
+ */
 public class MangaTop extends CacheEntity {
 
     public List<MangaTopSub> top = Collections.emptyList();

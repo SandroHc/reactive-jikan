@@ -8,6 +8,9 @@ package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The fields that can be sorted in the anime search.
+ */
 public enum AnimeOrderBy {
 	@JsonProperty("title")      TITLE,
 	@JsonProperty("start_date") START_DATE,

@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The status of an anime.
+ */
 public enum AnimeStatus {
 	@JsonProperty("Airing")
 	@JsonAlias("Currently Airing")

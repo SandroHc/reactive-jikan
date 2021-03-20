@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the anime by genre query.
+ */
 public class AnimeGenreList extends CacheEntity {
 
     @JsonProperty("mal_url")

@@ -19,23 +19,29 @@ public abstract class MangaBase extends MalEntity {
 	/** The official title. */
 	public String title;
 
-	/** The page URL on MyAnimeList. */
+	/** The URL to the manga on MyAnimeList. */
 	public String url;
 
 	/** The banner image URL. */
 	@JsonProperty("image_url")
 	public String imageUrl;
 
+	/** The current publication status. */
 	public MangaStatus status;
 
+	/** The publication type. */
 	public MangaType type;
 
+	/** The synopsis. */
 	public String synopsis;
 
+	/** The number of volumes. */
 	public int volumes;
 
+	/** The number of chapters. */
 	public int chapters;
 
+	/** If the manga is still being published. */
 	public boolean publishing;
 
 	public DateRange published = new DateRange();

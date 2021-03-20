@@ -13,8 +13,10 @@ import java.io.*;
  */
 public class Picture implements Serializable {
 
+	/** The URL for the large variant. */
 	public String large;
 
+	/** The URL for the small variant. Images are resized to a width of 225 pixels. */
 	public String small;
 
 

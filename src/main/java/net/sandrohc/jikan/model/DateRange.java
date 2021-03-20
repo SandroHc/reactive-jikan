@@ -11,6 +11,9 @@ import java.time.*;
 import java.util.*;
 import net.sandrohc.jikan.utils.Generated;
 
+/**
+ * A date range.
+ */
 public class DateRange implements Serializable {
 
 	public LocalDate from;

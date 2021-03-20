@@ -17,6 +17,7 @@ import net.sandrohc.jikan.model.enums.*;
  */
 public class Review extends MalEntity {
 
+    /** The URL to the review on MyAnimeList. */
     public String url;
 
     public Type type;

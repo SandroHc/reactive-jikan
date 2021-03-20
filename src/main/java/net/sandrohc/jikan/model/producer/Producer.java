@@ -11,6 +11,9 @@ import java.util.*;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.season.*;
 
+/**
+ * The base object for the producer query.
+ */
 public class Producer extends CacheEntity {
 
     public MalSubEntity meta;

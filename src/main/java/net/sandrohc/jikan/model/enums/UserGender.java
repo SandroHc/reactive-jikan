@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The user's gender.
+ */
 public enum UserGender {
 	@JsonEnumDefaultValue   UNKNOWN,
 	@JsonProperty("Male")   MALE,

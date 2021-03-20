@@ -8,13 +8,18 @@ package net.sandrohc.jikan.model.base;
 
 import net.sandrohc.jikan.model.enums.*;
 
+/**
+ * A MyAnimeList with a type, name and URL.
+ */
 public class MalSubEntity extends MalEntity {
 
+	/** The type. */
 	public Type type;
 
+	/** The name. */
 	public String name;
 
-	/** The page URL on MyAnimeList. */
+	/** The URL to MyAnimeList. */
 	public String url;
 
 

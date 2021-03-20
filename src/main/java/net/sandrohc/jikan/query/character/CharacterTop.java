@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the top characters query.
+ */
 public class CharacterTop extends CacheEntity {
 
     public List<CharacterTopSub> top = Collections.emptyList();

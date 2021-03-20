@@ -8,6 +8,10 @@ package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A mix between the type of anime and if it is currently airing.
+ * Used by the Top query.
+ */
 public enum AnimeSubType {
 	@JsonProperty("airing")       AIRING,
 	@JsonProperty("upcoming")     UPCOMING,

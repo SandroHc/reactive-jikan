@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The sort order.
+ */
 public enum Sort {
 	@JsonProperty("ascending")
 	@JsonAlias("asc")

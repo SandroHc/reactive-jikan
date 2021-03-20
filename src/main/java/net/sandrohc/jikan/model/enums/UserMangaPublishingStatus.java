@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Publishing status of a manga on a user's list.
+ */
 public enum UserMangaPublishingStatus {
 	@JsonEnumDefaultValue
 	UNKNOWN           (0),

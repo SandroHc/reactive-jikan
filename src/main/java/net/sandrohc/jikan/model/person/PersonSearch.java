@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The search results for the person query.
+ */
 public class PersonSearch extends CacheEntity {
 
     public List<PersonSearchSub> results = Collections.emptyList();

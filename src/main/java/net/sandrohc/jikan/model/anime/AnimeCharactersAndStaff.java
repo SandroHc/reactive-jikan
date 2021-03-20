@@ -11,6 +11,9 @@ import java.util.List;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the anime characters and staff query.
+ */
 public class AnimeCharactersAndStaff extends CacheEntity {
 
 	public List<AnimeCharacter> characters = Collections.emptyList();

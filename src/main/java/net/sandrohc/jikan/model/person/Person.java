@@ -17,7 +17,7 @@ import net.sandrohc.jikan.model.base.*;
  */
 public class Person extends MalEntity {
 
-    /** The page URL on MyAnimeList. */
+    /** The URL to the person on MyAnimeList. */
     public String url;
 
     /** The banner image URL. */

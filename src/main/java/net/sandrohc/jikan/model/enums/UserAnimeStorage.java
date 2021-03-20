@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Storage used by the user for a anime on his list.
+ */
 public enum UserAnimeStorage {
 	@JsonEnumDefaultValue        UNKNOWN,
 	@JsonProperty("Hard Drive")  HARD_DRIVE,

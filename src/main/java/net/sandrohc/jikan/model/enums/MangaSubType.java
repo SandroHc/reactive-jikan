@@ -8,6 +8,10 @@ package net.sandrohc.jikan.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A mix between the type of manga and if it is currently publishing.
+ * Used by the Top query.
+ */
 public enum MangaSubType {
 	@JsonProperty("manga")        MANGA,
 	@JsonProperty("novels")       NOVELS,

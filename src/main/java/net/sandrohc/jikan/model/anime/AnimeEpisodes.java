@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.CacheEntity;
 
+/**
+ * The base object for the anime episodes query.
+ */
 public class AnimeEpisodes extends CacheEntity {
 
 	public List<AnimeEpisode> episodes = Collections.emptyList();

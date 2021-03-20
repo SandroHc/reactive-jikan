@@ -10,6 +10,9 @@ import java.io.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * A promotional video.
+ */
 public class AnimeVideosPromo implements Serializable {
 
 	public String title;

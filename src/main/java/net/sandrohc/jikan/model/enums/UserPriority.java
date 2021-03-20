@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * Priority defined by the user.
+ */
 public enum UserPriority {
 	@JsonEnumDefaultValue   UNKNOWN,
 	@JsonProperty("Low")    LOW,

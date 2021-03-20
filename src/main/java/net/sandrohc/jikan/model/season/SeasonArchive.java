@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A anime season year archive.
+ */
 public class SeasonArchive extends CacheEntity {
 
     public List<SeasonArchiveYear> archive = Collections.emptyList();

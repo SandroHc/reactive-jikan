@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Watching status for an anime on a user's list.
+ */
 public enum UserAnimeWatchingStatus {
 	@JsonEnumDefaultValue
 	UNKNOWN       (0),

@@ -16,6 +16,7 @@ import net.sandrohc.jikan.model.base.*;
  */
 public class CharacterSearchSub extends MalEntity {
 
+    /** The URL to the character search on MyAnimeList. */
     public String url;
 
     @JsonProperty("image_url")

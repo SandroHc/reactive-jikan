@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The meta type.
+ */
 public enum Type {
 	@JsonProperty("anime")
 	ANIME("anime", "anime", "anime"),

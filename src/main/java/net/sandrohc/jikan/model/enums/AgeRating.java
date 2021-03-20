@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The official age rating.
+ */
 public enum AgeRating {
 
 	@JsonEnumDefaultValue

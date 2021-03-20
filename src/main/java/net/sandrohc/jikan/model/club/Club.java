@@ -17,7 +17,7 @@ import net.sandrohc.jikan.model.base.*;
  */
 public class Club extends MalEntity {
 
-    /** The page URL on MyAnimeList. */
+    /** The URL to the club page on MyAnimeList. */
     public String url;
 
     /** The banner image URL. */

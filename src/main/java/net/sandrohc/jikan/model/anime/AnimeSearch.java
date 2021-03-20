@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * The base object for the anime search query.
+ */
 public class AnimeSearch extends CacheEntity {
 
 	public List<AnimeSearchSub> results = Collections.emptyList();

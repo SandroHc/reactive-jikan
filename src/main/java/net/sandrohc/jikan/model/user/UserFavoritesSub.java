@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.user;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A user favourite.
+ */
 public class UserFavoritesSub extends MalEntity {
 
     public String url;

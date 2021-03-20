@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The manga genre.
+ */
 public enum MangaGenre {
 	@JsonProperty("All")           ALL,
 	@JsonProperty("Action")        ACTION,

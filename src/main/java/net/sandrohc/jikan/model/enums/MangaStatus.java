@@ -10,6 +10,9 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The status of a manga.
+ */
 public enum MangaStatus {
 	@JsonProperty("Publishing")
 	PUBLISHING,

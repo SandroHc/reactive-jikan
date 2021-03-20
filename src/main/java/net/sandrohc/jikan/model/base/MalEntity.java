@@ -11,8 +11,12 @@ import java.io.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.utils.Generated;
 
+/**
+ * A MyAnimeList entity with an ID.
+ */
 public abstract class MalEntity implements Serializable {
 
+	/** The MyAnimeList ID. */
 	@JsonProperty("mal_id")
 	public int malId;
 

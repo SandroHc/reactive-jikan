@@ -8,6 +8,9 @@ package net.sandrohc.jikan.model.manga;
 
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A manga character.
+ */
 public class MangaCharacter extends RoleSubEntity {
 
 }

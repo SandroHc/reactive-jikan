@@ -12,6 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.Season;
 
+/**
+ * A season and the list of anime that got broadcast in it.
+ */
 public class SeasonList extends CacheEntity {
 
     @JsonProperty("season_name")

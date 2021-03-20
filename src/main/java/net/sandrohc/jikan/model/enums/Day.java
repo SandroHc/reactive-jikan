@@ -9,6 +9,9 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * The day of the week.
+ */
 public enum Day {
 	@JsonProperty("monday")    MONDAY,
 	@JsonProperty("tuesday")   TUESDAY,

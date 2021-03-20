@@ -10,6 +10,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.base.CacheEntity;
 
+/**
+ * Promotional videos for the anime.
+ */
 public class AnimeVideos extends CacheEntity {
 
 	public List<AnimeVideosPromo> promo = Collections.emptyList();

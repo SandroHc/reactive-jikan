@@ -17,8 +17,10 @@ import net.sandrohc.jikan.utils.Generated;
  */
 public class UserSimple implements Serializable {
 
+	/** The user name. */
 	public String username;
 
+	/** The URL to the user's profile on MyAnimeList. */
 	public String url;
 
 	@JsonProperty("image_url")

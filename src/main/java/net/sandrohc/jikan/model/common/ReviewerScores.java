@@ -8,20 +8,30 @@ package net.sandrohc.jikan.model.common;
 
 import java.io.*;
 
+/**
+ * The scores a reviewer gave.
+ */
 public class ReviewerScores implements Serializable {
 
+    /** The overall score. */
     public int overall;
 
+    /** The score for the story. */
     public int story;
 
-    public int art; // manga only
+    /** The score for the art. Exclusive to manga. */
+    public int art;
 
-    public int animation; // anime only
+    /** The score for the animation. Exclusive to anime. */
+    public int animation;
 
-    public int sound; // anime only
+    /** The score for the sound. Exclusive to anime. */
+    public int sound;
 
+    /** The score for the character development. */
     public int character;
 
+    /** The score for the enjoyment. */
     public int enjoyment;
 
 

@@ -11,6 +11,9 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.base.*;
 
+/**
+ * A manga search.
+ */
 public class MangaSearch extends CacheEntity {
 
     public List<MangaSearchSub> results = Collections.emptyList();
