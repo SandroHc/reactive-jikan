@@ -30,9 +30,9 @@ If you want to use development versions, see: https://jitpack.io/#net.sandrohc/r
 
 ## Usage
 
-The way you fetch data is through the `Query` classes. Once you create your desired query (you can use the `QueryFactory` to help you navigate through all the available queries), you can pass it to your `Jikan` instance. Some queries may allow you to specify optional parameters, like the search queries.
+The Reactive Jikan library provides all queries through the `Query` classes. Once the desired query is created (the `QueryFactory` can be used to help you navigate through all the available queries), it can be passed to the `Jikan` instance. Some queries have optional parameters, like the search queries; for more details, please see the javadocs for each query or refer to the [official Jikan API documentation](https://jikan.docs.apiary.io).
 
-After you configure the query with your desired parameters, you can now execute it by calling `query.execute()` (or use `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>` or `Flux<T>` depending on the query. To convert it into your desired result, you must call `subscribe()` or `block()`. For more information on reactive queries, please read the [relevant documentation](https://projectreactor.io/docs/core/release/reference/).
+After the query has been configured with the desired parameters, it can be executed by calling `query.execute()` (or alternatively `jikan.query(yourQuery)`). The value returned is a reactive stream of type `Mono<T>` or `Flux<T>` depending on the query. The HTTP request is only made once the methods `subscribe()` or `block()` are called. For more information on reactive queries, please read the [relevant documentation](https://projectreactor.io/docs/core/release/reference/).
 
 Here are some examples on how to use this library:
 ```java
@@ -57,6 +57,8 @@ Collection<AnimeSearchSub> results = jikan.query().anime().search()
 ```
 
 ### Query list
+
+The following is an exhaustive list of all the endpoints and query classes supported by the Reactive Jikan library.
 
 | Endpoint                         	| Query                        	| Result      	            |
 |----------------------------------	|------------------------------	|-------------------------- |
