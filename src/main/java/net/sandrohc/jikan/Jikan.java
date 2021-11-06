@@ -76,8 +76,7 @@ public class Jikan {
 	 * Executes the desired query and returns the parsed entity.
 	 *
 	 * @param query the query
-	 * @param <INITIAL_TYPE> the request entity type
-	 * @param <PROCESSED_TYPE> the processed entity type
+	 * @param <T> the request entity type
 	 * @param <P> the publisher type (Mono or Flux)
 	 * @return the parsed entity, or {@code null} if the entity was not found
 	 */
