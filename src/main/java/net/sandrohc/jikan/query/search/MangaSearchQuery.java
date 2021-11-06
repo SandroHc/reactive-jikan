@@ -41,7 +41,7 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 	 * @return manga search query
 	 */
 	public MangaSearchQuery excludeGivenGenres() {
-		queryParams.putIfAbsent("genre_exclude", 0);
+		queryParams.putIfAbsent("genre_exclude", 1);
 		return this;
 	}
 
@@ -50,7 +50,7 @@ public class MangaSearchQuery extends AdvancedSearchQuery<MangaSearchQuery, Mang
 	 * @return manga search query
 	 */
 	public MangaSearchQuery includeGivenGenres() {
-		queryParams.putIfAbsent("genre_exclude", 1);
+		queryParams.putIfAbsent("genre_exclude", 0);
 		return this;
 	}
 

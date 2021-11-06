@@ -670,14 +670,15 @@ public class RequestMangaTest extends RequestTest {
 
 	@Test
 	void fetchSearch_excludeGenres() {
-		// https://api.jikan.moe/v3/search/manga?genre_exclude=0
+		// https://api.jikan.moe/v3/search/manga?genre[]=1&genre_exclude=1
 		String response = "{\n" +
 				"    \"results\": [],\n" +
 				"    \"last_page\": 0\n" +
 				"}";
 
 		mock(mockServer, "/search/manga", response,
-				Parameter.param("genre_exclude", "0"));
+				Parameter.param("genre[]", "1"),
+				Parameter.param("genre_exclude", "1"));
 
 		Collection<MangaSearchSub> results = jikan.query().manga().search()
 				.genres(MangaGenre.ACTION)

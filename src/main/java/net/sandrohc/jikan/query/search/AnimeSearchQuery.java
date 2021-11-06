@@ -40,7 +40,7 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 	 * @return anime search query
 	 */
 	public AnimeSearchQuery excludeGivenGenres() {
-		queryParams.putIfAbsent("genre_exclude", 0);
+		queryParams.putIfAbsent("genre_exclude", 1);
 		return this;
 	}
 
@@ -49,7 +49,7 @@ public class AnimeSearchQuery extends AdvancedSearchQuery<AnimeSearchQuery, Anim
 	 * @return anime search query
 	 */
 	public AnimeSearchQuery includeGivenGenres() {
-		queryParams.putIfAbsent("genre_exclude", 1);
+		queryParams.putIfAbsent("genre_exclude", 0);
 		return this;
 	}
 
