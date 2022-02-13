@@ -1,13 +1,13 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.model;
 
-import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.legacy.enums.*;
 
 /**
  * The base object for anime/manga genre with a type, name and URL.

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
@@ -10,47 +10,64 @@ import java.io.Serializable;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A list of related anime or manga.
  */
 public class Related implements Serializable {
 
-	@JsonProperty("Prequel")
-	public List<MalSubEntity> prequels = Collections.emptyList();
+	/** The relation type, e.g. 'Side story'. */
+	public RelatedType relation;
 
-	@JsonProperty("Alternative version")
-	public List<MalSubEntity> alternativeVersions = Collections.emptyList();
+	/** The related entries. */
+	public Collection<RelatedEntry> entry = Collections.emptyList();
 
-	@JsonProperty("Alternative setting")
-	public List<MalSubEntity> alternativeSettings = Collections.emptyList();
 
-	@JsonProperty("Character")
-	public List<MalSubEntity> characters = Collections.emptyList();
+	public RelatedType getRelation() {
+		return relation;
+	}
 
-	@JsonProperty("Spin-off")
-	public List<MalSubEntity> spinOffs = Collections.emptyList();
+	public void setRelation(RelatedType relation) {
+		this.relation = relation;
+	}
 
-	@JsonProperty("Adaptation")
-	public List<MalSubEntity> adaptations = Collections.emptyList();
+	public Collection<RelatedEntry> getEntry() {
+		return entry;
+	}
 
-	@JsonProperty("Summary")
-	public List<MalSubEntity> summaries = Collections.emptyList();
+	public void setEntry(Collection<RelatedEntry> entry) {
+		this.entry = entry;
+	}
 
-	@JsonProperty("Sequel")
-	public List<MalSubEntity> sequels = Collections.emptyList();
+	@Generated
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
 
-	@JsonProperty("Side story")
-	public List<MalSubEntity> sideStories = Collections.emptyList();
+		Related related = (Related) o;
 
-	@JsonProperty("Other")
-	public List<MalSubEntity> others = Collections.emptyList();
+		if (relation != related.relation) return false;
+		return entry != null ? entry.equals(related.entry) : related.entry == null;
+	}
 
-	@JsonProperty("Parent story")
-	public List<MalSubEntity> parentStories = Collections.emptyList();
+	@Generated
+	@Override
+	public int hashCode() {
+		int result = relation != null ? relation.hashCode() : 0;
+		result = 31 * result + (entry != null ? entry.hashCode() : 0);
+		return result;
+	}
 
-	@JsonProperty("Full story")
-	public List<MalSubEntity> fullStories = Collections.emptyList();
-
+	@Generated
+	@Override
+	public String toString() {
+		return "Related{" +
+				"relation=" + relation +
+				", entry=" + entry +
+				'}';
+	}
 }

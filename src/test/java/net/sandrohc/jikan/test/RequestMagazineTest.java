@@ -4,10 +4,11 @@ import java.time.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.magazine.*;
-import net.sandrohc.jikan.model.manga.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.legacy.magazine.*;
+import net.sandrohc.jikan.model.legacy.manga.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;

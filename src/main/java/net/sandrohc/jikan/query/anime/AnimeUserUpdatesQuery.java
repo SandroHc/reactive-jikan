@@ -1,23 +1,33 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.query.anime;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeUserUpdatesQuery extends Query<UserUpdate, Flux<UserUpdate>> {
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
-	/** The manga ID. */
+/**
+ * Query for the anime user updates.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeUserUpdates">Jikan API docs - getAnimeUserUpdates</a>
+ */
+public class AnimeUserUpdatesQuery extends Query<DataListHolderWithPagination<UserUpdate>, Flux<UserUpdate>> {
+
+	/** The anime ID. */
 	private final int id;
 
+	// TODO: validate javadoc by checking if max user updates per page has changed
 	/** The page. Each page contains up to 100 user updates. */
 	private final int page;
 
@@ -30,24 +40,19 @@ public class AnimeUserUpdatesQuery extends Query<UserUpdate, Flux<UserUpdate>> {
 	}
 
 	@Override
-	public String getUri() {
-		return "/anime/" + id + "/userupdates/" + page;
+	public String getUrl() {
+		return endpoint("/anime/" + id + "/userupdates")
+				.queryParam("page", page)
+				.build();
 	}
 
 	@Override
-	public Class<UserUpdate> getRequestClass() {
-		return UserUpdate.class;
+	public TypeReference<DataListHolderWithPagination<UserUpdate>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<UserUpdate>>() { };
 	}
 
 	@Override
-	public Class<?> getInitialRequestClass() {
-		return UserUpdates.class;
+	public Flux<UserUpdate> process(Mono<DataListHolderWithPagination<UserUpdate>> content) {
+		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
-
-	@SuppressWarnings({"unchecked", "RedundantCast"})
-	@Override
-	public Flux<UserUpdate> process(Mono<?> content) {
-		return ((Mono<UserUpdates>) content).flatMapMany(results -> Flux.fromIterable(results.users));
-	}
-
 }

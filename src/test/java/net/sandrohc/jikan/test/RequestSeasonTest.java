@@ -4,9 +4,10 @@ import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.season.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.legacy.season.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -77,7 +78,7 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/2020/summer", response);
 
-		Collection<SeasonAnime> results = jikan.query().season().get(2020, net.sandrohc.jikan.model.enums.Season.SUMMER)
+		Collection<SeasonAnime> results = jikan.query().season().get(2020, Season.SUMMER)
 				.execute()
 				.collectList()
 				.block();
@@ -170,10 +171,10 @@ public class RequestSeasonTest extends RequestTest {
 		assertNotNull(year1.toString());
 		assertEquals(2020, year1.year);
 		assertTrue(year1.seasons.containsAll(Arrays.asList(
-				net.sandrohc.jikan.model.enums.Season.WINTER,
-				net.sandrohc.jikan.model.enums.Season.SPRING,
-				net.sandrohc.jikan.model.enums.Season.SUMMER,
-				net.sandrohc.jikan.model.enums.Season.FALL
+				Season.WINTER,
+				Season.SPRING,
+				Season.SUMMER,
+				Season.FALL
 		)));
 
 		SeasonArchiveYear year2 = yearIt.next();
@@ -181,10 +182,10 @@ public class RequestSeasonTest extends RequestTest {
 		assertNotNull(year2.toString());
 		assertEquals(1917, year2.year);
 		assertTrue(year2.seasons.containsAll(Arrays.asList(
-				net.sandrohc.jikan.model.enums.Season.WINTER,
-				net.sandrohc.jikan.model.enums.Season.SPRING,
-				net.sandrohc.jikan.model.enums.Season.SUMMER,
-				net.sandrohc.jikan.model.enums.Season.FALL
+				Season.WINTER,
+				Season.SPRING,
+				Season.SUMMER,
+				Season.FALL
 		)));
 
 		assertFalse(yearIt.hasNext());

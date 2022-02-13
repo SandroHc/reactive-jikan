@@ -1,18 +1,27 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.query.anime;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeRecommendationsQuery extends Query<Recommendation, Flux<Recommendation>> {
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+
+/**
+ * Query for the anime recommendations.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeRecommendations">Jikan API docs - getAnimeRecommendations</a>
+ */
+public class AnimeRecommendationsQuery extends Query<DataListHolder<Recommendation>, Flux<Recommendation>> {
 
 	/** The anime ID. */
 	private final int id;
@@ -23,23 +32,17 @@ public class AnimeRecommendationsQuery extends Query<Recommendation, Flux<Recomm
 	}
 
 	@Override
-	public String getUri() {
-		return "/anime/" + id + "/recommendations";
+	public String getUrl() {
+		return endpoint("/anime/" + id + "/recommendations").build();
 	}
 
 	@Override
-	public Class<Recommendation> getRequestClass() {
-		return Recommendation.class;
+	public TypeReference<DataListHolder<Recommendation>> getResponseType() {
+		return new TypeReference<DataListHolder<Recommendation>>() { };
 	}
 
 	@Override
-	public Class<?> getInitialRequestClass() {
-		return Recommendations.class;
-	}
-
-	@SuppressWarnings({"unchecked", "RedundantCast"})
-	@Override
-	public Flux<Recommendation> process(Mono<?> content) {
-		return ((Mono<Recommendations>) content).flatMapMany(results -> Flux.fromIterable(results.recommendations));
+	public Flux<Recommendation> process(Mono<DataListHolder<Recommendation>> content) {
+		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
 }

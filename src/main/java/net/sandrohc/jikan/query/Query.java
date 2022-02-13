@@ -8,9 +8,8 @@ package net.sandrohc.jikan.query;
 
 import java.io.*;
 import java.time.*;
-import java.util.*;
-import java.util.stream.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanResponseException;
@@ -27,45 +26,34 @@ import static net.sandrohc.jikan.Jikan.JIKAN_MARKER;
 /**
  * A base query.
  *
- * @param <T> the result type for this query
- * @param <P> the publisher (mono or flux)
+ * @param <T> the response type for this query - used to map the HTTP response
+ * @param <R> the result type (can be either a mono or a flux)
  */
-public abstract class Query<T, P extends Publisher<T>> {
+public abstract class Query<T, R extends Publisher<?>> {
 
 	protected final Logger log;
 	protected final Jikan jikan;
-
-	protected final Map<String, Object> queryParams;
 
 
 	public Query(Jikan jikan) {
 		this.log = LoggerFactory.getLogger(getClass());
 		this.jikan = jikan;
-		this.queryParams = new HashMap<>();
 	}
 
 	/**
-	 * The query URI without parameters.
-	 *
-	 * @return the query URI
+	 * Build the query URL dynamically.
 	 */
-	public abstract String getUri();
+	public abstract String getUrl();
 
-	public Map<String, Object> getQueryParameters() {
-		return Collections.unmodifiableMap(queryParams);
-	}
+	// TODO: see if it's possible to fetch type from Query constructor
+	public abstract TypeReference<T> getResponseType();
 
-	public abstract Class<T> getRequestClass();
+	public R execute() {
+		final String url = getUrl();
+		log.debug(JIKAN_MARKER, "Fetching request: {}", url);
 
-	public Class<?> getInitialRequestClass() {
-		return getRequestClass(); // By default, return the original class
-	}
-
-	public P execute() {
-		final String uri = buildUriWithParams();
-		log.debug(JIKAN_MARKER, "Fetching request: {}", uri);
-
-		final Mono<?> queryResults = jikan.httpClient.get().uri(uri).responseSingle(this::extractBytesFromResponse)
+		final Mono<T> queryResults = jikan.httpClient.get().uri(url)
+				.responseSingle(this::extractBytesFromResponse)
 				.retryWhen(Retry.backoff(jikan.maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
 				.flatMap(this::deserialize);
 
@@ -79,34 +67,8 @@ public abstract class Query<T, P extends Publisher<T>> {
 	 * @return a stream with the unwrapped objects
 	 */
 	@SuppressWarnings("unchecked")
-	public P process(Mono<?> content) {
-		return (P) content; // By default, return the original publisher
-	}
-
-	private String buildUriWithParams() {
-		StringBuilder sb = new StringBuilder(getUri());
-
-		Map<String, Object> queryParameters = getQueryParameters();
-		if (!queryParameters.isEmpty()) {
-			String params = queryParameters.entrySet().stream()
-					.map(entry -> {
-						final String key;
-						final String value;
-						if (entry.getValue() instanceof Collection) {
-							key = entry.getKey() + "[]";
-							value = ((Collection<?>) entry.getValue()).stream().map(String::valueOf).collect(Collectors.joining(","));
-						} else {
-							key = entry.getKey();
-							value = String.valueOf(entry.getValue());
-						}
-						return key + "=" + value;
-					})
-					.collect(Collectors.joining("&"));
-
-			sb.append('?').append(params);
-		}
-
-		return sb.toString();
+	public R process(Mono<T> content) {
+		return (R) content; // By default, return the original publisher
 	}
 
 	private Mono<byte[]> extractBytesFromResponse(HttpClientResponse res, ByteBufMono content) {
@@ -117,15 +79,16 @@ public abstract class Query<T, P extends Publisher<T>> {
 		} else if (res.status() == HttpResponseStatus.TOO_MANY_REQUESTS) {
 			return Mono.error(new JikanThrottleException());
 		} else {
-			return content.asString().flatMap(str -> Mono.error(
-					new JikanResponseException("Response returned error '" + res.status() + "' while executing query " + getClass().getSimpleName() + ": " + str)
-			));
+			return content.asString()
+					.flatMap(str -> Mono.error(new JikanResponseException("Response returned error '" + res.status() +
+							"' while executing query " + getClass().getSimpleName() + " with URL '" + getUrl() +
+							"': " + str)));
 		}
 	}
 
-	public Mono<?> deserialize(byte[] content) {
+	public Mono<T> deserialize(byte[] content) {
 		try {
-			return Mono.just(jikan.objectMapper.readValue(content, getInitialRequestClass()));
+			return Mono.just(jikan.objectMapper.readValue(content, getResponseType()));
 		} catch (IOException e) {
 			return Mono.error(jikan.dumpStacktrace(this, content, e));
 		}
@@ -133,7 +96,6 @@ public abstract class Query<T, P extends Publisher<T>> {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + "[uri='" + getUri() + "']";
+		return getClass().getSimpleName() + "[url='" + getUrl() + "']";
 	}
-
 }

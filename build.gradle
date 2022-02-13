@@ -52,14 +52,15 @@ dependencies {
     testRuntimeOnly 'org.slf4j:slf4j-simple:1.7.36'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testImplementation 'org.assertj:assertj-core:3.22.0'
     testImplementation 'org.mock-server:mockserver-netty:5.12.0'
     testImplementation 'org.mock-server:mockserver-client-java:5.12.0'
     testImplementation 'io.projectreactor:reactor-test:3.4.14'
 
     // Required for 'mockserver-client-java', as the module 'sun.security.x509' became internal starting on JDK 16.
     // https://github.com/mock-server/mockserver/issues/1031
-    testImplementation 'org.bouncycastle:bcprov-jdk15on:1.70'
-    testImplementation 'org.bouncycastle:bcpkix-jdk15on:1.70'
+    testRuntimeOnly 'org.bouncycastle:bcprov-jdk15on:1.70'
+    testRuntimeOnly 'org.bouncycastle:bcpkix-jdk15on:1.70'
 }
 
 test {

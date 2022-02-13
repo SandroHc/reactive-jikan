@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
@@ -8,46 +8,83 @@ package net.sandrohc.jikan.model.character;
 
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 
 /**
- * A character object with all its details.
+ * A character with all its details.
  */
 public class Character extends MalEntity {
 
     /** The URL to the character on MyAnimeList. */
     public String url;
 
-    /** The banner image URL. */
-    @JsonProperty("image_url")
-    public String imageUrl;
+    /** The banner image. */
+    public Images images;
 
     /** The official name. */
     public String name;
 
-    /** The official name, in kanji. */
-    @JsonProperty("name_kanji")
-    public String nameKanji;
+    /** The list of nicknames. */
+    public Collection<String> nicknames = Collections.emptyList();
 
-    public List<String> nicknames;
+    /** The number of users with this character in their favourites list. */
+    public int favourites;
 
+    /** A summary about the character. */
     public String about;
 
-    @JsonProperty("member_favourites")
-    public int memberFavourites;
 
-    public List<RoleSubEntity> animeography = Collections.emptyList();
+    public String getUrl() {
+        return url;
+    }
 
-    public List<RoleSubEntity> mangaography = Collections.emptyList();
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
-    @JsonProperty("voice_actors")
-    public List<CharacterVoiceActor> voiceActors = Collections.emptyList();
+    public Images getImages() {
+        return images;
+    }
 
+    public void setImages(Images images) {
+        this.images = images;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Collection<String> getNicknames() {
+        return nicknames;
+    }
+
+    public void setNicknames(Collection<String> nicknames) {
+        this.nicknames = nicknames;
+    }
+
+    public int getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(int favourites) {
+        this.favourites = favourites;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
 
     @Override
     public String toString() {
         return "Character[id=" + malId + ", name='" + name + "']";
     }
-
 }

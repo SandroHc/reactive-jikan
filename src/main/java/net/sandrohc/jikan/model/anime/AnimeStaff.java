@@ -1,30 +1,70 @@
+/*
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
+ *
+ * @author Sandro Marques <sandro123iv@gmail.com>
+ */
+
 package net.sandrohc.jikan.model.anime;
 
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.MalEntity;
+import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A staff member.
  */
-public class AnimeStaff extends MalEntity {
+public class AnimeStaff implements Serializable {
 
-	/** The URL to the staff on MyAnimeList. */
-	public String url;
+	/** The person details. */
+	public Person person;
 
-	/** The staff name. */
-	public String name;
-
-	@JsonProperty("image_url")
-	public String imageUrl;
-
-	public List<String> positions;
+	/** The staff positions, e.g. 'Director'. */
+	public Collection<String> positions = Collections.emptyList(); // TODO: Convert to enum
 
 
-	@Override
-	public String toString() {
-		return "AnimeStaff[id=" + malId + ", name='" + name + "']";
+	public Person getPerson() {
+		return person;
 	}
 
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public Collection<String> getPositions() {
+		return positions;
+	}
+
+	public void setPositions(Collection<String> positions) {
+		this.positions = positions;
+	}
+
+	@Generated
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		if (!super.equals(o)) return false;
+
+		AnimeStaff that = (AnimeStaff) o;
+
+		if (person != null ? !person.equals(that.person) : that.person != null) return false;
+		return positions != null ? positions.equals(that.positions) : that.positions == null;
+	}
+
+	@Generated
+	@Override
+	public int hashCode() {
+		int result = super.hashCode();
+		result = 31 * result + (person != null ? person.hashCode() : 0);
+		result = 31 * result + (positions != null ? positions.hashCode() : 0);
+		return result;
+	}
+
+	@Generated
+	@Override
+	public String toString() {
+		return "AnimeStaff[person=" + person + ", positions=" + positions + ']';
+	}
 }

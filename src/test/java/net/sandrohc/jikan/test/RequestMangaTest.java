@@ -6,10 +6,13 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.base.*;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.manga.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.model.legacy.common.*;
+import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.legacy.manga.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -231,14 +234,14 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/news", response);
 
-		Collection<NewsArticle> newsArticles = jikan.query().manga().news(96792).execute().collectList().block();
+		Collection<AnimeNewsArticle> newsArticles = jikan.query().manga().news(96792).execute().collectList().block();
 
 		assertNotNull(newsArticles);
 
 		/* Articles */
-		Iterator<NewsArticle> articlesIt = newsArticles.iterator();
+		Iterator<AnimeNewsArticle> articlesIt = newsArticles.iterator();
 
-		NewsArticle a1 = articlesIt.next();
+		AnimeNewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
 		assertEquals("https://myanimelist.net/news/60161703", a1.url);
 		assertEquals("North American Anime & Manga Releases for July", a1.title);
@@ -248,7 +251,7 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(0, a1.comments);
 		assertEquals("Here are the North American anime & manga releases...", a1.intro);
 
-		NewsArticle a2 = articlesIt.next();
+		AnimeNewsArticle a2 = articlesIt.next();
 		assertNotNull(a2.toString());
 		assertEquals("https://myanimelist.net/news/59888183", a2.url);
 		assertEquals("Japan's Yearly Manga and Light Novel Rankings for 2020 (First Half)", a2.title);
@@ -321,30 +324,30 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/stats", response);
 
-		Stats stats = jikan.query().manga().stats(96792).execute().block();
+		Statistics statistics = jikan.query().manga().stats(96792).execute().block();
 
-		assertNotNull(stats);
-		assertNotNull(stats.toString());
-		assertEquals(54058,   stats.seeing);
-		assertEquals(42711,  stats.completed);
-		assertEquals(3209,   stats.onHold);
-		assertEquals(1906,   stats.dropped);
-		assertEquals(16489,  stats.planToSee);
-		assertEquals(118373, stats.total);
-		assertEquals(209,   stats.scores.get(1).votes);  assertEquals(0.3F,  stats.scores.get(1).percentage);
-		assertEquals(111,   stats.scores.get(2).votes);  assertEquals(0.2F,  stats.scores.get(2).percentage);
-		assertEquals(243,   stats.scores.get(3).votes);  assertEquals(0.4F,  stats.scores.get(3).percentage);
-		assertEquals(489,   stats.scores.get(4).votes);  assertEquals(0.8F,  stats.scores.get(4).percentage);
-		assertEquals(1245,  stats.scores.get(5).votes);  assertEquals(2.0F,  stats.scores.get(5).percentage);
-		assertEquals(2863,  stats.scores.get(6).votes);  assertEquals(4.6F,  stats.scores.get(6).percentage);
-		assertEquals(7971,  stats.scores.get(7).votes);  assertEquals(12.8F, stats.scores.get(7).percentage);
-		assertEquals(16494, stats.scores.get(8).votes);  assertEquals(26.4F, stats.scores.get(8).percentage);
-		assertEquals(18747, stats.scores.get(9).votes);  assertEquals(30.0F, stats.scores.get(9).percentage);
-		assertEquals(14086, stats.scores.get(10).votes); assertEquals(22.6F, stats.scores.get(10).percentage);
-		assertNotNull(stats.scores.values().iterator().next().toString());
+		assertNotNull(statistics);
+		assertNotNull(statistics.toString());
+		assertEquals(54058,   statistics.seeing);
+		assertEquals(42711,  statistics.completed);
+		assertEquals(3209,   statistics.onHold);
+		assertEquals(1906,   statistics.dropped);
+		assertEquals(16489,  statistics.planToSee);
+		assertEquals(118373, statistics.total);
+		assertEquals(209,   statistics.scores.get(1).votes);  assertEquals(0.3F,  statistics.scores.get(1).percentage);
+		assertEquals(111,   statistics.scores.get(2).votes);  assertEquals(0.2F,  statistics.scores.get(2).percentage);
+		assertEquals(243,   statistics.scores.get(3).votes);  assertEquals(0.4F,  statistics.scores.get(3).percentage);
+		assertEquals(489,   statistics.scores.get(4).votes);  assertEquals(0.8F,  statistics.scores.get(4).percentage);
+		assertEquals(1245,  statistics.scores.get(5).votes);  assertEquals(2.0F,  statistics.scores.get(5).percentage);
+		assertEquals(2863,  statistics.scores.get(6).votes);  assertEquals(4.6F,  statistics.scores.get(6).percentage);
+		assertEquals(7971,  statistics.scores.get(7).votes);  assertEquals(12.8F, statistics.scores.get(7).percentage);
+		assertEquals(16494, statistics.scores.get(8).votes);  assertEquals(26.4F, statistics.scores.get(8).percentage);
+		assertEquals(18747, statistics.scores.get(9).votes);  assertEquals(30.0F, statistics.scores.get(9).percentage);
+		assertEquals(14086, statistics.scores.get(10).votes); assertEquals(22.6F, statistics.scores.get(10).percentage);
+		assertNotNull(statistics.scores.values().iterator().next().toString());
 
-		int totalScores = stats.scores.values().stream().mapToInt(s -> s.votes).sum();
-		assertTrue(stats.total >= totalScores);
+		int totalScores = statistics.scores.values().stream().mapToInt(s -> s.votes).sum();
+		assertTrue(statistics.total >= totalScores);
 	}
 
 	@Test
@@ -372,15 +375,15 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/forum", response);
 
-		Collection<ForumTopic> forumTopics = jikan.query().manga().forum(96792).execute().collectList().block();
+		Collection<AnimeForumTopic> forumTopics = jikan.query().manga().forum(96792).execute().collectList().block();
 
 		assertNotNull(forumTopics);
 		assertNotNull(forumTopics.toString());
 
 		/* Topics */
-		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
+		Iterator<AnimeForumTopic> topicsIt = forumTopics.iterator();
 
-		ForumTopic t1 = topicsIt.next();
+		AnimeForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
 		assertEquals(1731050, t1.topicId);
 		assertEquals("https://myanimelist.net/forum/?topicid=1731050", t1.url);
@@ -468,7 +471,7 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals("abystoma2", reviewer.username);
 		assertEquals(207, reviewer.read);
 
-		ReviewerScores scores = reviewer.scores;
+		ReviewScores scores = reviewer.scores;
 		assertNotNull(scores);
 		assertNotNull(scores.toString());
 		assertEquals(5, scores.overall);

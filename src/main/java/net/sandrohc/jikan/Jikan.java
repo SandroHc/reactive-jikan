@@ -118,11 +118,9 @@ public class Jikan {
 			writer.newLine();
 			writer.write("Query: " + query.getClass().getName());
 			writer.newLine();
-			writer.write("Class: " + query.getRequestClass().getName());
+			writer.write("Response Class: " + query.getResponseType().getType());
 			writer.newLine();
-			writer.write("URI: " + query.getUri());
-			writer.newLine();
-			writer.write("Query parameters: " + query.getQueryParameters());
+			writer.write("URL: " + query.getUrl());
 			writer.newLine(); writer.newLine(); writer.flush();
 
 			/* Exception */
@@ -164,7 +162,7 @@ public class Jikan {
 	 */
 	public static class JikanBuilder {
 
-		private String baseUrl = "https://api.jikan.moe/v3";
+		private String baseUrl = "https://api.jikan.moe/v4";
 		private String userAgent = getDefaultUserAgent();
 		private boolean debug  = false;
 		private int maxRetries = 3;

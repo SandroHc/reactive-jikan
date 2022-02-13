@@ -1,23 +1,33 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.query.anime;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-public class AnimeReviewsQuery extends Query<Review, Flux<Review>> {
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+
+/**
+ * Query for the anime reviews.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeReviews">Jikan API docs - getAnimeReviews</a>
+ */
+public class AnimeReviewsQuery extends Query<DataListHolderWithPagination<Review>, Flux<Review>> {
 
 	/** The anime ID. */
 	private final int id;
 
+	// TODO: validate javadoc by checking if max reviews per page has changed
 	/** The page. Each page contains up to 20 reviews. */
 	private final int page;
 
@@ -30,24 +40,19 @@ public class AnimeReviewsQuery extends Query<Review, Flux<Review>> {
 	}
 
 	@Override
-	public String getUri() {
-		return "/anime/" + id + "/reviews/" + page;
+	public String getUrl() {
+		return endpoint("/anime/" + id + "/reviews")
+				.queryParam("page", page)
+				.build();
 	}
 
 	@Override
-	public Class<Review> getRequestClass() {
-		return Review.class;
+	public TypeReference<DataListHolderWithPagination<Review>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<Review>>() { };
 	}
 
 	@Override
-	public Class<?> getInitialRequestClass() {
-		return Reviews.class;
+	public Flux<Review> process(Mono<DataListHolderWithPagination<Review>> content) {
+		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
-
-	@SuppressWarnings({"unchecked", "RedundantCast"})
-	@Override
-	public Flux<Review> process(Mono<?> content) {
-		return ((Mono<Reviews>) content).flatMapMany(results -> Flux.fromIterable(results.reviews));
-	}
-
 }

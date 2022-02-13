@@ -4,7 +4,15 @@
 [![GitHub Workflow](https://img.shields.io/github/workflow/status/SandroHc/reactive-jikan/Build?style=flat-square)](https://github.com/SandroHc/reactive-jikan/actions?query=workflow:Build)
 [![Codecov](https://img.shields.io/codecov/c/github/SandroHc/reactive-jikan?style=flat-square)](https://codecov.io/gh/SandroHc/reactive-jikan)
 
-API wrapper for the [Jikan API](https://jikan.moe), with the power of Project Reactor and reactive streams.
+API wrapper for the [Jikan API](https://jikan.moe) V4, with the power of Project Reactor and reactive streams.
+
+## Version matrix
+
+| API version | reactive-jikan version |
+|------------ |----------------------- |
+| [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://github.com/SandroHc/reactive-jikan/releases/tag/1.1.0) |
+| [V4](https://docs.api.jikan.moe/) | [2.0.0-alpha](https://github.com/SandroHc/reactive-jikan/releases/tag/2.0.0-alpha) |
+
 
 ## Installation
 
@@ -69,7 +77,7 @@ The following is an exhaustive list of all the endpoints and query classes suppo
 | /{id}/news                       	| AnimeNewsQuery                | AnimeNews            	    |
 | /{id}/pictures                   	| AnimePicturesQuery            | (list) AnimePicture       |
 | /{id}/videos                     	| AnimeVideosQuery              | AnimeVideos            	|
-| /{id}/stats                      	| AnimeStatsQuery               | Stats            	        |
+| /{id}/statistics                  | AnimeStatisticsQuery          | Stats            	        |
 | /{id}/forum                      	| AnimeForumQuery               | (list) ForumTopic         |
 | /{id}/moreinfo                   	| AnimeMoreInfoQuery            | MoreInfo            	    |
 | /{id}/reviews/{page}             	| AnimeReviewsQuery             | (list) Review            	|
@@ -80,7 +88,7 @@ The following is an exhaustive list of all the endpoints and query classes suppo
 | /{id}/characters                 	| MangaCharactersQuery          | (list) RoleSubEntity      |
 | /{id}/news                       	| MangaNewsQuery                | (list) NewsArticle        |
 | /{id}/pictures                   	| MangaPicturesQuery            | (list) Pictures           |
-| /{id}/stats                      	| MangaStatsQuery               | Stats            	        |
+| /{id}/statistics                  | MangaStatisticsQuery          | Stats            	        |
 | /{id}/forum                      	| MangaForumQuery               | (list) ForumTopic         |
 | /{id}/moreinfo                   	| MangaMoreInfoQuery            | MoreInfo            	    |
 | /{id}/reviews/{page}             	| MangaReviewsQuery             | (list) Review             |

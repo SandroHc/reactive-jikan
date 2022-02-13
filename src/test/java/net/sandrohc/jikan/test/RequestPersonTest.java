@@ -5,10 +5,10 @@ import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.query.person.PersonTop;
-import net.sandrohc.jikan.query.person.PersonTopSub;
+import net.sandrohc.jikan.model.legacy.common.*;
+import net.sandrohc.jikan.model.legacy.person.*;
+import net.sandrohc.jikan.query.legacy.person.PersonTop;
+import net.sandrohc.jikan.query.legacy.person.PersonTopSub;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 

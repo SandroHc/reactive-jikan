@@ -1,35 +1,65 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.model.character;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.MalEntity;
+import java.io.*;
 
-/**
- * Details about the voice actor.
- */
-public class CharacterVoiceActor extends MalEntity {
+import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.utils.Generated;
 
-	/** The voice actor's name. */
-	public String name;
+public class CharacterVoiceActor implements Serializable {
 
-	/** The URL to the voice actor's page on MyAnimeList. */
-	public String url;
-
-	@JsonProperty("image_url")
-	public String imageUrl;
+	/** The voice actor details. */
+	public Person person;
 
 	/** The language performed by the voice actor. */
 	public String language;
 
 
+	public Person getPerson() {
+		return person;
+	}
+
+	public void setPerson(Person person) {
+		this.person = person;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	@Generated
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		CharacterVoiceActor that = (CharacterVoiceActor) o;
+
+		if (person != null ? !person.equals(that.person) : that.person != null) return false;
+		return language != null ? language.equals(that.language) : that.language == null;
+	}
+
+	@Generated
+	@Override
+	public int hashCode() {
+		int result = person != null ? person.hashCode() : 0;
+		result = 31 * result + (language != null ? language.hashCode() : 0);
+		return result;
+	}
+
+	@Generated
 	@Override
 	public String toString() {
-		return "CharacterVoiceActor[id=" + malId + ", name='" + name + "']";
+		return "AnimeCharacterVoiceActor[person=" + person + ", language='" + language + "']";
 	}
 
 }

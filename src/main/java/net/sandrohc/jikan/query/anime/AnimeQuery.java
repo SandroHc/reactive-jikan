@@ -6,12 +6,21 @@
 
 package net.sandrohc.jikan.query.anime;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
 import reactor.core.publisher.Mono;
 
-public class AnimeQuery extends Query<Anime, Mono<Anime>> {
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+
+/**
+ * Query for the anime details.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeById">Jikan API docs - getAnimeById</a>
+ */
+public class AnimeQuery extends Query<DataHolder<Anime>, Mono<Anime>> {
 
 	/** The anime ID. */
 	private final int id;
@@ -22,13 +31,17 @@ public class AnimeQuery extends Query<Anime, Mono<Anime>> {
 	}
 
 	@Override
-	public String getUri() {
-		return "/anime/" + id;
+	public String getUrl() {
+		return endpoint("/anime/" + id).build();
 	}
 
 	@Override
-	public Class<Anime> getRequestClass() {
-		return Anime.class;
+	public TypeReference<DataHolder<Anime>> getResponseType() {
+		return new TypeReference<DataHolder<Anime>>() { };
 	}
 
+	@Override
+	public Mono<Anime> process(Mono<DataHolder<Anime>> content) {
+		return content.map(holder -> holder.data);
+	}
 }

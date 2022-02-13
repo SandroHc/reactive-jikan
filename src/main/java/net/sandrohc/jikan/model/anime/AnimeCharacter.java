@@ -1,17 +1,83 @@
+/*
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
+ *
+ * @author Sandro Marques <sandro123iv@gmail.com>
+ */
+
 package net.sandrohc.jikan.model.anime;
 
-import java.util.List;
+import java.io.*;
+import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.character.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
- * A MyAnimeList anime character.
+ * A character.
  */
-public class AnimeCharacter extends RoleSubEntity {
+public class AnimeCharacter implements Serializable {
 
+	/** The character details. */
+	public AnimeCharacterDetails character;
+
+	/** The character role, e.g. 'Main'. */
+	public String role; // TODO: Convert to enum
+
+	/** The character voice actors. */
 	@JsonProperty("voice_actors")
 	public List<CharacterVoiceActor> voiceActors;
 
+
+	public AnimeCharacterDetails getCharacter() {
+		return character;
+	}
+
+	public void setCharacter(AnimeCharacterDetails character) {
+		this.character = character;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	public List<CharacterVoiceActor> getVoiceActors() {
+		return voiceActors;
+	}
+
+	public void setVoiceActors(List<CharacterVoiceActor> voiceActors) {
+		this.voiceActors = voiceActors;
+	}
+
+	@Generated
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		AnimeCharacter that = (AnimeCharacter) o;
+
+		if (character != null ? !character.equals(that.character) : that.character != null) return false;
+		if (role != null ? !role.equals(that.role) : that.role != null) return false;
+		return voiceActors != null ? voiceActors.equals(that.voiceActors) : that.voiceActors == null;
+	}
+
+	@Generated
+	@Override
+	public int hashCode() {
+		int result = character != null ? character.hashCode() : 0;
+		result = 31 * result + (role != null ? role.hashCode() : 0);
+		result = 31 * result + (voiceActors != null ? voiceActors.hashCode() : 0);
+		return result;
+	}
+
+	@Generated
+	@Override
+	public String toString() {
+		return "AnimeCharacter[character=" + character + ", role='" + role + '\'' + ", voiceActors=" + voiceActors + ']';
+	}
 }

@@ -1,41 +1,58 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
 package net.sandrohc.jikan.model.common;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.base.*;
+import java.io.*;
+
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A user recommendation for an anime or manga.
  */
-public class Recommendation extends MalEntity {
+public class Recommendation implements Serializable {
 
-    /** The URL to the anime/manga recommended. */
+    /** The recommended anime/manga's details. */
+    public BasicEntity entry;
+
+    /** The URL to the recommendation. */
     public String url;
 
-    /** The image. */
-    @JsonProperty("image_url")
-    public String imageUrl;
-
-    /** The URL for this recommendation's MyAnimeList page. */
-    @JsonProperty("recommendation_url")
-    public String recommendationUrl;
-
-    /** The title of the recommendation. */
-    public String title;
-
-    /** The number of times this recommendation has been made. */
-    @JsonProperty("recommendation_count")
-    public int recommendationCount;
+    /** The number of votes this recommendation has received. */
+    public int votes;
 
 
-    @Override
-    public String toString() {
-        return "Recommendation[id=" + malId + ", title='" + title + "', recommendationCount=" + recommendationCount + ']';
+    public BasicEntity getEntry() {
+        return entry;
     }
 
+    public void setEntry(BasicEntity entry) {
+        this.entry = entry;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
+
+    @Generated
+    @Override
+    public String toString() {
+        return "Recommendation[entry=" + entry + ", votes=" + votes + ']';
+    }
 }

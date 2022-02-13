@@ -4,10 +4,12 @@ import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.base.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.schedule.*;
-import net.sandrohc.jikan.model.season.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.enums.DayOfWeek;
+import net.sandrohc.jikan.model.legacy.schedule.*;
+import net.sandrohc.jikan.model.legacy.season.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -75,7 +77,7 @@ public class RequestScheduleTest extends RequestTest {
 
 		mock(mockServer, "/schedule/monday", response);
 
-		Schedule schedule = jikan.query().schedule().day(Day.MONDAY).execute().block();
+		Schedule schedule = jikan.query().schedule().day(DayOfWeek.MONDAY).execute().block();
 
 		assertNotNull(schedule);
 		assertNotNull(schedule.toString());

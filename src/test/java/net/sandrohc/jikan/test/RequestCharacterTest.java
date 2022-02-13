@@ -4,12 +4,12 @@ import java.io.*;
 import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.base.*;
-import net.sandrohc.jikan.model.character.Character;
-import net.sandrohc.jikan.model.character.*;
-import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.character.*;
+import net.sandrohc.jikan.model.legacy.base.*;
+import net.sandrohc.jikan.model.character.Character;
+import net.sandrohc.jikan.model.legacy.character.*;
+import net.sandrohc.jikan.model.legacy.common.*;
+import net.sandrohc.jikan.query.legacy.character.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 

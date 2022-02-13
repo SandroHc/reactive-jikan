@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
@@ -9,16 +9,20 @@ package net.sandrohc.jikan.model.enums;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * The fields that can be sorted in the anime search.
+ * Available filters to sort the anime search entries.
  */
 public enum AnimeOrderBy {
+	@JsonProperty("mal_id")     MAL_ID,
 	@JsonProperty("title")      TITLE,
+	@JsonProperty("type")       TYPE,
+	@JsonProperty("rating")     RATING,
 	@JsonProperty("start_date") START_DATE,
 	@JsonProperty("end_date")   END_DATE,
-	@JsonProperty("score")      SCORE,
-	@JsonProperty("type")       TYPE,
-	@JsonProperty("members")    MEMBERS,
-	@JsonProperty("id")         ID,
 	@JsonProperty("episodes")   EPISODES,
-	@JsonProperty("rating")     RATING,
+	@JsonProperty("score")      SCORE,
+	@JsonProperty("scored_by")  SCORED_BY,
+	@JsonProperty("rank")       RANK,
+	@JsonProperty("popularity") POPULARITY,
+	@JsonProperty("members")    MEMBERS,
+	@JsonProperty("favorites")  FAVORITES,
 }
