@@ -22,6 +22,8 @@ import reactor.netty.ByteBufMono;
 import reactor.netty.http.client.HttpClientResponse;
 import reactor.util.retry.Retry;
 
+import static net.sandrohc.jikan.Jikan.JIKAN_MARKER;
+
 /**
  * A base query.
  *
@@ -61,7 +63,7 @@ public abstract class Query<T, P extends Publisher<T>> {
 
 	public P execute() {
 		final String uri = buildUriWithParams();
-		log.atDebug().addArgument(uri).log("Fetching request: {}");
+		log.debug(JIKAN_MARKER, "Fetching request: {}", uri);
 
 		final Mono<?> queryResults = jikan.httpClient.get().uri(uri).responseSingle(this::extractBytesFromResponse)
 				.retryWhen(Retry.backoff(jikan.maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))

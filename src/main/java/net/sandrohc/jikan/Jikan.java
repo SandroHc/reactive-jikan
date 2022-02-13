@@ -31,7 +31,8 @@ import reactor.netty.http.client.HttpClient;
  */
 public class Jikan {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Jikan.class);
+	private static final Logger log = LoggerFactory.getLogger(Jikan.class);
+	public static final Marker JIKAN_MARKER = MarkerFactory.getMarker("JIKAN");
 
 	public final boolean debug;
 	public final String baseUrl;
@@ -50,6 +51,9 @@ public class Jikan {
 		this.baseUrl = builder.baseUrl;
 		this.userAgent = builder.userAgent;
 		this.maxRetries = builder.maxRetries;
+
+		log.trace(JIKAN_MARKER, "Preparing Jikan instance with parameters: debug=" + debug + ", baseUrl='" + baseUrl +
+				"', userAgent='" + userAgent + "', maxRetries=" + maxRetries);
 
 		this.httpClient = HttpClient.create()
 				.baseUrl(this.baseUrl)
@@ -137,11 +141,21 @@ public class Jikan {
 			writer.write(new String(response, StandardCharsets.UTF_8));
 			writer.newLine(); writer.flush();
 		} catch (IOException ex) {
-			LOG.atError().setCause(ex).addArgument(query).addArgument(reportPath).log("Error dumping contents of {} to: {}");
+			log.error(JIKAN_MARKER, "Error dumping contents of {} to: {}", query, reportPath, ex);
 		}
 
 		return new JikanResponseException("Error parsing JSON for query: " + query.getClass().getName() +
 				". A report file was generated at: " + reportPath, e);
+	}
+
+	@Override
+	public String toString() {
+		return "Jikan[" +
+				"debug=" + debug +
+				", baseUrl='" + baseUrl + '\'' +
+				", userAgent='" + userAgent + '\'' +
+				", maxRetries=" + maxRetries +
+				']';
 	}
 
 
@@ -232,6 +246,15 @@ public class Jikan {
 			}
 		}
 
+		@Override
+		public String toString() {
+			return "JikanBuilder[" +
+					"baseUrl='" + baseUrl + '\'' +
+					", userAgent='" + userAgent + '\'' +
+					", debug=" + debug +
+					", maxRetries=" + maxRetries +
+					']';
+		}
 	}
 
 }
