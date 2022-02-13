@@ -13,7 +13,7 @@ Add the following dependency to your build file.
 If using Gradle (`build.gradle`):
 ```groovy
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:1.0.2'
+    implementation 'net.sandrohc:reactive-jikan:1.1.0'
 }
 ```
 
@@ -22,7 +22,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>1.0.2</version>
+    <version>1.1.0</version>
 </dependency>
 ```
 
