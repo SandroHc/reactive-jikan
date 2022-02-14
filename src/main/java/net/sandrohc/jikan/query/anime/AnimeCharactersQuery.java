@@ -11,10 +11,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the list of characters.
@@ -32,8 +33,8 @@ public class AnimeCharactersQuery extends Query<DataListHolder<CharacterBasic>, 
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/anime/" + id + "/characters").build();
+	public QueryUrl getUrl() {
+		return endpoint("/anime/" + id + "/characters");
 	}
 
 	@Override

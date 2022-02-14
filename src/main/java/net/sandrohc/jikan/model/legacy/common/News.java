@@ -9,7 +9,6 @@ package net.sandrohc.jikan.model.legacy.common;
 import java.util.*;
 
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.model.legacy.base.CacheEntity;
 
 /**
  * The base object for the anime/manga news query.

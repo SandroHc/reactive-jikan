@@ -11,9 +11,10 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the anime videos.
@@ -31,8 +32,8 @@ public class AnimeVideosQuery extends Query<DataHolder<AnimeVideos>, Mono<AnimeV
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/anime/" + id + "/videos").build();
+	public QueryUrl getUrl() {
+		return endpoint("/anime/" + id + "/videos");
 	}
 
 	@Override

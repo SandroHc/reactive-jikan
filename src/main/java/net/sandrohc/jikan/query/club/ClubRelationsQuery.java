@@ -10,10 +10,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the club related entities.
@@ -31,8 +32,8 @@ public class ClubRelationsQuery extends Query<DataListHolder<EntityWithType>, Fl
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/clubs/" + id + "/relations").build();
+	public QueryUrl getUrl() {
+		return endpoint("/clubs/" + id + "/relations");
 	}
 
 	@Override

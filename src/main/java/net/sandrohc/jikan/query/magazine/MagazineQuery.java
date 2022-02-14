@@ -9,26 +9,27 @@ package net.sandrohc.jikan.query.magazine;
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the latest magazines.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getMagazines">Jikan API docs - getMagazines</a>
  */
-public class MagazineQuery extends Query<DataListHolderWithPagination<EntityWithCount>, Flux<EntityWithCount>> {
+public class MagazineQuery extends QueryableQuery<DataListHolderWithPagination<EntityWithCount>, Flux<EntityWithCount>, MagazineQuery> {
 
 	public MagazineQuery(Jikan jikan) {
 		super(jikan);
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/magazines").build();
+	public QueryUrl getInnerUrl() {
+		return endpoint("/magazines");
 	}
 
 	@Override

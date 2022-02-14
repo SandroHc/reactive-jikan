@@ -7,25 +7,23 @@
 package net.sandrohc.jikan.query.genre;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.QueryUrlBuilder;
+import net.sandrohc.jikan.query.QueryUrl;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the anime genre search.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeGenres">Jikan API docs - getAnimeGenres</a>
  */
-public class GenreAnimeQuery extends GenreQuery {
+public class GenreAnimeQuery extends GenreQuery<GenreAnimeQuery> {
 
 	public GenreAnimeQuery(Jikan jikan) {
 		super(jikan);
 	}
 
 	@Override
-	public String getUrl() {
-		QueryUrlBuilder builder = endpoint("/genres/anime");
-		addQueryParams(builder);
-		return builder.build();
+	protected QueryUrl getGenreQueryUrl() {
+		return endpoint("/genres/anime");
 	}
 }

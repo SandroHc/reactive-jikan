@@ -12,10 +12,11 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the anime reviews.
@@ -40,10 +41,9 @@ public class AnimeReviewsQuery extends Query<DataListHolderWithPagination<Review
 	}
 
 	@Override
-	public String getUrl() {
+	public QueryUrl getUrl() {
 		return endpoint("/anime/" + id + "/reviews")
-				.queryParam("page", page)
-				.build();
+				.param("page", page);
 	}
 
 	@Override

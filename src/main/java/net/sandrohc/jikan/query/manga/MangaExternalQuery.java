@@ -11,10 +11,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the manga external links.
@@ -32,8 +33,8 @@ public class MangaExternalQuery extends Query<DataListHolder<External>, Flux<Ext
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/manga/" + id + "/external").build();
+	public QueryUrl getUrl() {
+		return endpoint("/manga/" + id + "/external");
 	}
 
 	@Override

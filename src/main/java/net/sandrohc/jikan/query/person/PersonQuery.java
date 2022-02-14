@@ -11,9 +11,10 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the person details.
@@ -31,8 +32,8 @@ public class PersonQuery extends Query<DataHolder<Person>, Mono<Person>> {
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/people/" + id).build();
+	public QueryUrl getUrl() {
+		return endpoint("/people/" + id);
 	}
 
 	@Override

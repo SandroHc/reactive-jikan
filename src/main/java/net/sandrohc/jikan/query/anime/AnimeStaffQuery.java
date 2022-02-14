@@ -11,10 +11,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the list of staff.
@@ -32,8 +33,8 @@ public class AnimeStaffQuery extends Query<DataListHolder<AnimeStaff>, Flux<Anim
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/anime/" + id + "/staff").build();
+	public QueryUrl getUrl() {
+		return endpoint("/anime/" + id + "/staff");
 	}
 
 	@Override

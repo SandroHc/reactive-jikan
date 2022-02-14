@@ -12,9 +12,10 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the anime episode details.
@@ -38,8 +39,8 @@ public class AnimeEpisodeQuery extends Query<DataHolder<AnimeEpisode>, Mono<Anim
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/anime/" + id + "/episodes/" + episode).build();
+	public QueryUrl getUrl() {
+		return endpoint("/anime/" + id + "/episodes/" + episode);
 	}
 
 	@Override

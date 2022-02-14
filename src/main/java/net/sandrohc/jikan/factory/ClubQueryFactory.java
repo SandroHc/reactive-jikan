@@ -7,10 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.club.ClubMembersQuery;
-import net.sandrohc.jikan.query.club.ClubQuery;
-import net.sandrohc.jikan.query.club.ClubRelationsQuery;
-import net.sandrohc.jikan.query.club.ClubStaffQuery;
+import net.sandrohc.jikan.query.club.*;
 
 /**
  * Factory for the club queries.
@@ -48,12 +45,11 @@ public class ClubQueryFactory extends Factory {
      * Get the club members.
      *
      * @param clubId The club ID
-     * @param page The page number
      * @return The club members query factory
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubMembers">Jikan API docs - getClubMembers</a>
      */
-    public ClubMembersQuery members(int clubId, int page) {
-        return new ClubMembersQuery(this.jikan, clubId, page);
+    public ClubMembersQuery members(int clubId) {
+        return new ClubMembersQuery(this.jikan, clubId);
     }
 
     /**

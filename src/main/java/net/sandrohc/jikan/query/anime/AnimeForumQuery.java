@@ -12,11 +12,11 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrlBuilder;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the anime forum posts.
@@ -43,10 +43,9 @@ public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<Foru
 	}
 
 	@Override
-	public String getUrl() {
-		QueryUrlBuilder builder = endpoint("/anime/" + id + "/forum");
-		if (forumTopicType != null) builder.queryParam("filter", forumTopicType.value);
-		return builder.build();
+	public QueryUrl getUrl() {
+		return endpoint("/anime/" + id + "/forum")
+				.param("filter", forumTopicType, ForumTopicType::getValue);
 	}
 
 	@Override

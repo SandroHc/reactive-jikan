@@ -10,37 +10,31 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.PageableQuery;
+import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
  * Query for the club members.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getClubMembers">Jikan API docs - getClubMembers</a>
  */
-public class ClubMembersQuery extends Query<DataListHolderWithPagination<User>, Flux<User>> {
+public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination<User>, Flux<User>, ClubMembersQuery> {
 
 	/** The club ID. */
 	protected final int id;
 
-	// TODO: confirm max per page
-	/** The page number. Each page contains up to 35 members. */
-	protected final int page;
-
-	public ClubMembersQuery(Jikan jikan, int id, int page) {
+	public ClubMembersQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
-		this.page = page;
 	}
 
 	@Override
-	public String getUrl() {
-		return endpoint("/clubs/" + id + "/members")
-				.queryParam("page", page)
-				.build();
+	public QueryUrl getInnerUrl() {
+		return endpoint("/clubs/" + id + "/members");
 	}
 
 	@Override

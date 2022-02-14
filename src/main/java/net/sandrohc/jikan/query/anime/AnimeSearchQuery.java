@@ -6,10 +6,6 @@
 
 package net.sandrohc.jikan.query.anime;
 
-import java.io.*;
-import java.net.URLEncoder;
-import java.nio.charset.*;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
@@ -17,25 +13,19 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
-import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrlBuilder;
+import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryableQuery;
+import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import static net.sandrohc.jikan.utils.EnumUtil.enumsToOrdinals;
 
 /**
  * Query for the anime search.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeSearch">Jikan API docs - getAnimeSearch</a>
  */
-public class AnimeSearchQuery extends Query<DataListHolderWithPagination<Anime>, Flux<Anime>> {
+public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPagination<Anime>, Flux<Anime>, AnimeSearchQuery> {
 
-	public static final int LIMIT_MAX = 50;
-
-	protected Integer page;
-	protected Integer limit;
-	protected String query;
 	protected AnimeType type;
 	protected Double score;
 	protected Double minimumScore;
@@ -53,31 +43,6 @@ public class AnimeSearchQuery extends Query<DataListHolderWithPagination<Anime>,
 
 	public AnimeSearchQuery(Jikan jikan) {
 		super(jikan);
-	}
-
-	public AnimeSearchQuery page(Integer page) {
-		this.page = page;
-		return this;
-	}
-
-	public AnimeSearchQuery limit(Integer limit) throws JikanInvalidArgumentException {
-		if (limit != null && (limit < 0 || limit > LIMIT_MAX))
-			throw new JikanInvalidArgumentException("limit must be between 0 and " + LIMIT_MAX);
-
-		this.limit = limit;
-		return this;
-	}
-
-	public AnimeSearchQuery query(String query) throws UnsupportedEncodingException, JikanInvalidArgumentException {
-		if (query == null)
-			query = "";
-
-		// TODO: encode on the QueryUrlBuilder
-		// encode the string, as per the RFC3986 - http://tools.ietf.org/html/rfc3986#section-2.1 (percent encoding)
-		String encoded = URLEncoder.encode(query, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
-
-		this.query = encoded;
-		return this;
 	}
 
 	public AnimeSearchQuery type(AnimeType type) {
@@ -145,25 +110,21 @@ public class AnimeSearchQuery extends Query<DataListHolderWithPagination<Anime>,
 	}
 
 	@Override
-	public String getUrl() {
-		QueryUrlBuilder builder = QueryUrlBuilder.endpoint("/anime");
-		if (page != null) builder.queryParam("page", page);
-		if (limit != null) builder.queryParam("limit", limit);
-		if (query != null) builder.queryParam("q", query);
-		if (type != null) builder.queryParam("type", type.search);
-		if (score != null) builder.queryParam("score", score);
-		if (minimumScore != null) builder.queryParam("min_score", minimumScore);
-		if (maximumScore != null) builder.queryParam("max_score", maximumScore);
-		if (status != null) builder.queryParam("status", status.search);
-		if (ageRating != null) builder.queryParam("rating", ageRating.search);
-		if (sfw != null) builder.queryParam("sfw", sfw);
-		if (genres != null && genres.length > 0) builder.queryParam("genres", enumsToOrdinals(genres));
-		if (genresExclude != null && genresExclude.length > 0) builder.queryParam("genres_exclude", enumsToOrdinals(genresExclude));
-		if (orderBy != null) builder.queryParam("order_by", orderBy.search);
-		if (sort != null) builder.queryParam("sort", sort.search);
-		if (suffix != null) builder.queryParam("letter", suffix);
-		if (producerIds != null && producerIds.length > 0) builder.queryParam("producer", producerIds);
-		return builder.build();
+	public QueryUrl getInnerUrl() {
+		return QueryUrl.endpoint("/anime")
+				.param("type", type, AnimeType::getSearch)
+				.param("score", score)
+				.param("min_score", minimumScore)
+				.param("max_score", maximumScore)
+				.param("status", status, AnimeStatus::getSearch)
+				.param("rating", ageRating, AgeRating::getSearch)
+				.param("sfw", sfw)
+				.param("genres", genres, EnumUtil::enumsToOrdinals)
+				.param("genres_exclude", genresExclude, EnumUtil::enumsToOrdinals)
+				.param("order_by", orderBy, AnimeOrderBy::getSearch)
+				.param("sort", sort, SortOrder::getSearch)
+				.param("letter", suffix)
+				.param("producer", producerIds);
 	}
 
 	@Override

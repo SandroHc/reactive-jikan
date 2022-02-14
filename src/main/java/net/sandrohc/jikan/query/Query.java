@@ -43,13 +43,13 @@ public abstract class Query<T, R extends Publisher<?>> {
 	/**
 	 * Build the query URL dynamically.
 	 */
-	public abstract String getUrl();
+	public abstract QueryUrl getUrl();
 
 	// TODO: see if it's possible to fetch type from Query constructor
 	public abstract TypeReference<T> getResponseType();
 
 	public R execute() {
-		final String url = getUrl();
+		final String url = getUrl().build();
 		log.debug(JIKAN_MARKER, "Fetching request: {}", url);
 
 		final Mono<T> queryResults = jikan.httpClient.get().uri(url)
