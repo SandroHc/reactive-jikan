@@ -1,10 +1,10 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
@@ -21,19 +21,19 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeCharacters">Jikan API docs - getAnimeCharacters</a>
  */
-public class AnimeCharactersQuery extends Query<DataListHolder<CharacterBasic>, Flux<CharacterBasic>> {
+public class MangaCharactersQuery extends Query<DataListHolder<CharacterBasic>, Flux<CharacterBasic>> {
 
-	/** The anime ID. */
+	/** The manga ID. */
 	private final int id;
 
-	public AnimeCharactersQuery(Jikan jikan, int id) {
+	public MangaCharactersQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUrl() {
-		return endpoint("/anime/" + id + "/characters").build();
+		return endpoint("/manga/" + id + "/characters").build();
 	}
 
 	@Override

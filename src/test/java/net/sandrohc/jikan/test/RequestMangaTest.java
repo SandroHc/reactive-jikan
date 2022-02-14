@@ -6,13 +6,13 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.common.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.legacy.manga.*;
+import net.sandrohc.jikan.model.manga.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
@@ -234,14 +234,14 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/news", response);
 
-		Collection<AnimeNewsArticle> newsArticles = jikan.query().manga().news(96792).execute().collectList().block();
+		Collection<NewsArticle> newsArticles = jikan.query().manga().news(96792).execute().collectList().block();
 
 		assertNotNull(newsArticles);
 
 		/* Articles */
-		Iterator<AnimeNewsArticle> articlesIt = newsArticles.iterator();
+		Iterator<NewsArticle> articlesIt = newsArticles.iterator();
 
-		AnimeNewsArticle a1 = articlesIt.next();
+		NewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
 		assertEquals("https://myanimelist.net/news/60161703", a1.url);
 		assertEquals("North American Anime & Manga Releases for July", a1.title);
@@ -251,7 +251,7 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals(0, a1.comments);
 		assertEquals("Here are the North American anime & manga releases...", a1.intro);
 
-		AnimeNewsArticle a2 = articlesIt.next();
+		NewsArticle a2 = articlesIt.next();
 		assertNotNull(a2.toString());
 		assertEquals("https://myanimelist.net/news/59888183", a2.url);
 		assertEquals("Japan's Yearly Manga and Light Novel Rankings for 2020 (First Half)", a2.title);
@@ -375,15 +375,15 @@ public class RequestMangaTest extends RequestTest {
 
 		mock(mockServer, "/manga/96792/forum", response);
 
-		Collection<AnimeForumTopic> forumTopics = jikan.query().manga().forum(96792).execute().collectList().block();
+		Collection<ForumTopic> forumTopics = jikan.query().manga().forum(96792).execute().collectList().block();
 
 		assertNotNull(forumTopics);
 		assertNotNull(forumTopics.toString());
 
 		/* Topics */
-		Iterator<AnimeForumTopic> topicsIt = forumTopics.iterator();
+		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
 
-		AnimeForumTopic t1 = topicsIt.next();
+		ForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
 		assertEquals(1731050, t1.topicId);
 		assertEquals("https://myanimelist.net/forum/?topicid=1731050", t1.url);
@@ -755,7 +755,7 @@ public class RequestMangaTest extends RequestTest {
 		assertEquals("Solo Leveling", result.title);
 		assertEquals("https://myanimelist.net/manga/121496/Solo_Leveling", result.url);
 		assertEquals("https://cdn.myanimelist.net/images/manga/3/222295.jpg?s=b3abea95ceaccea8adf223bd0e4047b6", result.imageUrl);
-		assertEquals(MangaType.MANWHA, result.type);
+		assertEquals(MangaType.MANHWA, result.type);
 		assertEquals(0, result.volumes);
 		assertEquals("Mar 2018", result.startDate);
 		assertNull(result.endDate);

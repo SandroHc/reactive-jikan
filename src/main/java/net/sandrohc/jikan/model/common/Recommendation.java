@@ -17,7 +17,7 @@ import net.sandrohc.jikan.utils.Generated;
 public class Recommendation implements Serializable {
 
     /** The recommended anime/manga's details. */
-    public BasicEntity entry;
+    public EntityWithImage entry;
 
     /** The URL to the recommendation. */
     public String url;
@@ -26,11 +26,11 @@ public class Recommendation implements Serializable {
     public int votes;
 
 
-    public BasicEntity getEntry() {
+    public EntityWithImage getEntry() {
         return entry;
     }
 
-    public void setEntry(BasicEntity entry) {
+    public void setEntry(EntityWithImage entry) {
         this.entry = entry;
     }
 

@@ -16,24 +16,33 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum AnimeStatus {
 	@JsonProperty("Airing")
 	@JsonAlias("Currently Airing")
-	AIRING,
+	AIRING("airing"),
 
 	@JsonProperty("Completed")
 	@JsonAlias({ "Complete", "Finished Airing" })
-	COMPLETED,
+	COMPLETED("complete"),
 
 	@JsonProperty("Upcoming")
-	UPCOMING,
-
-	@JsonProperty("to_be_aired")
 	@JsonAlias({
 			"tba",
+			"to_be_aired",
 			"to be aired",
 			"Not yet aired"
 	})
-	TO_BE_AIRED,
+	UPCOMING("upcoming"),
 
 	@JsonEnumDefaultValue
-	@JsonProperty("Unknown")
-	UNKNOWN,
+	UNKNOWN(null);
+
+
+	/** Used in the search queries. */
+	public final String search;
+
+	AnimeStatus(String search) {
+		this.search = search;
+	}
+
+	public String getSearch() {
+		return search;
+	}
 }

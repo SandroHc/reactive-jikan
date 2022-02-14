@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.time.OffsetDateTime;
 
@@ -13,17 +13,17 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
- * A forum topic.
+ * An anime/manga news article.
  */
-public class AnimeForumTopic extends MalEntity {
+public class NewsArticle extends MalEntity {
 
-	/** The URL to the forum topic on MyAnimeList. */
+	/** The URL for the news article page on MyAnimeList. */
 	public String url;
 
-	/** The forum topic title. */
+	/** The news article title. */
 	public String title;
 
-	/** The date the forum topic was posted. */
+	/** The news article publishing date. */
 	public OffsetDateTime date;
 
 	/** The author name. */
@@ -34,10 +34,18 @@ public class AnimeForumTopic extends MalEntity {
 	@JsonProperty("author_url")
 	public String authorUrl;
 
+	/** The news article forum URL. */
+	@JsonProperty("forum_url")
+	public String forumUrl;
+
+	/** The news article image. */
+	public Images images;
+
+	/** The number of comments in this news article. */
 	public int comments;
 
-	@JsonProperty("last_comment")
-	public AnimeForumTopicComment lastComment;
+	/** A summary of the article text. Never exceeds 170 characters. */
+	public String excerpt;
 
 
 	public String getUrl() {
@@ -80,6 +88,22 @@ public class AnimeForumTopic extends MalEntity {
 		this.authorUrl = authorUrl;
 	}
 
+	public String getForumUrl() {
+		return forumUrl;
+	}
+
+	public void setForumUrl(String forumUrl) {
+		this.forumUrl = forumUrl;
+	}
+
+	public Images getImages() {
+		return images;
+	}
+
+	public void setImages(Images images) {
+		this.images = images;
+	}
+
 	public int getComments() {
 		return comments;
 	}
@@ -88,18 +112,18 @@ public class AnimeForumTopic extends MalEntity {
 		this.comments = comments;
 	}
 
-	public AnimeForumTopicComment getLastComment() {
-		return lastComment;
+	public String getExcerpt() {
+		return excerpt;
 	}
 
-	public void setLastComment(AnimeForumTopicComment lastComment) {
-		this.lastComment = lastComment;
+	public void setExcerpt(String excerpt) {
+		this.excerpt = excerpt;
 	}
 
 	@Generated
 	@Override
 	public String toString() {
-		return "ForumTopic[id=" + malId + ", title='" + title + "', url='" + url + "']";
+		return "NewsArticle[id=" + malId + ", title='" + title + "', url='" + url + "']";
 	}
 
 }

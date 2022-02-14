@@ -4,17 +4,16 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.io.*;
-import java.util.*;
 
 import net.sandrohc.jikan.utils.Generated;
 
 /**
  * An external resource.
  */
-public class AnimeExternal implements Serializable {
+public class External implements Serializable {
 
 	/** The name of the external resource. */
 	public String name;
@@ -45,7 +44,7 @@ public class AnimeExternal implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		AnimeExternal that = (AnimeExternal) o;
+		External that = (External) o;
 
 		if (name != null ? !name.equals(that.name) : that.name != null) return false;
 		return url != null ? url.equals(that.url) : that.url == null;

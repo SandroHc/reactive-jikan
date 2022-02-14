@@ -19,7 +19,7 @@ public class CharacterManga implements Serializable {
     public String role; // TODO: convert to enum
 
     /** The anime details. */
-    public BasicEntity manga;
+    public EntityWithImage manga;
 
 
     public String getRole() {
@@ -30,11 +30,11 @@ public class CharacterManga implements Serializable {
         this.role = role;
     }
 
-    public BasicEntity getManga() {
+    public EntityWithImage getManga() {
         return manga;
     }
 
-    public void setManga(BasicEntity manga) {
+    public void setManga(EntityWithImage manga) {
         this.manga = manga;
     }
 

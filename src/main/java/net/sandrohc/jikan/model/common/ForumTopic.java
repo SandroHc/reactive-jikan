@@ -4,27 +4,26 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.time.OffsetDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
- * An anime/manga news article.
+ * A forum post/topic.
  */
-public class AnimeNewsArticle extends MalEntity {
+public class ForumTopic extends MalEntity {
 
-	/** The URL for the news article page on MyAnimeList. */
+	/** The URL to the forum topic on MyAnimeList. */
 	public String url;
 
-	/** The news article title. */
+	/** The forum topic title. */
 	public String title;
 
-	/** The news article publishing date. */
+	/** The date the forum topic was posted. */
 	public OffsetDateTime date;
 
 	/** The author name. */
@@ -35,18 +34,12 @@ public class AnimeNewsArticle extends MalEntity {
 	@JsonProperty("author_url")
 	public String authorUrl;
 
-	/** The news article forum URL. */
-	@JsonProperty("forum_url")
-	public String forumUrl;
-
-	/** The news article image. */
-	public Images images;
-
-	/** The number of comments in this news article. */
+	/** The number of comments on this forum post/topic. */
 	public int comments;
 
-	/** A summary of the article text. Never exceeds 170 characters. */
-	public String excerpt;
+	/** The last comment on this forum post/topic. */
+	@JsonProperty("last_comment")
+	public ForumTopicComment lastComment;
 
 
 	public String getUrl() {
@@ -89,22 +82,6 @@ public class AnimeNewsArticle extends MalEntity {
 		this.authorUrl = authorUrl;
 	}
 
-	public String getForumUrl() {
-		return forumUrl;
-	}
-
-	public void setForumUrl(String forumUrl) {
-		this.forumUrl = forumUrl;
-	}
-
-	public Images getImages() {
-		return images;
-	}
-
-	public void setImages(Images images) {
-		this.images = images;
-	}
-
 	public int getComments() {
 		return comments;
 	}
@@ -113,18 +90,18 @@ public class AnimeNewsArticle extends MalEntity {
 		this.comments = comments;
 	}
 
-	public String getExcerpt() {
-		return excerpt;
+	public ForumTopicComment getLastComment() {
+		return lastComment;
 	}
 
-	public void setExcerpt(String excerpt) {
-		this.excerpt = excerpt;
+	public void setLastComment(ForumTopicComment lastComment) {
+		this.lastComment = lastComment;
 	}
 
 	@Generated
 	@Override
 	public String toString() {
-		return "NewsArticle[id=" + malId + ", title='" + title + "', url='" + url + "']";
+		return "ForumTopic[id=" + malId + ", title='" + title + "', url='" + url + "']";
 	}
 
 }

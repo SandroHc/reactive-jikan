@@ -23,14 +23,24 @@ public class UserUpdate implements Serializable {
     /** The score given by the user, from 0.0 to 10.0. */
     public double score;
 
-    /** The status, e.g. 'Watching'. */
+    /** The status, e.g. 'Watching', 'Reading'. */
     public String status; // TODO: convert to enum
 
-    @JsonAlias({ "episodes_seen", "chapters_seen" })
+    /** The number of episodes/chapters watched by the user. */
+    @JsonAlias({ "episodes_seen", "chapters_read" })
     public int seen;
 
+    /** The number of episodes/chapters for this anime/manga. */
     @JsonAlias({ "episodes_total", "chapters_total" })
     public int total;
+
+    /** The number of volumes read by the user. Available only for manga. */
+    @JsonAlias({ "volumes_read" })
+    public int volumesRead;
+
+    /** The number of volumes for this manga. Available only for manga. */
+    @JsonAlias({ "volumes_total" })
+    public int volumesTotal;
 
     public OffsetDateTime date;
 

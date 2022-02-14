@@ -1,0 +1,47 @@
+/*
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
+ *
+ * @author Sandro Marques <sandro123iv@gmail.com>
+ */
+
+package net.sandrohc.jikan.query.manga;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
+
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+
+/**
+ * Query for the "more info" section.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getMangaMoreInfo">Jikan API docs - getMangaMoreInfo</a>
+ */
+public class MangaMoreInfoQuery extends Query<DataHolder<MoreInfo>, Mono<MoreInfo>> {
+
+	/** The manga ID. */
+	private final int id;
+
+	public MangaMoreInfoQuery(Jikan jikan, int id) {
+		super(jikan);
+		this.id = id;
+	}
+
+	@Override
+	public String getUrl() {
+		return endpoint("/manga/" + id + "/moreinfo").build();
+	}
+
+	@Override
+	public TypeReference<DataHolder<MoreInfo>> getResponseType() {
+		return new TypeReference<DataHolder<MoreInfo>>() { };
+	}
+
+	@Override
+	public Mono<MoreInfo> process(Mono<DataHolder<MoreInfo>> content) {
+		return content.map(results -> results.data);
+	}
+}

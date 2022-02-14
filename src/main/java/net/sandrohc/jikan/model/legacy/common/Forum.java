@@ -8,7 +8,7 @@ package net.sandrohc.jikan.model.legacy.common;
 
 import java.util.*;
 
-import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.legacy.base.CacheEntity;
 
 /**
@@ -16,7 +16,7 @@ import net.sandrohc.jikan.model.legacy.base.CacheEntity;
  */
 public class Forum extends CacheEntity {
 
-	public List<AnimeForumTopic> topics = Collections.emptyList();
+	public List<ForumTopic> topics = Collections.emptyList();
 
 
 	@Override

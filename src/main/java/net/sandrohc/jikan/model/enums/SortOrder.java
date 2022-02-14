@@ -11,13 +11,14 @@ public enum SortOrder {
 	DESCENDING ("desc");
 
 
-	public final String value;
+	/** Used in the search queries. */
+	public final String search;
 
 	SortOrder(String value) {
-		this.value = value;
+		this.search = value;
 	}
 
-	public String getValue() {
-		return value;
+	public String getSearch() {
+		return search;
 	}
 }

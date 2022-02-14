@@ -90,7 +90,7 @@ public class Anime extends MalEntity {
 	/** The number of users that added this anime to their favorites. */
 	public int favorites;
 
-	/** The synopsis. */
+	/** The anime synopsis. */
 	public String synopsis;
 
 	/** The background information. */

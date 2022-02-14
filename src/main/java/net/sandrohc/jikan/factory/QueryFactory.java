@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.factory.legacy.ClubQueryFactory;
 
 /**
  * Factory for all the queries.
@@ -70,16 +71,15 @@ public class QueryFactory extends Factory {
 //        return new MagazineQueryFactory(this.jikan);
 //    }
 
-    // TODO: implement manga queries
-//    /**
-//     * All manga-related queries.
-//     *
-//     * @return the manga query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/manga">Jikan API docs - manga</a>
-//     */
-//    public MangaQueryFactory manga() {
-//        return new MangaQueryFactory(this.jikan);
-//    }
+    /**
+     * All manga-related queries.
+     *
+     * @return the manga query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/manga">Jikan API docs - manga</a>
+     */
+    public MangaQueryFactory manga() {
+        return new MangaQueryFactory(this.jikan);
+    }
 
     // TODO: implement person queries
 //    /**

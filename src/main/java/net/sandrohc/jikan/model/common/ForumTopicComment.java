@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.io.*;
 import java.time.*;
@@ -12,7 +12,7 @@ import java.time.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.utils.Generated;
 
-public class AnimeForumTopicComment implements Serializable {
+public class ForumTopicComment implements Serializable {
 
 	/** The URL to the forum topic comment on MyAnimeList. */
 	public String url;
@@ -67,7 +67,7 @@ public class AnimeForumTopicComment implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		AnimeForumTopicComment that = (AnimeForumTopicComment) o;
+		ForumTopicComment that = (ForumTopicComment) o;
 
 		if (url != null ? !url.equals(that.url) : that.url != null) return false;
 		if (authorUsername != null ? !authorUsername.equals(that.authorUsername) : that.authorUsername != null)

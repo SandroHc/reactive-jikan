@@ -14,42 +14,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * The official age rating.
  */
 public enum AgeRating {
-
-	@JsonEnumDefaultValue
-	@JsonProperty("NONE")
-	@JsonAlias("None")
-	NONE,
-
 	@JsonProperty("G")
 	@JsonAlias("G - All Ages")
-	G,
+	G("g"),
 
 	@JsonProperty("PG")
 	@JsonAlias("PG - Children")
-	PG,
+	PG("pg"),
 
 	@JsonProperty("PG-13")
 	@JsonAlias("PG-13 - Teens 13 or older")
-	PG13,
+	PG13("pg13"),
 
 	@JsonProperty("R")
 	@JsonAlias({
 			"R - 17+ (violence & profanity)",
 			"R - 17+ recommended (violence & profanity)",
 	})
-	R17,
+	R17("r17"),
 
 	@JsonProperty("R+")
 	@JsonAlias({
 			"R+ - Mild Nudity",
 			"R+ - Mild Nudity (may also contain violence & profanity)"
 	})
-	R,
+	R("r"),
 
 	@JsonProperty("Rx")
 	@JsonAlias("Rx - Hentai (extreme sexual content/nudity)")
-	RX,
+	RX("rx"),
 
 	@JsonEnumDefaultValue
-	UNKNOWN,
+	UNKNOWN(null);
+
+
+	/** Used in the search queries. */
+	public final String search;
+
+	AgeRating(String search) {
+		this.search = search;
+	}
+
+	public String getSearch() {
+		return search;
+	}
 }

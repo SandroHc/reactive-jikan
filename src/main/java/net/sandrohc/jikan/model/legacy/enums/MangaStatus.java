@@ -15,17 +15,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public enum MangaStatus {
 	@JsonProperty("Publishing")
-	PUBLISHING,
+	PUBLISHING("publishing"),
 
 	@JsonProperty("Completed")
 	@JsonAlias({ "Complete", "Finished" })
-	COMPLETED,
+	COMPLETED("complete"),
 
-	@JsonProperty("To be published")
-	@JsonAlias({ "TBP", "Upcoming" })
-	TO_BE_PUBLISHED,
+	@JsonProperty("Hiatus")
+	HIATUS("hiatus"),
+
+	@JsonProperty("Discontinued")
+	DISCONTINUED("discontinued"),
+
+	@JsonProperty("Upcoming")
+	@JsonAlias({ "TBP", "To be published" })
+	UPCOMING("upcoming"),
 
 	@JsonEnumDefaultValue
-	@JsonProperty("Unknown")
-	UNKNOWN,
+	UNKNOWN(null);
+
+
+	/** Used in the search queries. */
+	public final String search;
+
+	MangaStatus(String search) {
+		this.search = search;
+	}
+
+	public String getSearch() {
+		return search;
+	}
 }

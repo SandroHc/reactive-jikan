@@ -384,9 +384,9 @@ public class RequestAnimeTest extends RequestTest {
 		assertNotNull(charactersAndStaff.toString());
 
 		/* Characters */
-		Iterator<AnimeCharacter> charactersIt = charactersAndStaff.characters.iterator();
+		Iterator<CharacterBasic> charactersIt = charactersAndStaff.characters.iterator();
 
-		AnimeCharacter character1 = charactersIt.next();
+		CharacterBasic character1 = charactersIt.next();
 		assertNotNull(character1.toString());
 		assertEquals(36765, character1.malId);
 		assertEquals("Kirigaya, Kazuto", character1.name);
@@ -403,7 +403,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals("Matsuoka, Yoshitsugu", cha1va2.name);
 		assertEquals("Japanese", cha1va2.language);
 
-		AnimeCharacter character2 = charactersIt.next();
+		CharacterBasic character2 = charactersIt.next();
 		assertNotNull(character2.toString());
 		assertEquals(36828, character2.malId);
 		assertEquals("Yuuki, Asuna", character2.name);
@@ -534,15 +534,15 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/news", response);
 
-		Collection<AnimeNewsArticle> newsArticles = jikan.query().anime().news(11757).execute().collectList().block();
+		Collection<NewsArticle> newsArticles = jikan.query().anime().news(11757).execute().collectList().block();
 
 		assertNotNull(newsArticles);
 		assertNotNull(new News().toString());
 
 		/* Articles */
-		Iterator<AnimeNewsArticle> articlesIt = newsArticles.iterator();
+		Iterator<NewsArticle> articlesIt = newsArticles.iterator();
 
-		AnimeNewsArticle a1 = articlesIt.next();
+		NewsArticle a1 = articlesIt.next();
 		assertNotNull(a1.toString());
 		assertEquals("https://myanimelist.net/news/56114579", a1.url);
 		assertEquals("Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri", a1.title);
@@ -552,7 +552,7 @@ public class RequestAnimeTest extends RequestTest {
 		assertEquals(5, a1.comments);
 		assertEquals("Since making her international debut...", a1.intro);
 
-		AnimeNewsArticle a2 = articlesIt.next();
+		NewsArticle a2 = articlesIt.next();
 		assertNotNull(a2.toString());
 		assertEquals("https://myanimelist.net/news/50992876", a2.url);
 		assertEquals("North American Anime & Manga Releases for June", a2.title);
@@ -723,15 +723,15 @@ public class RequestAnimeTest extends RequestTest {
 
 		mock(mockServer, "/anime/11757/forum", response);
 
-		Collection<AnimeForumTopic> forumTopics = jikan.query().anime().forum(11757).execute().collectList().block();
+		Collection<ForumTopic> forumTopics = jikan.query().anime().forum(11757).execute().collectList().block();
 
 		assertNotNull(forumTopics);
 		assertNotNull(new Forum().toString());
 
 		/* Topics */
-		Iterator<AnimeForumTopic> topicsIt = forumTopics.iterator();
+		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
 
-		AnimeForumTopic t1 = topicsIt.next();
+		ForumTopic t1 = topicsIt.next();
 		assertNotNull(t1.toString());
 		assertEquals(1797514, t1.topicId);
 		assertEquals("https://myanimelist.net/forum/?topicid=1797514", t1.url);

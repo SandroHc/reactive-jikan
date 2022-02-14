@@ -4,22 +4,21 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.character;
 
 import java.io.*;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A character.
  */
-public class AnimeCharacter implements Serializable {
+public class CharacterBasic implements Serializable {
 
 	/** The character details. */
-	public AnimeCharacterDetails character;
+	public CharacterDetails character;
 
 	/** The character role, e.g. 'Main'. */
 	public String role; // TODO: Convert to enum
@@ -29,11 +28,11 @@ public class AnimeCharacter implements Serializable {
 	public List<CharacterVoiceActor> voiceActors;
 
 
-	public AnimeCharacterDetails getCharacter() {
+	public CharacterDetails getCharacter() {
 		return character;
 	}
 
-	public void setCharacter(AnimeCharacterDetails character) {
+	public void setCharacter(CharacterDetails character) {
 		this.character = character;
 	}
 
@@ -59,7 +58,7 @@ public class AnimeCharacter implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		AnimeCharacter that = (AnimeCharacter) o;
+		CharacterBasic that = (CharacterBasic) o;
 
 		if (character != null ? !character.equals(that.character) : that.character != null) return false;
 		if (role != null ? !role.equals(that.role) : that.role != null) return false;

@@ -11,9 +11,9 @@ import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
- * A user recommendation for an anime or manga.
+ * A basic MAL entity with name and image.
  */
-public class BasicEntity extends MalEntity {
+public class EntityWithImage extends MalEntity {
 
     /** The URL to the entity. */
     public String url;
@@ -21,7 +21,7 @@ public class BasicEntity extends MalEntity {
     /** The cover image of the entity. */
     public Images images;
 
-    /** The name of the entity. */
+    /** The entity name. */
     @JsonAlias({ "name", "title" })
     public String name;
 
@@ -53,6 +53,6 @@ public class BasicEntity extends MalEntity {
     @Generated
     @Override
     public String toString() {
-        return "BasicEntity[id=" + malId + ", name='" + name + "']";
+        return "EntityWithImage[id=" + malId + ", name='" + name + "']";
     }
 }

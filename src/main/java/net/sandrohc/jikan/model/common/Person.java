@@ -12,7 +12,7 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * The person details.
  */
-public class Person extends BasicEntity {
+public class Person extends EntityWithImage {
 
 	@Generated
 	@Override

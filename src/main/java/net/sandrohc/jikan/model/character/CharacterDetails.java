@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.character;
 
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
@@ -13,7 +13,7 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * The character details.
  */
-public class AnimeCharacterDetails extends MalEntity {
+public class CharacterDetails extends MalEntity {
 
 	/** The URL to MyAnimeList. */
 	public String url;

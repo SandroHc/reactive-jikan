@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
@@ -17,23 +17,23 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
- * Query for the anime external links.
+ * Query for the manga external links.
  *
- * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeExternal">Jikan API docs - getAnimeExternal</a>
+ * @see <a href="https://docs.api.jikan.moe/#operation/getMangaExternal">Jikan API docs - getMangaExternal</a>
  */
-public class AnimeExternalQuery extends Query<DataListHolder<External>, Flux<External>> {
+public class MangaExternalQuery extends Query<DataListHolder<External>, Flux<External>> {
 
-	/** The anime ID. */
+	/** The manga ID. */
 	private final int id;
 
-	public AnimeExternalQuery(Jikan jikan, int id) {
+	public MangaExternalQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUrl() {
-		return endpoint("/anime/" + id + "/external").build();
+		return endpoint("/manga/" + id + "/external").build();
 	}
 
 	@Override

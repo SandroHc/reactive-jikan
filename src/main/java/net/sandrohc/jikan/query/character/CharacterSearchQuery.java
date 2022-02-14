@@ -84,7 +84,7 @@ public class CharacterSearchQuery extends Query<DataListHolderWithPagination<Cha
 		if (limit != null) builder.queryParam("limit", limit);
 		if (query != null) builder.queryParam("q", query);
 		if (orderBy != null) builder.queryParam("order_by", orderBy.name().toLowerCase()); // TODO: add 'searchValue/queryParam' field to enum
-		if (sort != null) builder.queryParam("sort", sort.value);
+		if (sort != null) builder.queryParam("sort", sort.search);
 		if (suffix != null) builder.queryParam("letter", suffix);
 		return builder.build();
 	}

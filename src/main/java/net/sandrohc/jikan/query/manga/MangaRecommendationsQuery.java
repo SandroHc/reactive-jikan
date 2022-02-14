@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
@@ -17,32 +17,32 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
- * Query for the anime external links.
+ * Query for the manga recommendations.
  *
- * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeExternal">Jikan API docs - getAnimeExternal</a>
+ * @see <a href="https://docs.api.jikan.moe/#operation/getMangaRecommendations">Jikan API docs - getMangaRecommendations</a>
  */
-public class AnimeExternalQuery extends Query<DataListHolder<External>, Flux<External>> {
+public class MangaRecommendationsQuery extends Query<DataListHolder<Recommendation>, Flux<Recommendation>> {
 
-	/** The anime ID. */
+	/** The manga ID. */
 	private final int id;
 
-	public AnimeExternalQuery(Jikan jikan, int id) {
+	public MangaRecommendationsQuery(Jikan jikan, int id) {
 		super(jikan);
 		this.id = id;
 	}
 
 	@Override
 	public String getUrl() {
-		return endpoint("/anime/" + id + "/external").build();
+		return endpoint("/manga/" + id + "/recommendations").build();
 	}
 
 	@Override
-	public TypeReference<DataListHolder<External>> getResponseType() {
-		return new TypeReference<DataListHolder<External>>() { };
+	public TypeReference<DataListHolder<Recommendation>> getResponseType() {
+		return new TypeReference<DataListHolder<Recommendation>>() { };
 	}
 
 	@Override
-	public Flux<External> process(Mono<DataListHolder<External>> content) {
+	public Flux<Recommendation> process(Mono<DataListHolder<Recommendation>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
 }

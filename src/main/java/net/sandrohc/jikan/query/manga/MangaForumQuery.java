@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
@@ -19,24 +19,24 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
- * Query for the anime forum posts.
+ * Query for the manga forum posts/topics.
  *
- * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeForum">Jikan API docs - getAnimeForum</a>
+ * @see <a href="https://docs.api.jikan.moe/#operation/getMangaTopics">Jikan API docs - getMangaTopics</a>
  */
-public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<ForumTopic>> {
+public class MangaForumQuery extends Query<DataListHolder<ForumTopic>, Flux<ForumTopic>> {
 
-	/** The anime ID. */
+	/** The manga ID. */
 	private final int id;
 
 	/** The forum topic type. */
 	private final ForumTopicType forumTopicType;
 
 
-	public AnimeForumQuery(Jikan jikan, int id) {
+	public MangaForumQuery(Jikan jikan, int id) {
 		this(jikan, id, null);
 	}
 
-	public AnimeForumQuery(Jikan jikan, int id, ForumTopicType forumTopicType) {
+	public MangaForumQuery(Jikan jikan, int id, ForumTopicType forumTopicType) {
 		super(jikan);
 		this.id = id;
 		this.forumTopicType = forumTopicType;
@@ -44,7 +44,7 @@ public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<Foru
 
 	@Override
 	public String getUrl() {
-		QueryUrlBuilder builder = endpoint("/anime/" + id + "/forum");
+		QueryUrlBuilder builder = endpoint("/manga/" + id + "/forum");
 		if (forumTopicType != null) builder.queryParam("filter", forumTopicType.value);
 		return builder.build();
 	}

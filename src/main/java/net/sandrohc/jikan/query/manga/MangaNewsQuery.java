@@ -1,10 +1,10 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.query.anime;
+package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
@@ -18,20 +18,19 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
- * Query for the anime news.
+ * Query for the manga news.
  *
- * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeNews">Jikan API docs - getAnimeNews</a>
+ * @see <a href="https://docs.api.jikan.moe/#operation/getMangaNews">Jikan API docs - getMangaNews</a>
  */
-public class AnimeNewsQuery extends Query<DataListHolderWithPagination<NewsArticle>, Flux<NewsArticle>> {
+public class MangaNewsQuery extends Query<DataListHolderWithPagination<NewsArticle>, Flux<NewsArticle>> {
 
-	/** The anime ID. */
+	/** The manga ID. */
 	private final int id;
 
-	// TODO: validate javadoc by checking max news per page
-	/** The page. Each page contains up to ? news. */
+	/** The page number. */
 	private final int page;
 
-	public AnimeNewsQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
+	public MangaNewsQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
 		super(jikan);
 		if (page < 1) throw new JikanInvalidArgumentException("page starts at index 1");
 
@@ -41,7 +40,7 @@ public class AnimeNewsQuery extends Query<DataListHolderWithPagination<NewsArtic
 
 	@Override
 	public String getUrl() {
-		return endpoint("/anime/" + id + "/news")
+		return endpoint("/manga/" + id + "/news")
 				.queryParam("page", page)
 				.build();
 	}

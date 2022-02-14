@@ -32,10 +32,9 @@ public class Review extends MalEntity {
     /** The review. */
     public String review;
 
-    /** The number of episodes/chapters the reviewer saw. */
+    /** The number of episodes/chapters the reviewer watched. */
     @JsonAlias({ "episodes_watched", "chapters_read" })
     public int numberWatched;
-
 
     /** The scores given by the reviewer. */
     public ReviewScores scores;

@@ -8,7 +8,7 @@ package net.sandrohc.jikan.model.legacy.common;
 
 import java.util.*;
 
-import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.legacy.base.CacheEntity;
 
 /**
@@ -17,7 +17,7 @@ import net.sandrohc.jikan.model.legacy.base.CacheEntity;
 public class News extends CacheEntity {
 
 	/** The news articles. */
-	public List<AnimeNewsArticle> articles = Collections.emptyList();
+	public List<NewsArticle> articles = Collections.emptyList();
 
 
 	@Override
