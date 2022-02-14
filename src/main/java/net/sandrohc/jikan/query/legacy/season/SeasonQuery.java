@@ -16,10 +16,10 @@ import reactor.core.publisher.Mono;
 public class SeasonQuery extends Query<SeasonAnime, Flux<SeasonAnime>> {
 
 	/** The season year. */
-	private final int year;
+	protected final int year;
 
 	/** The season. */
-	private final Season season;
+	protected final Season season;
 
 	public SeasonQuery(Jikan jikan, int year, Season season) {
 		super(jikan);

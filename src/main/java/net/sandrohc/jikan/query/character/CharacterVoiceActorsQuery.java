@@ -24,7 +24,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class CharacterVoiceActorsQuery extends Query<DataListHolder<CharacterVoiceActor>, Flux<CharacterVoiceActor>> {
 
 	/** The character ID. */
-	private final int id;
+	protected final int id;
 
 	public CharacterVoiceActorsQuery(Jikan jikan, int id) {
 		super(jikan);

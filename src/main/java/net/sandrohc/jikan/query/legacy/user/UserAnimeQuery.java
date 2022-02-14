@@ -17,14 +17,13 @@ import reactor.core.publisher.Mono;
 public class UserAnimeQuery extends Query<UserAnime, Flux<UserAnime>> {
 
 	/** The username. **/
-	private final String username;
+	protected final String username;
 
 	/** The page. */
-	private final int page;
+	protected final int page;
 
 	/** The watching status. */
-	private UserAnimeWatchingStatus status;
-
+	protected UserAnimeWatchingStatus status;
 
 	public UserAnimeQuery(Jikan jikan, String username, int page) {
 		super(jikan);

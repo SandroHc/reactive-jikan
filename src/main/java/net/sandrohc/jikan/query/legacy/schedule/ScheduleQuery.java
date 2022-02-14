@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 public class ScheduleQuery extends Query<Schedule, Mono<Schedule>> {
 
 	/** The day of the week. */
-	private DayOfWeek day;
+	protected DayOfWeek day;
 
 	public ScheduleQuery(Jikan jikan) {
 		super(jikan);

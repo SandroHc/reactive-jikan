@@ -24,7 +24,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class AnimeExternalQuery extends Query<DataListHolder<External>, Flux<External>> {
 
 	/** The anime ID. */
-	private final int id;
+	protected final int id;
 
 	public AnimeExternalQuery(Jikan jikan, int id) {
 		super(jikan);

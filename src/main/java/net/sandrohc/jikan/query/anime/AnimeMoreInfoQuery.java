@@ -24,7 +24,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class AnimeMoreInfoQuery extends Query<DataHolder<MoreInfo>, Mono<MoreInfo>> {
 
 	/** The anime ID. */
-	private final int id;
+	protected final int id;
 
 	public AnimeMoreInfoQuery(Jikan jikan, int id) {
 		super(jikan);

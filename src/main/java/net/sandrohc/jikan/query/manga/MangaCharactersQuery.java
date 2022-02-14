@@ -24,7 +24,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class MangaCharactersQuery extends Query<DataListHolder<CharacterBasic>, Flux<CharacterBasic>> {
 
 	/** The manga ID. */
-	private final int id;
+	protected final int id;
 
 	public MangaCharactersQuery(Jikan jikan, int id) {
 		super(jikan);

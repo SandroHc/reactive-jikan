@@ -47,27 +47,25 @@ public class QueryFactory extends Factory {
         return new ClubQueryFactory(this.jikan);
     }
 
-    // TODO: implement genre queries
-//    /**
-//     * All genre-related queries.
-//     *
-//     * @return the genre query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/genres">Jikan API docs - genres</a>
-//     */
-//    public GenreQueryFactory genre() {
-//        return new GenreQueryFactory(this.jikan);
-//    }
+    /**
+     * All genre-related queries.
+     *
+     * @return the genre query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/genres">Jikan API docs - genres</a>
+     */
+    public GenreQueryFactory genre() {
+        return new GenreQueryFactory(this.jikan);
+    }
 
-    // TODO: implement magazine queries
-//    /**
-//     * All magazine-related queries.
-//     *
-//     * @return the magazine query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/magazines">Jikan API docs - magazines</a>
-//     */
-//    public MagazineQueryFactory magazine() {
-//        return new MagazineQueryFactory(this.jikan);
-//    }
+    /**
+     * All magazine-related queries.
+     *
+     * @return the magazine query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/magazines">Jikan API docs - magazines</a>
+     */
+    public MagazineQueryFactory magazine() {
+        return new MagazineQueryFactory(this.jikan);
+    }
 
     /**
      * All manga-related queries.
@@ -79,16 +77,15 @@ public class QueryFactory extends Factory {
         return new MangaQueryFactory(this.jikan);
     }
 
-    // TODO: implement person queries
-//    /**
-//     * All person-related queries.
-//     *
-//     * @return the person query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/people">Jikan API docs - people</a>
-//     */
-//    public PersonQueryFactory person() {
-//        return new ClubQueryFactory(this.jikan);
-//    }
+    /**
+     * All person-related queries.
+     *
+     * @return the person query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/people">Jikan API docs - people</a>
+     */
+    public PersonQueryFactory person() {
+        return new PersonQueryFactory(this.jikan);
+    }
 
     // TODO: implement producer queries
 //    /**
@@ -97,8 +94,8 @@ public class QueryFactory extends Factory {
 //     * @return the producer query factory
 //     * @see <a href="https://docs.api.jikan.moe/#tag/producers">Jikan API docs - producers</a>
 //     */
-//    public ClubQueryFactory producer() {
-//        return new ClubQueryFactory(this.jikan);
+//    public ProducerQueryFactory producer() {
+//        return new ProducerQueryFactory(this.jikan);
 //    }
 
     // TODO: implement random queries
@@ -163,8 +160,8 @@ public class QueryFactory extends Factory {
 //     * @return the season query factory
 //     * @see <a href="https://docs.api.jikan.moe/#tag/seasons">Jikan API docs - seasons</a>
 //     */
-//    public SeaspmQueryFactory season() {
-//        return new SeaspmQueryFactory(this.jikan);
+//    public SeasonQueryFactory season() {
+//        return new SeasonQueryFactory(this.jikan);
 //    }
 
     // TODO: implement top queries
@@ -174,8 +171,8 @@ public class QueryFactory extends Factory {
 //     * @return the top query factory
 //     * @see <a href="https://docs.api.jikan.moe/#tag/top">Jikan API docs - top</a>
 //     */
-//    public ClubQueryFactory top() {
-//        return new ClubQueryFactory(this.jikan);
+//    public TopQueryFactory top() {
+//        return new TopQueryFactory(this.jikan);
 //    }
 
     // TODO: implement watch queries
@@ -185,7 +182,7 @@ public class QueryFactory extends Factory {
 //     * @return the watch query factory
 //     * @see <a href="https://docs.api.jikan.moe/#tag/watch">Jikan API docs - watch</a>
 //     */
-//    public ClubQueryFactory watch() {
-//        return new ClubQueryFactory(this.jikan);
+//    public WatchQueryFactory watch() {
+//        return new WatchQueryFactory(this.jikan);
 //    }
 }

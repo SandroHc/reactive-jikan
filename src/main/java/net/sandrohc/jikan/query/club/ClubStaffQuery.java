@@ -24,7 +24,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class ClubStaffQuery extends Query<DataListHolder<User>, Flux<User>> {
 
 	/** The club ID. */
-	private final int id;
+	protected final int id;
 
 	public ClubStaffQuery(Jikan jikan, int id) {
 		super(jikan);

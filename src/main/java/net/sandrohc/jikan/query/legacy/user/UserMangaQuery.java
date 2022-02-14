@@ -19,17 +19,15 @@ public class UserMangaQuery extends Query<UserManga, Flux<UserManga>> {
     /**
      * The username.
      **/
-    private final String username;
+    protected final String username;
 
     /**
      * The page.
      */
-    private final int page;
+    protected final int page;
 
-    /**
-     * The watching status.
-     */
-    private UserMangaReadingStatus status;
+    /** The watching status. */
+    protected UserMangaReadingStatus status;
 
 
     public UserMangaQuery(Jikan jikan, String username, int page) {

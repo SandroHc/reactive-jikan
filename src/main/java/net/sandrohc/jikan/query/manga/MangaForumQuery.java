@@ -26,26 +26,26 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class MangaForumQuery extends Query<DataListHolder<ForumTopic>, Flux<ForumTopic>> {
 
 	/** The manga ID. */
-	private final int id;
+	protected final int id;
 
 	/** The forum topic type. */
-	private final ForumTopicType forumTopicType;
+	protected ForumTopicType type;
 
 
 	public MangaForumQuery(Jikan jikan, int id) {
-		this(jikan, id, null);
-	}
-
-	public MangaForumQuery(Jikan jikan, int id, ForumTopicType forumTopicType) {
 		super(jikan);
 		this.id = id;
-		this.forumTopicType = forumTopicType;
+	}
+
+	public MangaForumQuery type(ForumTopicType type) {
+		this.type = type;
+		return this;
 	}
 
 	@Override
 	public String getUrl() {
 		QueryUrlBuilder builder = endpoint("/manga/" + id + "/forum");
-		if (forumTopicType != null) builder.queryParam("filter", forumTopicType.value);
+		if (type != null) builder.queryParam("filter", type.value);
 		return builder.build();
 	}
 

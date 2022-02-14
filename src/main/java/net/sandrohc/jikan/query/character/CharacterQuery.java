@@ -23,7 +23,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class CharacterQuery extends Query<DataHolder<Character>, Mono<Character>> {
 
 	/** The character ID. */
-	private final int id;
+	protected final int id;
 
 	public CharacterQuery(Jikan jikan, int id) {
 		super(jikan);

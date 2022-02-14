@@ -23,7 +23,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class ClubQuery extends Query<DataHolder<Club>, Mono<Club>> {
 
 	/** The club ID. */
-	private final int id;
+	protected final int id;
 
 	public ClubQuery(Jikan jikan, int id) {
 		super(jikan);

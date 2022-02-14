@@ -25,11 +25,11 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class AnimeEpisodesQuery extends Query<DataListHolderWithPagination<AnimeEpisode>, Flux<AnimeEpisode>> {
 
 	/** The anime ID. */
-	private final int id;
+	protected final int id;
 
 	// TODO: validate javadoc by checking if max episodes per page has changed
 	/** The page. Each page contains up to 100 episodes. */
-	private final int page;
+	protected final int page;
 
 	public AnimeEpisodesQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
 		super(jikan);

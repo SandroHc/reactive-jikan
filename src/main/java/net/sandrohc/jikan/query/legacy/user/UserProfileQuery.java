@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 
 public class UserProfileQuery extends Query<UserProfile, Mono<UserProfile>> {
 
-	private final String username;
+	protected final String username;
 
 	public UserProfileQuery(Jikan jikan, String username) {
 		super(jikan);

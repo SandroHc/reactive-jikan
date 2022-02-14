@@ -9,7 +9,7 @@ package net.sandrohc.jikan.model.anime;
 import java.io.*;
 import java.util.*;
 
-import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -18,17 +18,17 @@ import net.sandrohc.jikan.utils.Generated;
 public class AnimeStaff implements Serializable {
 
 	/** The person details. */
-	public Person person;
+	public PersonSimple person;
 
 	/** The staff positions, e.g. 'Director'. */
 	public Collection<String> positions = Collections.emptyList(); // TODO: Convert to enum
 
 
-	public Person getPerson() {
+	public PersonSimple getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(PersonSimple person) {
 		this.person = person;
 	}
 

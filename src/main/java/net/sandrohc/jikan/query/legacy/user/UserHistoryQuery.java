@@ -14,10 +14,10 @@ import reactor.core.publisher.Mono;
 
 public abstract class UserHistoryQuery extends Query<UserHistory, Flux<UserHistory>> {
 
-	private final String type;
+	protected final String type;
 
 	/** The username. **/
-	private final String username;
+	protected final String username;
 
 
 	public UserHistoryQuery(Jikan jikan, String type, String username) {

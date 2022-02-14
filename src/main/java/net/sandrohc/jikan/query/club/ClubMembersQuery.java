@@ -24,11 +24,11 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class ClubMembersQuery extends Query<DataListHolderWithPagination<User>, Flux<User>> {
 
 	/** The club ID. */
-	private final int id;
+	protected final int id;
 
 	// TODO: confirm max per page
 	/** The page number. Each page contains up to 35 members. */
-	private final int page;
+	protected final int page;
 
 	public ClubMembersQuery(Jikan jikan, int id, int page) {
 		super(jikan);

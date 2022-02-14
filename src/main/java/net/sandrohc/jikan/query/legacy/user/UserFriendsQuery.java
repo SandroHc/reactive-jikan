@@ -15,10 +15,10 @@ import reactor.core.publisher.Mono;
 public class UserFriendsQuery extends Query<UserFriend, Flux<UserFriend>> {
 
 	/** The username. **/
-	private final String username;
+	protected final String username;
 
 	/** The page. */
-	private final int page;
+	protected final int page;
 
 
 	public UserFriendsQuery(Jikan jikan, String username, int page) {

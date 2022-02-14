@@ -8,23 +8,23 @@ package net.sandrohc.jikan.model.character;
 
 import java.io.*;
 
-import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.utils.Generated;
 
 public class CharacterVoiceActor implements Serializable {
 
 	/** The voice actor details. */
-	public Person person;
+	public PersonSimple person;
 
 	/** The language performed by the voice actor. */
 	public String language;
 
 
-	public Person getPerson() {
+	public PersonSimple getPerson() {
 		return person;
 	}
 
-	public void setPerson(Person person) {
+	public void setPerson(PersonSimple person) {
 		this.person = person;
 	}
 

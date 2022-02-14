@@ -8,7 +8,6 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.manga.*;
 
 /**
@@ -79,11 +78,10 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga forum posts/topics.
 	 *
 	 * @param mangaId The manga ID
-	 * @param forumTopicType The forum topic type
 	 * @return The manga forum topics query factory
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaTopics">Jikan API docs - getMangaTopics</a>
 	 */
-	public MangaForumQuery forum(int mangaId, ForumTopicType forumTopicType) {
+	public MangaForumQuery forum(int mangaId) {
 		return new MangaForumQuery(this.jikan, mangaId);
 	}
 

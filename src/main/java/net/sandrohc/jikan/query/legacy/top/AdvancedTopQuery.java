@@ -13,7 +13,7 @@ import net.sandrohc.jikan.model.enums.*;
 @SuppressWarnings("unchecked")
 public abstract class AdvancedTopQuery<Q extends AdvancedTopQuery<Q, T, SUBTYPE>, T, SUBTYPE> extends TopQuery<T> {
 
-	private SUBTYPE subtype;
+	protected SUBTYPE subtype;
 
 	protected AdvancedTopQuery(Jikan jikan, Type type, int page) throws JikanInvalidArgumentException {
 		super(jikan, type, page);

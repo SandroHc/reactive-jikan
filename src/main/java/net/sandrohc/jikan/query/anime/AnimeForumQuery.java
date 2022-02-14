@@ -26,10 +26,10 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<ForumTopic>> {
 
 	/** The anime ID. */
-	private final int id;
+	protected final int id;
 
 	/** The forum topic type. */
-	private final ForumTopicType forumTopicType;
+	protected final ForumTopicType forumTopicType;
 
 
 	public AnimeForumQuery(Jikan jikan, int id) {

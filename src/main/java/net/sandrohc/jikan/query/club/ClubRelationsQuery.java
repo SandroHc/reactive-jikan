@@ -23,7 +23,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class ClubRelationsQuery extends Query<DataListHolder<EntityWithType>, Flux<EntityWithType>> {
 
 	/** The club ID. */
-	private final int id;
+	protected final int id;
 
 	public ClubRelationsQuery(Jikan jikan, int id) {
 		super(jikan);

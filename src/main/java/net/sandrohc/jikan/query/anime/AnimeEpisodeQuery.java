@@ -24,10 +24,10 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 public class AnimeEpisodeQuery extends Query<DataHolder<AnimeEpisode>, Mono<AnimeEpisode>> {
 
 	/** The anime ID. */
-	private final int id;
+	protected final int id;
 
 	/** The episode number. */
-	private final int episode;
+	protected final int episode;
 
 	public AnimeEpisodeQuery(Jikan jikan, int id, int episode) throws JikanInvalidArgumentException {
 		super(jikan);

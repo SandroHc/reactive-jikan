@@ -15,7 +15,6 @@ import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.common.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.query.anime.AnimeQuery;
-import net.sandrohc.jikan.query.legacy.search.SearchQuery;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 

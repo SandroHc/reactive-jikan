@@ -15,10 +15,10 @@ import reactor.core.publisher.Mono;
 public class ProducerQuery extends Query<Producer, Mono<Producer>> {
 
 	/** The producer, studio, or licensor ID. */
-	private final int id;
+	protected final int id;
 
 	/** The page. Each page contains up to 100 anime. */
-	public final int page;
+	protected final int page;
 
 	public ProducerQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
 		super(jikan);

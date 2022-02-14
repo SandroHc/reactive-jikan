@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.common;
+package net.sandrohc.jikan.model.person;
 
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.utils.Generated;
@@ -12,7 +12,7 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * The person details.
  */
-public class Person extends EntityWithImage {
+public class PersonSimple extends EntityWithImage {
 
 	@Generated
 	@Override

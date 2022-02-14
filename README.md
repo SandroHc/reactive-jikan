@@ -6,12 +6,12 @@
 
 API wrapper for the [Jikan API](https://jikan.moe) V4, with the power of Project Reactor and reactive streams.
 
-## Version matrix
+## Supported versions
 
 | API version | reactive-jikan version |
-|------------ |----------------------- |
-| [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://github.com/SandroHc/reactive-jikan/releases/tag/1.1.0) |
-| [V4](https://docs.api.jikan.moe/) | [2.0.0-alpha](https://github.com/SandroHc/reactive-jikan/releases/tag/2.0.0-alpha) |
+| ----------- |----------------------- |
+| [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/1.1.0/jar) |
+| [V4](https://docs.api.jikan.moe/) | [2.0.0-alpha](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.0.0-alpha) |
 
 
 ## Installation
@@ -54,17 +54,22 @@ Anime anime = jikan.query().anime().get(1)
         .block();
 
 // Search for 'sword art online'. Returns a list of values, a flux.
-Collection<AnimeSearchSub> results = jikan.query().anime().search()
-        .query("sword art online")
-        .limit(5)
-        .status(AnimeStatus.AIRING)
-        .orderBy(AnimeOrderBy.MEMBERS)
-        .execute()
-        .collectList()
-        .block();
+Collection<Anime> results = jikan.query().anime().search()
+		.query("sword art online")
+		.limit(5)
+		.status(AnimeStatus.AIRING)
+		.orderBy(AnimeOrderBy.MEMBERS, SortOrder.ASCENDING)
+		.execute()
+		.collectList()
+		.block();
 ```
 
-### Query list
+## Caching
+
+Support for caching is still a work-in-progress.
+
+
+## Endpoints
 
 The following is an exhaustive list of all the endpoints and query classes supported by the Reactive Jikan library.
 
