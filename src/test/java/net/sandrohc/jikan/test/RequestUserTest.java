@@ -7,6 +7,7 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.legacy.user.*;
+import net.sandrohc.jikan.model.manga.*;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.jupiter.api.*;
 

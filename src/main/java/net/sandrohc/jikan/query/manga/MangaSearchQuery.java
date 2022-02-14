@@ -15,7 +15,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.enums.MangaOrderBy;
+import net.sandrohc.jikan.model.manga.MangaOrderBy;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.Query;

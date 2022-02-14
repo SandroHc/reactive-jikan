@@ -9,6 +9,7 @@ import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.legacy.magazine.*;
 import net.sandrohc.jikan.model.legacy.manga.*;
+import net.sandrohc.jikan.model.manga.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;

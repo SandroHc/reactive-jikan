@@ -11,7 +11,7 @@ import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 

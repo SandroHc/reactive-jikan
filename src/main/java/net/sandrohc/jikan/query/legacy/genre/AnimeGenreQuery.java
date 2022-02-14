@@ -8,6 +8,7 @@ package net.sandrohc.jikan.query.legacy.genre;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.anime.*;
 import reactor.core.publisher.Flux;

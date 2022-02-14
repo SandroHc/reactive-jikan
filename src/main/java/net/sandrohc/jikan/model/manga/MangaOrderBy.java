@@ -4,13 +4,13 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.enums;
+package net.sandrohc.jikan.model.manga;
 
 import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Available filters to sort the anime search entries.
+ * Available filters to sort the manga search entries.
  */
 public enum MangaOrderBy {
 	@JsonProperty("mal_id")     MAL_ID("mal_id"),

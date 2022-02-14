@@ -12,6 +12,7 @@ import java.util.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.manga.*;
 
 /**
  * The manga details of a MAL user.

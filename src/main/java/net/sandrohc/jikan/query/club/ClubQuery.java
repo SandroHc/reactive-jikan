@@ -1,0 +1,47 @@
+/*
+ * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ *
+ * @author Sandro Marques <sandro123iv@gmail.com>
+ */
+
+package net.sandrohc.jikan.query.club;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.club.*;
+import net.sandrohc.jikan.query.Query;
+import reactor.core.publisher.Mono;
+
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+
+/**
+ * Query for the club details.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getClubsById">Jikan API docs - getClubsById</a>
+ */
+public class ClubQuery extends Query<DataHolder<Club>, Mono<Club>> {
+
+	/** The club ID. */
+	private final int id;
+
+	public ClubQuery(Jikan jikan, int id) {
+		super(jikan);
+		this.id = id;
+	}
+
+	@Override
+	public String getUrl() {
+		return endpoint("/clubs/" + id).build();
+	}
+
+	@Override
+	public TypeReference<DataHolder<Club>> getResponseType() {
+		return new TypeReference<DataHolder<Club>>() { };
+	}
+
+	@Override
+	public Mono<Club> process(Mono<DataHolder<Club>> content) {
+		return content.map(holder -> holder.data);
+	}
+}

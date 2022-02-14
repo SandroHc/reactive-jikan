@@ -7,7 +7,6 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.factory.legacy.ClubQueryFactory;
 
 /**
  * Factory for all the queries.
@@ -38,16 +37,15 @@ public class QueryFactory extends Factory {
         return new CharacterQueryFactory(this.jikan);
     }
 
-    // TODO: implement club queries
-//    /**
-//     * All club-related queries.
-//     *
-//     * @return the club query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/clubs">Jikan API docs - clubs</a>
-//     */
-//    public ClubQueryFactory club() {
-//        return new ClubQueryFactory(this.jikan);
-//    }
+    /**
+     * All club-related queries.
+     *
+     * @return the club query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/clubs">Jikan API docs - clubs</a>
+     */
+    public ClubQueryFactory club() {
+        return new ClubQueryFactory(this.jikan);
+    }
 
     // TODO: implement genre queries
 //    /**

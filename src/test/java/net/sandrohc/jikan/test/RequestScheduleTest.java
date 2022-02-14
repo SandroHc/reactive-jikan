@@ -4,6 +4,7 @@ import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;

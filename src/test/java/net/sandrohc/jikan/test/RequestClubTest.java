@@ -5,7 +5,7 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.base.*;
-import net.sandrohc.jikan.model.legacy.club.*;
+import net.sandrohc.jikan.model.club.*;
 import net.sandrohc.jikan.model.legacy.user.*;
 import org.apache.commons.lang3.SerializationUtils;
 import org.junit.jupiter.api.*;

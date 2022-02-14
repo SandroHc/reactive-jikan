@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.model;
 
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 
