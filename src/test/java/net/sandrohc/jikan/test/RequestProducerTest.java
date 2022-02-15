@@ -8,7 +8,6 @@ import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
-import net.sandrohc.jikan.model.legacy.producer.*;
 import net.sandrohc.jikan.model.legacy.season.*;
 import org.junit.jupiter.api.*;
 

@@ -11,6 +11,7 @@ import java.time.*;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.user.*;
 
 /**
  * An anime or manga review.
@@ -40,7 +41,7 @@ public class Review extends MalEntity {
     public ReviewScores scores;
 
     /** The reviewer details. */
-    public User user;
+    public UserSimple user;
 
 
     public String getUrl() {
@@ -99,11 +100,11 @@ public class Review extends MalEntity {
         this.scores = scores;
     }
 
-    public User getUser() {
+    public UserSimple getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserSimple user) {
         this.user = user;
     }
 

@@ -78,12 +78,11 @@ public class AnimeQueryFactory extends Factory {
 	 * Get the list of episodes.
 	 *
 	 * @param animeId The anime ID
-	 * @param page The episodes page, starting at 1
 	 * @return The anime episodes query factory
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeEpisodes">Jikan API docs - getAnimeEpisodes</a>
 	 */
-	public AnimeEpisodesQuery episodes(int animeId, int page) throws JikanInvalidArgumentException {
-		return new AnimeEpisodesQuery(this.jikan, animeId, page);
+	public AnimeEpisodesQuery episodes(int animeId) throws JikanInvalidArgumentException {
+		return new AnimeEpisodesQuery(this.jikan, animeId);
 	}
 
 	/**

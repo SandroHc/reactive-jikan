@@ -4,11 +4,16 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.common;
+package net.sandrohc.jikan.model.user;
 
 import java.io.*;
 
-public class User implements Serializable {
+import net.sandrohc.jikan.model.common.*;
+
+/**
+ * Base details of a user.
+ */
+public class UserSimple implements Serializable {
 
 	/** The user name. */
 	public String username;
@@ -49,7 +54,7 @@ public class User implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		User that = (User) o;
+		UserSimple that = (UserSimple) o;
 
 		return username != null ? username.equals(that.username) : that.username == null;
 	}
@@ -61,6 +66,6 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "UserUpdateUser[username='" + username + "']";
+		return "UserSimple[username='" + username + "']";
 	}
 }

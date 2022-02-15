@@ -9,7 +9,7 @@ package net.sandrohc.jikan.query.club;
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.PageableQuery;
 import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
@@ -22,7 +22,7 @@ import static net.sandrohc.jikan.query.QueryUrl.endpoint;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getClubMembers">Jikan API docs - getClubMembers</a>
  */
-public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination<User>, Flux<User>, ClubMembersQuery> {
+public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination<UserSimple>, Flux<UserSimple>, ClubMembersQuery> {
 
 	/** The club ID. */
 	protected final int id;
@@ -38,12 +38,12 @@ public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<User>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<User>>() { };
+	public TypeReference<DataListHolderWithPagination<UserSimple>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<UserSimple>>() { };
 	}
 
 	@Override
-	public Flux<User> process(Mono<DataListHolderWithPagination<User>> content) {
+	public Flux<UserSimple> process(Mono<DataListHolderWithPagination<UserSimple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

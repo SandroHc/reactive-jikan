@@ -13,6 +13,7 @@ import net.sandrohc.jikan.model.legacy.common.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.legacy.manga.*;
 import net.sandrohc.jikan.model.manga.*;
+import net.sandrohc.jikan.model.user.*;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 

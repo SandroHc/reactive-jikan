@@ -16,35 +16,48 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public enum DayOfWeek {
 	@JsonProperty("monday")
 	@JsonAlias("Mondays")
-	MONDAY,
+	MONDAY("monday"),
 
 	@JsonProperty("tuesday")
 	@JsonAlias("Tuesdays")
-	TUESDAY,
+	TUESDAY("tuesday"),
 
 	@JsonProperty("wednesday")
 	@JsonAlias("Wednesdays")
-	WEDNESDAY,
+	WEDNESDAY("wednesday"),
 
 	@JsonProperty("thursday")
 	@JsonAlias("Thursdays")
-	THURSDAY,
+	THURSDAY("thursday"),
 
 	@JsonProperty("friday")
 	@JsonAlias("Fridays")
-	FRIDAY,
+	FRIDAY("friday"),
 
 	@JsonProperty("saturday")
 	@JsonAlias("Saturdays")
-	SATURDAY,
+	SATURDAY("saturday"),
 
 	@JsonProperty("sunday")
 	@JsonAlias("Sundays")
-	SUNDAY,
+	SUNDAY("sunday"),
 
 	@JsonProperty("other")
-	OTHER,
+	OTHER("other"),
 
 	@JsonEnumDefaultValue
-	@JsonProperty("unknown")   UNKNOWN,
+	@JsonProperty("unknown")
+	UNKNOWN("unknown");
+
+
+	/** Used in the search queries. */
+	public final String search;
+
+	DayOfWeek(String search) {
+		this.search = search;
+	}
+
+	public String getSearch() {
+		return search;
+	}
 }

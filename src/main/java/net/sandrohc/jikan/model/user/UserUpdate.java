@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.common;
+package net.sandrohc.jikan.model.user;
 
 import java.io.*;
 import java.time.*;
@@ -18,7 +18,7 @@ import net.sandrohc.jikan.utils.Generated;
 public class UserUpdate implements Serializable {
 
     /** The user details. */
-    public User user;
+    public UserSimple user;
 
     /** The score given by the user, from 0.0 to 10.0. */
     public double score;
@@ -45,11 +45,11 @@ public class UserUpdate implements Serializable {
     public OffsetDateTime date;
 
 
-    public User getUser() {
+    public UserSimple getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserSimple user) {
         this.user = user;
     }
 

@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.query.schedule.ScheduleQuery;
 
 /**
  * Factory for all the queries.
@@ -87,60 +88,55 @@ public class QueryFactory extends Factory {
         return new PersonQueryFactory(this.jikan);
     }
 
-    // TODO: implement producer queries
-//    /**
-//     * All producer-related queries.
-//     *
-//     * @return the producer query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/producers">Jikan API docs - producers</a>
-//     */
-//    public ProducerQueryFactory producer() {
-//        return new ProducerQueryFactory(this.jikan);
-//    }
+    /**
+     * All producer-related queries.
+     *
+     * @return the producer query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/producers">Jikan API docs - producers</a>
+     */
+    public ProducerQueryFactory producer() {
+        return new ProducerQueryFactory(this.jikan);
+    }
 
-    // TODO: implement random queries
-//    /**
-//     * All random-related queries.
-//     *
-//     * @return the random query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/random">Jikan API docs - random</a>
-//     */
-//    public RandomQueryFactory random() {
-//        return new RandomQueryFactory(this.jikan);
-//    }
+    /**
+     * All random-related queries.
+     *
+     * @return the random query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/random">Jikan API docs - random</a>
+     */
+    public RandomQueryFactory random() {
+        return new RandomQueryFactory(this.jikan);
+    }
 
-    // TODO: implement recommendation queries
-//    /**
-//     * All recommendation-related queries.
-//     *
-//     * @return the recommendation query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/recommendations">Jikan API docs - recommendations</a>
-//     */
-//    public RecommendationQueryFactory recommendation() {
-//        return new RecommendationQueryFactory(this.jikan);
-//    }
+    /**
+     * All recommendation-related queries.
+     *
+     * @return the recommendation query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/recommendations">Jikan API docs - recommendations</a>
+     */
+    public RecommendationQueryFactory recommendation() {
+        return new RecommendationQueryFactory(this.jikan);
+    }
 
-    // TODO: implement review queries
-//    /**
-//     * All review-related queries.
-//     *
-//     * @return the review query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/reviews">Jikan API docs - reviews</a>
-//     */
-//    public ReviewQueryFactory review() {
-//        return new ReviewQueryFactory(this.jikan);
-//    }
+    /**
+     * All review-related queries.
+     *
+     * @return the review query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/reviews">Jikan API docs - reviews</a>
+     */
+    public ReviewQueryFactory review() {
+        return new ReviewQueryFactory(this.jikan);
+    }
 
-    // TODO: implement schedule queries
-//    /**
-//     * All schedule-related queries.
-//     *
-//     * @return the schedule query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/schedules">Jikan API docs - schedules</a>
-//     */
-//    public ScheduleQueryFactory schedule() {
-//        return new ScheduleQueryFactory(this.jikan);
-//    }
+    /**
+     * Query for the currently airing anime/manga schedules.
+     *
+     * @return the schedule query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/schedules">Jikan API docs - schedules</a>
+     */
+    public ScheduleQuery schedule() {
+        return new ScheduleQuery(this.jikan);
+    }
 
     // TODO: implement user queries
 //    /**

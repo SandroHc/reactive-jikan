@@ -1,0 +1,54 @@
+/*
+ * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ *
+ * @author Sandro Marques <sandro123iv@gmail.com>
+ */
+
+package net.sandrohc.jikan.query.schedule;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.query.PageableQuery;
+import net.sandrohc.jikan.query.QueryUrl;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+/**
+ * Query for the currently airing anime/manga schedules.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#operation/getSchedules">Jikan API docs - getSchedules</a>
+ */
+public class ScheduleQuery extends PageableQuery<DataListHolderWithPagination<Anime>, Flux<Anime>, ScheduleQuery> {
+
+	/** The day of the week. */
+	protected DayOfWeek day;
+
+
+	public ScheduleQuery(Jikan jikan) {
+		super(jikan);
+	}
+
+	public ScheduleQuery type(DayOfWeek day) {
+		this.day = day;
+		return this;
+	}
+
+	@Override
+	public QueryUrl getInnerUrl() {
+		return QueryUrl.endpoint("/schedules")
+				.param("filter", day, DayOfWeek::getSearch);
+	}
+
+	@Override
+	public TypeReference<DataListHolderWithPagination<Anime>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<Anime>>() { };
+	}
+
+	@Override
+	public Flux<Anime> process(Mono<DataListHolderWithPagination<Anime>> content) {
+		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
+	}
+}

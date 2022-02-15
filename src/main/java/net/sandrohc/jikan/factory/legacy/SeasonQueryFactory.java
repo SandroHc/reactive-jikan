@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.legacy.season.SeasonQuery;
 
 /**
  * Factory for the season queries.
+ *
+ * @see <a href="https://docs.api.jikan.moe/#tag/seasons">Jikan API docs - seasons</a>
  */
 public class SeasonQueryFactory extends Factory {
 
@@ -22,6 +24,14 @@ public class SeasonQueryFactory extends Factory {
         super(jikan);
     }
 
+    /**
+     * Get the season details.
+     *
+     * @param year The year
+     * @param season The season
+     * @return The season query factory
+     * @see <a href="https://docs.api.jikan.moe/#operation/getSeason">Jikan API docs - getSeason</a>
+     */
     public SeasonQuery get(int year, Season season) {
         return new SeasonQuery(this.jikan, year, season);
     }

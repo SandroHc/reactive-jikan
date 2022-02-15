@@ -10,8 +10,7 @@ import java.io.*;
 import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.legacy.base.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**

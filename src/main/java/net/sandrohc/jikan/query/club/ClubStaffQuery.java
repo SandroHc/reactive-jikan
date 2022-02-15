@@ -9,7 +9,7 @@ package net.sandrohc.jikan.query.club;
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrl;
 import reactor.core.publisher.Flux;
@@ -22,7 +22,7 @@ import static net.sandrohc.jikan.query.QueryUrl.endpoint;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getClubStaff">Jikan API docs - getClubStaff</a>
  */
-public class ClubStaffQuery extends Query<DataListHolder<User>, Flux<User>> {
+public class ClubStaffQuery extends Query<DataListHolder<UserSimple>, Flux<UserSimple>> {
 
 	/** The club ID. */
 	protected final int id;
@@ -38,12 +38,12 @@ public class ClubStaffQuery extends Query<DataListHolder<User>, Flux<User>> {
 	}
 
 	@Override
-	public TypeReference<DataListHolder<User>> getResponseType() {
-		return new TypeReference<DataListHolder<User>>() { };
+	public TypeReference<DataListHolder<UserSimple>> getResponseType() {
+		return new TypeReference<DataListHolder<UserSimple>>() { };
 	}
 
 	@Override
-	public Flux<User> process(Mono<DataListHolder<User>> content) {
+	public Flux<UserSimple> process(Mono<DataListHolder<UserSimple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }
