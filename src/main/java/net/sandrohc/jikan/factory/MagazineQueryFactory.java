@@ -23,7 +23,7 @@ public class MagazineQueryFactory extends Factory {
     /**
      * Get the latest magazines.
      *
-     * @return The magazine query factory
+     * @return The magazine query
      * @see <a href="https://docs.api.jikan.moe/#operation/getMagazines">Jikan API docs - getMagazines</a>
      */
     public MagazineQuery list() {

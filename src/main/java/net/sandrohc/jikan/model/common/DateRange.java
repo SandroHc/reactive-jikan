@@ -20,6 +20,22 @@ public class DateRange implements Serializable {
 	public OffsetDateTime to;
 
 
+	public OffsetDateTime getFrom() {
+		return from;
+	}
+
+	public void setFrom(OffsetDateTime from) {
+		this.from = from;
+	}
+
+	public OffsetDateTime getTo() {
+		return to;
+	}
+
+	public void setTo(OffsetDateTime to) {
+		this.to = to;
+	}
+
 	@Generated
 	@Override
 	public boolean equals(Object o) {

@@ -24,7 +24,7 @@ public class ClubQueryFactory extends Factory {
      * Get the club details.
      *
      * @param clubId The club ID
-     * @return The club query factory
+     * @return The club query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubsById">Jikan API docs - getClubsById</a>
      */
     public ClubQuery get(int clubId) {
@@ -34,7 +34,7 @@ public class ClubQueryFactory extends Factory {
     /**
      * Get the club search.
      *
-     * @return The club search query factory
+     * @return The club search query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubSearch">Jikan API docs - getClubSearch</a>
      */
     public ClubSearchQuery search() {
@@ -45,7 +45,7 @@ public class ClubQueryFactory extends Factory {
      * Get the club members.
      *
      * @param clubId The club ID
-     * @return The club members query factory
+     * @return The club members query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubMembers">Jikan API docs - getClubMembers</a>
      */
     public ClubMembersQuery members(int clubId) {
@@ -56,7 +56,7 @@ public class ClubQueryFactory extends Factory {
      * Get the club staff.
      *
      * @param clubId The club ID
-     * @return The club staff query factory
+     * @return The club staff query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubStaff">Jikan API docs - getClubStaff</a>
      */
     public ClubStaffQuery staff(int clubId) {
@@ -67,7 +67,7 @@ public class ClubQueryFactory extends Factory {
      * Get the club relations.
      *
      * @param clubId The club ID
-     * @return The club relations query factory
+     * @return The club relations query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubRelations">Jikan API docs - getClubRelations</a>
      */
     public ClubRelationsQuery relations(int clubId) {

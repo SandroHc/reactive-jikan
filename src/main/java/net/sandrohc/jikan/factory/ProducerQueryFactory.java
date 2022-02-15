@@ -23,7 +23,7 @@ public class ProducerQueryFactory extends Factory {
     /**
      * Get list of producers.
      *
-     * @return The magazine query factory
+     * @return The magazine query
      * @see <a href="https://docs.api.jikan.moe/#operation/getProducers">Jikan API docs - getProducers</a>
      */
     public ProducerQuery list() {

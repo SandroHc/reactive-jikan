@@ -6,33 +6,17 @@
 
 package net.sandrohc.jikan.model;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A basic MAL entity with name and image.
  */
-public class EntityWithImage extends MalEntity {
-
-    /** The URL to the entity. */
-    public String url;
+public class EntityWithImage extends Entity {
 
     /** The cover image of the entity. */
     public Images images;
 
-    /** The entity name. */
-    @JsonAlias({ "name", "title" })
-    public String name;
-
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
 
     public Images getImages() {
         return images;
@@ -42,17 +26,9 @@ public class EntityWithImage extends MalEntity {
         this.images = images;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     @Generated
     @Override
     public String toString() {
-        return "EntityWithImage[id=" + malId + ", name='" + name + "']";
+        return getClass().getSimpleName() + "[id=" + malId + ", name='" + name + "', images=" + images + "]";
     }
 }

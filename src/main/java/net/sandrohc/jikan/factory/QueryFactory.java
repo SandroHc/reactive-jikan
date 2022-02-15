@@ -138,16 +138,15 @@ public class QueryFactory extends Factory {
         return new ScheduleQuery(this.jikan);
     }
 
-    // TODO: implement user queries
-//    /**
-//     * All user-related queries.
-//     *
-//     * @return the user query factory
-//     * @see <a href="https://docs.api.jikan.moe/#tag/users">Jikan API docs - users</a>
-//     */
-//    public UserQueryFactory user() {
-//        return new UserQueryFactory(this.jikan);
-//    }
+    /**
+     * All user-related queries.
+     *
+     * @return the user query factory
+     * @see <a href="https://docs.api.jikan.moe/#tag/users">Jikan API docs - users</a>
+     */
+    public UserQueryFactory user() {
+        return new UserQueryFactory(this.jikan);
+    }
 
     // TODO: implement season queries
 //    /**

@@ -9,6 +9,7 @@ package net.sandrohc.jikan.model.character;
 import java.io.*;
 
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
  * A relation between a character and a manga.
@@ -38,6 +39,7 @@ public class CharacterManga implements Serializable {
         this.manga = manga;
     }
 
+    @Generated
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -49,6 +51,7 @@ public class CharacterManga implements Serializable {
         return manga != null ? manga.equals(that.manga) : that.manga == null;
     }
 
+    @Generated
     @Override
     public int hashCode() {
         int result = role != null ? role.hashCode() : 0;
@@ -56,6 +59,7 @@ public class CharacterManga implements Serializable {
         return result;
     }
 
+    @Generated
     @Override
     public String toString() {
         return "Character[role=" + role + ", manga=" + manga + ']';

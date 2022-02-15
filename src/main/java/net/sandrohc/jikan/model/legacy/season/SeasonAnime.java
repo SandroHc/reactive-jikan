@@ -59,7 +59,7 @@ public class SeasonAnime extends MalEntity {
 
     public List<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
 
-    public List<MalSubEntity> producers = Collections.emptyList();
+    public List<EntityWithType> producers = Collections.emptyList();
 
     public List<String> licensors = Collections.emptyList();
 

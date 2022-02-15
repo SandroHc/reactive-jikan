@@ -543,14 +543,14 @@ public class RequestMangaTest extends RequestTest {
 
 		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().manga().userUpdates(10, 0), "page starts at index 1");
 
-		Collection<UserUpdate> userUpdates = jikan.query().manga().userUpdates(96792, 1).execute().collectList().block();
+		Collection<UserUpdateWithUser> userUpdates = jikan.query().manga().userUpdates(96792, 1).execute().collectList().block();
 
 		assertNotNull(userUpdates);
 
 		/* User Updates */
-		Iterator<UserUpdate> usersIt = userUpdates.iterator();
+		Iterator<UserUpdateWithUser> usersIt = userUpdates.iterator();
 
-		UserUpdate userUpdate = usersIt.next();
+		UserUpdateWithUser userUpdate = usersIt.next();
 		assertNotNull(userUpdate.toString());
 		assertEquals("Vincent1307", userUpdate.username);
 		assertEquals("https://myanimelist.net/profile/Vincent1307", userUpdate.url);

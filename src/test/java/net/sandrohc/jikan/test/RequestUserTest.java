@@ -106,7 +106,7 @@ public class RequestUserTest extends RequestTest {
 		int hash = user.hashCode();
 
 
-		UserAnimeStats animeStats = user.animeStats;
+		UserAnimeStatistics animeStats = user.animeStats;
 		assertNotNull(animeStats.toString());
 		assertEquals(10.1D, animeStats.daysWatched);
 		assertEquals(5.5D, animeStats.meanScore);
@@ -126,7 +126,7 @@ public class RequestUserTest extends RequestTest {
 		hash = animeStats.hashCode();
 
 
-		UserMangaStats mangaStats = user.mangaStats;
+		UserMangaStatistics mangaStats = user.mangaStats;
 		assertNotNull(mangaStats.toString());
 		assertEquals(20.1D, mangaStats.daysRead);
 		assertEquals(10.5D, mangaStats.meanScore);
@@ -212,12 +212,12 @@ public class RequestUserTest extends RequestTest {
 
 		mock(mockServer, "/user/USERNAME/history/anime", response);
 
-		Iterator<UserHistory> history = jikan.query().user("USERNAME").anime().updates()
+		Iterator<UserHistoryEntry> history = jikan.query().user("USERNAME").anime().updates()
 				.execute().collectList().block().iterator();
 
 		assertNotNull(new UserHistoryList().toString());
 
-		UserHistory h1 = history.next();
+		UserHistoryEntry h1 = history.next();
 		assertNotNull(h1.toString());
 		assertNotNull(h1.meta.toString());
 		assertEquals(790, h1.meta.malId);
@@ -227,7 +227,7 @@ public class RequestUserTest extends RequestTest {
 		assertEquals(10, h1.increment);
 		assertEquals(OffsetDateTime.parse("2020-01-30T12:25:35+00:00"), h1.date);
 
-		UserHistory h2 = history.next();
+		UserHistoryEntry h2 = history.next();
 		assertNotNull(h2.toString());
 		assertNotNull(h2.meta.toString());
 		assertEquals(39491, h2.meta.malId);
@@ -285,12 +285,12 @@ public class RequestUserTest extends RequestTest {
 
 		mock(mockServer, "/user/USERNAME/history/manga", response);
 
-		Iterator<UserHistory> history = jikan.query().user("USERNAME").manga().updates()
+		Iterator<UserHistoryEntry> history = jikan.query().user("USERNAME").manga().updates()
 				.execute().collectList().block().iterator();
 
 		assertNotNull(new UserHistoryList().toString());
 
-		UserHistory h1 = history.next();
+		UserHistoryEntry h1 = history.next();
 		assertNotNull(h1.toString());
 		assertNotNull(h1.meta.toString());
 		assertEquals(119792, h1.meta.malId);
@@ -300,7 +300,7 @@ public class RequestUserTest extends RequestTest {
 		assertEquals(10, h1.increment);
 		assertEquals(OffsetDateTime.parse("2020-01-30T12:25:35+00:00"), h1.date);
 
-		UserHistory h2 = history.next();
+		UserHistoryEntry h2 = history.next();
 		assertNotNull(h2.toString());
 		assertNotNull(h2.meta.toString());
 		assertEquals(25, h2.meta.malId);

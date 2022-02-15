@@ -35,10 +35,13 @@ public class Review extends MalEntity {
 
     /** The number of episodes/chapters the reviewer watched. */
     @JsonAlias({ "episodes_watched", "chapters_read" })
-    public int numberWatched;
+    public int seen;
 
     /** The scores given by the reviewer. */
     public ReviewScores scores;
+
+    /** The entry. Omitted if retrieving reviews for a specific anime or manga. */
+    public EntityWithImage entry;
 
     /** The reviewer details. */
     public UserSimple user;
@@ -84,12 +87,12 @@ public class Review extends MalEntity {
         this.review = review;
     }
 
-    public int getNumberWatched() {
-        return numberWatched;
+    public int getSeen() {
+        return seen;
     }
 
-    public void setNumberWatched(int numberWatched) {
-        this.numberWatched = numberWatched;
+    public void setSeen(int seen) {
+        this.seen = seen;
     }
 
     public ReviewScores getScores() {

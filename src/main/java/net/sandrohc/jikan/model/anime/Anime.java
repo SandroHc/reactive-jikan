@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.utils.Generated;
 
@@ -106,13 +105,13 @@ public class Anime extends MalEntity {
 	public AnimeBroadcast broadcast;
 
 	/** The producers. */
-	public Collection<MalSubEntity> producers = Collections.emptyList();
+	public Collection<EntityWithType> producers = Collections.emptyList();
 
 	/** The licensors. */
-	public Collection<MalSubEntity> licensors = Collections.emptyList();
+	public Collection<EntityWithType> licensors = Collections.emptyList();
 
 	/** The studios. */
-	public Collection<MalSubEntity> studios = Collections.emptyList();
+	public Collection<EntityWithType> studios = Collections.emptyList();
 
 	/** The genres. */
 	public Collection<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
@@ -336,27 +335,27 @@ public class Anime extends MalEntity {
 		this.broadcast = broadcast;
 	}
 
-	public Collection<MalSubEntity> getProducers() {
+	public Collection<EntityWithType> getProducers() {
 		return producers;
 	}
 
-	public void setProducers(Collection<MalSubEntity> producers) {
+	public void setProducers(Collection<EntityWithType> producers) {
 		this.producers = producers;
 	}
 
-	public Collection<MalSubEntity> getLicensors() {
+	public Collection<EntityWithType> getLicensors() {
 		return licensors;
 	}
 
-	public void setLicensors(Collection<MalSubEntity> licensors) {
+	public void setLicensors(Collection<EntityWithType> licensors) {
 		this.licensors = licensors;
 	}
 
-	public Collection<MalSubEntity> getStudios() {
+	public Collection<EntityWithType> getStudios() {
 		return studios;
 	}
 
-	public void setStudios(Collection<MalSubEntity> studios) {
+	public void setStudios(Collection<EntityWithType> studios) {
 		this.studios = studios;
 	}
 

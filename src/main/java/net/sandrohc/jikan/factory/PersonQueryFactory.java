@@ -24,7 +24,7 @@ public class PersonQueryFactory extends Factory {
      * Get the person details.
      *
      * @param personId The person ID
-     * @return The person query factory
+     * @return The person query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonById">Jikan API docs - getPersonById</a>
      */
     public PersonQuery get(int personId) {
@@ -34,7 +34,7 @@ public class PersonQueryFactory extends Factory {
     /**
      * Get the person search.
      *
-     * @return The person search query factory
+     * @return The person search query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonById">Jikan API docs - getPersonById</a>
      */
     public PersonSearchQuery search() {
@@ -50,7 +50,7 @@ public class PersonQueryFactory extends Factory {
      * Get the person anime-related positions.
      *
      * @param personId The person ID
-     * @return The person anime query factory
+     * @return The person anime query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonAnime">Jikan API docs - getPersonAnime</a>
      */
     public PersonAnimeQuery anime(int personId) {
@@ -61,7 +61,7 @@ public class PersonQueryFactory extends Factory {
      * Get the person voice-actor positions.
      *
      * @param personId The person ID
-     * @return The person voices query factory
+     * @return The person voices query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonVoices">Jikan API docs - getPersonVoices</a>
      */
     public PersonVoicesQuery voices(int personId) {
@@ -72,7 +72,7 @@ public class PersonQueryFactory extends Factory {
      * Get the person manga-related positions.
      *
      * @param personId The person ID
-     * @return The person manga query factory
+     * @return The person manga query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonManga">Jikan API docs - getPersonManga</a>
      */
     public PersonAnimeQuery manga(int personId) {
@@ -83,7 +83,7 @@ public class PersonQueryFactory extends Factory {
      * Get the person pictures.
      *
      * @param personId The person ID
-     * @return The person pictures query factory
+     * @return The person pictures query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonPictures">Jikan API docs - getPersonPictures</a>
      */
     public PersonPicturesQuery pictures(int personId) {

@@ -31,6 +31,7 @@ public class Images {
 		this.webp = webp;
 	}
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -42,6 +43,7 @@ public class Images {
 		return webp != null ? webp.equals(images.webp) : images.webp == null;
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		int result = jpg != null ? jpg.hashCode() : 0;

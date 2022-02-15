@@ -9,6 +9,8 @@ package net.sandrohc.jikan.model.anime;
 import java.io.*;
 import java.util.*;
 
+import net.sandrohc.jikan.utils.Generated;
+
 public class AnimeThemes implements Serializable {
 
 	/** The opening songs. */
@@ -34,6 +36,7 @@ public class AnimeThemes implements Serializable {
 		this.endings = endings;
 	}
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -45,6 +48,7 @@ public class AnimeThemes implements Serializable {
 		return endings != null ? endings.equals(that.endings) : that.endings == null;
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		int result = openings != null ? openings.hashCode() : 0;
@@ -52,6 +56,7 @@ public class AnimeThemes implements Serializable {
 		return result;
 	}
 
+	@Generated
 	@Override
 	public String toString() {
 		return "AnimeThemes[openings=" + openings + ", endings=" + endings + ']';

@@ -38,10 +38,10 @@ public class CharacterTopSub extends MalEntity {
     public int favorites;
 
     /** The list of anime this character appeared on. */
-    public List<MalSubEntity> animeography;
+    public List<EntityWithType> animeography;
 
     /** The list of manga this character appeared on. */
-    public List<MalSubEntity> mangaography;
+    public List<EntityWithType> mangaography;
 
 
     @Override

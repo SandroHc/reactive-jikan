@@ -23,7 +23,7 @@ import static net.sandrohc.jikan.query.QueryUrl.endpoint;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeUserUpdates">Jikan API docs - getAnimeUserUpdates</a>
  */
-public class AnimeUserUpdatesQuery extends Query<DataListHolderWithPagination<UserUpdate>, Flux<UserUpdate>> {
+public class AnimeUserUpdatesQuery extends Query<DataListHolderWithPagination<UserUpdateWithUser>, Flux<UserUpdateWithUser>> {
 
 	/** The anime ID. */
 	protected final int id;
@@ -47,12 +47,12 @@ public class AnimeUserUpdatesQuery extends Query<DataListHolderWithPagination<Us
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<UserUpdate>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<UserUpdate>>() { };
+	public TypeReference<DataListHolderWithPagination<UserUpdateWithUser>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<UserUpdateWithUser>>() { };
 	}
 
 	@Override
-	public Flux<UserUpdate> process(Mono<DataListHolderWithPagination<UserUpdate>> content) {
+	public Flux<UserUpdateWithUser> process(Mono<DataListHolderWithPagination<UserUpdateWithUser>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
 }

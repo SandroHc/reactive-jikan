@@ -23,7 +23,7 @@ public class RandomQueryFactory extends Factory {
     /**
      * Get a random anime.
      *
-     * @return The random anime query factory
+     * @return The random anime query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRandomAnime">Jikan API docs - getRandomAnime</a>
      */
     public RandomAnimeQuery anime() {
@@ -33,7 +33,7 @@ public class RandomQueryFactory extends Factory {
     /**
      * Get a random manga.
      *
-     * @return The random manga query factory
+     * @return The random manga query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRandomManga">Jikan API docs - getRandomManga</a>
      */
     public RandomMangaQuery manga() {
@@ -43,7 +43,7 @@ public class RandomQueryFactory extends Factory {
     /**
      * Get a random character.
      *
-     * @return The random character query factory
+     * @return The random character query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRandomCharacter">Jikan API docs - getRandomCharacter</a>
      */
     public RandomCharacterQuery character() {
@@ -53,7 +53,7 @@ public class RandomQueryFactory extends Factory {
     /**
      * Get a random person.
      *
-     * @return The random person query factory
+     * @return The random person query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRandomPerson">Jikan API docs - getRandomPerson</a>
      */
     public RandomPersonQuery person() {
@@ -63,7 +63,7 @@ public class RandomQueryFactory extends Factory {
     /**
      * Get a random user.
      *
-     * @return The random user query factory
+     * @return The random user query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRandomUser">Jikan API docs - getRandomUser</a>
      */
     public RandomUserQuery user() {

@@ -26,7 +26,7 @@ public class ReviewQueryFactory extends Factory {
     /**
      * Get a list of recent anime recommendations.
      *
-     * @return The anime recommendations query factory
+     * @return The anime recommendations query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRecentAnimeReviews">Jikan API docs - getRecentAnimeReviews</a>
      */
     public RecentAnimeReviewQuery anime() {
@@ -36,7 +36,7 @@ public class ReviewQueryFactory extends Factory {
     /**
      * Get a list of recent manga recommendations.
      *
-     * @return The manga recommendations query factory
+     * @return The manga recommendations query
      * @see <a href="https://docs.api.jikan.moe/#operation/getRecentMangaReviews">Jikan API docs - getRecentMangaReviews</a>
      */
     public RecentMangaReviewQuery manga() {

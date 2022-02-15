@@ -24,7 +24,7 @@ public class GenreQueryFactory extends Factory {
     /**
      * Get the anime genre search.
      *
-     * @return The anime genre query factory
+     * @return The anime genre query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubsById">Jikan API docs - getClubsById</a>
      */
     public GenreAnimeQuery anime() {
@@ -34,7 +34,7 @@ public class GenreQueryFactory extends Factory {
     /**
      * Get the manga genre search.
      *
-     * @return The manga genre query factory
+     * @return The manga genre query
      * @see <a href="https://docs.api.jikan.moe/#operation/getClubsById">Jikan API docs - getClubsById</a>
      */
     public GenreMangaQuery manga() {

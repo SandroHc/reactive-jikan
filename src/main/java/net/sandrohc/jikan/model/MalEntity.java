@@ -21,6 +21,14 @@ public abstract class MalEntity implements Serializable {
 	public int malId;
 
 
+	public int getMalId() {
+		return malId;
+	}
+
+	public void setMalId(int malId) {
+		this.malId = malId;
+	}
+
 	@Generated
 	@Override
 	public boolean equals(Object o) {
@@ -38,9 +46,9 @@ public abstract class MalEntity implements Serializable {
 		return 31 * malId;
 	}
 
+	@Generated
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName() + "[id=" + malId + ']';
 	}
-
 }

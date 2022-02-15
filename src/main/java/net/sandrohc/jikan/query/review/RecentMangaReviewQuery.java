@@ -22,7 +22,7 @@ import static net.sandrohc.jikan.query.QueryUrl.endpoint;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getRecentMangaReviews">Jikan API docs - getRecentMangaReviews</a>
  */
-public class RecentMangaReviewQuery extends PageableQuery<DataListHolderWithPagination<Recommendation>, Flux<Recommendation>, RecentMangaReviewQuery> {
+public class RecentMangaReviewQuery extends PageableQuery<DataListHolderWithPagination<Review>, Flux<Review>, RecentMangaReviewQuery> {
 
 	public RecentMangaReviewQuery(Jikan jikan) {
 		super(jikan);
@@ -30,16 +30,16 @@ public class RecentMangaReviewQuery extends PageableQuery<DataListHolderWithPagi
 
 	@Override
 	public QueryUrl getInnerUrl() {
-		return endpoint("/recommendations/manga");
+		return endpoint("/reviews/manga");
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Recommendation>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Recommendation>>() { };
+	public TypeReference<DataListHolderWithPagination<Review>> getResponseType() {
+		return new TypeReference<DataListHolderWithPagination<Review>>() { };
 	}
 
 	@Override
-	public Flux<Recommendation> process(Mono<DataListHolderWithPagination<Recommendation>> content) {
+	public Flux<Review> process(Mono<DataListHolderWithPagination<Review>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

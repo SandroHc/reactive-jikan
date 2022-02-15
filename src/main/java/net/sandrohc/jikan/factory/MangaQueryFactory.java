@@ -7,7 +7,6 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.query.manga.*;
 
 /**
@@ -25,7 +24,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga details.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga query factory
+	 * @return The manga query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaById">Jikan API docs - getMangaById</a>
 	 */
 	public MangaQuery get(int mangaId) {
@@ -35,7 +34,7 @@ public class MangaQueryFactory extends Factory {
 	/**
 	 * Get the manga search.
 	 *
-	 * @return The manga search query factory
+	 * @return The manga search query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaById">Jikan API docs - getMangaById</a>
 	 */
 	public MangaSearchQuery search() {
@@ -55,7 +54,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga characters.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga characters query factory
+	 * @return The manga characters query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaCharacters">Jikan API docs - getMangaCharacters</a>
 	 */
 	public MangaCharactersQuery characters(int mangaId) {
@@ -66,19 +65,18 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga news.
 	 *
 	 * @param mangaId The manga ID
-	 * @param page The page
-	 * @return The manga news query factory
+	 * @return The manga news query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaNews">Jikan API docs - getMangaNews</a>
 	 */
-	public MangaNewsQuery news(int mangaId, int page) throws JikanInvalidArgumentException {
-		return new MangaNewsQuery(this.jikan, mangaId, page);
+	public MangaNewsQuery news(int mangaId) {
+		return new MangaNewsQuery(this.jikan, mangaId);
 	}
 
 	/**
 	 * Get the manga forum posts/topics.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga forum topics query factory
+	 * @return The manga forum topics query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaTopics">Jikan API docs - getMangaTopics</a>
 	 */
 	public MangaForumQuery forum(int mangaId) {
@@ -89,7 +87,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga pictures.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga pictures query factory
+	 * @return The manga pictures query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaPictures">Jikan API docs - getMangaPictures</a>
 	 */
 	public MangaPicturesQuery pictures(int mangaId) {
@@ -100,7 +98,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga statistics.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga statistics query factory
+	 * @return The manga statistics query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaStatistics">Jikan API docs - getMangaStatistics</a>
 	 */
 	public MangaStatisticsQuery statistics(int mangaId) {
@@ -111,7 +109,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the "more info" section.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga more info query factory
+	 * @return The manga more info query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaMoreInfo">Jikan API docs - getMangaMoreInfo</a>
 	 */
 	public MangaMoreInfoQuery moreInfo(int mangaId) {
@@ -122,7 +120,7 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga recommendations.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga recommendations query factory
+	 * @return The manga recommendations query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaRecommendations">Jikan API docs - getMangaRecommendations</a>
 	 */
 	public MangaRecommendationsQuery recommendations(int mangaId) {
@@ -133,28 +131,28 @@ public class MangaQueryFactory extends Factory {
 	 * Get the manga user updates.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga user updates query factory
+	 * @return The manga user updates query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaUserUpdates">Jikan API docs - getMangaUserUpdates</a>
 	 */
-	public MangaUserUpdatesQuery userUpdates(int mangaId, int page) throws JikanInvalidArgumentException {
-		return new MangaUserUpdatesQuery(this.jikan, mangaId, page);
+	public MangaUserUpdatesQuery userUpdates(int mangaId) {
+		return new MangaUserUpdatesQuery(this.jikan, mangaId);
 	}
 
 	/**
 	 * Get the manga reviews.
 	 *
 	 * @param mangaId The manga ID
-	 * @return The manga reviews query factory
+	 * @return The manga reviews query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaReviews">Jikan API docs - getMangaReviews</a>
 	 */
-	public MangaReviewsQuery reviews(int mangaId, int page) throws JikanInvalidArgumentException {
-		return new MangaReviewsQuery(this.jikan, mangaId, page);
+	public MangaReviewsQuery reviews(int mangaId) {
+		return new MangaReviewsQuery(this.jikan, mangaId);
 	}
 
 	/**
 	 * Get the manga relations.
 	 *
-	 * @return The manga relations query factory
+	 * @return The manga relations query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaRelations">Jikan API docs - getMangaRelations</a>
 	 */
 	public MangaRelationsQuery relations(int mangaId) {
@@ -164,7 +162,7 @@ public class MangaQueryFactory extends Factory {
 	/**
 	 * Get the manga external resources.
 	 *
-	 * @return The manga external query factory
+	 * @return The manga external query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaExternal">Jikan API docs - getMangaExternal</a>
 	 */
 	public MangaExternalQuery external(int mangaId) {

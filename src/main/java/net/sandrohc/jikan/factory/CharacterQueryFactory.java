@@ -20,10 +20,23 @@ public class CharacterQueryFactory extends Factory {
 		super(jikan);
 	}
 
-	public CharacterQuery get(int id) {
-		return new CharacterQuery(this.jikan, id);
+	/**
+	 * Get the character details.
+	 *
+	 * @param characterId The character ID
+	 * @return The character query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterById">Jikan API docs - getCharacterById</a>
+	 */
+	public CharacterQuery get(int characterId) {
+		return new CharacterQuery(this.jikan, characterId);
 	}
 
+	/**
+	 * Get the character search.
+	 *
+	 * @return The character search query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharactersSearch">Jikan API docs - getCharactersSearch</a>
+	 */
     public CharacterSearchQuery search() {
         return new CharacterSearchQuery(this.jikan);
     }
@@ -33,19 +46,43 @@ public class CharacterQueryFactory extends Factory {
 //        return new CharacterTopQuery(this.jikan, page);
 //    }
 
-	public CharacterAnimeQuery anime(int id) {
-		return new CharacterAnimeQuery(this.jikan, id);
+	/**
+	 * Get the character appearances in anime.
+	 *
+	 * @return The character anime query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterAnime">Jikan API docs - getCharacterAnime</a>
+	 */
+	public CharacterAnimeQuery anime(int characterId) {
+		return new CharacterAnimeQuery(this.jikan, characterId);
 	}
 
-	public CharacterMangaQuery manga(int id) {
-		return new CharacterMangaQuery(this.jikan, id);
+	/**
+	 * Get the character appearances in manga.
+	 *
+	 * @return The character manga query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterManga">Jikan API docs - getCharacterManga</a>
+	 */
+	public CharacterMangaQuery manga(int characterId) {
+		return new CharacterMangaQuery(this.jikan, characterId);
 	}
 
-	public CharacterVoiceActorsQuery voiceActors(int id) {
-		return new CharacterVoiceActorsQuery(this.jikan, id);
+	/**
+	 * Get the character voice actors.
+	 *
+	 * @return The character voice actors query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterVoiceActors">Jikan API docs - getCharacterVoiceActors</a>
+	 */
+	public CharacterVoiceActorsQuery voiceActors(int characterId) {
+		return new CharacterVoiceActorsQuery(this.jikan, characterId);
 	}
 
-	public CharacterPicturesQuery pictures(int id) {
-		return new CharacterPicturesQuery(this.jikan, id);
+	/**
+	 * Get the character pictures.
+	 *
+	 * @return The character pictures query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterPictures">Jikan API docs - getCharacterPictures</a>
+	 */
+	public CharacterPicturesQuery pictures(int characterId) {
+		return new CharacterPicturesQuery(this.jikan, characterId);
 	}
 }

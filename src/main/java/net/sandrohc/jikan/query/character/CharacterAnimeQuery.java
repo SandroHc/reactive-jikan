@@ -18,7 +18,7 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 
 /**
- * Query for the character appearances on anime.
+ * Query for the character appearances in anime.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getCharacterAnime">Jikan API docs - getCharacterAnime</a>
  */
