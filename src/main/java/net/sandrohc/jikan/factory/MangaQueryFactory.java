@@ -7,6 +7,8 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.query.genre.GenreMangaQuery;
+import net.sandrohc.jikan.query.manga.MangaTopQuery;
 import net.sandrohc.jikan.query.manga.*;
 
 /**
@@ -41,14 +43,25 @@ public class MangaQueryFactory extends Factory {
 		return new MangaSearchQuery(this.jikan);
 	}
 
-	// TODO: implement 'top' and 'genre' endpoints
-//    public MangaTopQuery top(int page) throws JikanInvalidArgumentException {
-//        return new MangaTopQuery(this.jikan, page);
-//    }
+	/**
+	 * Get the most popular manga by score.
+	 *
+	 * @return The manga top query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getTopManga">Jikan API docs - getTopManga</a>
+	 */
+	public MangaTopQuery top() {
+		return new MangaTopQuery(this.jikan);
+	}
 
-//    public MangaGenreQuery genre(MangaGenre genre, int page) throws JikanInvalidArgumentException {
-//        return new MangaGenreQuery(this.jikan, genre, page);
-//    }
+	/**
+	 * Get the manga genre search.
+	 *
+	 * @return The manga genre query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaGenres">Jikan API docs - getMangaGenres</a>
+	 */
+    public GenreMangaQuery genres() {
+        return new GenreMangaQuery(this.jikan);
+    }
 
 	/**
 	 * Get the manga characters.

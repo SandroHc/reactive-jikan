@@ -7,6 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.query.person.PersonTopQuery;
 import net.sandrohc.jikan.query.person.*;
 
 /**
@@ -41,10 +42,15 @@ public class PersonQueryFactory extends Factory {
         return new PersonSearchQuery(this.jikan);
     }
 
-    // TODO: implement person top endpoint
-//    public PersonTopQuery top(int page) throws JikanInvalidArgumentException {
-//        return new PersonTopQuery(this.jikan, page);
-//    }
+    /**
+     * Get the most popular person by number of favorites.
+     *
+     * @return The person top query
+     * @see <a href="https://docs.api.jikan.moe/#operation/getTopPeople">Jikan API docs - getTopPeople</a>
+     */
+    public PersonTopQuery top() {
+        return new PersonTopQuery(this.jikan);
+    }
 
     /**
      * Get the person anime-related positions.

@@ -7,8 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.recommendation.RecentAnimeRecommendationQuery;
-import net.sandrohc.jikan.query.recommendation.RecentMangaRecommendationQuery;
+import net.sandrohc.jikan.query.review.ReviewTopQuery;
 import net.sandrohc.jikan.query.review.RecentAnimeReviewQuery;
 import net.sandrohc.jikan.query.review.RecentMangaReviewQuery;
 
@@ -41,5 +40,15 @@ public class ReviewQueryFactory extends Factory {
      */
     public RecentMangaReviewQuery manga() {
         return new RecentMangaReviewQuery(this.jikan);
+    }
+
+    /**
+     * Get the most popular review by number of favorites.
+     *
+     * @return The review top query
+     * @see <a href="https://docs.api.jikan.moe/#operation/getTopReviews">Jikan API docs - getTopReviews</a>
+     */
+    public ReviewTopQuery top() {
+        return new ReviewTopQuery(this.jikan);
     }
 }

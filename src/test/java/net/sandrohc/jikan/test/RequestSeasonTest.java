@@ -9,6 +9,7 @@ import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.legacy.season.*;
+import net.sandrohc.jikan.model.season.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -156,7 +157,7 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/archive", response);
 
-		List<SeasonArchiveYear> results = jikan.query().season().archive()
+		List<SeasonEntry> results = jikan.query().season().archive()
 				.execute()
 				.collectList()
 				.block();
@@ -165,9 +166,9 @@ public class RequestSeasonTest extends RequestTest {
 		assertNotNull(new SeasonArchive().toString());
 
 		/* Results */
-		Iterator<SeasonArchiveYear> yearIt = results.iterator();
+		Iterator<SeasonEntry> yearIt = results.iterator();
 
-		SeasonArchiveYear year1 = yearIt.next();
+		SeasonEntry year1 = yearIt.next();
 		assertNotNull(year1);
 		assertNotNull(year1.toString());
 		assertEquals(2020, year1.year);
@@ -178,7 +179,7 @@ public class RequestSeasonTest extends RequestTest {
 				Season.FALL
 		)));
 
-		SeasonArchiveYear year2 = yearIt.next();
+		SeasonEntry year2 = yearIt.next();
 		assertNotNull(year2);
 		assertNotNull(year2.toString());
 		assertEquals(1917, year2.year);

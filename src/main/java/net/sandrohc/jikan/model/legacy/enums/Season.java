@@ -6,16 +6,31 @@
 
 package net.sandrohc.jikan.model.legacy.enums;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * A season.
+ * An anime season.
  */
 public enum Season {
-	@JsonProperty("Summer") SUMMER,
-	@JsonProperty("Spring") SPRING,
-	@JsonProperty("Fall")   FALL,
-	@JsonProperty("Winter") WINTER,
+	@JsonProperty("Summer") SUMMER("summer"),
+	@JsonProperty("Spring") SPRING("spring"),
+	@JsonProperty("Fall")   FALL("fall"),
+	@JsonProperty("Winter") WINTER("winter"),
 
-	@JsonProperty("Later") LATER,
+	@JsonProperty("Later") LATER("later"),
+
+	@JsonEnumDefaultValue UNKNOWN(null);
+
+
+	/** Used in the search queries. */
+	public final String search;
+
+	Season(String value) {
+		this.search = value;
+	}
+
+	public String getSearch() {
+		return search;
+	}
 }

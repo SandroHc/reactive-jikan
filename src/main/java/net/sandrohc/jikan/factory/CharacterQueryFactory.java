@@ -8,6 +8,7 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.query.character.*;
+import net.sandrohc.jikan.query.character.CharacterTopQuery;
 
 /**
  * Factory for the character queries.
@@ -41,10 +42,15 @@ public class CharacterQueryFactory extends Factory {
         return new CharacterSearchQuery(this.jikan);
     }
 
-	// TODO: implement
-//    public CharacterTopQuery top(int page) throws JikanInvalidArgumentException {
-//        return new CharacterTopQuery(this.jikan, page);
-//    }
+	/**
+	 * Get the most popular character by number of favorites.
+	 *
+	 * @return The character top query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getTopCharacters">Jikan API docs - getTopCharacters</a>
+	 */
+	public CharacterTopQuery top() {
+		return new CharacterTopQuery(this.jikan);
+	}
 
 	/**
 	 * Get the character appearances in anime.

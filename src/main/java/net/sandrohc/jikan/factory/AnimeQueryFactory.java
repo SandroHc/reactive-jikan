@@ -10,6 +10,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.anime.*;
+import net.sandrohc.jikan.query.genre.GenreAnimeQuery;
 
 /**
  * Factory for the anime queries.
@@ -43,14 +44,25 @@ public class AnimeQueryFactory extends Factory {
 		return new AnimeSearchQuery(this.jikan);
 	}
 
-	// TODO: implement
-//	public AnimeTopQueryV4 top(int page) throws JikanInvalidArgumentException {
-//		return new AnimeTopQuery(this.jikan, page);
-//	}
-//
-//	public AnimeGenreQueryV4 genre(AnimeGenre genre, int page) throws JikanInvalidArgumentException {
-//		return new AnimeGenreQuery(this.jikan, genre, page);
-//	}
+	/**
+	 * Get the most popular anime by score.
+	 *
+	 * @return The anime top query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getTopAnime">Jikan API docs - getTopAnime</a>
+	 */
+	public AnimeTopQuery top() {
+		return new AnimeTopQuery(this.jikan);
+	}
+
+	/**
+	 * Get the anime genre search.
+	 *
+	 * @return The anime genre query
+	 * @see <a href="https://docs.api.jikan.moe/#operation/getMangaGenres">Jikan API docs - getAnimeGenres</a>
+	 */
+	public GenreAnimeQuery genres() {
+		return new GenreAnimeQuery(this.jikan);
+	}
 
 	/**
 	 * Get the list of characters.
