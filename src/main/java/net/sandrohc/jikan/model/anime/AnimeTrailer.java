@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
-// TODO: check if being used by other endpoints - if multiple uses, rename to 'Trailer'
 public class AnimeTrailer implements Serializable {
 
 	/** The YouTube ID. */

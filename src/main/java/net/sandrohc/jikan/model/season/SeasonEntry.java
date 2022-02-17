@@ -9,7 +9,6 @@ package net.sandrohc.jikan.model.season;
 import java.io.*;
 import java.util.*;
 
-import net.sandrohc.jikan.model.legacy.enums.Season;
 import net.sandrohc.jikan.utils.Generated;
 
 /**

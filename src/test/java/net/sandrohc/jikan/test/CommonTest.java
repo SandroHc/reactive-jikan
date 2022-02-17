@@ -2,23 +2,22 @@ package net.sandrohc.jikan.test;
 
 import java.time.*;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanException;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.exception.JikanResponseException;
-import net.sandrohc.jikan.exception.JikanThrottleException;
+import net.sandrohc.jikan.exception.*;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import reactor.core.publisher.Mono;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static net.sandrohc.jikan.test.MockUtils.mockError;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CommonTest extends RequestTest {
@@ -32,19 +31,23 @@ public class CommonTest extends RequestTest {
 				.maxRetries(10)
 				.build();
 
-		assertTrue(jikan.debug);
-		assertEquals("https://example.com", jikan.baseUrl);
-		assertEquals("user-agent", jikan.userAgent);
-		assertEquals(10, jikan.maxRetries);
+		SoftAssertions softly = new SoftAssertions();
+		softly.assertThat(jikan.debug).isTrue();
+		softly.assertThat(jikan.baseUrl).isEqualTo("https://example.com");
+		softly.assertThat(jikan.userAgent).isEqualTo("user-agent");
+		softly.assertThat(jikan.maxRetries).isEqualTo(10);
+		softly.assertAll();
 	}
 
 	@Test
 	void testBuilderDefaults() {
 		Jikan jikan = new Jikan();
 
-		assertFalse(jikan.debug);
-		assertEquals("https://api.jikan.moe/v3", jikan.baseUrl);
-		assertEquals("reactive-jikan/development", jikan.userAgent);
+		SoftAssertions softly = new SoftAssertions();
+		softly.assertThat(jikan.debug).isFalse();
+		softly.assertThat(jikan.baseUrl).isEqualTo("https://api.jikan.moe/v3");
+		softly.assertThat(jikan.userAgent).isEqualTo("reactive-jikan/development");
+		softly.assertAll();
 	}
 
 	@Test
@@ -60,11 +63,11 @@ public class CommonTest extends RequestTest {
 	}
 
 	@Test
-	void testNotFound() {
+	void testNotFound() throws JikanQueryException {
 		mockError(mockServer, HttpResponseStatus.NOT_FOUND);
 
 		Anime anime = jikan.query().anime().get(1).execute().block();
-		assertNull(anime);
+		assertThat(anime).isNull();
 	}
 
 	@Test
@@ -73,34 +76,30 @@ public class CommonTest extends RequestTest {
 		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
 	}
 
+	@SuppressWarnings("AssertBetweenInconvertibleTypes")
 	@Test
 	void testEquality_malEntity() {
 		Entity e1 = new Entity(1);
 		Entity e2 = new Entity(2);
 		Entity e3 = new Entity(1);
 
-		assertNotNull(e1.toString());
+		assertThat(e1.toString()).isNotNull();
 
-		assertNotEquals(e1.toString(), e2.toString());
-		assertNotEquals(e1.hashCode(), e2.hashCode());
+		assertThat(e1.toString()).isNotEqualTo(e2.toString());
+		assertThat(e1.hashCode()).isNotEqualTo(e2.hashCode());
 
-		assertEquals(e1, e1);
-		assertNotEquals(e1, null);
-		assertNotEquals(e1, new Anime());
+		assertThat(e1).isEqualTo(e1);
+		assertThat(e1).isNotEqualTo(null);
+		assertThat(e1).isNotEqualTo(new Anime());
 
-		assertNotEquals(e1, e2);
-		assertNotEquals(e2, e1);
+		assertThat(e1).isNotEqualTo(e2);
+		assertThat(e2).isNotEqualTo(e1);
 
-		assertEquals(e1, e3);
-		assertEquals(e3, e1);
-
-		MalSubEntity subEntity = new MalSubEntity();
-		subEntity.type = Type.ANIME;
-		subEntity.malId = 1;
-		subEntity.name = "NAME";
-		assertNotNull(subEntity.toString());
+		assertThat(e3).isEqualTo(e1);
+		assertThat(e1).isEqualTo(e3);
 	}
 
+	@SuppressWarnings("AssertBetweenInconvertibleTypes")
 	@Test
 	void testEquality_dateRange() {
 		DateRange e1 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-02T00:00:00+00:00"));
@@ -108,29 +107,29 @@ public class CommonTest extends RequestTest {
 		DateRange e3 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-01T00:00:00+00:00"));
 		DateRange e4 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-02T00:00:00+00:00"));
 
-		assertNotNull(e1.toString());
+		assertThat(e1.toString()).isNotNull();
 
-		assertNotEquals(e1.toString(), e2.toString());
-		assertNotEquals(e1.hashCode(), e2.hashCode());
+		assertThat(e1.toString()).isNotEqualTo(e2.toString());
+		assertThat(e1.hashCode()).isNotEqualTo(e2.hashCode());
 
-		assertEquals(e1, e1);
-		assertNotEquals(e1, null);
-		assertNotEquals(e1, new Anime());
+		assertThat(e1).isEqualTo(e1);
+		assertThat(e1).isNotEqualTo(null);
+		assertThat(e1).isNotEqualTo(new Anime());
 
-		assertNotEquals(e1, e2);
-		assertNotEquals(e2, e1);
-		assertNotEquals(e1, e3);
-		assertNotEquals(e3, e1);
+		assertThat(e1).isNotEqualTo(e2);
+		assertThat(e2).isNotEqualTo(e1);
+		assertThat(e1).isNotEqualTo(e3);
+		assertThat(e3).isNotEqualTo(e1);
 
-		assertEquals(e1, e4);
-		assertEquals(e4, e1);
+		assertThat(e1).isEqualTo(e4);
+		assertThat(e4).isEqualTo(e1);
 
 		DateRange rangeNull = new DateRangeTest(null, null);
-		assertNull(rangeNull.from);
-		assertNull(rangeNull.to);
+		assertThat(rangeNull.from).isNull();
+		assertThat(rangeNull.to).isNull();
 
-		assertNotNull(e1.from);
-		assertNotNull(e1.to);
+		assertThat(e1.from).isNotNull();
+		assertThat(e1.to).isNotNull();
 	}
 
 	@SuppressWarnings("UnusedAssignment")
@@ -144,35 +143,29 @@ public class CommonTest extends RequestTest {
 		je = new JikanException();
 		je = new JikanException("Message");
 		je = new JikanException("Message", new Throwable());
-		je = new JikanException("Message", new Throwable(), true, true);
 		je = new JikanException(new Throwable());
+		je = new JikanException("Message", new Throwable(), true, true);
 
-		jiae = new JikanInvalidArgumentException();
 		jiae = new JikanInvalidArgumentException("Message");
 		jiae = new JikanInvalidArgumentException("Message", new Throwable());
 		jiae = new JikanInvalidArgumentException("Message", new Throwable(), true, true);
-		jiae = new JikanInvalidArgumentException(new Throwable());
 
-		jre = new JikanResponseException();
 		jre = new JikanResponseException("Message");
 		jre = new JikanResponseException("Message", new Throwable());
 		jre = new JikanResponseException("Message", new Throwable(), true, true);
-		jre = new JikanResponseException(new Throwable());
 
-		jte = new JikanThrottleException();
 		jte = new JikanThrottleException("Message");
 		jte = new JikanThrottleException("Message", new Throwable());
 		jte = new JikanThrottleException("Message", new Throwable(), true, true);
-		jte = new JikanThrottleException(new Throwable());
 
-		assertNotNull(je);
-		assertNotNull(jiae);
-		assertNotNull(jre);
-		assertNotNull(jte);
+		assertThat(je).isNotNull();
+		assertThat(jiae).isNotNull();
+		assertThat(jre).isNotNull();
+		assertThat(jte).isNotNull();
 
-		assertTrue(JikanException.class.isAssignableFrom(JikanInvalidArgumentException.class));
-		assertTrue(JikanException.class.isAssignableFrom(JikanResponseException.class));
-		assertTrue(JikanException.class.isAssignableFrom(JikanThrottleException.class));
+		assertThat(JikanException.class.isAssignableFrom(JikanInvalidArgumentException.class)).isTrue();
+		assertThat(JikanException.class.isAssignableFrom(JikanResponseException.class)).isTrue();
+		assertThat(JikanException.class.isAssignableFrom(JikanThrottleException.class)).isTrue();
 	}
 
 	@Test
@@ -184,20 +177,20 @@ public class CommonTest extends RequestTest {
 		// debug mode = false
 		jikan = new Jikan.JikanBuilder().debug(false).build();
 		ex = jikan.dumpStacktrace(query, new byte[0], new RuntimeException("TEST 1"));
-		assertEquals(JikanResponseException.class, ex.getClass());
-		assertTrue(ex.getMessage().startsWith("Error parsing JSON for query:"));
+		assertThat(ex.getClass()).isEqualTo(JikanResponseException.class);
+		assertThat(ex.getMessage().startsWith("Error parsing JSON for query:")).isTrue();
 		assertFalse(ex.getMessage().contains("A report file was generated at"));
-		assertEquals(RuntimeException.class, ex.getCause().getClass());
-		assertEquals("TEST 1", ex.getCause().getMessage());
+		assertThat(ex.getCause().getClass()).isEqualTo(RuntimeException.class);
+		assertThat(ex.getCause().getMessage()).isEqualTo("TEST 1");
 
 		// debug mode = true
 		jikan = new Jikan.JikanBuilder().debug(true).build();
 		ex = jikan.dumpStacktrace(query, new byte[0], new RuntimeException("TEST 2"));
-		assertEquals(JikanResponseException.class, ex.getClass());
-		assertTrue(ex.getMessage().startsWith("Error parsing JSON for query"));
-		assertTrue(ex.getMessage().contains("A report file was generated at"));
-		assertEquals(RuntimeException.class, ex.getCause().getClass());
-		assertEquals("TEST 2", ex.getCause().getMessage());
+		assertThat(ex.getClass()).isEqualTo(JikanResponseException.class);
+		assertThat(ex.getMessage().startsWith("Error parsing JSON for query")).isTrue();
+		assertThat(ex.getMessage().contains("A report file was generated at")).isTrue();
+		assertThat(ex.getCause().getClass()).isEqualTo(RuntimeException.class);
+		assertThat(ex.getCause().getMessage()).isEqualTo("TEST 2");
 	}
 
 
@@ -206,7 +199,6 @@ public class CommonTest extends RequestTest {
 		public Entity(int malId) {
 			this.malId = malId;
 		}
-
 	}
 
 	private static class DateRangeTest extends DateRange {
@@ -215,7 +207,6 @@ public class CommonTest extends RequestTest {
 			setFrom(from);
 			setTo(to);
 		}
-
 	}
 
 	private static class QueryTest extends Query<Void, Mono<Void>> {
@@ -225,15 +216,13 @@ public class CommonTest extends RequestTest {
 		}
 
 		@Override
-		public String getUri() {
-			return "";
+		public QueryUrlBuilder getUrl() {
+			return QueryUrlBuilder.create();
 		}
 
 		@Override
-		public Class<Void> getRequestClass() {
-			return Void.class;
+		public TypeReference<Void> getResponseType() {
+			return new TypeReference<Void>() { };
 		}
-
 	}
-
 }

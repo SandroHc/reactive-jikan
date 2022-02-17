@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "relation": "Adaptation",
+      "entry": [
+        {
+          "mal_id": 21479,
+          "type": "manga",
+          "name": "Sword Art Online",
+          "url": "https:\/\/myanimelist.net\/manga\/21479\/Sword_Art_Online"
+        },
+        {
+          "mal_id": 43921,
+          "type": "manga",
+          "name": "Sword Art Online: Progressive",
+          "url": "https:\/\/myanimelist.net\/manga\/43921\/Sword_Art_Online__Progressive"
+        }
+      ]
+    },
+    {
+      "relation": "Other",
+      "entry": [
+        {
+          "mal_id": 16099,
+          "type": "anime",
+          "name": "Sword Art Online: Sword Art Offline",
+          "url": "https:\/\/myanimelist.net\/anime\/16099\/Sword_Art_Online__Sword_Art_Offline"
+        }
+      ]
+    },
+    {
+      "relation": "Sequel",
+      "entry": [
+        {
+          "mal_id": 20021,
+          "type": "anime",
+          "name": "Sword Art Online: Extra Edition",
+          "url": "https:\/\/myanimelist.net\/anime\/20021\/Sword_Art_Online__Extra_Edition"
+        }
+      ]
+    },
+    {
+      "relation": "Alternative version",
+      "entry": [
+        {
+          "mal_id": 42916,
+          "type": "anime",
+          "name": "Sword Art Online: Progressive Movie - Hoshi Naki Yoru no Aria",
+          "url": "https:\/\/myanimelist.net\/anime\/42916\/Sword_Art_Online__Progressive_Movie_-_Hoshi_Naki_Yoru_no_Aria"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "data": [
+    {
+      "name": "Official Site",
+      "url": "http:\/\/www.swordart-online.net\/"
+    },
+    {
+      "name": "AnimeDB",
+      "url": "http:\/\/anidb.info\/perl-bin\/animedb.pl?show=anime&aid=8692"
+    },
+    {
+      "name": "AnimeNewsNetwork",
+      "url": "http:\/\/www.animenewsnetwork.com\/encyclopedia\/anime.php?id=13858"
+    },
+    {
+      "name": "Wikipedia",
+      "url": "http:\/\/en.wikipedia.org\/wiki\/Sword_Art_Online"
+    }
+  ]
+}

@@ -13,7 +13,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.season.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -96,7 +96,7 @@ public class Anime extends MalEntity {
 	public String background;
 
 	/** The season the anime was premiered in, e.g. "Summer". Can be {@code null} if it is unknown. */
-	public String season;
+	public Season season;
 
 	/** The season the anime was premiered in, e.g. "2010". Can be {@code null} if it is unknown. */
 	public Integer year;
@@ -311,11 +311,11 @@ public class Anime extends MalEntity {
 		this.background = background;
 	}
 
-	public String getSeason() {
+	public Season getSeason() {
 		return season;
 	}
 
-	public void setSeason(String season) {
+	public void setSeason(Season season) {
 		this.season = season;
 	}
 

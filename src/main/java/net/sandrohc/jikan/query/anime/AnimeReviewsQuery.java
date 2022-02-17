@@ -8,41 +8,34 @@ package net.sandrohc.jikan.query.anime;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.PageableQuery;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime reviews.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeReviews">Jikan API docs - getAnimeReviews</a>
  */
-public class AnimeReviewsQuery extends Query<DataListHolderWithPagination<Review>, Flux<Review>> {
+public class AnimeReviewsQuery extends PageableQuery<DataListHolderWithPagination<Review>, Flux<Review>, AnimeReviewsQuery> {
 
 	/** The anime ID. */
 	protected final int id;
 
-	// TODO: validate javadoc by checking if max reviews per page has changed
-	/** The page. Each page contains up to 20 reviews. */
-	protected final int page;
-
-	public AnimeReviewsQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
+	public AnimeReviewsQuery(Jikan jikan, int id) {
 		super(jikan);
-		if (page < 1) throw new JikanInvalidArgumentException("page starts at index 1");
-
 		this.id = id;
-		this.page = page;
 	}
 
 	@Override
-	public QueryUrl getUrl() {
-		return endpoint("/anime/" + id + "/reviews")
+	public QueryUrlBuilder getInnerUrl() {
+		return create()
+				.path("/anime/" + id + "/reviews")
 				.param("page", page);
 	}
 

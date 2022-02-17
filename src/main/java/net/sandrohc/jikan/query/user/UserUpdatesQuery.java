@@ -11,10 +11,10 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the user recent updates.
@@ -32,7 +32,7 @@ public class UserUpdatesQuery extends Query<DataHolder<UserUpdates>, Mono<UserUp
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return endpoint("/users/" + username + "/userupdates");
 	}
 

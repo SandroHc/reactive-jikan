@@ -11,11 +11,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for a list of the latest anime recommendations.
@@ -29,7 +29,7 @@ public class RecentAnimeRecommendationQuery extends PageableQuery<DataListHolder
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
+	public QueryUrlBuilder getInnerUrl() {
 		return endpoint("/recommendations/anime");
 	}
 

@@ -11,10 +11,10 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.person.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for a random person.
@@ -28,7 +28,7 @@ public class RandomPersonQuery extends Query<DataHolder<Person>, Mono<Person>> {
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return endpoint("/random/people");
 	}
 

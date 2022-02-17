@@ -1,0 +1,162 @@
+{
+  "test:source": "https://api.jikan.moe/v4/anime/11757",
+  "data": {
+    "mal_id": 11757,
+    "url": "https:\/\/myanimelist.net\/anime\/11757\/Sword_Art_Online",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717.jpg",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717t.jpg",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717l.jpg"
+      },
+      "webp": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717.webp",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717t.webp",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/39717l.webp"
+      }
+    },
+    "trailer": {
+      "youtube_id": "6ohYYtxfDCg",
+      "url": "https:\/\/www.youtube.com\/watch?v=6ohYYtxfDCg",
+      "embed_url": "https:\/\/www.youtube.com\/embed\/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1",
+      "images": {
+        "image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/default.jpg",
+        "small_image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/sddefault.jpg",
+        "medium_image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/mqdefault.jpg",
+        "large_image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/hqdefault.jpg",
+        "maximum_image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/maxresdefault.jpg"
+      }
+    },
+    "title": "Sword Art Online",
+    "title_english": "Sword Art Online",
+    "title_japanese": "\u30bd\u30fc\u30c9\u30a2\u30fc\u30c8\u30fb\u30aa\u30f3\u30e9\u30a4\u30f3",
+    "title_synonyms": [
+      "S.A.O",
+      "SAO"
+    ],
+    "type": "UNKNOWN TYPE",
+    "source": "Light novel",
+    "episodes": 25,
+    "status": "Finished Airing",
+    "airing": false,
+    "aired": {
+      "from": "2012-07-08T00:00:00+00:00",
+      "to": "2012-12-23T00:00:00+00:00",
+      "prop": {
+        "from": {
+          "day": 8,
+          "month": 7,
+          "year": 2012
+        },
+        "to": {
+          "day": 23,
+          "month": 12,
+          "year": 2012
+        }
+      },
+      "string": "Jul 8, 2012 to Dec 23, 2012"
+    },
+    "duration": "23 min per ep",
+    "rating": "UNKNOWN RATING",
+    "score": 7.2,
+    "scored_by": 1845274,
+    "rank": 2897,
+    "popularity": 5,
+    "members": 2669774,
+    "favorites": 62703,
+    "synopsis": "In the year 2022, virtual reality has progressed by leaps and bounds, and a massive online role-playing game called Sword Art Online (SAO) is launched. With the aid of \"NerveGear\" technology, players can control their avatars within the game using nothing but their own thoughts. Kazuto Kirigaya, nicknamed \"Kirito,\" is among the lucky few enthusiasts who get their hands on the first shipment of the game. He logs in to find himself, with ten-thousand others, in the scenic and elaborate world of Aincrad, one full of fantastic medieval weapons and gruesome monsters. However, in a cruel turn of events, the players soon realize they cannot log out; the game's creator has trapped them in his new world until they complete all one hundred levels of the game. In order to escape Aincrad, Kirito will now have to interact and cooperate with his fellow players. Some are allies, while others are foes, like Asuna Yuuki, who commands the leading group attempting to escape from the ruthless game. To make matters worse, Sword Art Online is not all fun and games: if they die in Aincrad, they die in real life. Kirito must adapt to his new reality, fight for his survival, and hopefully break free from his virtual hell. [Written by MAL Rewrite]",
+    "background": null,
+    "season": "UNKNOWN SEASON",
+    "year": 2012,
+    "broadcast": {
+      "day": "UNKNOWN DAY",
+      "time": "00:00",
+      "timezone": "Asia\/Tokyo",
+      "string": "Sundays at 00:00 (JST)"
+    },
+    "producers": [
+      {
+        "mal_id": 17,
+        "type": "anime",
+        "name": "Aniplex",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/17\/Aniplex"
+      },
+      {
+        "mal_id": 79,
+        "type": "anime",
+        "name": "Genco",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/79\/Genco"
+      },
+      {
+        "mal_id": 315,
+        "type": "anime",
+        "name": "DAX Production",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/315\/DAX_Production"
+      },
+      {
+        "mal_id": 681,
+        "type": "anime",
+        "name": "ASCII Media Works",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/681\/ASCII_Media_Works"
+      },
+      {
+        "mal_id": 1097,
+        "type": "anime",
+        "name": "Bandai Namco Games",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/1097\/Bandai_Namco_Games"
+      }
+    ],
+    "licensors": [
+      {
+        "mal_id": 493,
+        "type": "anime",
+        "name": "Aniplex of America",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/493\/Aniplex_of_America"
+      }
+    ],
+    "studios": [
+      {
+        "mal_id": 56,
+        "type": "anime",
+        "name": "A-1 Pictures",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/56\/A-1_Pictures"
+      }
+    ],
+    "genres": [
+      {
+        "mal_id": 1,
+        "type": "anime",
+        "name": "Action",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/1\/Action"
+      },
+      {
+        "mal_id": 2,
+        "type": "anime",
+        "name": "Adventure",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/2\/Adventure"
+      },
+      {
+        "mal_id": 10,
+        "type": "anime",
+        "name": "Fantasy",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/10\/Fantasy"
+      },
+      {
+        "mal_id": 22,
+        "type": "anime",
+        "name": "Romance",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/22\/Romance"
+      }
+    ],
+    "explicit_genres": [],
+    "themes": [
+      {
+        "mal_id": 11,
+        "type": "anime",
+        "name": "Game",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/11\/Game"
+      }
+    ],
+    "demographics": []
+  }
+}

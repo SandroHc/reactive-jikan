@@ -6,17 +6,18 @@
 
 package net.sandrohc.jikan.query.character;
 
-import java.lang.Character;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.character.*;
+import net.sandrohc.jikan.model.character.Character;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the character search.
@@ -46,8 +47,9 @@ public class CharacterSearchQuery extends QueryableQuery<DataListHolderWithPagin
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/anime")
+	public QueryUrlBuilder getInnerUrl() {
+		return create()
+				.path("/anime")
 				.param("order_by", orderBy, CharacterOrderBy::getSearch)
 				.param("sort", sort, SortOrder::getSearch)
 				.param("letter", suffix);

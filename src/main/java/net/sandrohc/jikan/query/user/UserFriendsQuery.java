@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -33,8 +33,8 @@ public class UserFriendsQuery extends PageableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/users/" + username + "/friends");
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/users/" + username + "/friends");
 	}
 
 	@Override

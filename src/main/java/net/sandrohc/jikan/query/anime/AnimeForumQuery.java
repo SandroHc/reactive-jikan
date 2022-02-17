@@ -12,11 +12,11 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the anime forum posts.
@@ -26,24 +26,24 @@ import static net.sandrohc.jikan.query.QueryUrl.endpoint;
 public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<ForumTopic>> {
 
 	/** The anime ID. */
-	protected final int id;
+	protected int id;
 
 	/** The forum topic type. */
-	protected final ForumTopicType forumTopicType;
+	protected ForumTopicType forumTopicType;
 
 
 	public AnimeForumQuery(Jikan jikan, int id) {
-		this(jikan, id, null);
-	}
-
-	public AnimeForumQuery(Jikan jikan, int id, ForumTopicType forumTopicType) {
 		super(jikan);
 		this.id = id;
-		this.forumTopicType = forumTopicType;
+	}
+
+	public AnimeForumQuery type(ForumTopicType type) {
+		this.forumTopicType = type;
+		return this;
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return endpoint("/anime/" + id + "/forum")
 				.param("filter", forumTopicType, ForumTopicType::getValue);
 	}

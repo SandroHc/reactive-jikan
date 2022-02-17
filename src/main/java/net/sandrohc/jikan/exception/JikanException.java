@@ -29,5 +29,4 @@ public class JikanException extends Exception {
 	public JikanException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
-
 }

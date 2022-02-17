@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.genre.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -32,10 +32,10 @@ public abstract class GenreQuery<Q extends GenreQuery<?>> extends PageableQuery<
 		return this;
 	}
 
-	protected abstract QueryUrl getGenreQueryUrl();
+	protected abstract QueryUrlBuilder getGenreQueryUrl();
 
 	@Override
-	public QueryUrl getInnerUrl() {
+	public QueryUrlBuilder getInnerUrl() {
 		return getGenreQueryUrl()
 				.param("filter", type, GenreType::getSearch);
 	}

@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,8 +36,8 @@ public abstract class UserHistoryQuery extends Query<DataListHolder<UserHistoryE
 	}
 
 	@Override
-	public QueryUrl getUrl() {
-		return QueryUrl.endpoint("/users/" + username + "/history")
+	public QueryUrlBuilder getUrl() {
+		return QueryUrlBuilder.endpoint("/users/" + username + "/history")
 				.param("type", type);
 	}
 

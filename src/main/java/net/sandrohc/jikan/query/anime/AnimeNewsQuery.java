@@ -8,42 +8,33 @@ package net.sandrohc.jikan.query.anime;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.PageableQuery;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the anime news.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeNews">Jikan API docs - getAnimeNews</a>
  */
-public class AnimeNewsQuery extends Query<DataListHolderWithPagination<NewsArticle>, Flux<NewsArticle>> {
+public class AnimeNewsQuery extends PageableQuery<DataListHolderWithPagination<NewsArticle>, Flux<NewsArticle>, AnimeNewsQuery> {
 
 	/** The anime ID. */
 	protected final int id;
 
-	// TODO: validate javadoc by checking max news per page
-	/** The page. Each page contains up to ? news. */
-	protected final int page;
-
-	public AnimeNewsQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
+	public AnimeNewsQuery(Jikan jikan, int id) {
 		super(jikan);
-		if (page < 1) throw new JikanInvalidArgumentException("page starts at index 1");
-
 		this.id = id;
-		this.page = page;
 	}
 
 	@Override
-	public QueryUrl getUrl() {
-		return endpoint("/anime/" + id + "/news")
-				.param("page", page);
+	public QueryUrlBuilder getInnerUrl() {
+		return endpoint("/anime/" + id + "/news");
 	}
 
 	@Override

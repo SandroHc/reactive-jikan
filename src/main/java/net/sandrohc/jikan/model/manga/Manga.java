@@ -12,7 +12,6 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
 
 /**
  * A manga object with all its details.

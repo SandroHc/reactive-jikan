@@ -11,10 +11,10 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the manga details.
@@ -32,7 +32,7 @@ public class MangaQuery extends Query<DataHolder<Manga>, Mono<Manga>> {
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return endpoint("/manga/" + id);
 	}
 

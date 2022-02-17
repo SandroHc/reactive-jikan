@@ -8,7 +8,6 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
-import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.anime.*;
 import net.sandrohc.jikan.query.genre.GenreAnimeQuery;
 
@@ -105,7 +104,7 @@ public class AnimeQueryFactory extends Factory {
 	 * @return The anime episode query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeEpisodeById">Jikan API docs - getAnimeEpisodeById</a>
 	 */
-	public AnimeEpisodeQuery episode(int animeId, int episode) throws JikanInvalidArgumentException {
+	public AnimeEpisodeQuery episode(int animeId, int episode) {
 		return new AnimeEpisodeQuery(this.jikan, animeId, episode);
 	}
 
@@ -113,24 +112,22 @@ public class AnimeQueryFactory extends Factory {
 	 * Get the anime news.
 	 *
 	 * @param animeId The anime ID
-	 * @param page The page number
 	 * @return The anime news query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeNews">Jikan API docs - getAnimeNews</a>
 	 */
-	public AnimeNewsQuery news(int animeId, int page) throws JikanInvalidArgumentException {
-		return new AnimeNewsQuery(this.jikan, animeId, page);
+	public AnimeNewsQuery news(int animeId) {
+		return new AnimeNewsQuery(this.jikan, animeId);
 	}
 
 	/**
 	 * Get the anime forum posts.
 	 *
-	 * @param animeId        The anime ID
-	 * @param forumTopicType The forum topic type
+	 * @param animeId The anime ID
 	 * @return The anime forum query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeForum">Jikan API docs - getAnimeForum</a>
 	 */
-	public AnimeForumQuery forum(int animeId, ForumTopicType forumTopicType) {
-		return new AnimeForumQuery(this.jikan, animeId, forumTopicType);
+	public AnimeForumQuery forum(int animeId) {
+		return new AnimeForumQuery(this.jikan, animeId);
 	}
 
 	/**
@@ -192,24 +189,22 @@ public class AnimeQueryFactory extends Factory {
 	 * Get the anime user updates.
 	 *
 	 * @param animeId The anime ID
-	 * @param page    The page
 	 * @return The anime user updates query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeUserUpdates">Jikan API docs - getAnimeUserUpdates</a>
 	 */
-	public AnimeUserUpdatesQuery userUpdates(int animeId, int page) throws JikanInvalidArgumentException {
-		return new AnimeUserUpdatesQuery(this.jikan, animeId, page);
+	public AnimeUserUpdatesQuery userUpdates(int animeId) {
+		return new AnimeUserUpdatesQuery(this.jikan, animeId);
 	}
 
 	/**
 	 * Get the anime reviews.
 	 *
 	 * @param animeId The anime ID
-	 * @param page    The page
 	 * @return The anime reviews query
 	 * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeReviews">Jikan API docs - getAnimeReviews</a>
 	 */
-	public AnimeReviewsQuery reviews(int animeId, int page) throws JikanInvalidArgumentException {
-		return new AnimeReviewsQuery(this.jikan, animeId, page);
+	public AnimeReviewsQuery reviews(int animeId) {
+		return new AnimeReviewsQuery(this.jikan, animeId);
 	}
 
 	/**

@@ -2,158 +2,66 @@ package net.sandrohc.jikan.test;
 
 import java.time.*;
 import java.util.*;
+import java.util.stream.*;
 
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.base.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
-import net.sandrohc.jikan.model.legacy.season.*;
 import net.sandrohc.jikan.model.season.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RequestSeasonTest extends RequestTest {
 
 	@Test
 	void fetchSeason() {
 		// https://api.jikan.moe/v3/season/2020/summer
-		String response = "{\n" +
-				"    \"season_name\": \"Summer\",\n" +
-				"    \"season_year\": 2020,\n" +
-				"    \"anime\": [\n" +
-				"        {\n" +
-				"            \"mal_id\": 39587,\n" +
-				"            \"url\": \"https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season\",\n" +
-				"            \"title\": \"Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season\",\n" +
-				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/1444/108005.jpg\",\n" +
-				"            \"synopsis\": \"Even after dying countless times, Subaru finally ended the threat...\",\n" +
-				"            \"type\": \"TV\",\n" +
-				"            \"airing_start\": \"2020-07-08T13:30:00+00:00\",\n" +
-				"            \"episodes\": 13,\n" +
-				"            \"members\": 290261,\n" +
-				"            \"genres\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 8,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Drama\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/8/Drama\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 10,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Fantasy\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/10/Fantasy\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 40,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Psychological\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/40/Psychological\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 41,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Thriller\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/41/Thriller\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"source\": \"Light novel\",\n" +
-				"            \"producers\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 314,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"White Fox\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/producer/314/White_Fox\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"score\": 8.5,\n" +
-				"            \"licensors\": [ \"Crunchyroll\"],\n" +
-				"            \"r18\": false,\n" +
-				"            \"kids\": false,\n" +
-				"            \"continuing\": false\n" +
-				"        }\n" +
-				"    ]\n" +
-				"}";
 
 		mock(mockServer, "/season/2020/summer", response);
 
-		Collection<SeasonAnime> results = jikan.query().season().get(2020, Season.SUMMER)
+		Collection<Anime> results = jikan.query().season().get(2020, Season.SUMMER)
 				.execute()
 				.collectList()
 				.block();
 
-		assertNotNull(results);
-		assertNotNull(new SeasonList().toString());
+		assertThat(results).hasSize(1);
 
 		/* Results */
-		SeasonAnime anime = results.iterator().next();
+		Anime anime = results.iterator().next();
 
-		assertNotNull(anime);
-		assertNotNull(anime.toString());
-		assertEquals(39587, anime.malId);
-		assertEquals("https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season", anime.url);
-		assertEquals("Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season", anime.title);
-		assertEquals("https://cdn.myanimelist.net/images/anime/1444/108005.jpg", anime.imageUrl);
-		assertEquals("Even after dying countless times, Subaru finally ended the threat...", anime.synopsis);
-		assertEquals(AnimeType.TV, anime.type);
-		assertEquals(OffsetDateTime.parse("2020-07-08T13:30:00+00:00"), anime.airingStart);
-		assertEquals(13, anime.episodes);
-		assertEquals(290261, anime.members);
-		assertEquals("Light novel", anime.source);
-		assertEquals(8.5F, anime.score);
-		assertFalse(anime.r18);
-		assertFalse(anime.kids);
-		assertFalse(anime.continuing);
+		assertThat(anime).isNotNull();
+		assertThat(anime.toString()).isNotNull();
+		assertThat(anime.malId).isEqualTo(39587);
+		assertThat(anime.url).isEqualTo("https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season");
+		assertThat(anime.title).isEqualTo("Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season");
+		assertThat(anime.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/1444/108005.jpg");
+		assertThat(anime.synopsis).isEqualTo("Even after dying countless times, Subaru finally ended the threat...");
+		assertThat(anime.type).isEqualTo(AnimeType.TV);
+		assertThat(anime.airingStart).isEqualTo(OffsetDateTime.parse("2020-07-08T13:30:00+00:00"));
+		assertThat(anime.episodes).isEqualTo(13);
+		assertThat(anime.members).isEqualTo(290261);
+		assertThat(anime.source).isEqualTo("Light novel");
+		assertThat(anime.score).isEqualTo(8.5F);
+		assertThat(anime.r18).isFalse();
+		assertThat(anime.kids).isFalse();
+		assertThat(anime.continuing).isFalse();
+		List<AnimeGenre> animeGenres = anime.genres.stream().map(GenreEntity::getName).collect(Collectors.toList());
+		assertThat(animeGenres).containsExactly(AnimeGenre.DRAMA, AnimeGenre.FANTASY, AnimeGenre.PSYCHOLOGICAL, AnimeGenre.THRILLER);
 
-		Iterator<GenreEntity<AnimeGenre>> genresIt = anime.genres.iterator();
-		GenreEntity<AnimeGenre> genre1 = genresIt.next();
-		GenreEntity<AnimeGenre> genre2 = genresIt.next();
-		GenreEntity<AnimeGenre> genre3 = genresIt.next();
-		GenreEntity<AnimeGenre> genre4 = genresIt.next();
-		assertFalse(genresIt.hasNext());
-		assertNotNull(genre1.toString());
-		assertEquals(AnimeGenre.DRAMA, genre1.name);
-		assertEquals(AnimeGenre.FANTASY, genre2.name);
-		assertEquals(AnimeGenre.PSYCHOLOGICAL, genre3.name);
-		assertEquals(AnimeGenre.THRILLER, genre4.name);
+		EntityWithType producer = anime.producers.iterator().next();
+		assertThat(314, producer.malId).isEqualTo();
+		assertThat(Type.ANIME, producer.type).isEqualTo();
+		assertThat("White Fox", producer.name).isEqualTo();
+		assertThat("https://myanimelist.net/anime/producer/314/White_Fox", producer.url).isEqualTo();
 
-		MalSubEntity producer = anime.producers.iterator().next();
-		assertEquals(314, producer.malId);
-		assertEquals(Type.ANIME, producer.type);
-		assertEquals("White Fox", producer.name);
-		assertEquals("https://myanimelist.net/anime/producer/314/White_Fox", producer.url);
-
-		assertEquals("Crunchyroll", anime.licensors.iterator().next());
+		assertThat("Crunchyroll", anime.licensors.iterator().next()).isEqualTo();
 	}
 
 	@Test
 	void fetchSeasonArchive() {
 		// https://api.jikan.moe/v3/season/archive
-		String response = "{\n" +
-				"    \"archive\": [\n" +
-				"        {\n" +
-				"            \"year\": 2020,\n" +
-				"            \"seasons\": [\n" +
-				"                \"Winter\",\n" +
-				"                \"Spring\",\n" +
-				"                \"Summer\",\n" +
-				"                \"Fall\"\n" +
-				"            ]\n" +
-				"        },\n" +
-				"        {\n" +
-				"            \"year\": 1917,\n" +
-				"            \"seasons\": [\n" +
-				"                \"Winter\",\n" +
-				"                \"Spring\",\n" +
-				"                \"Summer\",\n" +
-				"                \"Fall\"\n" +
-				"            ]\n" +
-				"        }\n" +
-				"    ]\n" +
-				"}";
 
 		mock(mockServer, "/season/archive", response);
 
@@ -162,16 +70,16 @@ public class RequestSeasonTest extends RequestTest {
 				.collectList()
 				.block();
 
-		assertNotNull(results);
-		assertNotNull(new SeasonArchive().toString());
+		assertThat(results).isNotNull();
+		assertThat(new SeasonArchive().toString()).isNotNull();
 
 		/* Results */
 		Iterator<SeasonEntry> yearIt = results.iterator();
 
 		SeasonEntry year1 = yearIt.next();
-		assertNotNull(year1);
-		assertNotNull(year1.toString());
-		assertEquals(2020, year1.year);
+		assertThat(year1).isNotNull();
+		assertThat(year1.toString()).isNotNull();
+		assertThat(2020, year1.year).isEqualTo();
 		assertTrue(year1.seasons.containsAll(Arrays.asList(
 				Season.WINTER,
 				Season.SPRING,
@@ -180,9 +88,9 @@ public class RequestSeasonTest extends RequestTest {
 		)));
 
 		SeasonEntry year2 = yearIt.next();
-		assertNotNull(year2);
-		assertNotNull(year2.toString());
-		assertEquals(1917, year2.year);
+		assertThat(year2).isNotNull();
+		assertThat(year2.toString()).isNotNull();
+		assertThat(1917, year2.year).isEqualTo();
 		assertTrue(year2.seasons.containsAll(Arrays.asList(
 				Season.WINTER,
 				Season.SPRING,
@@ -190,87 +98,12 @@ public class RequestSeasonTest extends RequestTest {
 				Season.FALL
 		)));
 
-		assertFalse(yearIt.hasNext());
+		assertThat(yearIt.hasNext()).isFalse();
 	}
 
 	@Test
 	void fetchSeasonLater() {
 		// https://api.jikan.moe/v3/season/later
-		String response = "{\n" +
-				"    \"season_name\": \"Later\",\n" +
-				"    \"season_year\": null,\n" +
-				"    \"anime\": [\n" +
-				"        {\n" +
-				"            \"mal_id\": 40028,\n" +
-				"            \"url\": \"https://myanimelist.net/anime/40028/Shingeki_no_Kyojin__The_Final_Season\",\n" +
-				"            \"title\": \"Shingeki no Kyojin: The Final Season\",\n" +
-				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/1384/107759.jpg\",\n" +
-				"            \"synopsis\": \"Final Season of Shingeki no Kyojin.\",\n" +
-				"            \"type\": \"TV\",\n" +
-				"            \"airing_start\": null,\n" +
-				"            \"episodes\": null,\n" +
-				"            \"members\": 126784,\n" +
-				"            \"genres\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 1,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Action\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/1/Action\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 38,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Military\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/38/Military\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 7,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Mystery\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/7/Mystery\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 31,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Super Power\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/31/Super_Power\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 8,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Drama\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/8/Drama\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 10,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Fantasy\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/10/Fantasy\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 27,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Shounen\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/27/Shounen\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"source\": \"Manga\",\n" +
-				"            \"producers\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 569,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"MAPPA\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/producer/569/MAPPA\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"score\": null,\n" +
-				"            \"licensors\": [],\n" +
-				"            \"r18\": false,\n" +
-				"            \"kids\": false,\n" +
-				"            \"continuing\": false\n" +
-				"        }\n" +
-				"    ]\n" +
-				"}";
 
 		mock(mockServer, "/season/later", response);
 
@@ -279,42 +112,42 @@ public class RequestSeasonTest extends RequestTest {
 				.collectList()
 				.block();
 
-		assertNotNull(results);
+		assertThat(results).isNotNull();
 
 		/* Results */
 		SeasonAnime anime = results.iterator().next();
 
-		assertNotNull(anime);
-		assertNotNull(anime.toString());
-		assertEquals(40028, anime.malId);
-		assertEquals("https://myanimelist.net/anime/40028/Shingeki_no_Kyojin__The_Final_Season", anime.url);
-		assertEquals("Shingeki no Kyojin: The Final Season", anime.title);
-		assertEquals("https://cdn.myanimelist.net/images/anime/1384/107759.jpg", anime.imageUrl);
-		assertEquals("Final Season of Shingeki no Kyojin.", anime.synopsis);
-		assertEquals(AnimeType.TV, anime.type);
+		assertThat(anime).isNotNull();
+		assertThat(anime.toString()).isNotNull();
+		assertThat(40028, anime.malId).isEqualTo();
+		assertThat("https://myanimelist.net/anime/40028/Shingeki_no_Kyojin__The_Final_Season", anime.url).isEqualTo();
+		assertThat("Shingeki no Kyojin: The Final Season", anime.title).isEqualTo();
+		assertThat("https://cdn.myanimelist.net/images/anime/1384/107759.jpg", anime.imageUrl).isEqualTo();
+		assertThat("Final Season of Shingeki no Kyojin.", anime.synopsis).isEqualTo();
+		assertThat(AnimeType.TV, anime.type).isEqualTo();
 		assertNull(anime.airingStart);
 		assertNull(anime.episodes);
-		assertEquals(126784, anime.members);
-		assertEquals("Manga", anime.source);
+		assertThat(126784, anime.members).isEqualTo();
+		assertThat("Manga", anime.source).isEqualTo();
 		assertNull(anime.score);
-		assertFalse(anime.r18);
-		assertFalse(anime.kids);
-		assertFalse(anime.continuing);
+		assertThat(anime.r18).isFalse();
+		assertThat(anime.kids).isFalse();
+		assertThat(anime.continuing).isFalse();
 
 		Iterator<GenreEntity<AnimeGenre>> genresIt = anime.genres.iterator();
-		assertEquals(AnimeGenre.ACTION, genresIt.next().name);
-		assertEquals(AnimeGenre.MILITARY, genresIt.next().name);
-		assertEquals(AnimeGenre.MYSTERY, genresIt.next().name);
-		assertEquals(AnimeGenre.SUPERPOWER, genresIt.next().name);
-		assertEquals(AnimeGenre.DRAMA, genresIt.next().name);
-		assertEquals(AnimeGenre.FANTASY, genresIt.next().name);
-		assertEquals(AnimeGenre.SHOUNEN, genresIt.next().name);
+		assertThat(AnimeGenre.ACTION, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.MILITARY, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.MYSTERY, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.SUPERPOWER, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.DRAMA, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.FANTASY, genresIt.next().name).isEqualTo();
+		assertThat(AnimeGenre.SHOUNEN, genresIt.next().name).isEqualTo();
 
-		MalSubEntity producer = anime.producers.iterator().next();
-		assertEquals(569, producer.malId);
-		assertEquals(Type.ANIME, producer.type);
-		assertEquals("MAPPA", producer.name);
-		assertEquals("https://myanimelist.net/anime/producer/569/MAPPA", producer.url);
+		EntityWithType producer = anime.producers.iterator().next();
+		assertThat(569, producer.malId).isEqualTo();
+		assertThat(Type.ANIME, producer.type).isEqualTo();
+		assertThat("MAPPA", producer.name).isEqualTo();
+		assertThat("https://myanimelist.net/anime/producer/569/MAPPA", producer.url).isEqualTo();
 
 		assertTrue(anime.licensors.isEmpty());
 	}

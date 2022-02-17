@@ -1,6 +1,8 @@
 package net.sandrohc.jikan.test;
 
 import java.nio.charset.*;
+import java.nio.file.*;
+import java.util.*;
 
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
@@ -22,7 +24,9 @@ public class MockUtils {
 		return ClientAndServer.startClientAndServer(MOCK_PORT);
 	}
 
-	public static void mock(ClientAndServer mockServer, String uri, String json, Parameter... queryParameters) {
+	public static void mock(ClientAndServer mockServer, String uri, int temp, String jsonFile, Parameter... queryParameters) {
+		String json = readFileToString(jsonFile);
+
 		mockServer
 				.when(request().withMethod("GET").withPath(uri).withQueryStringParameters(queryParameters))
 				.respond(response()
@@ -49,4 +53,13 @@ public class MockUtils {
 				);
 	}
 
+	public static String readFileToString(String filename) {
+		try {
+			Path path = Paths.get(Objects.requireNonNull(MockUtils.class.getResource("responses/" + filename)).toURI());
+			byte[] bytes = Files.readAllBytes(path);
+			return new String(bytes, StandardCharsets.UTF_8);
+		} catch (Exception e) {
+			throw new RuntimeException("Unable to read test file: " + filename);
+		}
+	}
 }

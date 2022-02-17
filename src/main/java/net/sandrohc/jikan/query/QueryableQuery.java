@@ -38,13 +38,18 @@ public abstract class QueryableQuery<T, R extends Publisher<?>, Q extends Querya
 	}
 
 	@SuppressWarnings("unchecked")
-	public Q query(String query) throws UnsupportedEncodingException, JikanInvalidArgumentException {
+	public Q query(String query) throws JikanInvalidArgumentException {
 		if (query == null) {
 			this.query = null;
 		} else {
-			// TODO: encode on the QueryUrlBuilder
+			// TODO: encode on the QueryUrl
 			// encode the string, as per the RFC3986 - http://tools.ietf.org/html/rfc3986#section-2.1 (percent encoding)
-			String encoded = URLEncoder.encode(query, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
+			String encoded;
+			try {
+				encoded = URLEncoder.encode(query, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20");
+			} catch (UnsupportedEncodingException e) {
+				throw new JikanInvalidArgumentException("Failed to encode query param '" + query + "'", e);
+			}
 
 			this.query = encoded;
 		}
@@ -52,7 +57,7 @@ public abstract class QueryableQuery<T, R extends Publisher<?>, Q extends Querya
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return super.getUrl()
 				.param("q", query);
 	}

@@ -11,9 +11,6 @@ package net.sandrohc.jikan.exception;
  */
 public class JikanResponseException extends JikanException {
 
-	public JikanResponseException() {
-	}
-
 	public JikanResponseException(String message) {
 		super(message);
 	}
@@ -22,12 +19,7 @@ public class JikanResponseException extends JikanException {
 		super(message, cause);
 	}
 
-	public JikanResponseException(Throwable cause) {
-		super(cause);
-	}
-
 	public JikanResponseException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 	}
-
 }

@@ -7,11 +7,13 @@
 package net.sandrohc.jikan.query;
 
 import java.io.*;
+import java.net.URI;
 import java.time.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.exception.JikanThrottleException;
 import org.reactivestreams.Publisher;
@@ -43,21 +45,26 @@ public abstract class Query<T, R extends Publisher<?>> {
 	/**
 	 * Build the query URL dynamically.
 	 */
-	public abstract QueryUrl getUrl();
+	public abstract QueryUrlBuilder getUrl();
 
 	// TODO: see if it's possible to fetch type from Query constructor
 	public abstract TypeReference<T> getResponseType();
 
-	public R execute() {
-		final String url = getUrl().build();
-		log.debug(JIKAN_MARKER, "Fetching request: {}", url);
+	public R execute() throws JikanQueryException {
+		URI uri = null;
+		try {
+			uri = getUrl().build();
+			log.debug(JIKAN_MARKER, "Fetching request: {}", uri);
 
-		final Mono<T> queryResults = jikan.httpClient.get().uri(url)
-				.responseSingle(this::extractBytesFromResponse)
-				.retryWhen(Retry.backoff(jikan.maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
-				.flatMap(this::deserialize);
+			final Mono<T> queryResults = jikan.httpClient.get().uri(uri)
+					.responseSingle(this::extractBytesFromResponse)
+					.retryWhen(Retry.backoff(jikan.maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
+					.flatMap(this::deserialize);
 
-		return process(queryResults);
+			return process(queryResults);
+		} catch (Exception e) {
+			throw new JikanQueryException("Error when executing query '" + getClass().getName() + "' with URI '" + uri + "'", e);
+		}
 	}
 
 	/**
@@ -72,6 +79,8 @@ public abstract class Query<T, R extends Publisher<?>> {
 	}
 
 	private Mono<byte[]> extractBytesFromResponse(HttpClientResponse res, ByteBufMono content) {
+		log.trace(JIKAN_MARKER, "Received response for query '{}' and path '{}'", getClass(), res.path());
+
 		if (res.status() == HttpResponseStatus.OK) {
 			return content.asByteArray();
 		} else if (res.status() == HttpResponseStatus.NOT_FOUND) {
@@ -81,8 +90,7 @@ public abstract class Query<T, R extends Publisher<?>> {
 		} else {
 			return content.asString()
 					.flatMap(str -> Mono.error(new JikanResponseException("Response returned error '" + res.status() +
-							"' while executing query " + getClass().getSimpleName() + " with URL '" + getUrl() +
-							"': " + str)));
+							"' while executing query '" + getClass() + "' with URL '" + getUrl() + "': " + str)));
 		}
 	}
 

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -53,8 +53,8 @@ public class UserSearchQuery extends QueryableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/anime")
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/anime")
 				.param("gender", gender, UserGender::getSearch)
 				.param("location", location)
 				.param("maxAge", maxAge)

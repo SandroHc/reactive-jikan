@@ -10,11 +10,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Get the list of clubs the user joined.
@@ -32,7 +32,7 @@ public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<E
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
+	public QueryUrlBuilder getInnerUrl() {
 		return endpoint("/users/" + username + "/clubs");
 	}
 

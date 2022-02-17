@@ -9,9 +9,7 @@ package net.sandrohc.jikan.model.common;
 import java.io.Serializable;
 import java.util.*;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.base.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**

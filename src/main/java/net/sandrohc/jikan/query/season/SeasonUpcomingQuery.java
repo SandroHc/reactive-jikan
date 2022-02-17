@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -27,8 +27,8 @@ public class SeasonUpcomingQuery extends PageableQuery<DataListHolderWithPaginat
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/seasons/upcoming");
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/seasons/upcoming");
 	}
 
 	@Override

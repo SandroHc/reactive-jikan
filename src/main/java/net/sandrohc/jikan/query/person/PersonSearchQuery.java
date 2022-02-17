@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -44,8 +44,8 @@ public class PersonSearchQuery extends QueryableQuery<DataListHolderWithPaginati
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/people")
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/people")
 				.param("order_by", orderBy, PersonOrderBy::getSearch)
 				.param("sort", sort, SortOrder::getSearch)
 				.param("letter", suffix);

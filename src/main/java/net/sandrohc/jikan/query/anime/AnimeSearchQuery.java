@@ -12,8 +12,7 @@ import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
@@ -110,8 +109,8 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/anime")
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/anime")
 				.param("type", type, AnimeType::getSearch)
 				.param("score", score)
 				.param("min_score", minimumScore)

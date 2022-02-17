@@ -41,10 +41,10 @@ public abstract class PageableQuery<T, R extends Publisher<?>, Q extends Pageabl
 		return (Q) this;
 	}
 
-	public abstract QueryUrl getInnerUrl();
+	public abstract QueryUrlBuilder getInnerUrl();
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return getInnerUrl()
 				.param("page", page)
 				.param("limit", limit);

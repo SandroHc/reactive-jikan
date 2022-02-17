@@ -1,0 +1,137 @@
+{
+  "pagination": {
+    "last_visible_page": 36,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": 24751,
+      "url": "https:\/\/myanimelist.net\/anime\/24751\/Akuma_no_Riddle__Shousha_wa_Dare_Nukiuchi_Test",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653.jpg",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653t.jpg",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653l.jpg"
+        },
+        "webp": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653.webp",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653t.webp",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/63653l.webp"
+        }
+      },
+      "trailer": {
+        "youtube_id": "FzBH_dMf6wo",
+        "url": "https:\/\/www.youtube.com\/watch?v=FzBH_dMf6wo",
+        "embed_url": "https:\/\/www.youtube.com\/embed\/FzBH_dMf6wo?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https:\/\/img.youtube.com\/vi\/FzBH_dMf6wo\/default.jpg",
+          "small_image_url": "https:\/\/img.youtube.com\/vi\/FzBH_dMf6wo\/sddefault.jpg",
+          "medium_image_url": "https:\/\/img.youtube.com\/vi\/FzBH_dMf6wo\/mqdefault.jpg",
+          "large_image_url": "https:\/\/img.youtube.com\/vi\/FzBH_dMf6wo\/hqdefault.jpg",
+          "maximum_image_url": "https:\/\/img.youtube.com\/vi\/FzBH_dMf6wo\/maxresdefault.jpg"
+        }
+      },
+      "title": "Akuma no Riddle: Shousha wa Dare? Nukiuchi Test",
+      "title_english": null,
+      "title_japanese": "\u60aa\u9b54\u306e\u30ea\u30c9\u30eb\u3000\u52dd\u8005\u306f\u3060\u308c\uff1f\uff08\u629c\u304d\u6253\u3061\u30c6\u30b9\u30c8\uff09",
+      "title_synonyms": [
+        "Akuma no Riddle Special",
+        "Riddle Story of Devil Special",
+        "Akuma no Riddle Episode 13"
+      ],
+      "type": "Special",
+      "source": "Manga",
+      "episodes": 1,
+      "status": "Finished Airing",
+      "airing": false,
+      "aired": {
+        "from": "2014-11-22T00:00:00+00:00",
+        "to": null,
+        "prop": {
+          "from": {
+            "day": 22,
+            "month": 11,
+            "year": 2014
+          },
+          "to": {
+            "day": null,
+            "month": null,
+            "year": null
+          }
+        },
+        "string": "Nov 22, 2014"
+      },
+      "duration": "23 min",
+      "rating": "R - 17+ (violence & profanity)",
+      "score": 6.52,
+      "scored_by": 18674,
+      "rank": 6074,
+      "popularity": 3037,
+      "members": 36727,
+      "favorites": 31,
+      "synopsis": "Unaired episode 13 of Akuma no Riddle released with the seventh Blu-ray\/DVD volume. The special will be previewed at a screening in Tokyo City on November 22, 2014. The BD\/DVD will be released on December 17, 2014.",
+      "background": null,
+      "season": null,
+      "year": null,
+      "broadcast": {
+        "day": null,
+        "time": null,
+        "timezone": null,
+        "string": null
+      },
+      "producers": [
+        {
+          "mal_id": 144,
+          "type": "anime",
+          "name": "Pony Canyon",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/144\/Pony_Canyon"
+        }
+      ],
+      "licensors": [
+        {
+          "mal_id": 102,
+          "type": "anime",
+          "name": "Funimation",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/102\/Funimation"
+        }
+      ],
+      "studios": [
+        {
+          "mal_id": 51,
+          "type": "anime",
+          "name": "Diomed\u00e9a",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/51\/Diomed%C3%A9a"
+        }
+      ],
+      "genres": [
+        {
+          "mal_id": 1,
+          "type": "anime",
+          "name": "Action",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/1\/Action"
+        },
+        {
+          "mal_id": 4,
+          "type": "anime",
+          "name": "Comedy",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/4\/Comedy"
+        },
+        {
+          "mal_id": 26,
+          "type": "anime",
+          "name": "Girls Love",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/26\/Girls_Love"
+        },
+        {
+          "mal_id": 9,
+          "type": "anime",
+          "name": "Ecchi",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/9\/Ecchi"
+        }
+      ],
+      "explicit_genres": [],
+      "themes": [],
+      "demographics": []
+    }
+  ]
+}

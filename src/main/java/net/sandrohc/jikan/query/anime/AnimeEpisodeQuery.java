@@ -8,14 +8,13 @@ package net.sandrohc.jikan.query.anime;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the anime episode details.
@@ -30,16 +29,14 @@ public class AnimeEpisodeQuery extends Query<DataHolder<AnimeEpisode>, Mono<Anim
 	/** The episode number. */
 	protected final int episode;
 
-	public AnimeEpisodeQuery(Jikan jikan, int id, int episode) throws JikanInvalidArgumentException {
+	public AnimeEpisodeQuery(Jikan jikan, int id, int episode) {
 		super(jikan);
-		if (episode < 1) throw new JikanInvalidArgumentException("episode starts at index 1");
-
 		this.id = id;
 		this.episode = episode;
 	}
 
 	@Override
-	public QueryUrl getUrl() {
+	public QueryUrlBuilder getUrl() {
 		return endpoint("/anime/" + id + "/episodes/" + episode);
 	}
 

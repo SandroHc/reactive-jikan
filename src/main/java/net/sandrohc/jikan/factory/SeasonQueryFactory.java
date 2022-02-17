@@ -7,7 +7,7 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.model.legacy.enums.*;
+import net.sandrohc.jikan.model.season.*;
 import net.sandrohc.jikan.query.season.SeasonListQuery;
 import net.sandrohc.jikan.query.season.SeasonNowQuery;
 import net.sandrohc.jikan.query.season.SeasonQuery;

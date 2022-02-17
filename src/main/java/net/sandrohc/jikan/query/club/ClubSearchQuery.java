@@ -11,7 +11,7 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.club.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -56,8 +56,8 @@ public class ClubSearchQuery extends QueryableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/clubs")
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/clubs")
 				.param("type", type.search)
 				.param("category", category, ClubCategory::getSearch)
 				.param("order_by", orderBy, ClubOrderBy::getSearch)

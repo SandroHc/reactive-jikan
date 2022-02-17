@@ -11,11 +11,11 @@ import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
 
 /**
  * Query for the club members.
@@ -33,7 +33,7 @@ public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
+	public QueryUrlBuilder getInnerUrl() {
 		return endpoint("/clubs/" + id + "/members");
 	}
 

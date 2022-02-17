@@ -9,8 +9,6 @@ package net.sandrohc.jikan.model.user;
 import java.io.*;
 import java.util.*;
 
-import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.legacy.user.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**

@@ -6,9 +6,20 @@
 
 package net.sandrohc.jikan.model.enums;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * The sort order. Used by the search queries.
+ */
 public enum SortOrder {
-	ASCENDING  ("asc"),
-	DESCENDING ("desc");
+	@JsonProperty("ascending")
+	@JsonAlias("asc")
+	ASCENDING("asc"),
+
+	@JsonProperty("descending")
+	@JsonAlias("desc")
+	DESCENDING("desc");
 
 
 	/** Used in the search queries. */

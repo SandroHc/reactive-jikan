@@ -1,0 +1,40 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "mal_id": 56114579,
+      "url": "https:\/\/myanimelist.net\/news\/56114579",
+      "title": "Interview: Luna Haruna to Showcase Best Album at New York Anisong World Matsuri",
+      "date": "2018-10-31T20:00:00+00:00",
+      "author_username": "USERNAME_1",
+      "author_url": "https:\/\/myanimelist.net\/profile\/USERNAME_1",
+      "forum_url": "https:\/\/myanimelist.net\/forum\/?topicid=1748998",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/s\/common\/uploaded_files\/1541039084-d87d2d92a6923a7b69e2f1775ae39c93.jpeg?s=3288e6769101fc3bc22f4728c933d9f4"
+        }
+      },
+      "comments": 5,
+      "excerpt": "Since making her international debut at Sakura-Con in Seattle five years ago, model-turned-singer Luna Haruna has performed at more than 30 anime conventions and co..."
+    },
+    {
+      "mal_id": 50992876,
+      "url": "https:\/\/myanimelist.net\/news\/50992876",
+      "title": "North American Anime & Manga Releases for June",
+      "date": "2017-06-05T11:01:00+00:00",
+      "author_username": "USERNAME_2",
+      "author_url": "https:\/\/myanimelist.net\/profile\/USERNAME_2",
+      "forum_url": "https:\/\/myanimelist.net\/forum\/?topicid=1623111",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/s\/common\/uploaded_files\/1496685526-62c913dabd65ccbcc2980704531918c8.jpeg?s=413df56d899170c2e81c41a54235740c"
+        }
+      },
+      "comments": 12,
+      "excerpt": "Here are the North American anime & manga releases for June Week 1: June 6 - 12 Anime Releases Ajin (incl. Part 1: Shoudou) Blu-ray & DVD Combo Limited Editi..."
+    }
+  ]
+}

@@ -8,41 +8,34 @@ package net.sandrohc.jikan.query.anime;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.query.Query;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.PageableQuery;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrl.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime user updates.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeUserUpdates">Jikan API docs - getAnimeUserUpdates</a>
  */
-public class AnimeUserUpdatesQuery extends Query<DataListHolderWithPagination<UserUpdateWithUser>, Flux<UserUpdateWithUser>> {
+public class AnimeUserUpdatesQuery extends PageableQuery<DataListHolderWithPagination<UserUpdateWithUser>, Flux<UserUpdateWithUser>, AnimeUserUpdatesQuery> {
 
 	/** The anime ID. */
-	protected final int id;
+	protected int id;
 
-	// TODO: validate javadoc by checking if max user updates per page has changed
-	/** The page. Each page contains up to 100 user updates. */
-	protected final int page;
-
-	public AnimeUserUpdatesQuery(Jikan jikan, int id, int page) throws JikanInvalidArgumentException {
+	public AnimeUserUpdatesQuery(Jikan jikan, int id) {
 		super(jikan);
-		if (page < 1) throw new JikanInvalidArgumentException("page starts at index 1");
-
 		this.id = id;
-		this.page = page;
 	}
 
 	@Override
-	public QueryUrl getUrl() {
-		return endpoint("/anime/" + id + "/userupdates")
+	public QueryUrlBuilder getInnerUrl() {
+		return create()
+				.path("/anime/" + id + "/userupdates")
 				.param("page", page);
 	}
 

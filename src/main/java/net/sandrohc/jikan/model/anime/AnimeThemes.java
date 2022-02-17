@@ -11,6 +11,7 @@ import java.util.*;
 
 import net.sandrohc.jikan.utils.Generated;
 
+// TODO: split opening/ending strings into properly typed classes
 public class AnimeThemes implements Serializable {
 
 	/** The opening songs. */

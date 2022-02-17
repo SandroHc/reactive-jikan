@@ -5,12 +5,8 @@ import java.util.*;
 
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
-import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.legacy.base.*;
-import net.sandrohc.jikan.model.legacy.enums.*;
 import net.sandrohc.jikan.model.enums.DayOfWeek;
-import net.sandrohc.jikan.model.legacy.schedule.*;
-import net.sandrohc.jikan.model.legacy.season.*;
+import net.sandrohc.jikan.model.enums.*;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -21,60 +17,6 @@ public class RequestScheduleTest extends RequestTest {
 	@Test
 	void fetchSchedule() {
 		// https://api.jikan.moe/v3/schedule/monday
-		String response = "{\n" +
-				"    \"monday\": [\n" +
-				"        {\n" +
-				"            \"mal_id\": 39587,\n" +
-				"            \"url\": \"https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season\",\n" +
-				"            \"title\": \"Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season\",\n" +
-				"            \"image_url\": \"https://cdn.myanimelist.net/images/anime/1444/108005.jpg\",\n" +
-				"            \"synopsis\": \"Even after dying countless times, Subaru finally ended the threat...\",\n" +
-				"            \"type\": \"TV\",\n" +
-				"            \"airing_start\": \"2020-07-08T13:30:00+00:00\",\n" +
-				"            \"episodes\": 13,\n" +
-				"            \"members\": 290261,\n" +
-				"            \"genres\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 8,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Drama\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/8/Drama\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 10,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Fantasy\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/10/Fantasy\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 40,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Psychological\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/40/Psychological\"\n" +
-				"                },\n" +
-				"                {\n" +
-				"                    \"mal_id\": 41,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"Thriller\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/genre/41/Thriller\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"source\": \"Light novel\",\n" +
-				"            \"producers\": [\n" +
-				"                {\n" +
-				"                    \"mal_id\": 314,\n" +
-				"                    \"type\": \"anime\",\n" +
-				"                    \"name\": \"White Fox\",\n" +
-				"                    \"url\": \"https://myanimelist.net/anime/producer/314/White_Fox\"\n" +
-				"                }\n" +
-				"            ],\n" +
-				"            \"score\": 8.5,\n" +
-				"            \"licensors\": [ \"Crunchyroll\" ],\n" +
-				"            \"r18\": false,\n" +
-				"            \"kids\": false\n" +
-				"        }\n" +
-				"    ]\n" +
-				"}";
 
 		mock(mockServer, "/schedule/monday", response);
 
@@ -136,17 +78,6 @@ public class RequestScheduleTest extends RequestTest {
 	@Test
 	void fetchSchedule_allDays() {
 		// https://api.jikan.moe/v3/schedule
-		String response = "{\n" +
-				"    \"monday\": [],\n" +
-				"    \"tuesday\": [],\n" +
-				"    \"wednesday\": [],\n" +
-				"    \"thursday\": [],\n" +
-				"    \"friday\": [],\n" +
-				"    \"saturday\": [],\n" +
-				"    \"sunday\": [],\n" +
-				"    \"other\": [],\n" +
-				"    \"unknown\": []\n" +
-				"}";
 
 		mock(mockServer, "/schedule", response);
 

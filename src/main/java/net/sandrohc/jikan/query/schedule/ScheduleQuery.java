@@ -1,5 +1,5 @@
 /*
- * Copyright © 2020, Sandro Marques and the reactive-jikan contributors
+ * Copyright © 2022, Sandro Marques and the reactive-jikan contributors
  *
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
@@ -12,7 +12,7 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.PageableQuery;
-import net.sandrohc.jikan.query.QueryUrl;
+import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -37,8 +37,8 @@ public class ScheduleQuery extends PageableQuery<DataListHolderWithPagination<An
 	}
 
 	@Override
-	public QueryUrl getInnerUrl() {
-		return QueryUrl.endpoint("/schedules")
+	public QueryUrlBuilder getInnerUrl() {
+		return QueryUrlBuilder.endpoint("/schedules")
 				.param("filter", day, DayOfWeek::getSearch);
 	}
 
