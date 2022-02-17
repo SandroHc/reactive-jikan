@@ -31,7 +31,7 @@ public class ScheduleQuery extends PageableQuery<DataListHolderWithPagination<An
 		super(jikan);
 	}
 
-	public ScheduleQuery type(DayOfWeek day) {
+	public ScheduleQuery day(DayOfWeek day) {
 		this.day = day;
 		return this;
 	}

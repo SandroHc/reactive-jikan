@@ -84,17 +84,17 @@ public class RequestPersonTest extends RequestTest {
 
 		Images p1 = picturesIt.next();
 		assertThat(p1.toString()).isNotNull();
-		assertThat("https://cdn.myanimelist.net/images/voiceactors/3/21725.jpg", p1.large).isEqualTo();
-		assertThat("https://cdn.myanimelist.net/images/voiceactors/3/21725.jpg", p1.small).isEqualTo();
+		assertThat(p1.large).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/3/21725.jpg");
+		assertThat(p1.small).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/3/21725.jpg");
 
 		Images p2 = picturesIt.next();
 		assertThat(p2.toString()).isNotNull();
-		assertThat("https://cdn.myanimelist.net/images/voiceactors/2/40132.jpg", p2.large).isEqualTo();
-		assertThat("https://cdn.myanimelist.net/images/voiceactors/2/40132.jpg", p2.small).isEqualTo();
+		assertThat(p2.large).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/2/40132.jpg");
+		assertThat(p2.small).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/2/40132.jpg");
 	}
 
 	@Test
-	void fetchSearch() throws UnsupportedEncodingException, JikanInvalidArgumentException {
+	void fetchSearch() throws JikanInvalidArgumentException {
 		// https://api.jikan.moe/v3/search/person?q=asuna&page=1&limit=2
 
 		mock(mockServer, "/search/person", response,

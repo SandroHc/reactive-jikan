@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CharacterAnimeQueryTest extends RequestTest {
 
 	@Test
-	void fetchAnime() throws JikanUrlException, JikanQueryException {
+	void fetchCharacterAnime() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/characters/36765/anime", 1, "characters/getCharacterAnime.json");
 
@@ -32,15 +32,16 @@ public class CharacterAnimeQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765/anime");
 
 		// Anime
 		assertThat(animeList).isNotNull();
-		Iterator<CharacterAnime> animeIt = animeList.iterator();
+		assertThat(animeList).hasSize(1);
 
-		CharacterAnime anime = animeIt.next();
+		CharacterAnime anime = animeList.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(anime.toString()).isNotNull();
 		softly.assertThat(anime.role).isEqualTo("ROLE");
@@ -49,7 +50,5 @@ public class CharacterAnimeQueryTest extends RequestTest {
 		softly.assertThat(anime.anime.name).isEqualTo("NAME");
 		softly.assertThat(anime.anime.images.jpg.imageUrl).isEqualTo("IMAGE");
 		softly.assertAll();
-
-		assertThat(animeIt).isExhausted();
 	}
 }

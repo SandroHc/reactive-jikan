@@ -22,37 +22,31 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeStaffQueryTest extends RequestTest {
 
 	@Test
-	void fetchStaff() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeStaff() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/staff", 1, "anime/getAnimeStaff.json");
 
 		/* Act */
 		AnimeStaffQuery query = jikan.query().anime().staff(11757);
-		List<AnimeStaff> staff = query.execute().collectList().block();
+		List<AnimeStaff> staffList = query.execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/staff");
 
-		assertThat(staff).isNotNull();
-		Iterator<AnimeStaff> staffIt = staff.iterator();
+		// Staff
+		assertThat(staffList).isNotNull();
+		assertThat(staffList).hasSize(1);
 
-		AnimeStaff staff1 = staffIt.next();
-		SoftAssertions softly = new SoftAssertions();
-		softly.assertThat(staff1.toString()).isNotNull();
-		softly.assertThat(staff1.person.malId).isEqualTo(10801);
-		softly.assertThat(staff1.person.name).isEqualTo("Itou, Tomohiko");
-		softly.assertThat(staff1.positions).containsExactly("Director", "Episode Director", "Storyboard");
-		softly.assertAll();
-
-		AnimeStaff staff2 = staffIt.next();
+		AnimeStaff staff = staffList.iterator().next();
 		softly = new SoftAssertions();
-		softly.assertThat(staff2.toString()).isNotNull();
-		softly.assertThat(staff2.person.malId).isEqualTo(19775);
-		softly.assertThat(staff2.person.name).isEqualTo("Fujiwara, Yoshiyuki");
-		softly.assertThat(staff2.positions).containsExactly("Episode Director", "Storyboard", "2nd Key Animation", "Key Animation");
+		softly.assertThat(staff.toString()).isNotNull();
+		softly.assertThat(staff.person.malId).isEqualTo(10801);
+		softly.assertThat(staff.person.name).isEqualTo("Itou, Tomohiko");
+		softly.assertThat(staff.positions).containsExactly("Director", "Episode Director", "Storyboard");
 		softly.assertAll();
-
-		assertThat(staffIt).isExhausted();
 	}
 }

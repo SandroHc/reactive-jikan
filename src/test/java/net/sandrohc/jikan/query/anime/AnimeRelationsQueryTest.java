@@ -24,7 +24,7 @@ import static org.assertj.core.groups.Tuple.tuple;
 public class AnimeRelationsQueryTest extends RequestTest {
 
 	@Test
-	void fetchRelations() throws JikanQueryException, JikanUrlException {
+	void fetchAnimeRelations() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/relations", 1, "anime/getAnimeRelations.json");
 
@@ -34,15 +34,16 @@ public class AnimeRelationsQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/relations");
 
 		// Relations
 		assertThat(relatedList).isNotNull();
-		Iterator<Related> relatedIt = relatedList.iterator();
+		assertThat(relatedList).hasSize(1);
 
-		Related related = relatedIt.next();
+		Related related = relatedList.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(related.toString()).isNotNull();
 		softly.assertThat(related.relation).isEqualTo(RelatedType.ADAPTATION);
@@ -52,7 +53,5 @@ public class AnimeRelationsQueryTest extends RequestTest {
 						tuple(1, "URL", "NAME", Type.ANIME)
 				);
 		softly.assertAll();
-
-		assertThat(relatedIt).isExhausted();
 	}
 }

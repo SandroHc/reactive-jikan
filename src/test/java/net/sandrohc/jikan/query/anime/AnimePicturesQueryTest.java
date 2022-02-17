@@ -12,6 +12,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.test.RequestTest;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
@@ -22,7 +23,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class AnimePicturesQueryTest extends RequestTest {
 
 	@Test
-	void fetchPictures() throws JikanUrlException, JikanQueryException {
+	void fetchAnimePictures() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/pictures", 1, "anime/getAnimePictures.json");
 
@@ -31,16 +32,21 @@ public class AnimePicturesQueryTest extends RequestTest {
 		Collection<Images> pictures = query.execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/pictures");
 
 		// Pictures
-		assertThat(pictures).isNotNull();
-		assertThat(pictures)
+		softly = new SoftAssertions();
+		softly.assertThat(pictures).isNotNull();
+		softly.assertThat(pictures)
 				.extracting(p -> p.jpg.imageUrl, p -> p.webp.imageUrl)
 				.containsExactly(
 						tuple("https://cdn.myanimelist.net/images/anime/8/36343l.jpg", "https://cdn.myanimelist.net/images/anime/8/36343.jpg"),
 						tuple("https://cdn.myanimelist.net/images/anime/8/36343l.jpg", "https://cdn.myanimelist.net/images/anime/8/36343.jpg")
 				);
+		softly.assertAll();
 	}
 }

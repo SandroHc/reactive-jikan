@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class CharacterPicturesQueryTest extends RequestTest {
 
 	@Test
-	void fetchPictures() throws JikanUrlException, JikanQueryException {
+	void fetchCharacterPictures() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/characters/36765/pictures", 1, "characters/getCharacterPictures.json");
 
@@ -33,13 +33,14 @@ public class CharacterPicturesQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765/pictures");
 
 		// Pictures
-		assertThat(pictures).isNotNull();
 		softly = new SoftAssertions();
+		softly.assertThat(pictures).isNotNull();
 		softly.assertThat(pictures)
 				.extracting(p -> p.jpg.imageUrl, p -> p.webp.imageUrl)
 				.containsExactly(

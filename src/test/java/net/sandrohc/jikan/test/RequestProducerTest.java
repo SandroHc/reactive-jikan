@@ -14,56 +14,51 @@ import static org.junit.jupiter.api.Assertions.*;
 public class RequestProducerTest extends RequestTest {
 
 	@Test
-	void fetchProducer() throws JikanInvalidArgumentException {
+	void fetchProducer() {
 		// http://api.jikan.moe/v3/producer/43/1
 
 		mock(mockServer, "/producer/43/1", response);
 
 		Producer producer = jikan.query().producer(43, 1).execute().block();
 
-		assertNotNull(producer);
-		assertNotNull(producer.toString());
+		// Query
+		assertThat(producer).isNotNull();
+		assertThat(producer.toString()).isNotNull();
 
-		/* Results */
+		// Results
 		MalSubEntity meta = producer.meta;
-		assertEquals(43, meta.malId);
-		assertEquals(Type.ANIME, meta.type);
-		assertEquals("ufotable", meta.name);
-		assertEquals("https://myanimelist.net/anime/producer/43/ufotable", meta.url);
+		assertThat(meta.malId).isEqualTo(43);
+		assertThat(meta.type).isEqualTo(Type.ANIME);
+		assertThat(meta.name).isEqualTo("ufotable");
+		assertThat(meta.url).isEqualTo("https://myanimelist.net/anime/producer/43/ufotable");
 
 		SeasonAnime anime = producer.anime.iterator().next();
-		assertNotNull(anime.toString());
-		assertEquals(10087, anime.malId);
-		assertEquals("Fate/Zero", anime.title);
-		assertEquals("https://myanimelist.net/anime/10087/Fate_Zero", anime.url);
-		assertEquals("https://cdn.myanimelist.net/images/anime/2/73249.jpg", anime.imageUrl);
-		assertEquals("With the promise of granting any wish, the omnipotent Holy Grail triggered three wars in the past...", anime.synopsis);
-		assertEquals(AnimeType.TV, anime.type);
-		assertEquals(OffsetDateTime.parse("2011-10-01T15:00:00+00:00"), anime.airingStart);
-		assertEquals(13, anime.episodes);
-		assertEquals(938115, anime.members);
-		assertEquals("Light novel", anime.source);
-		assertEquals(8.38F, anime.score);
-		assertFalse(anime.r18);
-		assertFalse(anime.kids);
-		assertTrue(anime.licensors.contains("Aniplex of America"));
+		assertThat(anime.toString()).isNotNull();
+		assertThat(anime.malId).isEqualTo(10087);
+		assertThat(anime.title).isEqualTo("Fate/Zero");
+		assertThat(anime.url).isEqualTo("https://myanimelist.net/anime/10087/Fate_Zero");
+		assertThat(anime.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/2/73249.jpg");
+		assertThat(the omnipotent Holy Grail triggered three wars in the past...", anime.synopsis).isEqualTo("With the promise of granting any wish);
+		assertThat(anime.type).isEqualTo(AnimeType.TV);
+		assertThat(anime.airingStart).isEqualTo(OffsetDateTime.parse("2011-10-01T15:00:00+00:00"));
+		assertThat(anime.episodes).isEqualTo(13);
+		assertThat(anime.members).isEqualTo(938115);
+		assertThat(anime.source).isEqualTo("Light novel");
+		assertThat(anime.score).isEqualTo(8.38F);
+		assertThat(anime.r18).isFalse();
+		assertThat(anime.kids).isFalse();
+		assertThat(anime.licensors.contains("Aniplex of America")).isTrue();
 
 		GenreEntity<AnimeGenre> genre = anime.genres.iterator().next();
-		assertEquals(1, genre.malId);
-		assertEquals(Type.ANIME, genre.type);
-		assertEquals(AnimeGenre.ACTION, genre.name);
-		assertEquals("https://myanimelist.net/anime/genre/1/Action", genre.url);
+		assertThat(genre.malId).isEqualTo(1);
+		assertThat(genre.type).isEqualTo(Type.ANIME);
+		assertThat(genre.name).isEqualTo(AnimeGenre.ACTION);
+		assertThat(genre.url).isEqualTo("https://myanimelist.net/anime/genre/1/Action");
 
 		MalSubEntity animeProducer = anime.producers.iterator().next();
-		assertEquals(43, animeProducer.malId);
-		assertEquals(Type.ANIME, animeProducer.type);
-		assertEquals("ufotable", animeProducer.name);
-		assertEquals("https://myanimelist.net/anime/producer/43/ufotable", animeProducer.url);
+		assertThat(animeProducer.malId).isEqualTo(43);
+		assertThat(animeProducer.type).isEqualTo(Type.ANIME);
+		assertThat(animeProducer.name).isEqualTo("ufotable");
+		assertThat(animeProducer.url).isEqualTo("https://myanimelist.net/anime/producer/43/ufotable");
 	}
-
-	@Test
-	void fetchProducer_invalidParameters() {
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().producer(10, 0), "page starts at index 1");
-	}
-
 }

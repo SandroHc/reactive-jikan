@@ -35,20 +35,23 @@ public class ClubRelationsQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/clubs/1/relations");
 
 		// Related
-		assertThat(related).isNotNull();
-
-		assertThat(related)
+		softly = new SoftAssertions();
+		softly.assertThat(related).isNotNull();
+		softly.assertThat(related).hasSize(1);
+		softly.assertThat(related)
 				.extracting(r -> r.malId, r -> r.type, r -> r.name, r -> r.url)
 				.containsExactly(
 						tuple(20, Type.ANIME, "Cowboy Bebop", "https://myanimelist.net/anime/20"),
 						tuple(30, Type.MANGA, "Cowboy Bebop", "https://myanimelist.net/manga/30"),
 						tuple(40, Type.CHARACTER, "Wen", "https://myanimelist.net/character/40")
 				);
+		softly.assertAll();
 
 		for (EntityWithType entity : related) {
 			assertThat(entity).isNotNull();

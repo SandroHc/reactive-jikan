@@ -21,7 +21,7 @@ public class CharacterQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchCharacter() throws JikanQueryException, JikanUrlException {
+	void fetchCharacterDetails() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/characters/36765", 1, "characters/getCharacterById.json");
 
@@ -31,6 +31,7 @@ public class CharacterQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765");

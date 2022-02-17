@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CharacterVoiceActorsQueryTest extends RequestTest {
 
 	@Test
-	void fetchVoiceActors() throws JikanUrlException, JikanQueryException {
+	void fetchCharacterVoiceActors() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/characters/36765/voices", 1, "characters/getCharacterVoiceActors.json");
 
@@ -32,15 +32,16 @@ public class CharacterVoiceActorsQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765/voices");
 
 		// Manga
 		assertThat(voiceActors).isNotNull();
-		Iterator<CharacterVoiceActor> voiceActorsIt = voiceActors.iterator();
+		assertThat(voiceActors).hasSize(1);
 
-		CharacterVoiceActor voiceActor = voiceActorsIt.next();
+		CharacterVoiceActor voiceActor = voiceActors.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(voiceActor.toString()).isNotNull();
 		softly.assertThat(voiceActor.language).isEqualTo("LANGUAGE");
@@ -49,7 +50,5 @@ public class CharacterVoiceActorsQueryTest extends RequestTest {
 		softly.assertThat(voiceActor.person.name).isEqualTo("NAME");
 		softly.assertThat(voiceActor.person.images.jpg.imageUrl).isEqualTo("IMAGE");
 		softly.assertAll();
-
-		assertThat(voiceActorsIt).isExhausted();
 	}
 }

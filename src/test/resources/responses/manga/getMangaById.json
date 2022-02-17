@@ -1,0 +1,117 @@
+{
+  "data": {
+    "mal_id": 23390,
+    "url": "https:\/\/myanimelist.net\/manga\/23390\/Shingeki_no_Kyojin",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846.jpg",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846t.jpg",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846l.jpg"
+      },
+      "webp": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846.webp",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846t.webp",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/37846l.webp"
+      }
+    },
+    "title": "Shingeki no Kyojin",
+    "title_english": "Attack on Titan",
+    "title_japanese": "\u9032\u6483\u306e\u5de8\u4eba",
+    "title_synonyms": [],
+    "type": "Manga",
+    "chapters": 141,
+    "volumes": 34,
+    "status": "Finished",
+    "publishing": false,
+    "published": {
+      "from": "2009-09-09T00:00:00+00:00",
+      "to": "2021-04-09T00:00:00+00:00",
+      "prop": {
+        "from": {
+          "day": 9,
+          "month": 9,
+          "year": 2009
+        },
+        "to": {
+          "day": 9,
+          "month": 4,
+          "year": 2021
+        }
+      },
+      "string": "Sep 9, 2009 to Apr 9, 2021"
+    },
+    "scored": 8.58,
+    "scored_by": 337814,
+    "rank": 80,
+    "popularity": 1,
+    "members": 555038,
+    "favorites": 65044,
+    "synopsis": "Hundreds of years ago, horrifying creatures which resembled humans appeared. These mindless, towering giants, called \"Titans,\" proved to be an existential threat, as they preyed on whatever humans they could find in order to satisfy a seemingly unending appetite. Unable to effectively combat the Titans, mankind was forced to barricade themselves within large walls surrounding what may very well be humanity's last safe haven in the world. In the present day, life within the walls has finally found peace, since the residents have not dealt with Titans for many years. Eren Yeager, Mikasa Ackerman, and Armin Arlert are three young children who dream of experiencing all that the world has to offer, having grown up hearing stories of the wonders beyond the walls. But when the state of tranquility is suddenly shattered by the attack of a massive 60-meter Titan, they quickly learn just how cruel the world can be. On that day, Eren makes a promise to himself that he will do whatever it takes to eradicate every single Titan off the face of the Earth, with the hope that one day, humanity will once again be able to live outside the walls without fear. [Written by MAL Rewrite]",
+    "background": "Shingeki no Kyojin won the Kodansha Manga Award in the shounen category in 2011 and was nominated for both the 16th and 18th annual Tezuka Osamu Cultural Prize as well as the 4th Manga Taishou Award. The series was the second highest selling manga series of 2013, with 15,933,801 copies sold. It has received several spin-off series\u2014both manga and novel; two guidebooks titled Inside and Outside were released on April 9 and September 9, 2013, featuring concept art, character profiles and interviews, which were combined into one and published by Kodansha USA on September 16, 2014; a drama CD created with the anime's staff was included in the January 2014 issue of the magazine; and a two-part live-action film directed by Shinji Higuchi was released in Japanese theaters on August 1 and September 15, 2015 respectively. Shingeki no Kyojin has been published in English as Attack on Titan by Kodansha Comics USA since June 19, 2012 and in large-size 5-in-1 omnibus editions (subtitled Colossal Edition) since May 27, 2014. Kodansha USA's English release won the 2014 Harvey Award for Best American Edition of Foreign Material. Crunchyroll simulpublishes the manga digitally. The manga has also been published in French by Pika \u00c9dition, in Italian by Planet Manga, in German by Carlsen Comics, in Spanish by Norma Editorial in Spain and by Ovni Press in Argentina, in Portuguese by Panini Comics, in Polish by Japonica Polonica Fantastica, in Chinese by Tong Li Publishing Co., Ltd., in Filipino by VIVA-PSICOM Publishing Corporation, in Finnish by Sangatsu Manga, in Russian by Azbooka, and in Turkish by GEREKL\u0130 \u015eEYLER B\u00fcy\u00fck Mavi Yay\u0131nc\u0131l\u0131k Ltd. \u015eti.",
+    "authors": [
+      {
+        "mal_id": 11705,
+        "type": "people",
+        "name": "Isayama, Hajime",
+        "url": "https:\/\/myanimelist.net\/people\/11705\/Hajime_Isayama"
+      }
+    ],
+    "serializations": [
+      {
+        "mal_id": 450,
+        "type": "manga",
+        "name": "Bessatsu Shounen Magazine",
+        "url": "https:\/\/myanimelist.net\/manga\/magazine\/450\/Bessatsu_Shounen_Magazine"
+      }
+    ],
+    "genres": [
+      {
+        "mal_id": 1,
+        "type": "manga",
+        "name": "Action",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/1\/Action"
+      },
+      {
+        "mal_id": 8,
+        "type": "manga",
+        "name": "Drama",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/8\/Drama"
+      },
+      {
+        "mal_id": 10,
+        "type": "manga",
+        "name": "Fantasy",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/10\/Fantasy"
+      },
+      {
+        "mal_id": 7,
+        "type": "manga",
+        "name": "Mystery",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/7\/Mystery"
+      }
+    ],
+    "explicit_genres": [],
+    "themes": [
+      {
+        "mal_id": 38,
+        "type": "manga",
+        "name": "Military",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/38\/Military"
+      },
+      {
+        "mal_id": 31,
+        "type": "manga",
+        "name": "Super Power",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/31\/Super_Power"
+      }
+    ],
+    "demographics": [
+      {
+        "mal_id": 27,
+        "type": "manga",
+        "name": "Shounen",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/27\/Shounen"
+      }
+    ]
+  }
+}

@@ -9,8 +9,15 @@ package net.sandrohc.jikan.query.anime;
 import java.time.*;
 import java.util.*;
 
+import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
+import net.sandrohc.jikan.exception.JikanQueryException;
+import net.sandrohc.jikan.exception.JikanUrlException;
+import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.test.RequestTest;
+import org.assertj.core.api.SoftAssertions;
+import org.junit.jupiter.api.*;
+import org.mockserver.model.Parameter;
 
 import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -19,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeSearchQueryTest extends RequestTest {
 
 	@Test
-	void fetchSearch() throws UnsupportedEncodingException, JikanInvalidArgumentException, JikanUrlException, JikanQueryException {
+	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/reviews", 1, "anime/getAnimeSearch.json",
 				Parameter.param("q", "test"),
@@ -42,63 +49,38 @@ public class AnimeSearchQueryTest extends RequestTest {
 				.genres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE)
 				.status(AnimeStatus.COMPLETED)
 				.orderBy(AnimeOrderBy.MAL_ID, SortOrder.ASCENDING)
-				.rated(AgeRating.PG)
-				.score(1.0F)
-				.startDate(LocalDate.parse("2020-01-01"))
-				.endDate(LocalDate.parse("2020-12-31"));
-		Collection<Anime> searchResults = query.execute().collectList().block();
+				.rating(AgeRating.PG)
+				.score(1.0D);
+		Collection<Anime> results = query.execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo(MOCK_URL + "/anime/?q=test&page=1&limit=1&genre[]=1,2&status=completed&orderBy=mal_id&sort=asc&rated=pg&score=1.0&startDate=2020-01-01&endDate=2020-12-31");
+		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/?q=test&page=1&limit=1&genre[]=1,2&status=completed&orderBy=mal_id&sort=asc&rated=pg&score=1.0&startDate=2020-01-01&endDate=2020-12-31");
 
 		// Search Results
-		assertThat(searchResults).isNotNull();
-		Iterator<AnimeSearchSub> resultsIt = results.iterator();
+		assertThat(results).isNotNull();
+		assertThat(results).hasSize(1);
 
-		AnimeSearchSub r1 = resultsIt.next();
-		assertThat(r1.toString()).isNotNull();
-		assertThat(r1.malId).isEqualTo(6347);
-		assertThat(r1.url).isEqualTo("https://myanimelist.net/anime/6347/Baka_to_Test_to_Shoukanjuu");
-		assertThat(r1.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/3/50389.jpg?s=bb898c33476da7c587e8ec82afecee57");
-		assertThat(r1.title).isEqualTo("Baka to Test to Shoukanjuu");
-		assertThat(r1.airing).isFalse();
-		assertThat(r1.synopsis).isEqualTo("Fumizuki Academy isn't a typical Japanese high school...");
-		assertThat(r1.type).isEqualTo(AnimeType.TV);
-		assertThat(r1.episodes).isEqualTo(13);
-		assertThat(r1.score).isEqualTo(7.65F);
-		assertThat(r1.aired.from).isEqualTo(LocalDate.parse("2010-01-07"));
-		assertThat(r1.aired.to).isEqualTo(LocalDate.parse("2010-04-01"));
-		assertThat(r1.members).isEqualTo(484011);
-		assertThat(r1.rating).isEqualTo(AgeRating.PG13);
-
-		AnimeSearchSub r2 = resultsIt.next();
-		assertThat(r2.toString()).isNotNull();
-		assertThat(r2.malId).isEqualTo(9471);
-		assertThat(r2.url).isEqualTo("https://myanimelist.net/anime/9471/Baka_to_Test_to_Shoukanjuu__Matsuri");
-		assertThat(r2.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/3/67303.jpg?s=048fca5bdfb21cefa072a303fe8047ad");
-		assertThat(r2.title).isEqualTo("Baka to Test to Shoukanjuu: Matsuri");
-		assertThat(r2.airing).isFalse();
-		assertThat(r2.synopsis).isEqualTo("OVA of Baka to Test to Shoukanjuu...");
-		assertThat(r2.type).isEqualTo(AnimeType.OVA);
-		assertThat(r2.episodes).isEqualTo(2);
-		assertThat(r2.score).isEqualTo(7.66F);
-		assertThat(r2.aired.from).isEqualTo(LocalDate.parse("2011-02-23"));
-		assertThat(r2.aired.to).isEqualTo(LocalDate.parse("2011-03-30"));
-		assertThat(r2.members).isEqualTo(101901);
-		assertThat(r2.rating).isEqualTo(AgeRating.PG13);
-
-		assertThat(resultsIt).isExhausted();
-	}
-
-	@Test
-	void fetchSearch_invalidParameters() {
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().query("ab"), "query must be a minimum of 3 characters");
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().limit(-1),                        "limit must be between 0 and " + SearchQuery.LIMIT_MAX);
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().limit(SearchQuery.LIMIT_MAX + 1), "limit must be between 0 and " + SearchQuery.LIMIT_MAX);
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().score(-0.1F), "score must be between 0.0 and 10.0");
-		assertThrows(JikanInvalidArgumentException.class, () -> jikan.query().anime().search().score(10.1F), "score must be between 0.0 and 10.0");
+		Anime result = results.iterator().next();
+		softly = new SoftAssertions();
+		softly.assertThat(result.toString()).isNotNull();
+		softly.assertThat(result.malId).isEqualTo(6347);
+		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/anime/6347/Baka_to_Test_to_Shoukanjuu");
+		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/3/50389.jpg?s=bb898c33476da7c587e8ec82afecee57");
+		softly.assertThat(result.title).isEqualTo("Baka to Test to Shoukanjuu");
+		softly.assertThat(result.airing).isFalse();
+		softly.assertThat(result.synopsis).isEqualTo("Fumizuki Academy isn't a typical Japanese high school...");
+		softly.assertThat(result.type).isEqualTo(AnimeType.TV);
+		softly.assertThat(result.episodes).isEqualTo(13);
+		softly.assertThat(result.score).isEqualTo(7.65F);
+		softly.assertThat(result.aired.from).isEqualTo(LocalDate.parse("2010-01-07"));
+		softly.assertThat(result.aired.to).isEqualTo(LocalDate.parse("2010-04-01"));
+		softly.assertThat(result.members).isEqualTo(484011);
+		softly.assertThat(result.rating).isEqualTo(AgeRating.PG13);
+		softly.assertAll();
 	}
 
 	@Test

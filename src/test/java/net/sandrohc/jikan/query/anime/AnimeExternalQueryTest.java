@@ -12,6 +12,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.test.RequestTest;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
@@ -22,7 +23,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class AnimeExternalQueryTest extends RequestTest {
 
 	@Test
-	void fetchExternal() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeExternal() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/external", 1, "anime/getAnimeExternal.json");
 
@@ -31,16 +32,21 @@ public class AnimeExternalQueryTest extends RequestTest {
 		Collection<External> externals = query.execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/external");
 
 		// External
-		assertThat(externals).isNotNull();
-		assertThat(externals)
+		softly = new SoftAssertions();
+		softly.assertThat(externals).isNotNull();
+		softly.assertThat(externals).hasSize(1);
+		softly.assertThat(externals)
 				.extracting(e -> e.name, e -> e.url)
 				.containsExactly(
 						tuple("NAME", "URL")
 				);
+		softly.assertAll();
 	}
 }

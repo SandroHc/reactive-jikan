@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeThemesQueryTest extends RequestTest {
 
 	@Test
-	void fetchThemes() throws JikanQueryException, JikanUrlException {
+	void fetchAnimeThemes() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/themes", 1, "anime/getAnimeThemes.json");
 
@@ -30,6 +30,7 @@ public class AnimeThemesQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/themes");

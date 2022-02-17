@@ -8,7 +8,6 @@ package net.sandrohc.jikan.query.anime;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
@@ -17,6 +16,8 @@ import net.sandrohc.jikan.query.QueryableQuery;
 import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime search.
@@ -49,10 +50,7 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 		return this;
 	}
 
-	public AnimeSearchQuery score(Double moreThan) throws JikanInvalidArgumentException {
-		if (moreThan != null && (moreThan < 0 || moreThan > 10))
-			throw new JikanInvalidArgumentException("score must be between 0.0 and 10.0");
-
+	public AnimeSearchQuery score(Double moreThan) {
 		this.score = moreThan;
 		return this;
 	}
@@ -110,7 +108,8 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/anime")
+		return create()
+				.path("/anime")
 				.param("type", type, AnimeType::getSearch)
 				.param("score", score)
 				.param("min_score", minimumScore)

@@ -21,7 +21,7 @@ import static org.assertj.core.groups.Tuple.tuple;
 public class AnimeStatisticsQueryTest extends RequestTest {
 
 	@Test
-	void fetchStatistics() throws JikanQueryException, JikanUrlException {
+	void fetchAnimeStatistics() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/statistics", 1, "anime/getAnimeStatistics.json");
 
@@ -30,11 +30,14 @@ public class AnimeStatisticsQueryTest extends RequestTest {
 		Statistics statistics = query.execute().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/statistics");
 
 		// Statistics
-		SoftAssertions softly = new SoftAssertions();
+		softly = new SoftAssertions();
 		softly.assertThat(statistics).isNotNull();
 		softly.assertThat(statistics.toString()).isNotNull();
 		softly.assertThat(statistics.seeing).isEqualTo(68292);
@@ -59,6 +62,6 @@ public class AnimeStatisticsQueryTest extends RequestTest {
 				);
 		int totalScores = statistics.scores.stream().mapToInt(s -> s.votes).sum();
 		softly.assertThat(statistics.total >= totalScores).isTrue();
-		softly.assertAll();;
+		softly.assertAll();
 	}
 }

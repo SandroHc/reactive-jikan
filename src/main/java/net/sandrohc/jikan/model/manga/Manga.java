@@ -79,14 +79,6 @@ public class Manga extends MalEntity {
 	/** The background information. */
 	public String background;
 
-
-
-	/** The current publication status. */
-	public MangaStatus status;
-
-	/** A list of related material. */
-	public Related related;
-
 	/** The authors. */
 	public List<EntityWithType> authors = Collections.emptyList();
 
@@ -257,22 +249,6 @@ public class Manga extends MalEntity {
 
 	public void setBackground(String background) {
 		this.background = background;
-	}
-
-	public MangaStatus getStatus() {
-		return status;
-	}
-
-	public void setStatus(MangaStatus status) {
-		this.status = status;
-	}
-
-	public Related getRelated() {
-		return related;
-	}
-
-	public void setRelated(Related related) {
-		this.related = related;
 	}
 
 	public List<EntityWithType> getAuthors() {

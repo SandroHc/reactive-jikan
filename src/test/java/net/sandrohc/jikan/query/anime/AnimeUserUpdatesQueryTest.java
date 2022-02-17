@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeUserUpdatesQueryTest extends RequestTest {
 
 	@Test
-	void fetchUserUpdates() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeUserUpdates() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/userupdates", 1, "anime/getAnimeUserUpdates.json");
 
@@ -33,15 +33,16 @@ public class AnimeUserUpdatesQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/userupdates");
 
 		// User Updates
 		assertThat(userUpdates).isNotNull();
-		Iterator<UserUpdateWithUser> usersIt = userUpdates.iterator();
+		assertThat(userUpdates).hasSize(1);
 
-		UserUpdateWithUser userUpdate = usersIt.next();
+		UserUpdateWithUser userUpdate = userUpdates.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(userUpdate.toString()).isNotNull();
 		softly.assertThat(userUpdate.user.username).isEqualTo("Vincent1307");
@@ -55,7 +56,5 @@ public class AnimeUserUpdatesQueryTest extends RequestTest {
 		softly.assertThat(userUpdate.volumesTotal).isNull();
 		softly.assertThat(userUpdate.date).isEqualTo(LocalDateTime.of(2012, Month.JULY, 15, 0, 0).atOffset(ZoneOffset.UTC));
 		softly.assertAll();
-
-		assertThat(usersIt).isExhausted();
 	}
 }

@@ -24,7 +24,7 @@ public class CharacterSearchQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
+	void fetchCharacterSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
 		/* Arrange */
 		mock(mockServer, "/characters", 1, "characters/getCharactersSearch.json");
 
@@ -37,15 +37,16 @@ public class CharacterSearchQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters");
 
 		// Results
 		assertThat(results).isNotNull();
-		Iterator<Character> resultsIt = results.iterator();
+		assertThat(results).hasSize(1);
 
-		Character character1 = resultsIt.next();
+		Character character1 = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(character1.toString()).isNotNull();
 		softly.assertThat(character1.malId).isEqualTo(92639);
@@ -56,7 +57,5 @@ public class CharacterSearchQueryTest extends RequestTest {
 		softly.assertThat(character1.favourites).isEqualTo(1);
 		softly.assertThat(character1.about).isEqualTo("ABOUT");
 		softly.assertAll();
-
-		assertThat(resultsIt).isExhausted();
 	}
 }

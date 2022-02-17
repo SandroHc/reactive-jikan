@@ -24,7 +24,7 @@ public class AnimeCharactersQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchCharacters() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeCharacters() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/characters", 1, "anime/getAnimeCharacters.json");
 
@@ -34,44 +34,28 @@ public class AnimeCharactersQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/characters");
 
 		// Characters
 		assertThat(characters).isNotNull();
-		Iterator<CharacterBasic> charactersIt = characters.iterator();
+		assertThat(characters).hasSize(1);
 
-		CharacterBasic character1 = charactersIt.next();
+		CharacterBasic character = characters.iterator().next();
 		softly = new SoftAssertions();
-		softly.assertThat(character1.toString()).isNotNull();
-		softly.assertThat(character1.role).isEqualTo("Main");
-		softly.assertThat(character1.character.malId).isEqualTo(36765);
-		softly.assertThat(character1.character.name).isEqualTo("Kirigaya, Kazuto");
-		softly.assertThat(character1.role).isEqualTo("Main");
-		softly.assertThat(character1.voiceActors)
+		softly.assertThat(character.toString()).isNotNull();
+		softly.assertThat(character.role).isEqualTo("Main");
+		softly.assertThat(character.character.malId).isEqualTo(36765);
+		softly.assertThat(character.character.name).isEqualTo("Kirigaya, Kazuto");
+		softly.assertThat(character.role).isEqualTo("Main");
+		softly.assertThat(character.voiceActors)
 				.extracting(va -> va.person.malId, va -> va.person.name, va -> va.language)
 				.containsExactly(
 						tuple(732, "Papenbrook, Bryce", "English"),
 						tuple(11817, "Matsuoka, Yoshitsugu", "Japanese")
 				);
 		softly.assertAll();
-
-		CharacterBasic character2 = charactersIt.next();
-		softly = new SoftAssertions();
-		softly.assertThat(character2.toString()).isNotNull();
-		softly.assertThat(character2.role).isEqualTo("Main");
-		softly.assertThat(character2.character.malId).isEqualTo(36828);
-		softly.assertThat(character2.character.name).isEqualTo("Yuuki, Asuna");
-		softly.assertThat(character2.role).isEqualTo("Main");
-		softly.assertThat(character1.voiceActors)
-				.extracting(va -> va.person.malId, va -> va.person.name, va -> va.language)
-				.containsExactly(
-						tuple(890, "Tomatsu, Haruka", "Japanese"),
-						tuple(1650, "Leigh, Cherami", "English")
-				);
-		softly.assertAll();
-
-		assertThat(charactersIt).isExhausted();
 	}
 }

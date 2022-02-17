@@ -8,6 +8,7 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.season.*;
+import net.sandrohc.jikan.query.season.SeasonQuery;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mock;
@@ -21,10 +22,8 @@ public class RequestSeasonTest extends RequestTest {
 
 		mock(mockServer, "/season/2020/summer", response);
 
-		Collection<Anime> results = jikan.query().season().get(2020, Season.SUMMER)
-				.execute()
-				.collectList()
-				.block();
+		SeasonQuery query = jikan.query().season().get(2020, Season.SUMMER);
+		Collection<Anime> results = query.execute().collectList().block();
 
 		assertThat(results).hasSize(1);
 
@@ -39,7 +38,7 @@ public class RequestSeasonTest extends RequestTest {
 		assertThat(anime.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/1444/108005.jpg");
 		assertThat(anime.synopsis).isEqualTo("Even after dying countless times, Subaru finally ended the threat...");
 		assertThat(anime.type).isEqualTo(AnimeType.TV);
-		assertThat(anime.airingStart).isEqualTo(OffsetDateTime.parse("2020-07-08T13:30:00+00:00"));
+		assertThat(anime.aired.from).isEqualTo(OffsetDateTime.parse("2020-07-08T13:30:00+00:00"));
 		assertThat(anime.episodes).isEqualTo(13);
 		assertThat(anime.members).isEqualTo(290261);
 		assertThat(anime.source).isEqualTo("Light novel");
@@ -125,11 +124,11 @@ public class RequestSeasonTest extends RequestTest {
 		assertThat("https://cdn.myanimelist.net/images/anime/1384/107759.jpg", anime.imageUrl).isEqualTo();
 		assertThat("Final Season of Shingeki no Kyojin.", anime.synopsis).isEqualTo();
 		assertThat(AnimeType.TV, anime.type).isEqualTo();
-		assertNull(anime.airingStart);
-		assertNull(anime.episodes);
+		assertThat(anime.airingStart).isNull();
+		assertThat(anime.episodes).isNull();
 		assertThat(126784, anime.members).isEqualTo();
 		assertThat("Manga", anime.source).isEqualTo();
-		assertNull(anime.score);
+		assertThat(anime.score).isNull();
 		assertThat(anime.r18).isFalse();
 		assertThat(anime.kids).isFalse();
 		assertThat(anime.continuing).isFalse();

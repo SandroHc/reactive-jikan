@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeRecommendationsQueryTest extends RequestTest {
 
 	@Test
-	void fetchRecommendations() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeRecommendations() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/recommendations", 1, "anime/getAnimeRecommendations.json");
 
@@ -32,14 +32,16 @@ public class AnimeRecommendationsQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/recommendations");
 
 		// Recommendations
 		assertThat(recommendations).isNotNull();
-		Iterator<Recommendation> recommendationsIt = recommendations.iterator();
+		assertThat(recommendations).hasSize(1);
 
-		Recommendation recommendation = recommendationsIt.next();
+		Recommendation recommendation = recommendations.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(recommendation.toString()).isNotNull();
 		softly.assertThat(recommendation.entry.malId).isEqualTo(17265);
@@ -49,7 +51,5 @@ public class AnimeRecommendationsQueryTest extends RequestTest {
 		softly.assertThat(recommendation.url).isEqualTo("https://myanimelist.net/recommendations/anime/11757-17265");
 		softly.assertThat(recommendation.votes).isEqualTo(160);
 		softly.assertAll();
-
-		assertThat(recommendationsIt).isExhausted();
 	}
 }

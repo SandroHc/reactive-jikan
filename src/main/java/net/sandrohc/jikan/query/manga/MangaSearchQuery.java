@@ -8,7 +8,6 @@ package net.sandrohc.jikan.query.manga;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.MangaOrderBy;
@@ -18,6 +17,8 @@ import net.sandrohc.jikan.query.QueryableQuery;
 import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga search.
@@ -49,10 +50,7 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 		return this;
 	}
 
-	public MangaSearchQuery score(Double moreThan) throws JikanInvalidArgumentException {
-		if (moreThan != null && (moreThan < 0 || moreThan > 10))
-			throw new JikanInvalidArgumentException("score must be between 0.0 and 10.0");
-
+	public MangaSearchQuery score(Double moreThan) {
 		this.score = moreThan;
 		return this;
 	}
@@ -105,7 +103,8 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/manga")
+		return create()
+				.path("/manga")
 				.param("type", type.search)
 				.param("score", score)
 				.param("min_score", minimumScore)

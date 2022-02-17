@@ -34,17 +34,21 @@ public class ClubStaffQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/clubs/1/staff");
 
 		// Related
-		assertThat(staff).isNotNull();
-		assertThat(staff)
+		softly = new SoftAssertions();
+		softly.assertThat(staff).isNotNull();
+		softly.assertThat(staff).hasSize(1);
+		softly.assertThat(staff)
 				.extracting(r -> r.username, r -> r.url, r -> r.images.jpg.imageUrl)
 				.containsExactly(
 						tuple("NAME", "URL", "https://myanimelist.net/anime/20")
 				);
+		softly.assertAll();
 
 		for (UserSimple entity : staff) {
 			assertThat(entity).isNotNull();

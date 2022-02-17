@@ -19,7 +19,6 @@ import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class MagazineQueryTest extends RequestTest {
 
@@ -30,20 +29,24 @@ public class MagazineQueryTest extends RequestTest {
 
 		/* Act */
 		MagazineQuery query = jikan.query().magazine().list();
-		List<EntityWithCount> magazines = query.execute().collectList().block();
+		Collection<EntityWithCount> magazines = query.execute().collectList().block();
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/magazines");
 
 		/* Results */
-		assertNotNull(magazines);
-		assertThat(magazines)
+		softly = new SoftAssertions();
+		softly.assertThat(magazines).isNotNull();
+		softly.assertThat(magazines).hasSize(1);
+		softly.assertThat(magazines)
 				.extracting(m -> m.malId, m -> m.url, m -> m.name, m -> m.count)
 				.containsExactly(
 						tuple(1, "URL", "NAME", 2)
 				);
+		softly.assertAll();
 	}
 }

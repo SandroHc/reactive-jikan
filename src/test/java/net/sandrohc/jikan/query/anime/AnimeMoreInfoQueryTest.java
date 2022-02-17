@@ -19,9 +19,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeMoreInfoQueryTest extends RequestTest {
 
-	// TODO: fix endpoint
 	@Test
-	void fetchMoreInfo() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeMoreInfo() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/moreinfo", 1, "anime/getAnimeMoreInfo.json");
 
@@ -31,9 +30,12 @@ public class AnimeMoreInfoQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/moreinfo");
 
+		// More Info
 		softly = new SoftAssertions();
 		softly.assertThat(moreInfo).isNotNull();
 		softly.assertThat(moreInfo.toString()).isNotNull();

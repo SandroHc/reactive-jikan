@@ -27,7 +27,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class AnimeQueryTest extends RequestTest {
 
 	@Test
-	void fetchAnime() throws JikanQueryException, JikanUrlException {
+	void fetchAnimeDetails() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757", 1, "anime/getAnimeById.json");
 
@@ -36,10 +36,14 @@ public class AnimeQueryTest extends RequestTest {
 		Anime anime = query.execute().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757");
 
-		SoftAssertions softly = new SoftAssertions();
+		// Anime
+		softly = new SoftAssertions();
 		softly.assertThat(anime).isNotNull();
 		softly.assertThat(anime.toString()).isNotNull();
 		softly.assertThat(anime.malId).isEqualTo(1);

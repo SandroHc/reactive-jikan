@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ClubQueryTest extends RequestTest {
 
 	@Test
-	void fetchClub() throws JikanQueryException, JikanUrlException {
+	void fetchClubDetails() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/clubs/1", 1, "clubs/getClubsById.json");
 
@@ -33,6 +33,7 @@ public class ClubQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/clubs/1");

@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeEpisodesQueryTest extends RequestTest {
 
 	@Test
-	void fetchEpisodes() throws JikanInvalidArgumentException, JikanUrlException, JikanQueryException {
+	void fetchAnimeEpisodes() throws JikanInvalidArgumentException, JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/episodes", 1, "anime/getAnimeEpisodes.json");
 
@@ -33,43 +33,30 @@ public class AnimeEpisodesQueryTest extends RequestTest {
 		List<AnimeEpisode> episodes = query.page(1).execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/episodes");
 
+		// Episodes
 		assertThat(episodes).isNotNull();
+		assertThat(episodes).hasSize(1);
 
-		Iterator<AnimeEpisode> episodesIt = episodes.iterator();
-
-		AnimeEpisode ep1 = episodesIt.next();
-		SoftAssertions softly = new SoftAssertions();
-		softly.assertThat(ep1.toString()).isNotNull();
-		softly.assertThat(ep1.malId).isEqualTo(1);
-		softly.assertThat(ep1.url).isEqualTo("URL");
-		softly.assertThat(ep1.title).isEqualTo("The World of Swords");
-		softly.assertThat(ep1.titleJapanese).isEqualTo("The World of Swords");
-		softly.assertThat(ep1.titleRomanji).isEqualTo("The World of Swords");
-		softly.assertThat(ep1.duration).isEqualTo(1);
-		softly.assertThat(ep1.aired).isEqualTo(LocalDateTime.of(2012, Month.JULY, 8, 0, 0).atOffset(ZoneOffset.UTC));
-		softly.assertThat(ep1.filler).isFalse();
-		softly.assertThat(ep1.recap).isFalse();
-		softly.assertThat(ep1.forumUrl).isEqualTo("URL");
-		softly.assertThat(ep1.synopsis).isEqualTo("SYNOPSIS");
-		softly.assertAll();
-
-		AnimeEpisode ep2 = episodesIt.next();
+		AnimeEpisode ep = episodes.iterator().next();
 		softly = new SoftAssertions();
-		softly.assertThat(ep2.toString()).isNotNull();
-		softly.assertThat(ep2.malId).isEqualTo(2);
-		softly.assertThat(ep2.url).isEqualTo("URL");
-		softly.assertThat(ep2.title).isEqualTo("Beater");
-		softly.assertThat(ep2.titleJapanese).isEqualTo("Beater");
-		softly.assertThat(ep2.titleRomanji).isEqualTo("Beater");
-		softly.assertThat(ep2.duration).isEqualTo(1);
-		softly.assertThat(ep2.aired).isEqualTo(LocalDateTime.of(2012, Month.JULY, 15, 0, 0).atOffset(ZoneOffset.UTC));
-		softly.assertThat(ep2.filler).isFalse();
-		softly.assertThat(ep2.recap).isFalse();
-		softly.assertThat(ep2.forumUrl).isEqualTo("URL");
-		softly.assertThat(ep2.synopsis).isEqualTo("SYNOPSIS");
+		softly.assertThat(ep.toString()).isNotNull();
+		softly.assertThat(ep.malId).isEqualTo(1);
+		softly.assertThat(ep.url).isEqualTo("URL");
+		softly.assertThat(ep.title).isEqualTo("The World of Swords");
+		softly.assertThat(ep.titleJapanese).isEqualTo("The World of Swords");
+		softly.assertThat(ep.titleRomanji).isEqualTo("The World of Swords");
+		softly.assertThat(ep.duration).isEqualTo(1);
+		softly.assertThat(ep.aired).isEqualTo(LocalDateTime.of(2012, Month.JULY, 8, 0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(ep.filler).isFalse();
+		softly.assertThat(ep.recap).isFalse();
+		softly.assertThat(ep.forumUrl).isEqualTo("URL");
+		softly.assertThat(ep.synopsis).isEqualTo("SYNOPSIS");
 		softly.assertAll();
 	}
 }

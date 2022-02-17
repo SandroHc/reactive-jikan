@@ -24,7 +24,7 @@ import static org.assertj.core.api.Assertions.tuple;
 public class ClubMembersQueryTest extends RequestTest {
 
 	@Test
-	void fetchMembers() throws JikanQueryException, JikanUrlException {
+	void fetchClubMembers() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mock(mockServer, "/clubs/1/members", 1, "clubs/getClubMembers.json");
 
@@ -34,17 +34,20 @@ public class ClubMembersQueryTest extends RequestTest {
 
 		/* Assert */
 		SoftAssertions softly;
+
 		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/clubs/1/members");
 
 		// Members
-		assertThat(members).isNotNull();
-		assertThat(members)
+		softly = new SoftAssertions();
+		softly.assertThat(members).isNotNull();
+		softly.assertThat(members)
 				.extracting(m -> m.username, m -> m.url, m -> m.images.jpg.imageUrl)
 				.containsExactly(
 						tuple("USER", "URL", "IMAGE")
 				);
+		softly.assertAll();
 
 		for (UserSimple user : members) {
 			assertThat(user).isNotNull();

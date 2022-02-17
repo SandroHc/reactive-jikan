@@ -25,7 +25,7 @@ public class AnimeForumQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchForum() throws JikanUrlException, JikanQueryException {
+	void fetchAnimeForum() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
 		mock(mockServer, "/anime/11757/forum", 1, "anime/getAnimeForum.json");
 
@@ -34,31 +34,31 @@ public class AnimeForumQueryTest extends RequestTest {
 		Collection<ForumTopic> forumTopics = query.execute().collectList().block();
 
 		/* Assert */
+		SoftAssertions softly;
+
+		// Query
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/forum");
 
 		// Topics
-		SoftAssertions softly;
 		assertThat(forumTopics).isNotNull();
-		Iterator<ForumTopic> topicsIt = forumTopics.iterator();
+		assertThat(forumTopics).hasSize(1);
 
-		ForumTopic t1 = topicsIt.next();
+		ForumTopic topic = forumTopics.iterator().next();
 		softly = new SoftAssertions();
-		softly.assertThat(t1.toString()).isNotNull();
-		softly.assertThat(t1.malId).isEqualTo(1797514);
-		softly.assertThat(t1.url).isEqualTo("https://myanimelist.net/forum/?topicid=1797514");
-		softly.assertThat(t1.title).isEqualTo("Is Kirito an UNLIKABLE character?");
-		softly.assertThat(t1.date).isEqualTo(LocalDateTime.of(2012, Month.JULY, 15, 0, 0).atOffset(ZoneOffset.UTC));
-		softly.assertThat(t1.authorUsername).isEqualTo("AUTHOR");
-		softly.assertThat(t1.authorUrl).isEqualTo("AUTHOR");
-		softly.assertThat(t1.comments).isEqualTo(54);
-		softly.assertThat(t1.lastComment)
+		softly.assertThat(topic.toString()).isNotNull();
+		softly.assertThat(topic.malId).isEqualTo(1797514);
+		softly.assertThat(topic.url).isEqualTo("https://myanimelist.net/forum/?topicid=1797514");
+		softly.assertThat(topic.title).isEqualTo("Is Kirito an UNLIKABLE character?");
+		softly.assertThat(topic.date).isEqualTo(LocalDateTime.of(2012, Month.JULY, 15, 0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(topic.authorUsername).isEqualTo("AUTHOR");
+		softly.assertThat(topic.authorUrl).isEqualTo("AUTHOR");
+		softly.assertThat(topic.comments).isEqualTo(54);
+		softly.assertThat(topic.lastComment)
 				.extracting(c -> c.url, c -> c.authorUsername, c -> c.date)
 				.containsExactly(
 						tuple("URL", "AUTHOR", LocalDateTime.of(2012, Month.JULY, 15, 0, 0).atOffset(ZoneOffset.UTC))
 				);
 		softly.assertAll();
-
-		assertThat(topicsIt).isExhausted();
 	}
 }
