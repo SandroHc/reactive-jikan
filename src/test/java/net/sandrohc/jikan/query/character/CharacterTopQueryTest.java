@@ -15,16 +15,16 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CharacterTopQueryTest extends RequestTest {
 
+	@SuppressWarnings("SpellCheckingInspection")
 	@Test
 	void fetchCharacterTop() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/top/characters", 1, "characters/getTopCharacters.json");
+		mockFromFile(mockServer, "/top/characters", "top/getTopCharacters.json");
 
 		/* Act */
 		CharacterTopQuery query = jikan.query().character().top();
@@ -35,7 +35,7 @@ public class CharacterTopQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/top/characters");
+		assertThat(query.getUrl().build()).isEqualTo("/top/characters");
 
 		// Results
 		assertThat(results).isNotNull();
@@ -44,13 +44,14 @@ public class CharacterTopQueryTest extends RequestTest {
 		Character character1 = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(character1.toString()).isNotNull();
-		softly.assertThat(character1.malId).isEqualTo(92639);
-		softly.assertThat(character1.url).isEqualTo("https://myanimelist.net/character/92639/Asuna");
-		softly.assertThat(character1.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/characters/12/315884.jpg?s=137d8ac45a770ba4abf6d165aea2dc3e");
-		softly.assertThat(character1.name).isEqualTo("Asuna");
-		softly.assertThat(character1.nicknames).containsExactly("NICK");
-		softly.assertThat(character1.favourites).isEqualTo(1);
-		softly.assertThat(character1.about).isEqualTo("ABOUT");
+		softly.assertThat(character1.malId).isEqualTo(417);
+		softly.assertThat(character1.url).isEqualTo( "https://myanimelist.net/character/417/Lelouch_Lamperouge");
+		softly.assertThat(character1.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/characters/8/406163.jpg");
+		softly.assertThat(character1.name).isEqualTo("Lelouch Lamperouge");
+		softly.assertThat(character1.nicknames).containsExactlyInAnyOrder("Lelouch vi Britannia", "Zero", "Lulu", "Black Prince", "The Demon Emperor");
+		softly.assertThat(character1.favorites).isEqualTo(150195);
+		softly.assertThat(character1.about).startsWith("Age: 17 (first season), 18 (second season)Date of Birth:  December 5, 1999");
+		softly.assertThat(character1.about).hasSize(3000);
 		softly.assertAll();
 	}
 }

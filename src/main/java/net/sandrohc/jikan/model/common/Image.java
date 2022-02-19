@@ -6,10 +6,12 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.utils.Generated;
 
-public class Image {
+public class Image implements Serializable {
 
 	/** The image URL. */
 	@JsonProperty("image_url")

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeStaffQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class AnimeStaffQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeStaff() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/staff", 1, "anime/getAnimeStaff.json");
+		mockFromFile(mockServer, "/anime/11757/staff", "anime/getAnimeStaff.json");
 
 		/* Act */
 		AnimeStaffQuery query = jikan.query().anime().staff(11757);
@@ -35,7 +34,7 @@ public class AnimeStaffQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/staff");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/staff");
 
 		// Staff
 		assertThat(staffList).isNotNull();
@@ -44,9 +43,9 @@ public class AnimeStaffQueryTest extends RequestTest {
 		AnimeStaff staff = staffList.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(staff.toString()).isNotNull();
-		softly.assertThat(staff.person.malId).isEqualTo(10801);
-		softly.assertThat(staff.person.name).isEqualTo("Itou, Tomohiko");
-		softly.assertThat(staff.positions).containsExactly("Director", "Episode Director", "Storyboard");
+		softly.assertThat(staff.person.malId).isEqualTo(14031);
+		softly.assertThat(staff.person.name).isEqualTo("Iwakami, Atsuhiro");
+		softly.assertThat(staff.positions).containsExactlyInAnyOrder("Producer");
 		softly.assertAll();
 	}
 }

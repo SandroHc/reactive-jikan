@@ -13,12 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * An anime season.
  */
 public enum Season {
-	@JsonProperty("Summer") SUMMER("summer"),
-	@JsonProperty("Spring") SPRING("spring"),
-	@JsonProperty("Fall")   FALL("fall"),
-	@JsonProperty("Winter") WINTER("winter"),
+	@JsonProperty("summer") SUMMER("summer"),
+	@JsonProperty("spring") SPRING("spring"),
+	@JsonProperty("fall")   FALL("fall"),
+	@JsonProperty("winter") WINTER("winter"),
 
-	@JsonProperty("Later") LATER("later"),
+	@JsonProperty("later") LATER("later"),
 
 	@JsonEnumDefaultValue UNKNOWN(null);
 

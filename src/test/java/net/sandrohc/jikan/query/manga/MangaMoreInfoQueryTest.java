@@ -13,8 +13,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaMoreInfoQueryTest extends RequestTest {
@@ -22,7 +21,7 @@ public class MangaMoreInfoQueryTest extends RequestTest {
 	@Test
 	void fetchMangaMoreInfo() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/moreinfo", 1, "manga/getMangaMoreInfo.json");
+		mockFromFile(mockServer, "/manga/23390/moreinfo", "manga/getMangaMoreInfo.json");
 
 		/* Act */
 		MangaMoreInfoQuery query = jikan.query().manga().moreInfo(23390);
@@ -33,7 +32,7 @@ public class MangaMoreInfoQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/moreinfo");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/moreinfo");
 
 		// More Info
 		softly = new SoftAssertions();

@@ -16,8 +16,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
@@ -26,7 +25,7 @@ public class AnimeRelationsQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeRelations() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/relations", 1, "anime/getAnimeRelations.json");
+		mockFromFile(mockServer, "/anime/11757/relations", "anime/getAnimeRelations.json");
 
 		/* Act */
 		AnimeRelationsQuery query = jikan.query().anime().relations(11757);
@@ -37,7 +36,7 @@ public class AnimeRelationsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/relations");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/relations");
 
 		// Relations
 		assertThat(relatedList).isNotNull();
@@ -49,8 +48,9 @@ public class AnimeRelationsQueryTest extends RequestTest {
 		softly.assertThat(related.relation).isEqualTo(RelatedType.ADAPTATION);
 		softly.assertThat(related.entry)
 				.extracting(r -> r.malId, r -> r.url, r -> r.name, r -> r.type)
-				.containsExactly(
-						tuple(1, "URL", "NAME", Type.ANIME)
+				.containsExactlyInAnyOrder(
+						tuple(21479, "https://myanimelist.net/manga/21479/Sword_Art_Online", "Sword Art Online", Type.MANGA),
+						tuple(43921, "https://myanimelist.net/manga/43921/Sword_Art_Online__Progressive", "Sword Art Online: Progressive", Type.MANGA)
 				);
 		softly.assertAll();
 	}

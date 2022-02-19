@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonMangaQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class PersonMangaQueryTest extends RequestTest {
 	@Test
 	void fetchPersonManga() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/people/1/manga", 1, "people/getPersonManga.json");
+		mockFromFile(mockServer, "/people/1/manga", "people/getPersonManga.json");
 
 		/* Act */
 		PersonMangaQuery query = jikan.query().person().manga(1);
@@ -35,7 +34,7 @@ public class PersonMangaQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/people/1/manga");
+		assertThat(query.getUrl().build()).isEqualTo("/people/1/manga");
 
 		// Roles
 		assertThat(roles).isNotNull();
@@ -44,11 +43,11 @@ public class PersonMangaQueryTest extends RequestTest {
 		PersonRole role = roles.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(role.toString()).isNotNull();
-		softly.assertThat(role.role).isEqualTo("Theme Song Performance");
-		softly.assertThat(role.entry.malId).isEqualTo(30205);
-		softly.assertThat(role.entry.url).isEqualTo("URL");
-		softly.assertThat(role.entry.name).isEqualTo("Aoharu x Kikanjuu");
-		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("IMAGE");
+		softly.assertThat(role.role).isEqualTo("Story & Art");
+		softly.assertThat(role.entry.malId).isEqualTo(23390);
+		softly.assertThat(role.entry.url).isEqualTo("https://myanimelist.net/manga/23390/Shingeki_no_Kyojin");
+		softly.assertThat(role.entry.name).isEqualTo("Shingeki no Kyojin");
+		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846.jpg?s=b6287253ff8bf4145d07a32a74bdff9e");
 		softly.assertAll();
 	}
 }

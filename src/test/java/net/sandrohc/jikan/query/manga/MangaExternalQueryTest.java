@@ -6,15 +6,16 @@
 
 package net.sandrohc.jikan.query.manga;
 
+import java.util.*;
+
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
-import net.sandrohc.jikan.model.manga.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaExternalQueryTest extends RequestTest {
@@ -22,17 +23,19 @@ public class MangaExternalQueryTest extends RequestTest {
 	@Test
 	void fetchMangaExternal() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/11757", 1, "manga/getAnimeById.json");
+		mockFromFile(mockServer, "/manga/11757/external", "manga/getMangaExternal.json");
 
 		/* Act */
-		MangaQuery query = jikan.query().manga().get(11757);
-		Manga manga = query.execute().block();
+		MangaExternalQuery query = jikan.query().manga().external(11757);
+		Collection<External> external = query.execute().collectList().block();
 
 		/* Assert */
 		SoftAssertions softly;
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/11757");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/11757/external");
+
+		throw new UnsupportedOperationException();
 	}
 }

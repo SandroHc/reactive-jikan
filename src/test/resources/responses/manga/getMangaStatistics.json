@@ -1,1 +1,62 @@
-{"data":{"reading":240448,"completed":217974,"on_hold":29066,"dropped":20591,"plan_to_read":47127,"total":555206,"scores":[{"score":1,"votes":4533,"percentage":1.3},{"score":2,"votes":1178,"percentage":0.3},{"score":3,"votes":1695,"percentage":0.5},{"score":4,"votes":3483,"percentage":1},{"score":5,"votes":5335,"percentage":1.6},{"score":6,"votes":11456,"percentage":3.4},{"score":7,"votes":30102,"percentage":8.9},{"score":8,"votes":66678,"percentage":19.7},{"score":9,"votes":99556,"percentage":29.5},{"score":10,"votes":113950,"percentage":33.7}]}}
+{
+  "data": {
+    "reading": 240448,
+    "completed": 217974,
+    "on_hold": 29066,
+    "dropped": 20591,
+    "plan_to_read": 47127,
+    "total": 555206,
+    "scores": [
+      {
+        "score": 1,
+        "votes": 4533,
+        "percentage": 1.3
+      },
+      {
+        "score": 2,
+        "votes": 1178,
+        "percentage": 0.3
+      },
+      {
+        "score": 3,
+        "votes": 1695,
+        "percentage": 0.5
+      },
+      {
+        "score": 4,
+        "votes": 3483,
+        "percentage": 1
+      },
+      {
+        "score": 5,
+        "votes": 5335,
+        "percentage": 1.6
+      },
+      {
+        "score": 6,
+        "votes": 11456,
+        "percentage": 3.4
+      },
+      {
+        "score": 7,
+        "votes": 30102,
+        "percentage": 8.9
+      },
+      {
+        "score": 8,
+        "votes": 66678,
+        "percentage": 19.7
+      },
+      {
+        "score": 9,
+        "votes": 99556,
+        "percentage": 29.5
+      },
+      {
+        "score": 10,
+        "votes": 113950,
+        "percentage": 33.7
+      }
+    ]
+  }
+}

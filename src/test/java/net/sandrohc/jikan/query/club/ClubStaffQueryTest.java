@@ -16,8 +16,7 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
@@ -26,7 +25,7 @@ public class ClubStaffQueryTest extends RequestTest {
 	@Test
 	void fetchClubStaff() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/clubs/1/staff", 1, "clubs/getClubStaff.json");
+		mockFromFile(mockServer, "/clubs/1/staff", "clubs/getClubStaff.json");
 
 		/* Act */
 		ClubStaffQuery query = jikan.query().club().staff(1);
@@ -37,16 +36,16 @@ public class ClubStaffQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/clubs/1/staff");
+		assertThat(query.getUrl().build()).isEqualTo("/clubs/1/staff");
 
 		// Related
 		softly = new SoftAssertions();
 		softly.assertThat(staff).isNotNull();
 		softly.assertThat(staff).hasSize(1);
 		softly.assertThat(staff)
-				.extracting(r -> r.username, r -> r.url, r -> r.images.jpg.imageUrl)
-				.containsExactly(
-						tuple("NAME", "URL", "https://myanimelist.net/anime/20")
+				.extracting(r -> r.username, r -> r.url, r -> r != null && r.images != null && r.images.jpg != null ? r.images.jpg.imageUrl : null)
+				.containsExactlyInAnyOrder(
+						tuple("USER_1", "https://myanimelist.net/profile/USER_1", null)
 				);
 		softly.assertAll();
 

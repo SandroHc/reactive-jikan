@@ -30,7 +30,7 @@ public class Person extends EntityWithImage {
     public String familyName;
 
     /** The alternative names. */
-    @JsonProperty("alternative_names")
+    @JsonProperty("alternate_names")
     public Collection<String> alternativeNames = Collections.emptyList();
 
     /** The birthday. Will be {@code null} if unknown. */

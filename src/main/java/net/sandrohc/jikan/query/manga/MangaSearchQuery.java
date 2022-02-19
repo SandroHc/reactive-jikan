@@ -105,11 +105,11 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	public QueryUrlBuilder getInnerUrl() {
 		return create()
 				.path("/manga")
-				.param("type", type.search)
+				.param("type", type, MangaType::getSearch)
 				.param("score", score)
 				.param("min_score", minimumScore)
 				.param("max_score", maximumScore)
-				.param("status", status.search)
+				.param("status", status, MangaStatus::getSearch)
 				.param("sfw", sfw)
 				.param("genres", genres, EnumUtil::enumsToOrdinals)
 				.param("genres_exclude", genresExclude, EnumUtil::enumsToOrdinals)

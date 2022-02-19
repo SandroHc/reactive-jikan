@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonAnimeQueryTest extends RequestTest {
@@ -24,10 +23,10 @@ public class PersonAnimeQueryTest extends RequestTest {
 	@Test
 	void fetchPersonAnime() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/people/1/anime", 1, "people/getPersonAnime.json");
+		mockFromFile(mockServer, "/people/1/anime", "people/getPersonAnime.json");
 
 		/* Act */
-		PersonAnimeQuery query = jikan.query().person().anime(23390);
+		PersonAnimeQuery query = jikan.query().person().anime(1);
 		Collection<PersonRole> roles = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +34,7 @@ public class PersonAnimeQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/people/1/anime");
+		assertThat(query.getUrl().build()).isEqualTo("/people/1/anime");
 
 		// Roles
 		assertThat(roles).isNotNull();
@@ -44,11 +43,11 @@ public class PersonAnimeQueryTest extends RequestTest {
 		PersonRole role = roles.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(role.toString()).isNotNull();
-		softly.assertThat(role.role).isEqualTo("Theme Song Performance");
-		softly.assertThat(role.entry.malId).isEqualTo(30205);
-		softly.assertThat(role.entry.url).isEqualTo("URL");
-		softly.assertThat(role.entry.name).isEqualTo("Aoharu x Kikanjuu");
-		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("IMAGE");
+		softly.assertThat(role.role).isEqualTo("add Theme Song Performance"); // TODO: is this a Jikan parser issue? Raise in appropriate GitHub repo
+		softly.assertThat(role.entry.malId).isEqualTo(3080);
+		softly.assertThat(role.entry.url).isEqualTo("https://myanimelist.net/anime/3080/Anime_Tenchou");
+		softly.assertThat(role.entry.name).isEqualTo("Anime Tenchou");
+		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/9/4635.jpg?s=ad3dd02ed42bccbc84e0bde5c9e4ac7d");
 		softly.assertAll();
 	}
 }

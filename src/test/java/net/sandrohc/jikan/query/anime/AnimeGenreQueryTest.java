@@ -16,8 +16,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeGenreQueryTest extends RequestTest {
@@ -25,7 +24,7 @@ public class AnimeGenreQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeGenre() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/genres/anime", 1, "genres/getAnimeGenres.json");
+		mockFromFile(mockServer, "/genres/anime", "genres/getAnimeGenres.json");
 
 		/* Act */
 		GenreAnimeQuery query = jikan.query().anime().genres();
@@ -36,7 +35,7 @@ public class AnimeGenreQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/genres/anime");
+		assertThat(query.getUrl().build()).isEqualTo("/genres/anime");
 
 		// Results
 		assertThat(results).isNotNull();
@@ -45,10 +44,10 @@ public class AnimeGenreQueryTest extends RequestTest {
 		EntityWithCount gender = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(gender.toString()).isNotNull();
-		softly.assertThat(gender.malId).isEqualTo(16498);
-		softly.assertThat(gender.url).isEqualTo("https://myanimelist.net/anime/16498/Shingeki_no_Kyojin");
-		softly.assertThat(gender.name).isEqualTo("Shingeki no Kyojin");
-		softly.assertThat(gender.count).isEqualTo(25);
+		softly.assertThat(gender.malId).isEqualTo(1);
+		softly.assertThat(gender.url).isEqualTo("https://myanimelist.net/anime/genre/1/Action");
+		softly.assertThat(gender.name).isEqualTo("Action");
+		softly.assertThat(gender.count).isEqualTo(4124);
 		softly.assertAll();
 	}
 }

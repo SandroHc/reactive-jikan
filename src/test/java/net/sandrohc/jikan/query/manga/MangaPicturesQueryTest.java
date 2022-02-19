@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaPicturesQueryTest extends RequestTest {
@@ -24,10 +23,10 @@ public class MangaPicturesQueryTest extends RequestTest {
 	@Test
 	void fetchMangaPictures() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/pictures", 1, "manga/getMangaPictures.json");
+		mockFromFile(mockServer, "/manga/23390/pictures", "manga/getMangaPictures.json");
 
 		/* Act */
-		MangaPicturesQuery query = jikan.query().manga().pictures(96792);
+		MangaPicturesQuery query = jikan.query().manga().pictures(23390);
 		Collection<Images> pictures = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +34,7 @@ public class MangaPicturesQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/pictures");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/pictures");
 
 		// Pictures
 		assertThat(pictures).isNotNull();
@@ -44,16 +43,16 @@ public class MangaPicturesQueryTest extends RequestTest {
 		Images picture = pictures.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(picture.toString()).isNotNull();
-		softly.assertThat(picture.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.jpg");
-		softly.assertThat(picture.jpg.smallImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.jpg");
-		softly.assertThat(picture.jpg.mediumImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.jpg");
-		softly.assertThat(picture.jpg.largeImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.jpg");
-		softly.assertThat(picture.jpg.maximumImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.jpg");
-		softly.assertThat(picture.webp.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.webp");
-		softly.assertThat(picture.webp.smallImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.webp");
-		softly.assertThat(picture.webp.mediumImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.webp");
-		softly.assertThat(picture.webp.largeImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.webp");
-		softly.assertThat(picture.webp.maximumImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/172790l.webp");
+		softly.assertThat(picture.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846.jpg");
+		softly.assertThat(picture.jpg.smallImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846t.jpg");
+		softly.assertThat(picture.jpg.mediumImageUrl).isNull();
+		softly.assertThat(picture.jpg.largeImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846l.jpg");
+		softly.assertThat(picture.jpg.maximumImageUrl).isNull();
+		softly.assertThat(picture.webp.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846.webp");
+		softly.assertThat(picture.webp.smallImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846t.webp");
+		softly.assertThat(picture.webp.mediumImageUrl).isNull();
+		softly.assertThat(picture.webp.largeImageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/2/37846l.webp");
+		softly.assertThat(picture.webp.maximumImageUrl).isNull();
 		softly.assertAll();
 	}
 }

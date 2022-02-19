@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaTopQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class MangaTopQueryTest extends RequestTest {
 	@Test
 	void fetchMangaTop() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/top/manga", 1, "manga/getTopManga.json");
+		mockFromFile(mockServer, "/top/manga", "top/getTopManga.json");
 
 		/* Act */
 		MangaTopQuery query = jikan.query().manga().top();
@@ -35,7 +34,7 @@ public class MangaTopQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/top/manga");
+		assertThat(query.getUrl().build()).isEqualTo("/top/manga");
 
 		// Results
 		assertThat(results).isNotNull();
@@ -44,11 +43,11 @@ public class MangaTopQueryTest extends RequestTest {
 		Manga result = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(result.toString()).isNotNull();
-		softly.assertThat(result.malId).isEqualTo(121496);
-		softly.assertThat(result.title).isEqualTo("Solo Leveling");
-		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/manga/121496/Solo_Leveling");
-		softly.assertThat(result.type).isEqualTo(MangaType.MANHWA);
-		softly.assertThat(result.score).isEqualTo(8.94F);
+		softly.assertThat(result.malId).isEqualTo(2);
+		softly.assertThat(result.title).isEqualTo("Berserk");
+		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/manga/2/Berserk");
+		softly.assertThat(result.type).isEqualTo(MangaType.MANGA);
+		softly.assertThat(result.score).isEqualTo(9.43D);
 		softly.assertAll();
 	}
 }

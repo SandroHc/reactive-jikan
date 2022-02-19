@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
@@ -26,7 +25,7 @@ public class AnimeCharactersQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeCharacters() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/characters", 1, "anime/getAnimeCharacters.json");
+		mockFromFile(mockServer, "/anime/11757/characters", "anime/getAnimeCharacters.json");
 
 		/* Act */
 		AnimeCharactersQuery query = jikan.query().anime().characters(11757);
@@ -37,7 +36,7 @@ public class AnimeCharactersQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/characters");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/characters");
 
 		// Characters
 		assertThat(characters).isNotNull();
@@ -52,7 +51,7 @@ public class AnimeCharactersQueryTest extends RequestTest {
 		softly.assertThat(character.role).isEqualTo("Main");
 		softly.assertThat(character.voiceActors)
 				.extracting(va -> va.person.malId, va -> va.person.name, va -> va.language)
-				.containsExactly(
+				.containsExactlyInAnyOrder(
 						tuple(732, "Papenbrook, Bryce", "English"),
 						tuple(11817, "Matsuoka, Yoshitsugu", "Japanese")
 				);

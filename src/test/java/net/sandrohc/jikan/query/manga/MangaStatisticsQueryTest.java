@@ -13,8 +13,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
@@ -23,10 +22,10 @@ public class MangaStatisticsQueryTest extends RequestTest {
 	@Test
 	void fetchMangaStatistics() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/statistics", 1, "manga/getMangaStatistics.json");
+		mockFromFile(mockServer, "/manga/23390/statistics", "manga/getMangaStatistics.json");
 
 		/* Act */
-		MangaStatisticsQuery query = jikan.query().manga().statistics(96792);
+		MangaStatisticsQuery query = jikan.query().manga().statistics(23390);
 		Statistics statistics = query.execute().block();
 
 		/* Assert */
@@ -34,31 +33,31 @@ public class MangaStatisticsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/statistics");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/statistics");
 
 		// Statistics
 		softly = new SoftAssertions();
 		softly.assertThat(statistics).isNotNull();
 		softly.assertThat(statistics.toString()).isNotNull();
-		softly.assertThat(statistics.seeing).isEqualTo(54058);
-		softly.assertThat(statistics.completed).isEqualTo(42711);
-		softly.assertThat(statistics.onHold).isEqualTo(3209);
-		softly.assertThat(statistics.dropped).isEqualTo(1906);
-		softly.assertThat(statistics.planToSee).isEqualTo(16489);
-		softly.assertThat(statistics.total).isEqualTo(118373);
+		softly.assertThat(statistics.seeing).isEqualTo(240448);
+		softly.assertThat(statistics.completed).isEqualTo(217974);
+		softly.assertThat(statistics.onHold).isEqualTo(29066);
+		softly.assertThat(statistics.dropped).isEqualTo(20591);
+		softly.assertThat(statistics.planToSee).isEqualTo(47127);
+		softly.assertThat(statistics.total).isEqualTo(555206);
 		softly.assertThat(statistics.scores)
 				.extracting(s -> s.score, s -> s.votes, s -> s.percentage)
 				.containsExactly(
-						tuple(1, 19669, 1.5F),
-						tuple(2, 21048, 1.6F),
-						tuple(3, 35624, 2.7F),
-						tuple(4, 64411, 4.8F),
-						tuple(5, 98516, 7.4F),
-						tuple(6, 150171, 11.2F),
-						tuple(7, 250296, 18.7F),
-						tuple(8, 264412, 19.8F),
-						tuple(9, 212935, 15.9F),
-						tuple(10, 219496, 16.4F)
+						tuple(1, 4533, 1.3D),
+						tuple(2, 1178, 0.3D),
+						tuple(3, 1695, 0.5D),
+						tuple(4, 3483, 1.0D),
+						tuple(5, 5335, 1.6D),
+						tuple(6, 11456, 3.4D),
+						tuple(7, 30102, 8.9D),
+						tuple(8, 66678, 19.7D),
+						tuple(9, 99556, 29.5D),
+						tuple(10, 113950, 33.7D)
 				);
 		int totalScores = statistics.scores.stream().mapToInt(s -> s.votes).sum();
 		softly.assertThat(statistics.total >= totalScores).isTrue();

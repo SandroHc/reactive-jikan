@@ -49,7 +49,7 @@ public class CharacterSearchQuery extends QueryableQuery<DataListHolderWithPagin
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
 		return create()
-				.path("/anime")
+				.path("/characters")
 				.param("order_by", orderBy, CharacterOrderBy::getSearch)
 				.param("sort", sort, SortOrder::getSearch)
 				.param("letter", suffix);

@@ -6,10 +6,12 @@
 
 package net.sandrohc.jikan.model.common;
 
+import java.io.*;
+
 import net.sandrohc.jikan.utils.Generated;
 
 // TODO: add helper method to get best image - prefer webp
-public class Images {
+public class Images implements Serializable {
 
 	public Image jpg;
 	public Image webp;

@@ -1,0 +1,96 @@
+{
+  "pagination": {
+    "last_visible_page": 6,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": 49689,
+      "url": "https:\/\/myanimelist.net\/anime\/49689\/Hikaribe_my_light",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906.jpg",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906t.jpg",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906l.jpg"
+        },
+        "webp": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906.webp",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906t.webp",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1419\/118906l.webp"
+        }
+      },
+      "trailer": {
+        "youtube_id": null,
+        "url": null,
+        "embed_url": null,
+        "images": {
+          "image_url": null,
+          "small_image_url": null,
+          "medium_image_url": null,
+          "large_image_url": null,
+          "maximum_image_url": null
+        }
+      },
+      "title": "Hikari~be my light",
+      "title_english": "Hikari~be my light",
+      "title_japanese": "\u81ea\u4e3b\u5236\u4f5c\u30a2\u30cb\u30e1",
+      "title_synonyms": [
+        "\u81ea\u4e3b\u5236\u4f5c\u30a2\u30cb\u30e1"
+      ],
+      "type": "TV",
+      "source": "Original",
+      "episodes": null,
+      "status": "Currently Airing",
+      "airing": true,
+      "aired": {
+        "from": "2020-01-17T00:00:00+00:00",
+        "to": null,
+        "prop": {
+          "from": {
+            "day": 17,
+            "month": 1,
+            "year": 2020
+          },
+          "to": {
+            "day": null,
+            "month": null,
+            "year": null
+          }
+        },
+        "string": "Jan 17, 2020 to ?"
+      },
+      "duration": "4 min",
+      "rating": "PG-13 - Teens 13 or older",
+      "score": null,
+      "scored_by": null,
+      "rank": 0,
+      "popularity": 0,
+      "members": 0,
+      "favorites": 2,
+      "synopsis": "He is the only light. Story about an office worker who is suffering from depression and a university student.",
+      "background": null,
+      "season": null,
+      "year": null,
+      "broadcast": {
+        "day": null,
+        "time": null,
+        "timezone": null,
+        "string": "Unknown"
+      },
+      "producers": [],
+      "licensors": [],
+      "studios": [],
+      "genres": [
+        {
+          "mal_id": 28,
+          "type": "anime",
+          "name": "Boys Love",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/28\/Boys_Love"
+        }
+      ],
+      "explicit_genres": [],
+      "themes": [],
+      "demographics": []
+    }
+  ]
+}

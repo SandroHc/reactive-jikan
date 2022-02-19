@@ -18,7 +18,8 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static net.sandrohc.jikan.test.MockUtils.mockError;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class CommonTest extends RequestTest {
 
@@ -45,7 +46,7 @@ public class CommonTest extends RequestTest {
 
 		SoftAssertions softly = new SoftAssertions();
 		softly.assertThat(jikan.debug).isFalse();
-		softly.assertThat(jikan.baseUrl).isEqualTo("https://api.jikan.moe/v3");
+		softly.assertThat(jikan.baseUrl).isEqualTo("https://api.jikan.moe/v4");
 		softly.assertThat(jikan.userAgent).isEqualTo("reactive-jikan/development");
 		softly.assertAll();
 	}
@@ -102,10 +103,12 @@ public class CommonTest extends RequestTest {
 	@SuppressWarnings("AssertBetweenInconvertibleTypes")
 	@Test
 	void testEquality_dateRange() {
-		DateRange e1 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-02T00:00:00+00:00"));
-		DateRange e2 = new DateRangeTest(OffsetDateTime.parse("2020-01-02T00:00:00+00:00"), OffsetDateTime.parse("2020-01-02T00:00:00+00:00"));
-		DateRange e3 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-01T00:00:00+00:00"));
-		DateRange e4 = new DateRangeTest(OffsetDateTime.parse("2020-01-01T00:00:00+00:00"), OffsetDateTime.parse("2020-01-02T00:00:00+00:00"));
+		OffsetDateTime date1 = LocalDate.of(2020, Month.JANUARY, 1).atTime(0, 0).atOffset(ZoneOffset.UTC);
+		OffsetDateTime date2 = LocalDate.of(2020, Month.JANUARY, 2).atTime(0, 0).atOffset(ZoneOffset.UTC);
+		DateRange e1 = new DateRangeTest(OffsetDateTime.from(date1), OffsetDateTime.from(date2));
+		DateRange e2 = new DateRangeTest(OffsetDateTime.from(date2), OffsetDateTime.from(date2));
+		DateRange e3 = new DateRangeTest(OffsetDateTime.from(date1), OffsetDateTime.from(date1));
+		DateRange e4 = new DateRangeTest(OffsetDateTime.from(date1), OffsetDateTime.from(date2));
 
 		assertThat(e1.toString()).isNotNull();
 

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaRecommendationsQueryTest extends RequestTest {
@@ -24,10 +23,10 @@ public class MangaRecommendationsQueryTest extends RequestTest {
 	@Test
 	void fetchMangaRecommendations() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/recommendations", 1, "manga/getMangaRecommendations.json");
+		mockFromFile(mockServer, "/manga/23390/recommendations", "manga/getMangaRecommendations.json");
 
 		/* Act */
-		MangaRecommendationsQuery query = jikan.query().manga().recommendations(96792);
+		MangaRecommendationsQuery query = jikan.query().manga().recommendations(23390);
 		Collection<Recommendation> recommendations = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +34,7 @@ public class MangaRecommendationsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/recommendations");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/recommendations");
 
 		// Recommendations
 		assertThat(recommendations).isNotNull();
@@ -44,15 +43,15 @@ public class MangaRecommendationsQueryTest extends RequestTest {
 		Recommendation recommendation = recommendations.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(recommendation.toString()).isNotNull();
-		softly.assertThat(recommendation.url).isEqualTo("https://myanimelist.net/manga/25/Fullmetal_Alchemist");
-		softly.assertThat(recommendation.votes).isEqualTo(1);
+		softly.assertThat(recommendation.url).isEqualTo("https://myanimelist.net/recommendations/manga/23390-44489");
+		softly.assertThat(recommendation.votes).isEqualTo(13);
 		softly.assertAll();
 
 		softly = new SoftAssertions();
-		softly.assertThat(recommendation.entry.malId).isEqualTo(25);
-		softly.assertThat(recommendation.entry.url).isEqualTo("https://cdn.myanimelist.net/images/manga/1/27600.jpg?s=9d0238ae01b9fbab777e64b023b7d654");
-		softly.assertThat(recommendation.entry.name).isEqualTo("Fullmetal Alchemist");
-		softly.assertThat(recommendation.entry.images.jpg.imageUrl).isEqualTo("https://myanimelist.net/recommendations/manga/25-96792");
+		softly.assertThat(recommendation.entry.malId).isEqualTo(44489);
+		softly.assertThat(recommendation.entry.url).isEqualTo("https://myanimelist.net/manga/44489/Houseki_no_Kuni");
+		softly.assertThat(recommendation.entry.name).isEqualTo("Houseki no Kuni");
+		softly.assertThat(recommendation.entry.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/1/115443.jpg?s=9795cb8739785d402a60e5aade4ddf3b");
 		softly.assertAll();
 	}
 }

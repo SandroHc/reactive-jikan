@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonVoicesQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class PersonVoicesQueryTest extends RequestTest {
 	@Test
 	void fetchPersonVoices() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/people/1/voices", 1, "people/getPersonVoices.json");
+		mockFromFile(mockServer, "/people/1/voices", "people/getPersonVoices.json");
 
 		/* Act */
 		PersonVoicesQuery query = jikan.query().person().voices(1);
@@ -35,7 +34,7 @@ public class PersonVoicesQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/people/1/voices");
+		assertThat(query.getUrl().build()).isEqualTo("/people/1/voices");
 
 		// Roles
 		assertThat(roles).isNotNull();
@@ -44,15 +43,15 @@ public class PersonVoicesQueryTest extends RequestTest {
 		PersonVoiceActingRole role = roles.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(role.toString()).isNotNull();
-		softly.assertThat(role.role).isEqualTo("Theme Song Performance");
-		softly.assertThat(role.entry.malId).isEqualTo(30205);
-		softly.assertThat(role.entry.url).isEqualTo("URL");
-		softly.assertThat(role.entry.name).isEqualTo("Aoharu x Kikanjuu");
-		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("IMAGE");
-		softly.assertThat(role.character.malId).isEqualTo(36765);
-		softly.assertThat(role.character.url).isEqualTo("URL");
-		softly.assertThat(role.character.name).isEqualTo("Kirigaya, Kazuto");
-		softly.assertThat(role.character.images.jpg.imageUrl).isEqualTo("IMAGE");
+		softly.assertThat(role.role).isEqualTo("Main");
+		softly.assertThat(role.entry.malId).isEqualTo(48561);
+		softly.assertThat(role.entry.url).isEqualTo("https://myanimelist.net/anime/48561/Jujutsu_Kaisen_0_Movie");
+		softly.assertThat(role.entry.name).isEqualTo("Jujutsu Kaisen 0 Movie");
+		softly.assertThat(role.entry.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/1121/119044.jpg?s=b4821cdac7d0126dc79e948b62df4d2e");
+		softly.assertThat(role.character.malId).isEqualTo(164476);
+		softly.assertThat(role.character.url).isEqualTo("https://myanimelist.net/character/164476/Panda");
+		softly.assertThat(role.character.name).isEqualTo("Panda");
+		softly.assertThat(role.character.images.jpg.imageUrl).isEqualTo( "https://cdn.myanimelist.net/r/84x124/images/characters/16/423950.jpg?s=0028e4781ba40417b1e7779268b2bc59");
 		softly.assertAll();
 	}
 }

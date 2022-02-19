@@ -7,7 +7,6 @@
 package net.sandrohc.jikan.query;
 
 import java.io.*;
-import java.net.URI;
 import java.time.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -51,19 +50,19 @@ public abstract class Query<T, R extends Publisher<?>> {
 	public abstract TypeReference<T> getResponseType();
 
 	public R execute() throws JikanQueryException {
-		URI uri = null;
+		String url = null;
 		try {
-			uri = getUrl().build();
-			log.debug(JIKAN_MARKER, "Fetching request: {}", uri);
+			url = getUrl().build();
+			log.debug(JIKAN_MARKER, "Fetching request: {}", url);
 
-			final Mono<T> queryResults = jikan.httpClient.get().uri(uri)
+			final Mono<T> queryResults = jikan.httpClient.get().uri(url)
 					.responseSingle(this::extractBytesFromResponse)
 					.retryWhen(Retry.backoff(jikan.maxRetries, Duration.ofMillis(500)).filter(th -> th instanceof JikanThrottleException))
 					.flatMap(this::deserialize);
 
 			return process(queryResults);
 		} catch (Exception e) {
-			throw new JikanQueryException("Error when executing query '" + getClass().getName() + "' with URI '" + uri + "'", e);
+			throw new JikanQueryException("Error when executing query '" + getClass().getName() + "' with URL '" + url + "'", e);
 		}
 	}
 

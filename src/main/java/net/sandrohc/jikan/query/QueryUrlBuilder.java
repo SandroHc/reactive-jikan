@@ -24,7 +24,7 @@ public class QueryUrlBuilder {
 	private static final Logger log = LoggerFactory.getLogger(QueryUrlBuilder.class);
 
 	protected String path;
-	protected final StringBuilder query = new StringBuilder();
+	protected final StringBuilder params = new StringBuilder();
 
 	private QueryUrlBuilder() {
 	}
@@ -67,26 +67,26 @@ public class QueryUrlBuilder {
 		log.trace(JIKAN_MARKER, "Appending query parameter '{}': {}", key, value);
 
 		// Append the query parameter separator
-		if (query.length() > 0)
-			query.append('&');
+		if (params.length() > 0)
+			params.append('&');
 
 		// TODO: support arrays
 		// TODO: url-encode key and value
 		if (value instanceof Collection) {
-			query.append(key).append("[]=");
+			params.append(key).append("[]=");
 
 			boolean isFirstValue = true;
 			for (Object val : ((Collection<?>) value)) {
 				if (isFirstValue) {
 					isFirstValue = false;
 				} else {
-					query.append(',');
+					params.append(',');
 				}
 
-				query.append(val);
+				params.append(val);
 			}
 		} else {
-			query.append(key).append('=').append(value);
+			params.append(key).append('=').append(value);
 		}
 
 		return this;
@@ -94,11 +94,12 @@ public class QueryUrlBuilder {
 
 	// TODO: confirm that URI query params conform to RFC3986 - http://tools.ietf.org/html/rfc3986#section-2.1 (percent encoding)
 	//  Currently doing on QueryableQuery: URLEncoder.encode(query, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20")
-	public URI build() throws JikanUrlException {
+	public String build() throws JikanUrlException {
+		String query = this.params.length() > 0 ? this.params.toString() : null;
 		try {
-			return new URI(null, null, path, query.toString(), null);
+			return new URI(null, null, path, query, null).toString();
 		} catch (URISyntaxException e) {
-			throw new JikanUrlException(path, query.toString(), e);
+			throw new JikanUrlException(path, query, e);
 		}
 	}
 }

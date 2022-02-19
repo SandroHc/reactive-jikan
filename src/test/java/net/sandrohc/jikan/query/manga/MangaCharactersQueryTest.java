@@ -15,17 +15,17 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.groups.Tuple.tuple;
 
 public class MangaCharactersQueryTest extends RequestTest {
 
+	@SuppressWarnings("SpellCheckingInspection")
 	@Test
 	void fetchMangaCharacters() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/characters", 1, "manga/getMangaCharacters.json");
+		mockFromFile(mockServer, "/manga/23390/characters", "manga/getMangaCharacters.json");
 
 		/* Act */
 		MangaCharactersQuery query = jikan.query().manga().characters(23390);
@@ -36,7 +36,7 @@ public class MangaCharactersQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/characters");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/characters");
 
 		// Characters
 		assertThat(characters).isNotNull();
@@ -46,15 +46,11 @@ public class MangaCharactersQueryTest extends RequestTest {
 		softly = new SoftAssertions();
 		softly.assertThat(character.toString()).isNotNull();
 		softly.assertThat(character.role).isEqualTo("Main");
-		softly.assertThat(character.character.malId).isEqualTo(146157);
-		softly.assertThat(character.character.url).isEqualTo("URL");
-		softly.assertThat(character.character.images.jpg.imageUrl).isEqualTo("IMAGE");
-		softly.assertThat(character.character.name).isEqualTo("Kamado, Nezuko");
-		softly.assertThat(character.voiceActors)
-				.extracting(va -> va.language, va -> va.person.malId, va -> va.person.url, va -> va.person.name, va -> va.person.images.jpg.imageUrl)
-				.containsExactly(
-						tuple("LANG", 1, "URL", "NAME", "IMAGE")
-				);
+		softly.assertThat(character.character.malId).isEqualTo(40881);
+		softly.assertThat(character.character.url).isEqualTo("https://myanimelist.net/character/40881/Mikasa_Ackerman");
+		softly.assertThat(character.character.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/characters/9/215563.jpg?s=5b0650bb09a7e053afc6bad84ab48947");
+		softly.assertThat(character.character.name).isEqualTo("Ackerman, Mikasa");
+		softly.assertThat(character.voiceActors).hasSize(0);
 		softly.assertAll();
 	}
 }

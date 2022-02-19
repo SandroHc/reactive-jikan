@@ -29,7 +29,7 @@ public class Character extends MalEntity {
     public Collection<String> nicknames = Collections.emptyList();
 
     /** The number of users with this character in their favourites list. */
-    public int favourites;
+    public int favorites;
 
     /** A summary about the character. */
     public String about;
@@ -67,12 +67,12 @@ public class Character extends MalEntity {
         this.nicknames = nicknames;
     }
 
-    public int getFavourites() {
-        return favourites;
+    public int getFavorites() {
+        return favorites;
     }
 
-    public void setFavourites(int favourites) {
-        this.favourites = favourites;
+    public void setFavorites(int favorites) {
+        this.favorites = favorites;
     }
 
     public String getAbout() {

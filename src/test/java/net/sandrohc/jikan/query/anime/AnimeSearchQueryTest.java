@@ -19,8 +19,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeSearchQueryTest extends RequestTest {
@@ -28,18 +27,16 @@ public class AnimeSearchQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/reviews", 1, "anime/getAnimeSearch.json",
-				Parameter.param("q", "test"),
+		mockFromFile(mockServer, "/anime/11757/reviews", "anime/getAnimeSearch.json",
+				Parameter.param("score", "1.0"),
+				Parameter.param("status", "complete"),
+				Parameter.param("rating", "pg"),
+				Parameter.param("genres[]", "1,2"),
+				Parameter.param("order_by", "mal_id"),
+				Parameter.param("sort", "asc"),
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"),
-				Parameter.param("genre[]", "1,2"),
-				Parameter.param("status", "completed"),
-				Parameter.param("orderBy", "mal_id"),
-				Parameter.param("sort", "asc"),
-				Parameter.param("rated", "pg"),
-				Parameter.param("score", "1.0"),
-				Parameter.param("startDate", "2020-01-01"),
-				Parameter.param("endDate", "2020-12-31"));
+				Parameter.param("q", "test"));
 
 		/* Act */
 		AnimeSearchQuery query = jikan.query().anime().search()
@@ -58,7 +55,7 @@ public class AnimeSearchQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/?q=test&page=1&limit=1&genre[]=1,2&status=completed&orderBy=mal_id&sort=asc&rated=pg&score=1.0&startDate=2020-01-01&endDate=2020-12-31");
+		assertThat(query.getUrl().build()).isEqualTo("/anime?score=1.0&status=complete&rating=pg&genres[]=1,2&order_by=mal_id&sort=asc&page=1&limit=1&q=test");
 
 		// Search Results
 		assertThat(results).isNotNull();
@@ -75,7 +72,7 @@ public class AnimeSearchQueryTest extends RequestTest {
 		softly.assertThat(result.synopsis).isEqualTo("Fumizuki Academy isn't a typical Japanese high school...");
 		softly.assertThat(result.type).isEqualTo(AnimeType.TV);
 		softly.assertThat(result.episodes).isEqualTo(13);
-		softly.assertThat(result.score).isEqualTo(7.65F);
+		softly.assertThat(result.score).isEqualTo(7.65D);
 		softly.assertThat(result.aired.from).isEqualTo(LocalDate.parse("2010-01-07"));
 		softly.assertThat(result.aired.to).isEqualTo(LocalDate.parse("2010-04-01"));
 		softly.assertThat(result.members).isEqualTo(484011);
@@ -84,45 +81,13 @@ public class AnimeSearchQueryTest extends RequestTest {
 	}
 
 	@Test
-	void fetchSearch_excludeGenres() {
-		// https://api.jikan.moe/v3/search/anime?genre[]=1&genre_exclude=0
-		String response = "{\n" +
-				"    \"results\": [],\n" +
-				"    \"last_page\": 0\n" +
-				"}";
+	void fetchAnimeSearch_excludeGenres() throws JikanUrlException {
+		AnimeSearchQuery query = jikan.query().anime().search()
+				.excludeGenres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE);
 
-		mock(mockServer, "/search/anime", response,
-				Parameter.param("genre", "1"),
-				Parameter.param("genre_exclude", "1"));
+		assertThat(query.genres).isNull();
+		assertThat(query.genresExclude).containsExactlyInAnyOrder(AnimeGenre.ACTION, AnimeGenre.ADVENTURE);
 
-		Collection<AnimeSearchSub> results = jikan.query().anime().search()
-				.genres(AnimeGenre.ACTION)
-				.excludeGivenGenres()
-				.execute()
-				.collectList()
-				.block();
-
-		assertThat(results).isNotNull();
-	}
-
-	@Test
-	void fetchSearch_includeGenres() {
-		// https://api.jikan.moe/v3/search/anime?genre_exclude=1
-		String response = "{\n" +
-				"    \"results\": [],\n" +
-				"    \"last_page\": 0\n" +
-				"}";
-
-		mock(mockServer, "/search/anime", response,
-				Parameter.param("genre_exclude", "1"));
-
-		Collection<AnimeSearchSub> results = jikan.query().anime().search()
-				.genres(AnimeGenre.ACTION)
-				.includeGivenGenres()
-				.execute()
-				.collectList()
-				.block();
-
-		assertThat(results).isNotNull();
+		assertThat(query.getUrl().build()).isEqualTo("/anime?genres_exclude[]=1,2");
 	}
 }

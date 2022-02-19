@@ -9,9 +9,9 @@ package net.sandrohc.jikan.query.club;
 import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.club.*;
 import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
@@ -21,7 +21,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getClubRelations">Jikan API docs - getClubRelations</a>
  */
-public class ClubRelationsQuery extends Query<DataListHolder<EntityWithType>, Flux<EntityWithType>> {
+public class ClubRelationsQuery extends Query<DataHolder<ClubRelations>, Mono<ClubRelations>> {
 
 	/** The club ID. */
 	protected final int id;
@@ -37,12 +37,12 @@ public class ClubRelationsQuery extends Query<DataListHolder<EntityWithType>, Fl
 	}
 
 	@Override
-	public TypeReference<DataListHolder<EntityWithType>> getResponseType() {
-		return new TypeReference<DataListHolder<EntityWithType>>() { };
+	public TypeReference<DataHolder<ClubRelations>> getResponseType() {
+		return new TypeReference<DataHolder<ClubRelations>>() { };
 	}
 
 	@Override
-	public Flux<EntityWithType> process(Mono<DataListHolder<EntityWithType>> content) {
-		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
+	public Mono<ClubRelations> process(Mono<DataHolder<ClubRelations>> content) {
+		return content.map(holder -> holder.data);
 	}
 }

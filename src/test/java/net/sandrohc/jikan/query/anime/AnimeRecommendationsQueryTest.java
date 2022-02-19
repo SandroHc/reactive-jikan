@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeRecommendationsQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class AnimeRecommendationsQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeRecommendations() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/recommendations", 1, "anime/getAnimeRecommendations.json");
+		mockFromFile(mockServer, "/anime/11757/recommendations", "anime/getAnimeRecommendations.json");
 
 		/* Act */
 		AnimeRecommendationsQuery query = jikan.query().anime().recommendations(11757);
@@ -35,7 +34,7 @@ public class AnimeRecommendationsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/recommendations");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/recommendations");
 
 		// Recommendations
 		assertThat(recommendations).isNotNull();
@@ -49,7 +48,7 @@ public class AnimeRecommendationsQueryTest extends RequestTest {
 		softly.assertThat(recommendation.entry.name).isEqualTo("Log Horizon");
 		softly.assertThat(recommendation.entry.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/5/84004.jpg?s=73d4b44ed253ca5c865ef6e026cec99f");
 		softly.assertThat(recommendation.url).isEqualTo("https://myanimelist.net/recommendations/anime/11757-17265");
-		softly.assertThat(recommendation.votes).isEqualTo(160);
+		softly.assertThat(recommendation.votes).isEqualTo(174);
 		softly.assertAll();
 	}
 }

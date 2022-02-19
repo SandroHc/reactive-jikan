@@ -63,7 +63,7 @@ public class Jikan {
 						.add(HttpHeaderNames.USER_AGENT, this.userAgent));
 
 		this.objectMapper = new ObjectMapper()
-				.registerModule(new JavaTimeModule())
+				.registerModules(new JavaTimeModule(), new JikanModule())
 				.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)
 				.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 	}

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
@@ -25,7 +24,7 @@ public class AnimeExternalQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeExternal() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/external", 1, "anime/getAnimeExternal.json");
+		mockFromFile(mockServer, "/anime/11757/external", "anime/getAnimeExternal.json");
 
 		/* Act */
 		AnimeExternalQuery query = jikan.query().anime().external(11757);
@@ -36,7 +35,7 @@ public class AnimeExternalQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/external");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/external");
 
 		// External
 		softly = new SoftAssertions();
@@ -44,8 +43,8 @@ public class AnimeExternalQueryTest extends RequestTest {
 		softly.assertThat(externals).hasSize(1);
 		softly.assertThat(externals)
 				.extracting(e -> e.name, e -> e.url)
-				.containsExactly(
-						tuple("NAME", "URL")
+				.containsExactlyInAnyOrder(
+						tuple("Official Site", "http://www.swordart-online.net/")
 				);
 		softly.assertAll();
 	}

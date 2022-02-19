@@ -25,7 +25,7 @@ public class CharacterBasic implements Serializable {
 
 	/** The character voice actors. */
 	@JsonProperty("voice_actors")
-	public List<CharacterVoiceActor> voiceActors;
+	public List<CharacterVoiceActor> voiceActors = Collections.emptyList();
 
 
 	public CharacterDetails getCharacter() {

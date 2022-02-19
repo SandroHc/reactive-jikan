@@ -19,8 +19,7 @@ import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaSearchQueryTest extends RequestTest {
@@ -28,7 +27,7 @@ public class MangaSearchQueryTest extends RequestTest {
 	@Test
 	void fetchMangaSearch() throws JikanInvalidArgumentException, JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga", 1, "manga/getMangaSearch.json",
+		mockFromFile(mockServer, "/manga", "manga/getMangaSearch.json",
 				Parameter.param("q", "test"),
 				Parameter.param("page", "1"),
 				Parameter.param("limit", "1"),
@@ -57,7 +56,7 @@ public class MangaSearchQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga");
+		assertThat(query.getUrl().build()).isEqualTo("/manga?score=1.0&status=complete&genres[]=1,2&order_by=mal_id&sort=asc&page=1&limit=1&q=test");
 
 		// Results
 		assertThat(results).isNotNull();
@@ -66,54 +65,31 @@ public class MangaSearchQueryTest extends RequestTest {
 		Manga result = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(result.toString()).isNotNull();
-		softly.assertThat(result.malId).isEqualTo(2915);
-		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/manga/2915/Testarotho");
-		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/3/200365.jpg?s=2925c3aa1fca9d2e89f5480cfbf95984");
-		softly.assertThat(result.title).isEqualTo("Testarotho");
+		softly.assertThat(result.malId).isEqualTo(1);
+		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/manga/1/Monster");
+		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/manga/3/54525.jpg");
+		softly.assertThat(result.title).isEqualTo("Monster");
 		softly.assertThat(result.publishing).isFalse();
-		softly.assertThat(result.synopsis).isEqualTo("Capria has spent her life sheltered...");
+		softly.assertThat(result.synopsis).startsWith("Kenzou Tenma, a renowned Japanese neurosurgeon working in post-war Germany, faces a difficult choice");
+		softly.assertThat(result.synopsis).hasSize(981);
 		softly.assertThat(result.type).isEqualTo(MangaType.MANGA);
-		softly.assertThat(result.chapters).isEqualTo(26);
-		softly.assertThat(result.volumes).isEqualTo(4);
-		softly.assertThat(result.score).isEqualTo(6.60F);
-		softly.assertThat(result.published.from).isEqualTo(LocalDate.parse("2000-06-09"));
-		softly.assertThat(result.published.to).isEqualTo(LocalDate.parse("2002-10-09"));
-		softly.assertThat(result.members).isEqualTo(612);
+		softly.assertThat(result.chapters).isEqualTo(162);
+		softly.assertThat(result.volumes).isEqualTo(18);
+		softly.assertThat(result.score).isEqualTo(9.12D);
+		softly.assertThat(result.published.from).isEqualTo(LocalDate.of(1994, Month.DECEMBER, 5).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(result.published.to).isEqualTo(LocalDate.of(2001, Month.DECEMBER, 20).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(result.members).isEqualTo(171735);
 		softly.assertAll();
 	}
 
 	@Test
-	void fetchSearch_excludeGenres() {
-		// https://api.jikan.moe/v3/search/manga?genre[]=1&genre_exclude=1
+	void fetchMangaSearch_excludeGenres() throws JikanUrlException {
+		MangaSearchQuery query = jikan.query().manga().search()
+				.excludeGenres(MangaGenre.ACTION, MangaGenre.ADVENTURE);
 
-		mock(mockServer, "/search/manga", response,
-				Parameter.param("genre[]", "1"),
-				Parameter.param("genre_exclude", "1"));
+		assertThat(query.genres).isNull();
+		assertThat(query.genresExclude).containsExactlyInAnyOrder(MangaGenre.ACTION, MangaGenre.ADVENTURE);
 
-		Collection<MangaSearchSub> results = jikan.query().manga().search()
-				.genres(MangaGenre.ACTION)
-				.excludeGivenGenres()
-				.execute()
-				.collectList()
-				.block();
-
-		assertThat(results).isNotNull();
-	}
-
-	@Test
-	void fetchSearch_includeGenres() {
-		// https://api.jikan.moe/v3/search/manga?genre_exclude=1
-
-		mock(mockServer, "/search/manga", response,
-				Parameter.param("genre_exclude", "1"));
-
-		Collection<MangaSearchSub> results = jikan.query().manga().search()
-				.genres(MangaGenre.ACTION)
-				.includeGivenGenres()
-				.execute()
-				.collectList()
-				.block();
-
-		assertThat(results).isNotNull();
+		assertThat(query.getUrl().build()).isEqualTo("/manga?genres_exclude[]=1,2");
 	}
 }

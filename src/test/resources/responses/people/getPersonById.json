@@ -1,1 +1,23 @@
-{"data":{"mal_id":1,"url":"https:\/\/myanimelist.net\/people\/1\/Tomokazu_Seki","website_url":null,"images":{"jpg":{"image_url":"https:\/\/cdn.myanimelist.net\/images\/voiceactors\/1\/55486.jpg"}},"name":"Tomokazu Seki","given_name":"\u667a\u4e00","family_name":"\u95a2","alternate_names":["Seki Mondoya","\u9580\u6238 \u958b","Monto Hiraku"],"birthday":"1972-09-08T00:00:00+00:00","favorites":5772,"about":"Hometown: Tokyo, Japan\nBlood type: AB\n\nTwitter: @seki0908"}}
+{
+  "data": {
+    "mal_id": 1,
+    "url": "https:\/\/myanimelist.net\/people\/1\/Tomokazu_Seki",
+    "website_url": "WEBSITE",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/voiceactors\/1\/55486.jpg"
+      }
+    },
+    "name": "Tomokazu Seki",
+    "given_name": "\u667a\u4e00",
+    "family_name": "\u95a2",
+    "alternate_names": [
+      "Seki Mondoya",
+      "\u9580\u6238 \u958b",
+      "Monto Hiraku"
+    ],
+    "birthday": "1972-09-08T00:00:00+00:00",
+    "favorites": 5772,
+    "about": "Hometown: Tokyo, Japan\nBlood type: AB\n\nTwitter: @seki0908"
+  }
+}

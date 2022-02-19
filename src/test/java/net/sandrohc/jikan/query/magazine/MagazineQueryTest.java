@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
@@ -25,7 +24,7 @@ public class MagazineQueryTest extends RequestTest {
 	@Test
 	void fetchMagazines() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/magazines", 1, "magazines/getMagazines.json");
+		mockFromFile(mockServer, "/magazines", "magazines/getMagazines.json");
 
 		/* Act */
 		MagazineQuery query = jikan.query().magazine().list();
@@ -36,7 +35,7 @@ public class MagazineQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/magazines");
+		assertThat(query.getUrl().build()).isEqualTo("/magazines");
 
 		/* Results */
 		softly = new SoftAssertions();
@@ -44,8 +43,8 @@ public class MagazineQueryTest extends RequestTest {
 		softly.assertThat(magazines).hasSize(1);
 		softly.assertThat(magazines)
 				.extracting(m -> m.malId, m -> m.url, m -> m.name, m -> m.count)
-				.containsExactly(
-						tuple(1, "URL", "NAME", 2)
+				.containsExactlyInAnyOrder(
+						tuple(1, "https://myanimelist.net/manga/magazine/1/Big_Comic_Original", "Big Comic Original", 66)
 				);
 		softly.assertAll();
 	}

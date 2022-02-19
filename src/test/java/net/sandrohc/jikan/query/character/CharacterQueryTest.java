@@ -13,8 +13,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CharacterQueryTest extends RequestTest {
@@ -23,7 +22,7 @@ public class CharacterQueryTest extends RequestTest {
 	@Test
 	void fetchCharacterDetails() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/characters/36765", 1, "characters/getCharacterById.json");
+		mockFromFile(mockServer, "/characters/11757", "characters/getCharacterById.json");
 
 		/* Act */
 		CharacterQuery query = jikan.query().character().get(11757);
@@ -34,19 +33,20 @@ public class CharacterQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765");
+		assertThat(query.getUrl().build()).isEqualTo("/characters/11757");
 
 		// Character
 		softly = new SoftAssertions();
 		softly.assertThat(character).isNotNull();
 		softly.assertThat(character.toString()).isNotNull();
 		softly.assertThat(character.malId).isEqualTo(36765);
-		softly.assertThat(character.url).isEqualTo("URL");
+		softly.assertThat(character.url).isEqualTo("https://myanimelist.net/character/36765/Kazuto_Kirigaya");
 		softly.assertThat(character.name).isEqualTo("Kazuto Kirigaya");
-		softly.assertThat(character.images.jpg.imageUrl).isEqualTo("IMAGE");
-		softly.assertThat(character.nicknames).containsExactly("NICK");
-		softly.assertThat(character.favourites).isEqualTo(1);
-		softly.assertThat(character.about).isEqualTo("ABOUT");
+		softly.assertThat(character.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/characters/7/204821.jpg");
+		softly.assertThat(character.nicknames).containsExactlyInAnyOrder("Kirito", "The Black Swordsman", "Beater", "Kazu");
+		softly.assertThat(character.favorites).isEqualTo(38444);
+		softly.assertThat(character.about).startsWith("Birthday: October 7, 2008Age: 14 (Beginning of Aincrad arc), 16");
+		softly.assertThat(character.about).hasSize(1469);
 		softly.assertAll();
 	}
 }

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
@@ -24,7 +23,7 @@ public class MangaForumQueryTest extends RequestTest {
 
 	void fetchMangaForum() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/forum", 1, "manga/getMangaTopics.json");
+		mockFromFile(mockServer, "/manga/23390/forum", "manga/getMangaTopics.json");
 
 		/* Act */
 		MangaForumQuery query = jikan.query().manga().forum(23390);
@@ -35,7 +34,7 @@ public class MangaForumQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/forum");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/forum");
 
 		// Topics
 		assertThat(forumTopics).isNotNull();
@@ -53,7 +52,7 @@ public class MangaForumQueryTest extends RequestTest {
 		softly.assertThat(topic.comments).isEqualTo(8);
 		softly.assertThat(topic.lastComment)
 				.extracting(c -> c.url, c -> c.authorUsername, c -> c.authorUrl, c -> c.date)
-				.containsExactly(
+				.containsExactlyInAnyOrder(
 						tuple("URL", "USER", "URL", LocalDate.of(2020, Month.JULY, 15).atTime(15, 39).atOffset(ZoneOffset.UTC))
 				);
 		softly.assertAll();

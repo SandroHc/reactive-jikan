@@ -71,7 +71,7 @@ public class Anime extends MalEntity {
 	public AgeRating rating;
 
 	/** The anime score, in the range of 0.00 to 10.00. */
-	public float score;
+	public double score;
 
 	/** The number of users that gave a score to this anime. */
 	@JsonProperty("scored_by")
@@ -247,11 +247,11 @@ public class Anime extends MalEntity {
 		this.rating = rating;
 	}
 
-	public float getScore() {
+	public double getScore() {
 		return score;
 	}
 
-	public void setScore(float score) {
+	public void setScore(double score) {
 		this.score = score;
 	}
 

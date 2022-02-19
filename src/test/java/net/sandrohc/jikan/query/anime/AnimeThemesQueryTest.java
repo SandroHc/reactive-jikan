@@ -13,8 +13,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeThemesQueryTest extends RequestTest {
@@ -22,7 +21,7 @@ public class AnimeThemesQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeThemes() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/themes", 1, "anime/getAnimeThemes.json");
+		mockFromFile(mockServer, "/anime/11757/themes", "anime/getAnimeThemes.json");
 
 		/* Act */
 		AnimeThemesQuery query = jikan.query().anime().themes(11757);
@@ -33,14 +32,21 @@ public class AnimeThemesQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/themes");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/themes");
 
 		// Themes
 		assertThat(themes).isNotNull();
 		softly = new SoftAssertions();
 		softly.assertThat(themes.toString()).isNotNull();
-		softly.assertThat(themes.openings).containsExactly("OP");
-		softly.assertThat(themes.endings).containsExactly("ED");
+		softly.assertThat(themes.openings).containsExactly(
+				"1: \"crossing field\" by LiSA (eps 2-14)",
+				"2: \"INNOCENCE\" by Aoi Eir (eps 15-24)"
+		);
+		softly.assertThat(themes.endings).containsExactly(
+				"1: \"Yume Sekai (ユメセカイ)\" by Haruka Tomatsu (eps 2-14)",
+				"2: \"Overfly\" by Luna Haruna (eps 15-24)",
+				"3: \"crossing field\" by LiSA (eps 25)"
+		);
 		softly.assertAll();
 	}
 }

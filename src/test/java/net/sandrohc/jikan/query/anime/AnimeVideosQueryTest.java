@@ -13,8 +13,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeVideosQueryTest extends RequestTest {
@@ -22,7 +21,7 @@ public class AnimeVideosQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeVideos() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/anime/11757/videos", 1, "anime/getAnimeVideos.json");
+		mockFromFile(mockServer, "/anime/11757/videos", "anime/getAnimeVideos.json");
 
 		/* Act */
 		AnimeVideosQuery query = jikan.query().anime().videos(11757);
@@ -33,7 +32,7 @@ public class AnimeVideosQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/anime/11757/videos");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/videos");
 
 		// Videos
 		softly = new SoftAssertions();
@@ -48,20 +47,20 @@ public class AnimeVideosQueryTest extends RequestTest {
 		softly = new SoftAssertions();
 		softly.assertThat(promo.toString()).isNotNull();
 		softly.assertThat(promo.title).isEqualTo("PV English dub version");
-		softly.assertThat(promo.trailer.youtubeId).isEqualTo("https://i.ytimg.com/vi/6ohYYtxfDCg/mqdefault.jpg");
-		softly.assertThat(promo.trailer.url).isEqualTo("https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1");
+		softly.assertThat(promo.trailer.youtubeId).isEqualTo("6ohYYtxfDCg");
+		softly.assertThat(promo.trailer.url).isEqualTo("https://www.youtube.com/watch?v=6ohYYtxfDCg");
 		softly.assertThat(promo.trailer.embedUrl).isEqualTo("https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1");
-		softly.assertThat(promo.trailer.images.imageUrl).isEqualTo("https://www.youtube.com/embed/6ohYYtxfDCg?enablejsapi=1&wmode=opaque&autoplay=1");
+		softly.assertThat(promo.trailer.images.imageUrl).isEqualTo("https://img.youtube.com/vi/6ohYYtxfDCg/default.jpg");
 		softly.assertAll();
 
 		// Episode Videos
 		AnimeVideosEpisode episode = videos.episodes.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(episode.toString()).isNotNull();
-		softly.assertThat(episode.title).isEqualTo("The World of Swords");
-		softly.assertThat(episode.episode).isEqualTo("Episode 1");
-		softly.assertThat(episode.url).isEqualTo("https://myanimelist.net/anime/11757/Sword_Art_Online/episode/1");
-		softly.assertThat(episode.images.jpg.imageUrl).isEqualTo("https://img1.ak.crunchyroll.com/i/spire1-tmb/018d02b49a25a58bfd8a64416bdb69b41341616322_large.jpg");
+		softly.assertThat(episode.title).isEqualTo("The World Seed");
+		softly.assertThat(episode.episode).isEqualTo("Episode 25");
+		softly.assertThat(episode.url).isEqualTo("https://myanimelist.net/anime/11757/Sword_Art_Online/episode/25");
+		softly.assertThat(episode.images.jpg.imageUrl).isNull();
 		softly.assertAll();
 	}
 }

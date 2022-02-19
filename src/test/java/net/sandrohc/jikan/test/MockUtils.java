@@ -24,15 +24,18 @@ public class MockUtils {
 		return ClientAndServer.startClientAndServer(MOCK_PORT);
 	}
 
-	public static void mock(ClientAndServer mockServer, String uri, int temp, String jsonFile, Parameter... queryParameters) {
-		String json = readFileToString(jsonFile);
+	public static void mockFromFile(ClientAndServer mockServer, String uri, String jsonFile, Parameter... queryParameters) {
+		String response = readFileToString(jsonFile);
+		mock(mockServer, uri, response);
+	}
 
+	public static void mock(ClientAndServer mockServer, String uri, String response, Parameter... queryParameters) {
 		mockServer
 				.when(request().withMethod("GET").withPath(uri).withQueryStringParameters(queryParameters))
 				.respond(response()
 						.withStatusCode(200)
 						.withHeader(new Header(HttpHeaderNames.CONTENT_TYPE.toString(), HttpHeaderValues.APPLICATION_JSON.toString()))
-						.withBody(json, StandardCharsets.UTF_8)
+						.withBody(response, StandardCharsets.UTF_8)
 				);
 	}
 
@@ -55,11 +58,11 @@ public class MockUtils {
 
 	public static String readFileToString(String filename) {
 		try {
-			Path path = Paths.get(Objects.requireNonNull(MockUtils.class.getResource("responses/" + filename)).toURI());
+			Path path = Paths.get(Objects.requireNonNull(MockUtils.class.getResource("/responses/" + filename)).toURI());
 			byte[] bytes = Files.readAllBytes(path);
 			return new String(bytes, StandardCharsets.UTF_8);
 		} catch (Exception e) {
-			throw new RuntimeException("Unable to read test file: " + filename);
+			throw new RuntimeException("Unable to read test file '" + filename + "'", e);
 		}
 	}
 }

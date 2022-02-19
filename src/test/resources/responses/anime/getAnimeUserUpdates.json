@@ -22,25 +22,6 @@
       "episodes_seen": 25,
       "episodes_total": 25,
       "date": "2022-02-16T12:24:41+00:00"
-    },
-    {
-      "user": {
-        "username": "USERNAME_2",
-        "url": "https:\/\/myanimelist.net\/profile\/USERNAME_2",
-        "images": {
-          "jpg": {
-            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/11608525.jpg?t=1645014600"
-          },
-          "webp": {
-            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/11608525.webp?t=1645014600"
-          }
-        }
-      },
-      "score": 5,
-      "status": "Watching",
-      "episodes_seen": 15,
-      "episodes_total": 25,
-      "date": "2022-02-16T12:24:07+00:00"
     }
   ]
 }

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaRelationsQueryTest extends RequestTest {
@@ -24,10 +23,10 @@ public class MangaRelationsQueryTest extends RequestTest {
 	@Test
 	void fetchMangaRelations() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/relations", 1, "manga/getAnimeById.json");
+		mockFromFile(mockServer, "/manga/23390/relations", "manga/getMangaRelations.json");
 
 		/* Act */
-		MangaRelationsQuery query = jikan.query().manga().relations(11757);
+		MangaRelationsQuery query = jikan.query().manga().relations(23390);
 		Collection<Related> related = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +34,7 @@ public class MangaRelationsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/relations");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/relations");
 
 		// Relations
 		assertThat(related).isNotNull();

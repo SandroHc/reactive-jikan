@@ -16,8 +16,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaNewsQueryTest extends RequestTest {
@@ -25,7 +24,7 @@ public class MangaNewsQueryTest extends RequestTest {
 	@Test
 	void fetchMangaNews() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/news", 1, "manga/getMangaNews.json");
+		mockFromFile(mockServer, "/manga/23390/news", "manga/getMangaNews.json");
 
 		/* Act */
 		MangaNewsQuery query = jikan.query().manga().news(23390);
@@ -36,7 +35,7 @@ public class MangaNewsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/news");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/news");
 
 		// News Articles
 		assertThat(newsArticles).isNotNull();
@@ -45,15 +44,16 @@ public class MangaNewsQueryTest extends RequestTest {
 		NewsArticle article = newsArticles.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(article.toString()).isNotNull();
-		softly.assertThat(article.url).isEqualTo("https://myanimelist.net/news/60161703");
-		softly.assertThat(article.title).isEqualTo("North American Anime & Manga Releases for July");
-		softly.assertThat(article.date).isEqualTo(LocalDate.of(2020, Month.JULY, 15).atTime(15, 39).atOffset(ZoneOffset.UTC));
-		softly.assertThat(article.authorUsername).isEqualTo("ImperfectBlue");
-		softly.assertThat(article.authorUrl).isEqualTo("AUTHOR URL");
-		softly.assertThat(article.forumUrl).isEqualTo("https://myanimelist.net/forum/?topicid=1850747");
-		softly.assertThat(article.images.jpg.imageUrl).isEqualTo("IMAGE");
-		softly.assertThat(article.comments).isEqualTo(0);
-		softly.assertThat(article.excerpt).isEqualTo("Here are the North American anime & manga releases...");
+		softly.assertThat(article.url).isEqualTo("https://myanimelist.net/news/65168030");
+		softly.assertThat(article.title).isEqualTo("'Kono Manga ga Sugoi!' 2022 Rankings Revealed");
+		softly.assertThat(article.date).isEqualTo(LocalDate.of(2021, Month.DECEMBER, 12).atTime(1, 11).atOffset(ZoneOffset.UTC));
+		softly.assertThat(article.authorUsername).isEqualTo("USER_1");
+		softly.assertThat(article.authorUrl).isEqualTo("https://myanimelist.net/profile/USER_1");
+		softly.assertThat(article.forumUrl).isEqualTo("https://myanimelist.net/forum/?topicid=1978847");
+		softly.assertThat(article.images.jpg.imageUrl).isEqualTo( "https://cdn.myanimelist.net/s/common/uploaded_files/1639300126-5b3f7ab8681fbd31a28c3556dcb4e891.jpeg?s=fb5f7b8f9844443a824273b6b06eca46");
+		softly.assertThat(article.comments).isEqualTo(10);
+		softly.assertThat(article.excerpt).startsWith("Here are the top 20 manga rankings collected by the \"Kono Manga ga Sugoi!\" (This Manga is Amazing!) annual magazine");
+		softly.assertThat(article.excerpt).hasSize(153);
 		softly.assertAll();
 	}
 }

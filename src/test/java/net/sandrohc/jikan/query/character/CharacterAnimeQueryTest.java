@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CharacterAnimeQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class CharacterAnimeQueryTest extends RequestTest {
 	@Test
 	void fetchCharacterAnime() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/characters/36765/anime", 1, "characters/getCharacterAnime.json");
+		mockFromFile(mockServer, "/characters/11757/anime", "characters/getCharacterAnime.json");
 
 		/* Act */
 		CharacterAnimeQuery query = jikan.query().character().anime(11757);
@@ -35,7 +34,7 @@ public class CharacterAnimeQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765/anime");
+		assertThat(query.getUrl().build()).isEqualTo("/characters/11757/anime");
 
 		// Anime
 		assertThat(animeList).isNotNull();
@@ -44,11 +43,11 @@ public class CharacterAnimeQueryTest extends RequestTest {
 		CharacterAnime anime = animeList.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(anime.toString()).isNotNull();
-		softly.assertThat(anime.role).isEqualTo("ROLE");
-		softly.assertThat(anime.anime.malId).isEqualTo(1);
-		softly.assertThat(anime.anime.url).isEqualTo("URL");
-		softly.assertThat(anime.anime.name).isEqualTo("NAME");
-		softly.assertThat(anime.anime.images.jpg.imageUrl).isEqualTo("IMAGE");
+		softly.assertThat(anime.role).isEqualTo("Main");
+		softly.assertThat(anime.anime.malId).isEqualTo(11757);
+		softly.assertThat(anime.anime.url).isEqualTo("https://myanimelist.net/anime/11757/Sword_Art_Online");
+		softly.assertThat(anime.anime.name).isEqualTo("Sword Art Online");
+		softly.assertThat(anime.anime.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/11/39717.jpg?s=e418310b575f6afe9ac03b383527169d");
 		softly.assertAll();
 	}
 }

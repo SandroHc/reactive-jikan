@@ -16,8 +16,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class MangaUserUpdatesQueryTest extends RequestTest {
@@ -25,7 +24,7 @@ public class MangaUserUpdatesQueryTest extends RequestTest {
 	@Test
 	void fetchMangaUserUpdates() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/manga/23390/userupdates", 1, "manga/getMangaUserUpdates.json");
+		mockFromFile(mockServer, "/manga/23390/userupdates", "manga/getMangaUserUpdates.json");
 
 		/* Act */
 		MangaUserUpdatesQuery query = jikan.query().manga().userUpdates(23390);
@@ -36,7 +35,7 @@ public class MangaUserUpdatesQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/manga/23390/userupdates");
+		assertThat(query.getUrl().build()).isEqualTo("/manga/23390/userupdates");
 
 		// User Updates
 		assertThat(userUpdates).isNotNull();
@@ -45,16 +44,16 @@ public class MangaUserUpdatesQueryTest extends RequestTest {
 		UserUpdateWithUser userUpdate = userUpdates.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(userUpdate.toString()).isNotNull();
-		softly.assertThat(userUpdate.user.username).isEqualTo("Vincent1307");
-		softly.assertThat(userUpdate.user.url).isEqualTo("https://myanimelist.net/profile/Vincent1307");
-		softly.assertThat(userUpdate.user.images.jpg.imageUrl).isEqualTo("IMAGE");
-		softly.assertThat(userUpdate.score).isEqualTo(8.5F);
+		softly.assertThat(userUpdate.user.username).isEqualTo("USER_1");
+		softly.assertThat(userUpdate.user.url).isEqualTo("https://myanimelist.net/profile/USER_1");
+		softly.assertThat(userUpdate.user.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/userimages/6288511.jpg?t=1645123200");
+		softly.assertThat(userUpdate.score).isEqualTo(9.0D);
 		softly.assertThat(userUpdate.status).isEqualTo("Completed");
-		softly.assertThat(userUpdate.seen).isEqualTo(10);
-		softly.assertThat(userUpdate.total).isEqualTo(10);
-		softly.assertThat(userUpdate.volumesRead).isEqualTo(0);
-		softly.assertThat(userUpdate.volumesTotal).isEqualTo(0);
-		softly.assertThat(userUpdate.date).isEqualTo(LocalDate.of(2020, Month.JULY, 15).atTime(15, 39).atOffset(ZoneOffset.UTC));
+		softly.assertThat(userUpdate.seen).isEqualTo(141);
+		softly.assertThat(userUpdate.total).isEqualTo(141);
+		softly.assertThat(userUpdate.volumesRead).isEqualTo(34);
+		softly.assertThat(userUpdate.volumesTotal).isEqualTo(34);
+		softly.assertThat(userUpdate.date).isEqualTo(LocalDate.of(2022, Month.FEBRUARY, 17).atTime(18, 36, 11).atOffset(ZoneOffset.UTC));
 		softly.assertAll();
 	}
 }

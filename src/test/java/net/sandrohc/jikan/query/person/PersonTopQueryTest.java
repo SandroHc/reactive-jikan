@@ -16,8 +16,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PersonTopQueryTest extends RequestTest {
@@ -25,7 +24,7 @@ public class PersonTopQueryTest extends RequestTest {
 	@Test
 	void fetchPersonTop() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/top/people", 1, "top/getTopPeople.json");
+		mockFromFile(mockServer, "/top/people", "top/getTopPeople.json");
 
 		/* Act */
 		PersonTopQuery query = jikan.query().person().top();
@@ -36,7 +35,7 @@ public class PersonTopQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/top/people");
+		assertThat(query.getUrl().build()).isEqualTo("/top/people");
 
 		// Results
 		assertThat(results).isNotNull();
@@ -45,17 +44,18 @@ public class PersonTopQueryTest extends RequestTest {
 		Person person = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(person.toString()).isNotNull();
-		softly.assertThat(person.malId).isEqualTo(11817);
-		softly.assertThat(person.url).isEqualTo("URL");
-		softly.assertThat(person.name).isEqualTo("Yoshitsugu Matsuoka");
-		softly.assertThat(person.images.jpg.imageUrl).isEqualTo("IMG");
+		softly.assertThat(person.malId).isEqualTo(118);
+		softly.assertThat(person.url).isEqualTo("https://myanimelist.net/people/118/Hiroshi_Kamiya");
+		softly.assertThat(person.name).isEqualTo("Hiroshi Kamiya");
+		softly.assertThat(person.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/1/58597.jpg");
 		softly.assertThat(person.websiteUrl).isEqualTo("WEBSITE");
-		softly.assertThat(person.givenName).isEqualTo("GIVEN");
-		softly.assertThat(person.familyName).isEqualTo("FAMILY");
-		softly.assertThat(person.alternativeNames).containsExactly("NICK");
-		softly.assertThat(person.birthday).isEqualTo(LocalDate.of(2020, Month.JANUARY, 1).atTime(0, 0).atOffset(ZoneOffset.UTC));
-		softly.assertThat(person.favorites).isEqualTo(1);
-		softly.assertThat(person.about).isEqualTo("ABOUT");
+		softly.assertThat(person.givenName).isEqualTo("浩史");
+		softly.assertThat(person.familyName).isEqualTo("神谷");
+		softly.assertThat(person.alternativeNames).containsExactlyInAnyOrder("ヒロC", "HiroC", "Kamiyan");
+		softly.assertThat(person.birthday).isEqualTo(LocalDate.of(1975, Month.JANUARY, 28).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(person.favorites).isEqualTo(100361);
+		softly.assertThat(person.about).startsWith("Birth place: Matsudo, Chiba Prefecture, Japan");
+		softly.assertThat(person.about).hasSize(1703);
 		softly.assertAll();
 	}
 }

@@ -29,7 +29,7 @@ public class ProducerQuery extends QueryableQuery<DataListHolderWithPagination<E
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return create().path("/producer");
+		return create().path("/producers");
 	}
 
 	@Override

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AnimeTopQueryTest extends RequestTest {
@@ -25,7 +24,7 @@ public class AnimeTopQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeAnimeTop() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mock(mockServer, "/top/anime", 1, "top/getTopAnime.json");
+		mockFromFile(mockServer, "/top/anime", "top/getTopAnime.json");
 
 		/* Act */
 		AnimeTopQuery query = jikan.query().anime().top();
@@ -36,7 +35,7 @@ public class AnimeTopQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/top/anime");
+		assertThat(query.getUrl().build()).isEqualTo("/top/anime");
 
 		// Top
 		assertThat(results).isNotNull();
@@ -55,7 +54,7 @@ public class AnimeTopQueryTest extends RequestTest {
 		softly.assertThat(result.aired.from).isEqualTo("Jul 2020");
 		softly.assertThat(result.aired.to).isNull();
 		softly.assertThat(result.members).isEqualTo(290261);
-		softly.assertThat(result.score).isEqualTo(8.5F);
+		softly.assertThat(result.score).isEqualTo(8.5D);
 		softly.assertAll();
 	}
 }

@@ -15,8 +15,7 @@ import net.sandrohc.jikan.test.RequestTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
-import static net.sandrohc.jikan.test.MockUtils.MOCK_URL;
-import static net.sandrohc.jikan.test.MockUtils.mock;
+import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CharacterVoiceActorsQueryTest extends RequestTest {
@@ -24,7 +23,7 @@ public class CharacterVoiceActorsQueryTest extends RequestTest {
 	@Test
 	void fetchCharacterVoiceActors() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mock(mockServer, "/characters/36765/voices", 1, "characters/getCharacterVoiceActors.json");
+		mockFromFile(mockServer, "/characters/11757/voices", "characters/getCharacterVoiceActors.json");
 
 		/* Act */
 		CharacterVoiceActorsQuery query = jikan.query().character().voiceActors(11757);
@@ -35,7 +34,7 @@ public class CharacterVoiceActorsQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build().toString()).isEqualTo(MOCK_URL + "/characters/36765/voices");
+		assertThat(query.getUrl().build()).isEqualTo("/characters/11757/voices");
 
 		// Manga
 		assertThat(voiceActors).isNotNull();
@@ -44,11 +43,11 @@ public class CharacterVoiceActorsQueryTest extends RequestTest {
 		CharacterVoiceActor voiceActor = voiceActors.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(voiceActor.toString()).isNotNull();
-		softly.assertThat(voiceActor.language).isEqualTo("LANGUAGE");
-		softly.assertThat(voiceActor.person.malId).isEqualTo(1);
-		softly.assertThat(voiceActor.person.url).isEqualTo("URL");
-		softly.assertThat(voiceActor.person.name).isEqualTo("NAME");
-		softly.assertThat(voiceActor.person.images.jpg.imageUrl).isEqualTo("IMAGE");
+		softly.assertThat(voiceActor.language).isEqualTo("English");
+		softly.assertThat(voiceActor.person.malId).isEqualTo(732);
+		softly.assertThat(voiceActor.person.url).isEqualTo("https://myanimelist.net/people/732/Bryce_Papenbrook");
+		softly.assertThat(voiceActor.person.name).isEqualTo("Papenbrook, Bryce");
+		softly.assertThat(voiceActor.person.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/voiceactors/3/29853.jpg");
 		softly.assertAll();
 	}
 }
