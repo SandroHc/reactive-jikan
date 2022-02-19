@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the list of recommendations by the user.
@@ -34,7 +34,7 @@ public class UserRecommendationsQuery extends PageableQuery<DataListHolderWithPa
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/users/" + username + "/recommendations");
+		return create().path("/users/" + username + "/recommendations");
 	}
 
 	@Override

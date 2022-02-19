@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the list of clubs the user joined.
@@ -33,7 +33,7 @@ public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<E
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/users/" + username + "/clubs");
+		return create().path("/users/" + username + "/clubs");
 	}
 
 	@Override

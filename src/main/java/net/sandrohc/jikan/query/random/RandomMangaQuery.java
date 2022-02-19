@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for a random manga.
@@ -29,7 +29,7 @@ public class RandomMangaQuery extends Query<DataHolder<Manga>, Mono<Manga>> {
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/random/manga");
+		return create().path("/random/manga");
 	}
 
 	@Override

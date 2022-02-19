@@ -15,14 +15,14 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the person anime-related positions.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getPersonAnime">Jikan API docs - getPersonAnime</a>
  */
-public class PersonAnimeQuery extends Query<DataListHolder<PersonAnimePosition>, Flux<PersonAnimePosition>> {
+public class PersonAnimeQuery extends Query<DataListHolder<PersonRole>, Flux<PersonRole>> {
 
 	/** The person ID. */
 	protected final int id;
@@ -34,16 +34,16 @@ public class PersonAnimeQuery extends Query<DataListHolder<PersonAnimePosition>,
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/people/" + id + "/anime");
+		return create().path("/people/" + id + "/anime");
 	}
 
 	@Override
-	public TypeReference<DataListHolder<PersonAnimePosition>> getResponseType() {
-		return new TypeReference<DataListHolder<PersonAnimePosition>>() { };
+	public TypeReference<DataListHolder<PersonRole>> getResponseType() {
+		return new TypeReference<DataListHolder<PersonRole>>() { };
 	}
 
 	@Override
-	public Flux<PersonAnimePosition> process(Mono<DataListHolder<PersonAnimePosition>> content) {
+	public Flux<PersonRole> process(Mono<DataListHolder<PersonRole>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

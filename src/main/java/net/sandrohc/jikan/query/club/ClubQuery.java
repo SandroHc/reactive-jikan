@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the club details.
@@ -33,7 +33,7 @@ public class ClubQuery extends Query<DataHolder<Club>, Mono<Club>> {
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/clubs/" + id);
+		return create().path("/clubs/" + id);
 	}
 
 	@Override

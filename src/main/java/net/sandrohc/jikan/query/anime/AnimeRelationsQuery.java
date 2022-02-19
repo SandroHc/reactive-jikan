@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime relations.
@@ -34,7 +34,7 @@ public class AnimeRelationsQuery extends Query<DataListHolder<Related>, Flux<Rel
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/anime/" + id + "/relations");
+		return create().path("/anime/" + id + "/relations");
 	}
 
 	@Override

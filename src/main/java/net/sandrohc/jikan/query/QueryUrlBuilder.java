@@ -33,14 +33,6 @@ public class QueryUrlBuilder {
 		return new QueryUrlBuilder();
 	}
 
-	/**
-	 * @deprecated use {@link #create()} and {@link #path(String)} instead
-	 */
-	@Deprecated
-	public static QueryUrlBuilder endpoint(String path) {
-		return new QueryUrlBuilder().path(path);
-	}
-
 	public QueryUrlBuilder path(String path) {
 		this.path = path;
 		return this;

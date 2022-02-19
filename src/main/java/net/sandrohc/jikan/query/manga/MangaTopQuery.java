@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the most popular manga by score.
@@ -30,7 +30,7 @@ public class MangaTopQuery extends PageableQuery<DataListHolderWithPagination<Ma
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/top/manga");
+		return create().path("/top/manga");
 	}
 
 	@Override

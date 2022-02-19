@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime episode details.
@@ -37,7 +37,7 @@ public class AnimeEpisodeQuery extends Query<DataHolder<AnimeEpisode>, Mono<Anim
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/anime/" + id + "/episodes/" + episode);
+		return create().path("/anime/" + id + "/episodes/" + episode);
 	}
 
 	@Override

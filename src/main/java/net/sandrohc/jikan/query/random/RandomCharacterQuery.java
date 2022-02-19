@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for a random character.
@@ -29,7 +29,7 @@ public class RandomCharacterQuery extends Query<DataHolder<Character>, Mono<Char
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/random/characters");
+		return create().path("/random/characters");
 	}
 
 	@Override

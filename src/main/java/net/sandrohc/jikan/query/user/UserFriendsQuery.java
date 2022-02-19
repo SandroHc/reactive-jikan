@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Get the user list of friends, if public.
  * <p>
@@ -34,7 +36,7 @@ public class UserFriendsQuery extends PageableQuery<DataListHolderWithPagination
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/users/" + username + "/friends");
+		return create().path("/users/" + username + "/friends");
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for a list of the latest manga recommendations.
@@ -30,7 +30,7 @@ public class RecentMangaRecommendationQuery extends PageableQuery<DataListHolder
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/recommendations/manga");
+		return create().path("/recommendations/manga");
 	}
 
 	@Override

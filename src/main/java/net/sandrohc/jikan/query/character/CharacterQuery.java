@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the character details.
@@ -33,7 +33,7 @@ public class CharacterQuery extends Query<DataHolder<Character>, Mono<Character>
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/characters/" + id);
+		return create().path("/characters/" + id);
 	}
 
 	@Override

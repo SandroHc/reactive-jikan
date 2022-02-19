@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga news.
@@ -34,7 +34,7 @@ public class MangaNewsQuery extends PageableQuery<DataListHolderWithPagination<N
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/manga/" + id + "/news");
+		return create().path("/manga/" + id + "/news");
 	}
 
 	@Override

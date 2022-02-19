@@ -16,6 +16,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Get the anime released on a specific season.
  *
@@ -37,7 +39,7 @@ public class SeasonQuery extends PageableQuery<DataListHolderWithPagination<Anim
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/seasons/" + year + '/' + season.getSearch());
+		return create().path("/seasons/" + year + '/' + season.getSearch());
 	}
 
 	@Override

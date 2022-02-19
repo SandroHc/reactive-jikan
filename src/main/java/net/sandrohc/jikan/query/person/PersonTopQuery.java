@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the most popular person by number of favorites.
@@ -30,7 +30,7 @@ public class PersonTopQuery extends PageableQuery<DataListHolderWithPagination<P
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/top/people");
+		return create().path("/top/people");
 	}
 
 	@Override

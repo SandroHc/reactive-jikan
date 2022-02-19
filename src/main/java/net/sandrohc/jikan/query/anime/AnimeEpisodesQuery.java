@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the list of episodes.
@@ -34,7 +34,7 @@ public class AnimeEpisodesQuery extends PageableQuery<DataListHolderWithPaginati
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/anime/" + id + "/episodes");
+		return create().path("/anime/" + id + "/episodes");
 	}
 
 	@Override

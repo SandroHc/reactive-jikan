@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Get the anime to be released on the upcoming season.
  *
@@ -28,7 +30,7 @@ public class SeasonUpcomingQuery extends PageableQuery<DataListHolderWithPaginat
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/seasons/upcoming");
+		return create().path("/seasons/upcoming");
 	}
 
 	@Override

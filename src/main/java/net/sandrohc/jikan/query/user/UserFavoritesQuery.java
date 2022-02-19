@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the user favorites.
@@ -33,7 +33,7 @@ public class UserFavoritesQuery extends Query<DataHolder<UserFavorites>, Mono<Us
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/users/" + username + "/favorites");
+		return create().path("/users/" + username + "/favorites");
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga pictures.
@@ -34,7 +34,7 @@ public class MangaPicturesQuery extends Query<DataListHolder<Images>, Flux<Image
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/manga/" + id + "/pictures");
+		return create().path("/manga/" + id + "/pictures");
 	}
 
 	@Override

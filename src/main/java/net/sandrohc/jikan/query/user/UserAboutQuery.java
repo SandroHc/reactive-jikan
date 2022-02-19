@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the user about page.
@@ -33,7 +33,7 @@ public class UserAboutQuery extends Query<DataHolder<UserAbout>, Mono<UserAbout>
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/users/" + username + "/about");
+		return create().path("/users/" + username + "/about");
 	}
 
 	@Override

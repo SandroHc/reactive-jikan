@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Get the anime released on the current season.
  *
@@ -28,7 +30,7 @@ public class SeasonNowQuery extends PageableQuery<DataListHolderWithPagination<A
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/seasons/now");
+		return create().path("/seasons/now");
 	}
 
 	@Override

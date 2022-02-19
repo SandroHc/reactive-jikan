@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the person voice actor roles.
@@ -34,7 +34,7 @@ public class PersonVoicesQuery extends Query<DataListHolder<PersonVoiceActingRol
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/people/" + id + "/voices");
+		return create().path("/people/" + id + "/voices");
 	}
 
 	@Override

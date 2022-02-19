@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Query for the user search.
  *
@@ -54,7 +56,8 @@ public class UserSearchQuery extends QueryableQuery<DataListHolderWithPagination
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/anime")
+		return create()
+				.path("/anime")
 				.param("gender", gender, UserGender::getSearch)
 				.param("location", location)
 				.param("maxAge", maxAge)

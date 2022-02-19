@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the list of characters.
@@ -34,7 +34,7 @@ public class AnimeCharactersQuery extends Query<DataListHolder<CharacterBasic>, 
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/anime/" + id + "/characters");
+		return create().path("/anime/" + id + "/characters");
 	}
 
 	@Override

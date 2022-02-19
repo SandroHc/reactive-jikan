@@ -16,7 +16,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga forum posts/topics.
@@ -44,7 +44,7 @@ public class MangaForumQuery extends Query<DataListHolder<ForumTopic>, Flux<Foru
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/manga/" + id + "/forum")
+		return create().path("/manga/" + id + "/forum")
 				.param("filter", type, ForumTopicType::getValue);
 	}
 

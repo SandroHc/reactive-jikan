@@ -16,6 +16,8 @@ import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Query for the club search.
  *
@@ -57,7 +59,8 @@ public class ClubSearchQuery extends QueryableQuery<DataListHolderWithPagination
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/clubs")
+		return create()
+				.path("/clubs")
 				.param("type", type.search)
 				.param("category", category, ClubCategory::getSearch)
 				.param("order_by", orderBy, ClubOrderBy::getSearch)

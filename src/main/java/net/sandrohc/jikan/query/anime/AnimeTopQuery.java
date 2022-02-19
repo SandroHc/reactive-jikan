@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the most popular anime by score.
@@ -30,7 +30,7 @@ public class AnimeTopQuery extends PageableQuery<DataListHolderWithPagination<An
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/top/anime");
+		return create().path("/top/anime");
 	}
 
 	@Override

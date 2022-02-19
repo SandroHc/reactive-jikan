@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Get the most popular review by number of favorites.
@@ -30,7 +30,7 @@ public class ReviewTopQuery extends PageableQuery<DataListHolderWithPagination<R
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/top/reviews");
+		return create().path("/top/reviews");
 	}
 
 	@Override

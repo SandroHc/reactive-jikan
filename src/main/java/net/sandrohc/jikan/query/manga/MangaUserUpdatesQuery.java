@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga user updates.
@@ -34,7 +34,7 @@ public class MangaUserUpdatesQuery extends Query<DataListHolderWithPagination<Us
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/manga/" + id + "/userupdates");
+		return create().path("/manga/" + id + "/userupdates");
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga statistics.
@@ -33,7 +33,7 @@ public class MangaStatisticsQuery extends Query<DataHolder<Statistics>, Mono<Sta
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/manga/" + id + "/statistics");
+		return create().path("/manga/" + id + "/statistics");
 	}
 
 	@Override

@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the club related entities.
@@ -33,7 +33,7 @@ public class ClubRelationsQuery extends Query<DataListHolder<EntityWithType>, Fl
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/clubs/" + id + "/relations");
+		return create().path("/clubs/" + id + "/relations");
 	}
 
 	@Override

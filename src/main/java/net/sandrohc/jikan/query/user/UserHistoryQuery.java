@@ -15,6 +15,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Query for the user recent history.
  *
@@ -37,7 +39,8 @@ public abstract class UserHistoryQuery extends Query<DataListHolder<UserHistoryE
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return QueryUrlBuilder.endpoint("/users/" + username + "/history")
+		return create()
+				.path("/users/" + username + "/history")
 				.param("type", type);
 	}
 

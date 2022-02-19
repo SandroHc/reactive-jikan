@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for a random anime.
@@ -29,7 +29,7 @@ public class RandomAnimeQuery extends Query<DataHolder<Anime>, Mono<Anime>> {
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/random/anime");
+		return create().path("/random/anime");
 	}
 
 	@Override

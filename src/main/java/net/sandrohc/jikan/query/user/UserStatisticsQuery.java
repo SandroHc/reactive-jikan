@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the user statistics.
@@ -33,7 +33,7 @@ public class UserStatisticsQuery extends Query<DataHolder<UserStatistics>, Mono<
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/users/" + username + "/statistics");
+		return create().path("/users/" + username + "/statistics");
 	}
 
 	@Override

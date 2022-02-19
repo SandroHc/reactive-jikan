@@ -9,7 +9,7 @@ package net.sandrohc.jikan.query.genre;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the manga genre search.
@@ -24,6 +24,6 @@ public class GenreMangaQuery extends GenreQuery<GenreMangaQuery> {
 
 	@Override
 	protected QueryUrlBuilder getGenreQueryUrl() {
-		return endpoint("/genres/manga");
+		return create().path("/genres/manga");
 	}
 }

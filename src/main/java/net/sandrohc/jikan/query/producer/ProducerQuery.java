@@ -14,7 +14,7 @@ import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the producers.
@@ -29,7 +29,7 @@ public class ProducerQuery extends QueryableQuery<DataListHolderWithPagination<E
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return endpoint("/producer");
+		return create().path("/producer");
 	}
 
 	@Override

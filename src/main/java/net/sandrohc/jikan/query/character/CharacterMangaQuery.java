@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the character appearances on manga.
@@ -34,7 +34,7 @@ public class CharacterMangaQuery extends Query<DataListHolder<CharacterManga>, F
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/characters/" + id + "/manga");
+		return create().path("/characters/" + id + "/manga");
 	}
 
 	@Override

@@ -15,7 +15,7 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import static net.sandrohc.jikan.query.QueryUrlBuilder.endpoint;
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
  * Query for the anime external links.
@@ -34,7 +34,7 @@ public class AnimeExternalQuery extends Query<DataListHolder<External>, Flux<Ext
 
 	@Override
 	public QueryUrlBuilder getUrl() {
-		return endpoint("/anime/" + id + "/external");
+		return create().path("/anime/" + id + "/external");
 	}
 
 	@Override

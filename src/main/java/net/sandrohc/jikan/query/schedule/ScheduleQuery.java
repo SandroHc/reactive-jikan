@@ -16,6 +16,8 @@ import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
+
 /**
  * Query for the currently airing anime/manga schedules.
  *
@@ -38,7 +40,8 @@ public class ScheduleQuery extends PageableQuery<DataListHolderWithPagination<An
 
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
-		return QueryUrlBuilder.endpoint("/schedules")
+		return create()
+				.path("/schedules")
 				.param("filter", day, DayOfWeek::getSearch);
 	}
 
