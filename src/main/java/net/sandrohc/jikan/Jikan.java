@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
+import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
@@ -84,7 +85,7 @@ public class Jikan {
 	 * @param <P> the publisher type (Mono or Flux)
 	 * @return the parsed entity, or {@code null} if the entity was not found
 	 */
-	public <T, P extends Publisher<T>> P query(Query<T, P> query) {
+	public <T, P extends Publisher<T>> P query(Query<T, P> query) throws JikanQueryException {
 		return query.execute();
 	}
 

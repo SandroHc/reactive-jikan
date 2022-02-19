@@ -6,40 +6,16 @@
 
 package net.sandrohc.jikan.model.person;
 
-import java.io.*;
-
 import net.sandrohc.jikan.model.*;
 
 /**
  * A person's voice acting role for a given character on an anime.
  */
-public class PersonVoiceActingRole implements Serializable {
-
-    /** The role. */
-    public String role;
-
-    /** The anime. */
-    public EntityWithImage anime;
+public class PersonVoiceActingRole extends PersonRole {
 
     /** The character. */
     public EntityWithImage character;
 
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public EntityWithImage getAnime() {
-        return anime;
-    }
-
-    public void setAnime(EntityWithImage anime) {
-        this.anime = anime;
-    }
 
     public EntityWithImage getCharacter() {
         return character;
@@ -51,6 +27,6 @@ public class PersonVoiceActingRole implements Serializable {
 
     @Override
     public String toString() {
-        return "PersonVoiceActingRole[role='" + role + "', anime=" + anime + ", character=" + character + ']';
+        return "PersonVoiceActingRole[role='" + role + "', entry=" + entry + ", character=" + character + ']';
     }
 }

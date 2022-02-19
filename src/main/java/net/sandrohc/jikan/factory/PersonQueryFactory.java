@@ -81,8 +81,8 @@ public class PersonQueryFactory extends Factory {
      * @return The person manga query
      * @see <a href="https://docs.api.jikan.moe/#operation/getPersonManga">Jikan API docs - getPersonManga</a>
      */
-    public PersonAnimeQuery manga(int personId) {
-        return new PersonAnimeQuery(this.jikan, personId);
+    public PersonMangaQuery manga(int personId) {
+        return new PersonMangaQuery(this.jikan, personId);
     }
 
     /**

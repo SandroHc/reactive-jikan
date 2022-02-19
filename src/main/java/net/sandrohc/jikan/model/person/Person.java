@@ -21,11 +21,11 @@ public class Person extends EntityWithImage {
     @JsonProperty("website_url")
     public String websiteUrl;
 
-    /** The given (first) name. */
+    /** The forename, or given (first) name. */
     @JsonProperty("given_name")
     public String givenName;
 
-    /** The family (last) name. */
+    /** The surname, or family (last) name. */
     @JsonProperty("family_name")
     public String familyName;
 
