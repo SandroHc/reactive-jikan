@@ -140,7 +140,12 @@
       }
     ],
     "demographics": [
-      "DEMOGRAPHICS"
+      {
+        "mal_id": 27,
+        "type": "anime",
+        "name": "Shounen",
+        "url": "https://myanimelist.net/anime/genre/27/Shounen"
+      }
     ]
   }
 }

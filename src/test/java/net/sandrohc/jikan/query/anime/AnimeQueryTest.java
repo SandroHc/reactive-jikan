@@ -25,6 +25,7 @@ import static org.assertj.core.api.Assertions.tuple;
 
 public class AnimeQueryTest extends RequestTest {
 
+	@SuppressWarnings("SpellCheckingInspection")
 	@Test
 	void fetchAnimeDetails() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
@@ -111,7 +112,7 @@ public class AnimeQueryTest extends RequestTest {
 				);
 		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.ACTION, AnimeGenre.ADVENTURE, AnimeGenre.FANTASY, AnimeGenre.ROMANCE);
 		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.GAME);
-		softly.assertThat(anime.demographics).containsExactlyInAnyOrder("DEMOGRAPHICS");
+		softly.assertThat(anime.demographics).map(Entity::getName).containsExactlyInAnyOrder("Shounen");
 		softly.assertAll();
 	}
 

@@ -81,7 +81,7 @@ public class MangaReviewsQueryTest extends RequestTest {
 		softly.assertThat(user.toString()).isNotNull();
 		softly.assertThat(user.username).isEqualTo("USER_1");
 		softly.assertThat(user.url).isEqualTo("https://myanimelist.net/profile/USER_1");
-		softly.assertThat(user.images.jpg.imageUrl).isEqualTo("https://myanimelist.net/profile/abystoma2");
+		softly.assertThat(user.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/userimages/10783406.jpg?t=1640443800");
 		softly.assertAll();
 	}
 }

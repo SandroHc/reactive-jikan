@@ -6,6 +6,7 @@
 
 package net.sandrohc.jikan.query.anime;
 
+import java.time.*;
 import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
@@ -22,7 +23,7 @@ public class AnimeTopQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchAnimeAnimeTop() throws JikanQueryException, JikanUrlException {
+	void fetchAnimeTop() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/top/anime", "top/getTopAnime.json");
 
@@ -44,17 +45,17 @@ public class AnimeTopQueryTest extends RequestTest {
 		Anime result = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(result.toString()).isNotNull();
-		softly.assertThat(result.malId).isEqualTo(39587);
-		softly.assertThat(result.rank).isEqualTo(3);
-		softly.assertThat(result.title).isEqualTo("Re:Zero kara Hajimeru Isekai Seikatsu 2nd Season");
-		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/anime/39587/Re_Zero_kara_Hajimeru_Isekai_Seikatsu_2nd_Season");
-		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/1444/108005.jpg?s=b998e66dcfad4bbd4510b9ece4c9eb99");
+		softly.assertThat(result.malId).isEqualTo(5114);
+		softly.assertThat(result.rank).isEqualTo(1);
+		softly.assertThat(result.title).isEqualTo("Fullmetal Alchemist: Brotherhood");
+		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/anime/5114/Fullmetal_Alchemist__Brotherhood");
+		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/1223/96541.jpg");
 		softly.assertThat(result.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(result.episodes).isEqualTo(13);
-		softly.assertThat(result.aired.from).isEqualTo("Jul 2020");
-		softly.assertThat(result.aired.to).isNull();
-		softly.assertThat(result.members).isEqualTo(290261);
-		softly.assertThat(result.score).isEqualTo(8.5D);
+		softly.assertThat(result.episodes).isEqualTo(64);
+		softly.assertThat(result.aired.from).isEqualTo(LocalDate.of(2009, Month.APRIL, 5).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(result.aired.to).isEqualTo(LocalDate.of(2010, Month.JULY, 4).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(result.members).isEqualTo(2783236);
+		softly.assertThat(result.score).isEqualTo(9.15D);
 		softly.assertAll();
 	}
 }

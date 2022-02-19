@@ -18,7 +18,7 @@ import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
+import static org.assertj.core.groups.Tuple.tuple;
 
 public class AnimeForumQueryTest extends RequestTest {
 
@@ -52,11 +52,10 @@ public class AnimeForumQueryTest extends RequestTest {
 		softly.assertThat(topic.authorUsername).isEqualTo("USERNAME_1");
 		softly.assertThat(topic.authorUrl).isEqualTo("https://myanimelist.net/profile/USERNAME_1");
 		softly.assertThat(topic.comments).isEqualTo(1);
-		softly.assertThat(topic.lastComment)
-				.extracting(c -> c.url, c -> c.authorUsername, c -> c.date)
-				.containsExactlyInAnyOrder(
-						tuple("https://myanimelist.net/forum/?topicid=535278&goto=lastpost", "USERNAME_2", LocalDate.of(2022, Month.FEBRUARY, 16).atTime(9, 23, 45).atOffset(ZoneOffset.UTC))
-				);
+		softly.assertThat(topic.lastComment.url).isEqualTo("https://myanimelist.net/forum/?topicid=535278&goto=lastpost");
+		softly.assertThat(topic.lastComment.authorUsername).isEqualTo("USERNAME_2");
+		softly.assertThat(topic.lastComment.authorUrl).isEqualTo("https://myanimelist.net/profile/USERNAME_2");
+		softly.assertThat(topic.lastComment.date).isEqualTo(LocalDate.of(2022, Month.FEBRUARY, 16).atTime(9, 23, 45).atOffset(ZoneOffset.UTC));
 		softly.assertAll();
 	}
 }

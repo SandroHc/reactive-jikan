@@ -124,7 +124,7 @@ public class Anime extends MalEntity {
 	public Collection<GenreEntity<AnimeGenre>> themes = Collections.emptyList();
 
 	/** The demographics. */
-	public Collection<String> demographics = Collections.emptyList(); // TODO: Convert to enum?
+	public Collection<EntityWithType> demographics = Collections.emptyList(); // TODO: Convert to enum?
 
 
 	public String getUrl() {
@@ -383,11 +383,11 @@ public class Anime extends MalEntity {
 		this.themes = themes;
 	}
 
-	public Collection<String> getDemographics() {
+	public Collection<EntityWithType> getDemographics() {
 		return demographics;
 	}
 
-	public void setDemographics(Collection<String> demographics) {
+	public void setDemographics(Collection<EntityWithType> demographics) {
 		this.demographics = demographics;
 	}
 

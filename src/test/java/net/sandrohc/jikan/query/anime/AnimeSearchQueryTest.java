@@ -27,7 +27,7 @@ public class AnimeSearchQueryTest extends RequestTest {
 	@Test
 	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
 		/* Arrange */
-		mockFromFile(mockServer, "/anime/11757/reviews", "anime/getAnimeSearch.json",
+		mockFromFile(mockServer, "/anime", "anime/getAnimeSearch.json",
 				Parameter.param("score", "1.0"),
 				Parameter.param("status", "complete"),
 				Parameter.param("rating", "pg"),
@@ -64,19 +64,20 @@ public class AnimeSearchQueryTest extends RequestTest {
 		Anime result = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(result.toString()).isNotNull();
-		softly.assertThat(result.malId).isEqualTo(6347);
-		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/anime/6347/Baka_to_Test_to_Shoukanjuu");
-		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/3/50389.jpg?s=bb898c33476da7c587e8ec82afecee57");
-		softly.assertThat(result.title).isEqualTo("Baka to Test to Shoukanjuu");
+		softly.assertThat(result.malId).isEqualTo(24751);
+		softly.assertThat(result.url).isEqualTo("https://myanimelist.net/anime/24751/Akuma_no_Riddle__Shousha_wa_Dare_Nukiuchi_Test");
+		softly.assertThat(result.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/anime/11/63653.jpg");
+		softly.assertThat(result.title).isEqualTo("Akuma no Riddle: Shousha wa Dare? Nukiuchi Test");
 		softly.assertThat(result.airing).isFalse();
-		softly.assertThat(result.synopsis).isEqualTo("Fumizuki Academy isn't a typical Japanese high school...");
-		softly.assertThat(result.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(result.episodes).isEqualTo(13);
-		softly.assertThat(result.score).isEqualTo(7.65D);
-		softly.assertThat(result.aired.from).isEqualTo(LocalDate.parse("2010-01-07"));
-		softly.assertThat(result.aired.to).isEqualTo(LocalDate.parse("2010-04-01"));
-		softly.assertThat(result.members).isEqualTo(484011);
-		softly.assertThat(result.rating).isEqualTo(AgeRating.PG13);
+		softly.assertThat(result.synopsis).startsWith("Unaired episode 13 of Akuma no Riddle released with the seventh Blu-ray/DVD volume. The special will be previewed");
+		softly.assertThat(result.synopsis).hasSize(214);
+		softly.assertThat(result.type).isEqualTo(AnimeType.SPECIAL);
+		softly.assertThat(result.episodes).isEqualTo(1);
+		softly.assertThat(result.score).isEqualTo(6.52D);
+		softly.assertThat(result.aired.from).isEqualTo(LocalDate.of(2014, Month.NOVEMBER, 22).atTime(0, 0).atOffset(ZoneOffset.UTC));
+		softly.assertThat(result.aired.to).isNull();
+		softly.assertThat(result.members).isEqualTo(36727);
+		softly.assertThat(result.rating).isEqualTo(AgeRating.R17);
 		softly.assertAll();
 	}
 

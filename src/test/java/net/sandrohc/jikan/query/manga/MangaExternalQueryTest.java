@@ -17,6 +17,7 @@ import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class MangaExternalQueryTest extends RequestTest {
 
@@ -36,6 +37,15 @@ public class MangaExternalQueryTest extends RequestTest {
 		assertThat(query.toString()).isNotNull();
 		assertThat(query.getUrl().build()).isEqualTo("/manga/11757/external");
 
-		throw new UnsupportedOperationException();
+		// External
+		softly = new SoftAssertions();
+		softly.assertThat(external).isNotNull();
+		softly.assertThat(external).hasSize(1);
+		softly.assertThat(external)
+				.extracting(e -> e.url, e -> e.name)
+				.containsExactlyInAnyOrder(
+						tuple("http://shingeki.net/", "Official Site")
+				);
+		softly.assertAll();
 	}
 }

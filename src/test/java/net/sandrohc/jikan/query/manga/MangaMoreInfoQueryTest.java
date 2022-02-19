@@ -38,7 +38,8 @@ public class MangaMoreInfoQueryTest extends RequestTest {
 		softly = new SoftAssertions();
 		softly.assertThat(moreInfo).isNotNull();
 		softly.assertThat(moreInfo.toString()).isNotNull();
-		softly.assertThat(moreInfo.moreInfo).isEqualTo("Volume 7 contains a side story...");
+		softly.assertThat(moreInfo.moreInfo).startsWith("Volume 3 contains the special story \"Levi Heishichou\" (リヴァイ兵士長");
+		softly.assertThat(moreInfo.moreInfo).hasSize(155);
 		softly.assertAll();
 	}
 }
