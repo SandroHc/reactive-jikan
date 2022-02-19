@@ -38,11 +38,6 @@ public class AnimeExternalQuery extends Query<DataListHolder<External>, Flux<Ext
 	}
 
 	@Override
-	public TypeReference<DataListHolder<External>> getResponseType() {
-		return new TypeReference<DataListHolder<External>>() { };
-	}
-
-	@Override
 	public Flux<External> process(Mono<DataListHolder<External>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

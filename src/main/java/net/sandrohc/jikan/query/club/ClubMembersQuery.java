@@ -38,11 +38,6 @@ public class ClubMembersQuery extends PageableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<UserSimple>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<UserSimple>>() { };
-	}
-
-	@Override
 	public Flux<UserSimple> process(Mono<DataListHolderWithPagination<UserSimple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

@@ -43,11 +43,6 @@ public class SeasonQuery extends PageableQuery<DataListHolderWithPagination<Anim
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Anime>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Anime>>() { };
-	}
-
-	@Override
 	public Flux<Anime> process(Mono<DataListHolderWithPagination<Anime>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

@@ -38,11 +38,6 @@ public class MangaRecommendationsQuery extends Query<DataListHolder<Recommendati
 	}
 
 	@Override
-	public TypeReference<DataListHolder<Recommendation>> getResponseType() {
-		return new TypeReference<DataListHolder<Recommendation>>() { };
-	}
-
-	@Override
 	public Flux<Recommendation> process(Mono<DataListHolder<Recommendation>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

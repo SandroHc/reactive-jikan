@@ -37,11 +37,6 @@ public class ClubQuery extends Query<DataHolder<Club>, Mono<Club>> {
 	}
 
 	@Override
-	public TypeReference<DataHolder<Club>> getResponseType() {
-		return new TypeReference<DataHolder<Club>>() { };
-	}
-
-	@Override
 	public Mono<Club> process(Mono<DataHolder<Club>> content) {
 		return content.map(holder -> holder.data);
 	}

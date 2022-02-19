@@ -40,11 +40,6 @@ public class AnimeUserUpdatesQuery extends PageableQuery<DataListHolderWithPagin
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<UserUpdateWithUser>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<UserUpdateWithUser>>() { };
-	}
-
-	@Override
 	public Flux<UserUpdateWithUser> process(Mono<DataListHolderWithPagination<UserUpdateWithUser>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

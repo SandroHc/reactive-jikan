@@ -38,11 +38,6 @@ public class MangaRelationsQuery extends Query<DataListHolder<Related>, Flux<Rel
 	}
 
 	@Override
-	public TypeReference<DataListHolder<Related>> getResponseType() {
-		return new TypeReference<DataListHolder<Related>>() { };
-	}
-
-	@Override
 	public Flux<Related> process(Mono<DataListHolder<Related>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

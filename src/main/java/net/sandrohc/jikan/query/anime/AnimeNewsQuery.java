@@ -38,11 +38,6 @@ public class AnimeNewsQuery extends PageableQuery<DataListHolderWithPagination<N
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<NewsArticle>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<NewsArticle>>() { };
-	}
-
-	@Override
 	public Flux<NewsArticle> process(Mono<DataListHolderWithPagination<NewsArticle>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

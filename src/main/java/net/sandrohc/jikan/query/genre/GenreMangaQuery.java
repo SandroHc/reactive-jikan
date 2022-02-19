@@ -7,7 +7,12 @@
 package net.sandrohc.jikan.query.genre;
 
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.genre.*;
+import net.sandrohc.jikan.query.PageableQuery;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
@@ -16,14 +21,28 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getMangaGenres">Jikan API docs - getMangaGenres</a>
  */
-public class GenreMangaQuery extends GenreQuery<GenreMangaQuery> {
+public class GenreMangaQuery extends PageableQuery<DataListHolder<EntityWithCount>, Flux<EntityWithCount>, GenreMangaQuery> {
+
+	protected GenreType type;
 
 	public GenreMangaQuery(Jikan jikan) {
 		super(jikan);
 	}
 
+	public GenreMangaQuery type(GenreType type) {
+		this.type = type;
+		return this;
+	}
+
 	@Override
-	protected QueryUrlBuilder getGenreQueryUrl() {
-		return create().path("/genres/manga");
+	public QueryUrlBuilder getInnerUrl() {
+		return create()
+				.path("/genres/manga")
+				.param("filter", type, GenreType::getSearch);
+	}
+
+	@Override
+	public Flux<EntityWithCount> process(Mono<DataListHolder<EntityWithCount>> content) {
+		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

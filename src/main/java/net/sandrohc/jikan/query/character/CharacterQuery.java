@@ -37,11 +37,6 @@ public class CharacterQuery extends Query<DataHolder<Character>, Mono<Character>
 	}
 
 	@Override
-	public TypeReference<DataHolder<Character>> getResponseType() {
-		return new TypeReference<DataHolder<Character>>() { };
-	}
-
-	@Override
 	public Mono<Character> process(Mono<DataHolder<Character>> content) {
 		return content.map(holder -> holder.data);
 	}

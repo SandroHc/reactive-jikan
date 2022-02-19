@@ -119,7 +119,7 @@ public class Jikan {
 			writer.newLine();
 			writer.write("Query: " + query.getClass().getName());
 			writer.newLine();
-			writer.write("Response Class: " + query.getResponseType().getType());
+			writer.write("Response Class: " + query.responseType);
 			writer.newLine();
 			writer.write("URL: " + query.getUrl());
 			writer.newLine(); writer.newLine(); writer.flush();

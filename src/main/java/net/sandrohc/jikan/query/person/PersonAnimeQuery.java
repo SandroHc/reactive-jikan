@@ -38,11 +38,6 @@ public class PersonAnimeQuery extends Query<DataListHolder<PersonRole>, Flux<Per
 	}
 
 	@Override
-	public TypeReference<DataListHolder<PersonRole>> getResponseType() {
-		return new TypeReference<DataListHolder<PersonRole>>() { };
-	}
-
-	@Override
 	public Flux<PersonRole> process(Mono<DataListHolder<PersonRole>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

@@ -38,11 +38,6 @@ public class ClubStaffQuery extends Query<DataListHolder<UserSimple>, Flux<UserS
 	}
 
 	@Override
-	public TypeReference<DataListHolder<UserSimple>> getResponseType() {
-		return new TypeReference<DataListHolder<UserSimple>>() { };
-	}
-
-	@Override
 	public Flux<UserSimple> process(Mono<DataListHolder<UserSimple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

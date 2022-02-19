@@ -55,11 +55,6 @@ public class PersonSearchQuery extends QueryableQuery<DataListHolderWithPaginati
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Person>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Person>>() { };
-	}
-
-	@Override
 	public Flux<Person> process(Mono<DataListHolderWithPagination<Person>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

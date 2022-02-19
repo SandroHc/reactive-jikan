@@ -33,11 +33,6 @@ public class RandomUserQuery extends Query<DataHolder<User>, Mono<User>> {
 	}
 
 	@Override
-	public TypeReference<DataHolder<User>> getResponseType() {
-		return new TypeReference<DataHolder<User>>() { };
-	}
-
-	@Override
 	public Mono<User> process(Mono<DataHolder<User>> content) {
 		return content.map(holder -> holder.data);
 	}

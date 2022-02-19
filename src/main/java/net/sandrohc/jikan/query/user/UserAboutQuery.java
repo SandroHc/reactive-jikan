@@ -37,11 +37,6 @@ public class UserAboutQuery extends Query<DataHolder<UserAbout>, Mono<UserAbout>
 	}
 
 	@Override
-	public TypeReference<DataHolder<UserAbout>> getResponseType() {
-		return new TypeReference<DataHolder<UserAbout>>() { };
-	}
-
-	@Override
 	public Mono<UserAbout> process(Mono<DataHolder<UserAbout>> content) {
 		return content.map(holder -> holder.data);
 	}

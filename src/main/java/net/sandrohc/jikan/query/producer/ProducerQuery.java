@@ -33,11 +33,6 @@ public class ProducerQuery extends QueryableQuery<DataListHolderWithPagination<E
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<EntityWithCount>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<EntityWithCount>>() { };
-	}
-
-	@Override
 	public Flux<EntityWithCount> process(Mono<DataListHolderWithPagination<EntityWithCount>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

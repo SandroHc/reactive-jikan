@@ -38,11 +38,6 @@ public class MangaUserUpdatesQuery extends Query<DataListHolderWithPagination<Us
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<UserUpdateWithUser>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<UserUpdateWithUser>>() { };
-	}
-
-	@Override
 	public Flux<UserUpdateWithUser> process(Mono<DataListHolderWithPagination<UserUpdateWithUser>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

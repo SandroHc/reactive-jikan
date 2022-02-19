@@ -50,11 +50,6 @@ public class AnimeForumQuery extends Query<DataListHolder<ForumTopic>, Flux<Foru
 	}
 
 	@Override
-	public TypeReference<DataListHolder<ForumTopic>> getResponseType() {
-		return new TypeReference<DataListHolder<ForumTopic>>() { };
-	}
-
-	@Override
 	public Flux<ForumTopic> process(Mono<DataListHolder<ForumTopic>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

@@ -38,11 +38,6 @@ public class CharacterAnimeQuery extends Query<DataListHolder<CharacterAnime>, F
 	}
 
 	@Override
-	public TypeReference<DataListHolder<CharacterAnime>> getResponseType() {
-		return new TypeReference<DataListHolder<CharacterAnime>>() { };
-	}
-
-	@Override
 	public Flux<CharacterAnime> process(Mono<DataListHolder<CharacterAnime>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

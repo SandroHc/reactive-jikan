@@ -37,11 +37,6 @@ public class MangaStatisticsQuery extends Query<DataHolder<Statistics>, Mono<Sta
 	}
 
 	@Override
-	public TypeReference<DataHolder<Statistics>> getResponseType() {
-		return new TypeReference<DataHolder<Statistics>>() { };
-	}
-
-	@Override
 	public Mono<Statistics> process(Mono<DataHolder<Statistics>> content) {
 		return content.map(results -> results.data);
 	}

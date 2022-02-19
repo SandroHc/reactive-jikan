@@ -34,11 +34,6 @@ public class RecentMangaReviewQuery extends PageableQuery<DataListHolderWithPagi
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Review>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Review>>() { };
-	}
-
-	@Override
 	public Flux<Review> process(Mono<DataListHolderWithPagination<Review>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

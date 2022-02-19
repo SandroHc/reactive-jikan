@@ -37,11 +37,6 @@ public class MangaMoreInfoQuery extends Query<DataHolder<MoreInfo>, Mono<MoreInf
 	}
 
 	@Override
-	public TypeReference<DataHolder<MoreInfo>> getResponseType() {
-		return new TypeReference<DataHolder<MoreInfo>>() { };
-	}
-
-	@Override
 	public Mono<MoreInfo> process(Mono<DataHolder<MoreInfo>> content) {
 		return content.map(results -> results.data);
 	}

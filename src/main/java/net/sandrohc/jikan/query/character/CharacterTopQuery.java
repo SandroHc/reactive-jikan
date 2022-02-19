@@ -34,11 +34,6 @@ public class CharacterTopQuery extends PageableQuery<DataListHolderWithPaginatio
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Character>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Character>>() { };
-	}
-
-	@Override
 	public Flux<Character> process(Mono<DataListHolderWithPagination<Character>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

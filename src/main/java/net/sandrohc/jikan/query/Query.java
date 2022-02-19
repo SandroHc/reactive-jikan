@@ -7,6 +7,8 @@
 package net.sandrohc.jikan.query;
 
 import java.io.*;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.time.*;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -33,21 +35,22 @@ import static net.sandrohc.jikan.Jikan.JIKAN_MARKER;
 public abstract class Query<T, R extends Publisher<?>> {
 
 	protected final Logger log;
-	protected final Jikan jikan;
-
+	public final Jikan jikan;
+	public final TypeReference<T> responseType;
 
 	public Query(Jikan jikan) {
 		this.log = LoggerFactory.getLogger(getClass());
 		this.jikan = jikan;
+
+		// Use the first generic type as the response class type.
+		Type type = ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		this.responseType = new JikanTypeReference(type);
 	}
 
 	/**
 	 * Build the query URL dynamically.
 	 */
 	public abstract QueryUrlBuilder getUrl();
-
-	// TODO: see if it's possible to fetch type from Query constructor
-	public abstract TypeReference<T> getResponseType();
 
 	public R execute() throws JikanQueryException {
 		String url = null;
@@ -95,7 +98,7 @@ public abstract class Query<T, R extends Publisher<?>> {
 
 	public Mono<T> deserialize(byte[] content) {
 		try {
-			return Mono.just(jikan.objectMapper.readValue(content, getResponseType()));
+			return Mono.just(jikan.objectMapper.readValue(content, responseType));
 		} catch (IOException e) {
 			return Mono.error(jikan.dumpStacktrace(this, content, e));
 		}
@@ -104,5 +107,19 @@ public abstract class Query<T, R extends Publisher<?>> {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + "[url='" + getUrl() + "']";
+	}
+
+
+	private class JikanTypeReference extends TypeReference<T> {
+		protected Type type;
+
+		public JikanTypeReference(Type type) {
+			this.type = type;
+		}
+
+		@Override
+		public Type getType() {
+			return type;
+		}
 	}
 }

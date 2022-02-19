@@ -120,11 +120,6 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Manga>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Manga>>() { };
-	}
-
-	@Override
 	public Flux<Manga> process(Mono<DataListHolderWithPagination<Manga>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

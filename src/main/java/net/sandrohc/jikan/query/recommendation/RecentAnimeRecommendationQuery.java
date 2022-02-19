@@ -34,11 +34,6 @@ public class RecentAnimeRecommendationQuery extends PageableQuery<DataListHolder
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Recommendation>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Recommendation>>() { };
-	}
-
-	@Override
 	public Flux<Recommendation> process(Mono<DataListHolderWithPagination<Recommendation>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

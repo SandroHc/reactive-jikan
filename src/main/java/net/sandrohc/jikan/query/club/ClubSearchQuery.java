@@ -69,11 +69,6 @@ public class ClubSearchQuery extends QueryableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Club>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Club>>() { };
-	}
-
-	@Override
 	public Flux<Club> process(Mono<DataListHolderWithPagination<Club>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

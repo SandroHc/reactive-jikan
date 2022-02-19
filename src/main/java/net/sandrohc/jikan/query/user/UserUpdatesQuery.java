@@ -37,11 +37,6 @@ public class UserUpdatesQuery extends Query<DataHolder<UserUpdates>, Mono<UserUp
 	}
 
 	@Override
-	public TypeReference<DataHolder<UserUpdates>> getResponseType() {
-		return new TypeReference<DataHolder<UserUpdates>>() { };
-	}
-
-	@Override
 	public Mono<UserUpdates> process(Mono<DataHolder<UserUpdates>> content) {
 		return content.map(holder -> holder.data);
 	}

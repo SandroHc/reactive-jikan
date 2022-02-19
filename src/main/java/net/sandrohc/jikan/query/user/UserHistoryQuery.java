@@ -45,11 +45,6 @@ public abstract class UserHistoryQuery extends Query<DataListHolder<UserHistoryE
 	}
 
 	@Override
-	public TypeReference<DataListHolder<UserHistoryEntry>> getResponseType() {
-		return new TypeReference<DataListHolder<UserHistoryEntry>>() { };
-	}
-
-	@Override
 	public Flux<UserHistoryEntry> process(Mono<DataListHolder<UserHistoryEntry>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

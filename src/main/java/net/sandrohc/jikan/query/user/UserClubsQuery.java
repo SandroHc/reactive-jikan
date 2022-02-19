@@ -37,11 +37,6 @@ public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<E
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Entity>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Entity>>() { };
-	}
-
-	@Override
 	public Flux<Entity> process(Mono<DataListHolderWithPagination<Entity>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

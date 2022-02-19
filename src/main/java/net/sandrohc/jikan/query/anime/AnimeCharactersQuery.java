@@ -38,11 +38,6 @@ public class AnimeCharactersQuery extends Query<DataListHolder<CharacterBasic>, 
 	}
 
 	@Override
-	public TypeReference<DataListHolder<CharacterBasic>> getResponseType() {
-		return new TypeReference<DataListHolder<CharacterBasic>>() { };
-	}
-
-	@Override
 	public Flux<CharacterBasic> process(Mono<DataListHolder<CharacterBasic>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

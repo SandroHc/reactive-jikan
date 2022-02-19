@@ -37,11 +37,6 @@ public class MangaQuery extends Query<DataHolder<Manga>, Mono<Manga>> {
 	}
 
 	@Override
-	public TypeReference<DataHolder<Manga>> getResponseType() {
-		return new TypeReference<DataHolder<Manga>>() { };
-	}
-
-	@Override
 	public Mono<Manga> process(Mono<DataHolder<Manga>> content) {
 		return content.map(holder -> holder.data);
 	}

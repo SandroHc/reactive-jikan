@@ -37,11 +37,6 @@ public class UserFavoritesQuery extends Query<DataHolder<UserFavorites>, Mono<Us
 	}
 
 	@Override
-	public TypeReference<DataHolder<UserFavorites>> getResponseType() {
-		return new TypeReference<DataHolder<UserFavorites>>() { };
-	}
-
-	@Override
 	public Mono<UserFavorites> process(Mono<DataHolder<UserFavorites>> content) {
 		return content.map(holder -> holder.data);
 	}

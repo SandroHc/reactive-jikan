@@ -40,11 +40,6 @@ public class UserFriendsQuery extends PageableQuery<DataListHolderWithPagination
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<UserFriend>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<UserFriend>>() { };
-	}
-
-	@Override
 	public Flux<UserFriend> process(Mono<DataListHolderWithPagination<UserFriend>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}

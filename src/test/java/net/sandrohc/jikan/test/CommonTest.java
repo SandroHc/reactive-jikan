@@ -222,10 +222,5 @@ public class CommonTest extends RequestTest {
 		public QueryUrlBuilder getUrl() {
 			return QueryUrlBuilder.create();
 		}
-
-		@Override
-		public TypeReference<Void> getResponseType() {
-			return new TypeReference<Void>() { };
-		}
 	}
 }

@@ -38,11 +38,6 @@ public class AnimePicturesQuery extends Query<DataListHolder<Images>, Flux<Image
 	}
 
 	@Override
-	public TypeReference<DataListHolder<Images>> getResponseType() {
-		return new TypeReference<DataListHolder<Images>>() { };
-	}
-
-	@Override
 	public Flux<Images> process(Mono<DataListHolder<Images>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}

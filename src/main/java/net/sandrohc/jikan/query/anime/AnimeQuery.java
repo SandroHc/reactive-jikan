@@ -37,11 +37,6 @@ public class AnimeQuery extends Query<DataHolder<Anime>, Mono<Anime>> {
 	}
 
 	@Override
-	public TypeReference<DataHolder<Anime>> getResponseType() {
-		return new TypeReference<DataHolder<Anime>>() { };
-	}
-
-	@Override
 	public Mono<Anime> process(Mono<DataHolder<Anime>> content) {
 		return content.map(holder -> holder.data);
 	}

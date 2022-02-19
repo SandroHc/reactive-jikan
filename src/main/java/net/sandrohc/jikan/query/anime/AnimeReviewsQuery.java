@@ -40,11 +40,6 @@ public class AnimeReviewsQuery extends PageableQuery<DataListHolderWithPaginatio
 	}
 
 	@Override
-	public TypeReference<DataListHolderWithPagination<Review>> getResponseType() {
-		return new TypeReference<DataListHolderWithPagination<Review>>() { };
-	}
-
-	@Override
 	public Flux<Review> process(Mono<DataListHolderWithPagination<Review>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
