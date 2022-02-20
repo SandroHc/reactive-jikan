@@ -6,11 +6,10 @@
 
 package net.sandrohc.jikan.query.character;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.character.Character;
+import net.sandrohc.jikan.model.character.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;

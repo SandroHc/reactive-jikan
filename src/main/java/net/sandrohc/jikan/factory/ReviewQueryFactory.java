@@ -7,9 +7,9 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.review.ReviewTopQuery;
 import net.sandrohc.jikan.query.review.RecentAnimeReviewQuery;
 import net.sandrohc.jikan.query.review.RecentMangaReviewQuery;
+import net.sandrohc.jikan.query.review.ReviewTopQuery;
 
 /**
  * Factory for the review queries.

@@ -6,11 +6,9 @@
 
 package net.sandrohc.jikan.query.manga;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.manga.MangaOrderBy;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;

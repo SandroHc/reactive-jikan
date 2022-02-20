@@ -6,7 +6,7 @@
 
 package net.sandrohc.jikan.model.common;
 
-import java.time.OffsetDateTime;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;

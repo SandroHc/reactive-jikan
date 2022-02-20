@@ -6,7 +6,7 @@
 
 package net.sandrohc.jikan.model.common;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.*;
 
 import net.sandrohc.jikan.model.enums.*;

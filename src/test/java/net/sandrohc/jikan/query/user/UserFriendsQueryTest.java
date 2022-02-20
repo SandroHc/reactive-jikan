@@ -18,7 +18,6 @@ import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.tuple;
 
 public class UserFriendsQueryTest extends RequestTest {
 

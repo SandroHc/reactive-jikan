@@ -2,7 +2,6 @@ package net.sandrohc.jikan.test;
 
 import java.time.*;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.exception.*;

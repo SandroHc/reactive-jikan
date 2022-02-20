@@ -7,7 +7,6 @@
 package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.query.user.UserFriendsQuery;
 import net.sandrohc.jikan.query.user.*;
 
 /**

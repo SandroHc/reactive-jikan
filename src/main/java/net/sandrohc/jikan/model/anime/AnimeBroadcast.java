@@ -8,7 +8,7 @@ package net.sandrohc.jikan.model.anime;
 
 import java.io.*;
 
-import net.sandrohc.jikan.model.enums.DayOfWeek;
+import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.utils.Generated;
 
 public class AnimeBroadcast implements Serializable {

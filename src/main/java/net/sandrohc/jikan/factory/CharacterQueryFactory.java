@@ -8,7 +8,6 @@ package net.sandrohc.jikan.factory;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.query.character.*;
-import net.sandrohc.jikan.query.character.CharacterTopQuery;
 
 /**
  * Factory for the character queries.

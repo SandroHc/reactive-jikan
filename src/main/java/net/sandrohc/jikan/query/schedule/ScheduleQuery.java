@@ -6,7 +6,6 @@
 
 package net.sandrohc.jikan.query.schedule;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;

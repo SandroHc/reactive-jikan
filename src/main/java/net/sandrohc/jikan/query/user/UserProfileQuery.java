@@ -6,7 +6,6 @@
 
 package net.sandrohc.jikan.query.user;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
