@@ -66,8 +66,15 @@ Collection<Anime> results = jikan.query().anime().search()
 
 ## Caching
 
-Support for caching is still a work-in-progress.
+Caching comes **enabled** by default. It is possible to customize it by providing an implementation of `JikanCache` to the `Jikan` instance.
 
+Here is an example using [Caffeine](https://github.com/ben-manes/caffeine) as the cache library:
+
+```java
+JikanCache cache = new CaffeineJikanCache(Caffeine.newBuilder().maximumSize(1_000_000));
+JikanBuilder builder = new JikanBuilder().cache(cache);
+Jikan jikan = new Jikan(builder);
+```
 
 ## Endpoints
 

@@ -18,10 +18,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
+import net.sandrohc.jikan.cache.CaffeineJikanCache;
+import net.sandrohc.jikan.cache.DisabledJikanCache;
+import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanResponseException;
 import net.sandrohc.jikan.factory.QueryFactory;
 import net.sandrohc.jikan.query.Query;
+import net.sandrohc.jikan.serializer.JikanModule;
 import net.sandrohc.jikan.utils.Generated;
 import org.reactivestreams.Publisher;
 import org.slf4j.*;
@@ -39,6 +43,7 @@ public class Jikan {
 	public final String baseUrl;
 	public final String userAgent;
 	public final int maxRetries;
+	public final JikanCache cache;
 
 	public final HttpClient httpClient;
 	public final ObjectMapper objectMapper;
@@ -52,6 +57,7 @@ public class Jikan {
 		this.baseUrl = builder.baseUrl;
 		this.userAgent = builder.userAgent;
 		this.maxRetries = builder.maxRetries;
+		this.cache = builder.cache;
 
 		log.trace(JIKAN_MARKER, "Preparing Jikan instance with parameters: debug=" + debug + ", baseUrl='" + baseUrl +
 				"', userAgent='" + userAgent + "', maxRetries=" + maxRetries);
@@ -167,6 +173,7 @@ public class Jikan {
 		private String userAgent = getDefaultUserAgent();
 		private boolean debug  = false;
 		private int maxRetries = 3;
+		private JikanCache cache = new CaffeineJikanCache();
 
 		public JikanBuilder() {
 		}
@@ -216,6 +223,26 @@ public class Jikan {
 		 */
 		public JikanBuilder maxRetries(int maxRetries) {
 			this.maxRetries = maxRetries;
+			return this;
+		}
+
+		/**
+		 * Defines the caching implementation to use.
+		 * <p>
+		 * Available implementations are:
+		 * <ul>
+		 *     <li>{@link CaffeineJikanCache}</li>
+		 *     <li>{@link DisabledJikanCache}</li>
+		 * </ul>
+		 *
+		 * @param cache the cache implementation, or {@code null} to disable caching
+		 * @return the builder
+		 */
+		public JikanBuilder cache(JikanCache cache) {
+			if (cache == null)
+				cache = new DisabledJikanCache();
+
+			this.cache = cache;
 			return this;
 		}
 

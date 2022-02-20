@@ -48,6 +48,9 @@ dependencies {
     // Logging
     api 'org.slf4j:slf4j-api:1.7.36'
 
+    // Cache
+    api 'com.github.ben-manes.caffeine:caffeine:3.0.5'
+
     // Tests
     testRuntimeOnly 'ch.qos.logback:logback-classic:1.2.10'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
