@@ -11,7 +11,6 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * A basic MAL entity with name and count.
  */
-// TODO: create dummy classes, like 'Magazine', or 'Genre'
 public class EntityWithCount extends Entity {
 
     /** The count of results. */

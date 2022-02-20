@@ -34,7 +34,7 @@ public class Image implements Serializable {
 	public String maximumImageUrl;
 
 
-	public String getImageUrlForHighestResolution() {
+	public String getPreferredImageUrl() {
 		if (this.maximumImageUrl != null) return this.maximumImageUrl;
 		if (this.largeImageUrl != null) return this.largeImageUrl;
 		if (this.mediumImageUrl != null) return this.mediumImageUrl;

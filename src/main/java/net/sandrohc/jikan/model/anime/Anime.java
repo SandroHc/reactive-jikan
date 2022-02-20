@@ -6,14 +6,17 @@
 
 package net.sandrohc.jikan.model.anime;
 
+import java.time.*;
 import java.util.*;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.season.*;
+import net.sandrohc.jikan.serializer.EpisodeDurationDeserializer;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -49,7 +52,7 @@ public class Anime extends MalEntity {
 	public AnimeType type;
 
 	/** The source material. */
-	public String source; // TODO: convert to enum
+	public AnimeSource source;
 
 	/** The number of episodes. Can be {@code null} if it is unknown. */
 	public Integer episodes;
@@ -64,7 +67,8 @@ public class Anime extends MalEntity {
 	public DateRange aired = new DateRange();
 
 	/** The average runtime duration of the episodes. */
-	public String duration; // TODO: convert string to Duration class
+	@JsonDeserialize(using=EpisodeDurationDeserializer.class)
+	public Duration duration;
 
 	/** The anime age rating. */
 	@JsonAlias("rated")
@@ -105,13 +109,13 @@ public class Anime extends MalEntity {
 	public AnimeBroadcast broadcast;
 
 	/** The producers. */
-	public Collection<EntityWithType> producers = Collections.emptyList();
+	public Collection<Producer> producers = Collections.emptyList();
 
 	/** The licensors. */
-	public Collection<EntityWithType> licensors = Collections.emptyList();
+	public Collection<Licensor> licensors = Collections.emptyList();
 
 	/** The studios. */
-	public Collection<EntityWithType> studios = Collections.emptyList();
+	public Collection<Studio> studios = Collections.emptyList();
 
 	/** The genres. */
 	public Collection<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
@@ -124,7 +128,7 @@ public class Anime extends MalEntity {
 	public Collection<GenreEntity<AnimeGenre>> themes = Collections.emptyList();
 
 	/** The demographics. */
-	public Collection<EntityWithType> demographics = Collections.emptyList(); // TODO: Convert to enum?
+	public Collection<EntityWithType> demographics = Collections.emptyList();
 
 
 	public String getUrl() {
@@ -191,11 +195,11 @@ public class Anime extends MalEntity {
 		this.type = type;
 	}
 
-	public String getSource() {
+	public AnimeSource getSource() {
 		return source;
 	}
 
-	public void setSource(String source) {
+	public void setSource(AnimeSource source) {
 		this.source = source;
 	}
 
@@ -231,11 +235,11 @@ public class Anime extends MalEntity {
 		this.aired = aired;
 	}
 
-	public String getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 
-	public void setDuration(String duration) {
+	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
 
@@ -335,27 +339,27 @@ public class Anime extends MalEntity {
 		this.broadcast = broadcast;
 	}
 
-	public Collection<EntityWithType> getProducers() {
+	public Collection<Producer> getProducers() {
 		return producers;
 	}
 
-	public void setProducers(Collection<EntityWithType> producers) {
+	public void setProducers(Collection<Producer> producers) {
 		this.producers = producers;
 	}
 
-	public Collection<EntityWithType> getLicensors() {
+	public Collection<Licensor> getLicensors() {
 		return licensors;
 	}
 
-	public void setLicensors(Collection<EntityWithType> licensors) {
+	public void setLicensors(Collection<Licensor> licensors) {
 		this.licensors = licensors;
 	}
 
-	public Collection<EntityWithType> getStudios() {
+	public Collection<Studio> getStudios() {
 		return studios;
 	}
 
-	public void setStudios(Collection<EntityWithType> studios) {
+	public void setStudios(Collection<Studio> studios) {
 		this.studios = studios;
 	}
 

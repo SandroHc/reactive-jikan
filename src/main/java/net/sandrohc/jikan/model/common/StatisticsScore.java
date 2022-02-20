@@ -22,7 +22,7 @@ public class StatisticsScore implements Serializable {
 	public int votes;
 
 	/** The percentage of total votes that are in this score. */
-	public double percentage; // TODO: normalize [0,100] to fit inside [0,1]?
+	public double percentage;
 
 
 	public int getScore() {

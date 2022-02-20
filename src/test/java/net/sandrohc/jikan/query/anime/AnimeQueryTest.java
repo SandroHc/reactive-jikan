@@ -12,8 +12,8 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
-import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.model.season.*;
 import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
@@ -71,13 +71,13 @@ public class AnimeQueryTest extends QueryTest {
 		softly.assertThat(anime.titleJapanese).isEqualTo("ソードアート・オンライン");
 		softly.assertThat(anime.titleSynonyms).containsExactlyInAnyOrder("S.A.O", "SAO");
 		softly.assertThat(anime.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(anime.source).isEqualTo("Light novel");
+		softly.assertThat(anime.source).isEqualTo(AnimeSource.LIGHT_NOVEL);
 		softly.assertThat(anime.episodes).isEqualTo(25);
 		softly.assertThat(anime.status).isEqualTo(AnimeStatus.COMPLETED);
 		softly.assertThat(anime.airing).isFalse();
 		softly.assertThat(anime.aired.from).isEqualTo(LocalDate.of(2012, Month.JULY, 8).atTime(0, 0).atOffset(ZoneOffset.UTC));
 		softly.assertThat(anime.aired.to).isEqualTo(LocalDate.of(2012, Month.DECEMBER, 23).atTime(0, 0).atOffset(ZoneOffset.UTC));
-		softly.assertThat(anime.duration).isEqualTo("23 min per ep");
+		softly.assertThat(anime.duration).isEqualTo(Duration.ofMinutes(23));
 		softly.assertThat(anime.rating).isEqualTo(AgeRating.PG13);
 		softly.assertThat(anime.score).isEqualTo(7.2D);
 		softly.assertThat(anime.scoredBy).isEqualTo(1845274);
@@ -91,8 +91,8 @@ public class AnimeQueryTest extends QueryTest {
 		softly.assertThat(anime.season).isEqualTo(Season.SUMMER);
 		softly.assertThat(anime.year).isEqualTo(2012);
 		softly.assertThat(anime.broadcast.day).isEqualTo(DayOfWeek.SUNDAY);
-		softly.assertThat(anime.broadcast.time).isEqualTo("00:00");
-		softly.assertThat(anime.broadcast.timezone).isEqualTo("Asia/Tokyo");
+		softly.assertThat(anime.broadcast.time).isEqualTo(LocalTime.of(0, 0));
+		softly.assertThat(anime.broadcast.timezone).isEqualTo(ZoneId.of("Asia/Tokyo"));
 		softly.assertThat(anime.broadcast.string).isEqualTo("Sundays at 00:00 (JST)");
 		softly.assertThat(anime.producers)
 				.extracting(Entity::getMalId, Entity::getName)

@@ -8,6 +8,8 @@ package net.sandrohc.jikan.model.user;
 
 import java.io.*;
 
+import net.sandrohc.jikan.utils.Generated;
+
 /**
  * The user statistics.
  */
@@ -36,6 +38,7 @@ public class UserStatistics implements Serializable {
 		this.manga = manga;
 	}
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -47,6 +50,7 @@ public class UserStatistics implements Serializable {
 		return manga != null ? manga.equals(that.manga) : that.manga == null;
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		int result = anime != null ? anime.hashCode() : 0;
@@ -54,6 +58,7 @@ public class UserStatistics implements Serializable {
 		return result;
 	}
 
+	@Generated
 	@Override
 	public String toString() {
 		return "UserStatistics[anime=" + anime + ", manga=" + manga + ']';

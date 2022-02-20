@@ -6,6 +6,8 @@
 
 package net.sandrohc.jikan.query.user;
 
+import java.time.Duration;
+
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.user.*;
@@ -41,7 +43,7 @@ public class UserStatisticsQueryTest extends QueryTest {
 		// Statistics - Anime
 		softly = new SoftAssertions();
 		softly.assertThat(statistics.anime.toString()).isNotNull();
-		softly.assertThat(statistics.anime.daysWatched).isEqualTo(594.5D);
+		softly.assertThat(statistics.anime.daysWatched).isEqualTo(Duration.ofDays(594).plusHours(12));
 		softly.assertThat(statistics.anime.meanScore).isEqualTo(3.62D);
 		softly.assertThat(statistics.anime.watching).isEqualTo(4);
 		softly.assertThat(statistics.anime.completed).isEqualTo(3211);
@@ -56,7 +58,7 @@ public class UserStatisticsQueryTest extends QueryTest {
 		// Statistics - Manga
 		softly = new SoftAssertions();
 		softly.assertThat(statistics.manga.toString()).isNotNull();
-		softly.assertThat(statistics.manga.daysRead).isEqualTo(13.4D);
+		softly.assertThat(statistics.manga.daysRead).isEqualTo(Duration.ofDays(13).plusHours(9).plusMinutes(36));
 		softly.assertThat(statistics.manga.meanScore).isEqualTo(7.11D);
 		softly.assertThat(statistics.manga.reading).isEqualTo(4);
 		softly.assertThat(statistics.manga.completed).isEqualTo(24);

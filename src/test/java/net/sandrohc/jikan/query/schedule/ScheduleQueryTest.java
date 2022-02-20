@@ -55,13 +55,13 @@ public class ScheduleQueryTest extends QueryTest {
 		softly.assertThat(anime.titleJapanese).isEqualTo("自主制作アニメ");
 		softly.assertThat(anime.titleSynonyms).containsExactlyInAnyOrder("自主制作アニメ");
 		softly.assertThat(anime.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(anime.source).isEqualTo("Original");
+		softly.assertThat(anime.source).isEqualTo(AnimeSource.ORIGINAL);
 		softly.assertThat(anime.episodes).isNull();
 		softly.assertThat(anime.status).isEqualTo(AnimeStatus.AIRING);
 		softly.assertThat(anime.airing).isTrue();
 		softly.assertThat(anime.aired.from).isEqualTo(LocalDate.of(2020, Month.JANUARY, 17).atTime(0, 0).atOffset(ZoneOffset.UTC));
 		softly.assertThat(anime.aired.to).isNull();
-		softly.assertThat(anime.duration).isEqualTo("4 min");
+		softly.assertThat(anime.duration).isEqualTo(Duration.ofMinutes(4));
 		softly.assertThat(anime.rating).isEqualTo(AgeRating.PG13);
 		softly.assertThat(anime.score).isEqualTo(0.0D);
 		softly.assertThat(anime.scoredBy).isEqualTo(0);

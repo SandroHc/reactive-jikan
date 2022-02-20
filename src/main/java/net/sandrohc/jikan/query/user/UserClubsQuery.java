@@ -8,6 +8,7 @@ package net.sandrohc.jikan.query.user;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.club.*;
 import net.sandrohc.jikan.query.PageableQuery;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import reactor.core.publisher.Flux;
@@ -20,7 +21,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getUserClubs">Jikan API docs - getUserClubs</a>
  */
-public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<Entity>, Flux<Entity>, UserClubsQuery> {
+public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<ClubSimple>, Flux<ClubSimple>, UserClubsQuery> {
 
 	/** The user name. */
 	protected final String username;
@@ -36,7 +37,7 @@ public class UserClubsQuery extends PageableQuery<DataListHolderWithPagination<E
 	}
 
 	@Override
-	public Flux<Entity> process(Mono<DataListHolderWithPagination<Entity>> content) {
+	public Flux<ClubSimple> process(Mono<DataListHolderWithPagination<ClubSimple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

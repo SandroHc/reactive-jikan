@@ -9,7 +9,9 @@ package net.sandrohc.jikan.model.anime;
 import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.serializer.EpisodeDurationDeserializer;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -32,7 +34,8 @@ public class AnimeEpisode extends MalEntity {
 	public String titleRomanji;
 
 	/** The episode duration, in seconds. */
-	public int duration; // TODO: convert to Duration/Temporal amount
+	@JsonDeserialize(using=EpisodeDurationDeserializer.class)
+	public Duration duration;
 
 	/** The original airing date */
 	public OffsetDateTime aired;
@@ -83,11 +86,11 @@ public class AnimeEpisode extends MalEntity {
 		this.titleRomanji = titleRomanji;
 	}
 
-	public int getDuration() {
+	public Duration getDuration() {
 		return duration;
 	}
 
-	public void setDuration(int duration) {
+	public void setDuration(Duration duration) {
 		this.duration = duration;
 	}
 

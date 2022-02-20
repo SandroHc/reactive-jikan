@@ -17,17 +17,17 @@ import net.sandrohc.jikan.utils.Generated;
 public class CharacterManga implements Serializable {
 
     /** The character role in the anime. */
-    public String role; // TODO: convert to enum
+    public CharacterRole role;
 
     /** The anime details. */
     public EntityWithImage manga;
 
 
-    public String getRole() {
+    public CharacterRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(CharacterRole role) {
         this.role = role;
     }
 

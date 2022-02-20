@@ -12,7 +12,6 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * A basic MAL entity with name.
  */
-// TODO: create dummy classes, like 'Magazine', or 'Genre'
 public class Entity extends MalEntity {
 
     /** The URL to the entity page. */

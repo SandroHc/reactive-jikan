@@ -43,7 +43,7 @@ public class CharacterMangaQueryTest extends QueryTest {
 		CharacterManga manga = mangaList.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(manga.toString()).isNotNull();
-		softly.assertThat(manga.role).isEqualTo("Main");
+		softly.assertThat(manga.role).isEqualTo(CharacterRole.MAIN);
 		softly.assertThat(manga.manga.malId).isEqualTo(21479);
 		softly.assertThat(manga.manga.url).isEqualTo("https://myanimelist.net/manga/21479/Sword_Art_Online");
 		softly.assertThat(manga.manga.name).isEqualTo("Sword Art Online");

@@ -21,7 +21,7 @@ public class CharacterBasic implements Serializable {
 	public CharacterDetails character;
 
 	/** The character role, e.g. 'Main'. */
-	public String role; // TODO: Convert to enum
+	public CharacterRole role;
 
 	/** The character voice actors. */
 	@JsonProperty("voice_actors")
@@ -36,11 +36,11 @@ public class CharacterBasic implements Serializable {
 		this.character = character;
 	}
 
-	public String getRole() {
+	public CharacterRole getRole() {
 		return role;
 	}
 
-	public void setRole(String role) {
+	public void setRole(CharacterRole role) {
 		this.role = role;
 	}
 

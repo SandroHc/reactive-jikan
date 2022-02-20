@@ -18,8 +18,6 @@ public class StringDeserializer extends com.fasterxml.jackson.databind.deser.std
 	protected static final Pattern REGEX_NON_PRINTABLE = Pattern.compile("[\\p{Cc}\\p{Cf}\\p{Co}\\p{Cn}]");
 	protected static final Pattern REGEX_WHITESPACE = Pattern.compile("\\p{Zs}");
 
-	public StringDeserializer() {
-	}
 
 	@Override
 	public String deserialize(JsonParser p, DeserializationContext ctx) throws IOException {

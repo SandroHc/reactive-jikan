@@ -44,7 +44,7 @@ public class MangaCharactersQueryTest extends QueryTest {
 		CharacterBasic character = characters.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(character.toString()).isNotNull();
-		softly.assertThat(character.role).isEqualTo("Main");
+		softly.assertThat(character.role).isEqualTo(CharacterRole.MAIN);
 		softly.assertThat(character.character.malId).isEqualTo(40881);
 		softly.assertThat(character.character.url).isEqualTo("https://myanimelist.net/character/40881/Mikasa_Ackerman");
 		softly.assertThat(character.character.images.jpg.imageUrl).isEqualTo("https://cdn.myanimelist.net/images/characters/9/215563.jpg?s=5b0650bb09a7e053afc6bad84ab48947");

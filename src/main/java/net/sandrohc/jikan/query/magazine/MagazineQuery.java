@@ -8,6 +8,7 @@ package net.sandrohc.jikan.query.magazine;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
 import reactor.core.publisher.Flux;
@@ -20,7 +21,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getMagazines">Jikan API docs - getMagazines</a>
  */
-public class MagazineQuery extends QueryableQuery<DataListHolderWithPagination<EntityWithCount>, Flux<EntityWithCount>, MagazineQuery> {
+public class MagazineQuery extends QueryableQuery<DataListHolderWithPagination<MagazineWithCount>, Flux<MagazineWithCount>, MagazineQuery> {
 
 	public MagazineQuery(Jikan jikan) {
 		super(jikan);
@@ -32,7 +33,7 @@ public class MagazineQuery extends QueryableQuery<DataListHolderWithPagination<E
 	}
 
 	@Override
-	public Flux<EntityWithCount> process(Mono<DataListHolderWithPagination<EntityWithCount>> content) {
+	public Flux<MagazineWithCount> process(Mono<DataListHolderWithPagination<MagazineWithCount>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

@@ -10,12 +10,20 @@ import java.io.*;
 
 import net.sandrohc.jikan.utils.Generated;
 
-// TODO: add helper method to get best image - prefer webp
 public class Images implements Serializable {
 
 	public Image jpg;
 	public Image webp;
 
+
+	public String getPreferredImageUrl() {
+		String preferredImageUrl = null;
+		if (webp != null)
+			preferredImageUrl = webp.getPreferredImageUrl();
+		if (preferredImageUrl == null && jpg != null)
+			preferredImageUrl = jpg.getPreferredImageUrl();
+		return preferredImageUrl;
+	}
 
 	public Image getJpg() {
 		return jpg;

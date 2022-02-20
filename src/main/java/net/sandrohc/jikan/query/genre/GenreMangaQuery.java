@@ -8,6 +8,7 @@ package net.sandrohc.jikan.query.genre;
 
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.genre.*;
 import net.sandrohc.jikan.query.PageableQuery;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
@@ -21,7 +22,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getMangaGenres">Jikan API docs - getMangaGenres</a>
  */
-public class GenreMangaQuery extends PageableQuery<DataListHolder<EntityWithCount>, Flux<EntityWithCount>, GenreMangaQuery> {
+public class GenreMangaQuery extends PageableQuery<DataListHolder<GenreWithCount>, Flux<GenreWithCount>, GenreMangaQuery> {
 
 	protected GenreType type;
 
@@ -42,7 +43,7 @@ public class GenreMangaQuery extends PageableQuery<DataListHolder<EntityWithCoun
 	}
 
 	@Override
-	public Flux<EntityWithCount> process(Mono<DataListHolder<EntityWithCount>> content) {
+	public Flux<GenreWithCount> process(Mono<DataListHolder<GenreWithCount>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

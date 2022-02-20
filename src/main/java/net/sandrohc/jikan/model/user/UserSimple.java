@@ -9,6 +9,7 @@ package net.sandrohc.jikan.model.user;
 import java.io.*;
 
 import net.sandrohc.jikan.model.common.*;
+import net.sandrohc.jikan.utils.Generated;
 
 /**
  * Base details of a user.
@@ -49,6 +50,7 @@ public class UserSimple implements Serializable {
 		this.images = images;
 	}
 
+	@Generated
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -59,11 +61,13 @@ public class UserSimple implements Serializable {
 		return username != null ? username.equals(that.username) : that.username == null;
 	}
 
+	@Generated
 	@Override
 	public int hashCode() {
 		return username != null ? username.hashCode() : 0;
 	}
 
+	@Generated
 	@Override
 	public String toString() {
 		return "UserSimple[username='" + username + "']";

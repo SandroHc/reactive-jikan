@@ -11,29 +11,28 @@ import java.util.*;
 
 import net.sandrohc.jikan.utils.Generated;
 
-// TODO: split opening/ending strings into properly typed classes
 public class AnimeThemes implements Serializable {
 
 	/** The opening songs. */
-	public Collection<String> openings;
+	public Collection<Song> openings;
 
 	/** The ending songs. */
-	public Collection<String> endings;
+	public Collection<Song> endings;
 
 
-	public Collection<String> getOpenings() {
+	public Collection<Song> getOpenings() {
 		return openings;
 	}
 
-	public void setOpenings(Collection<String> openings) {
+	public void setOpenings(Collection<Song> openings) {
 		this.openings = openings;
 	}
 
-	public Collection<String> getEndings() {
+	public Collection<Song> getEndings() {
 		return endings;
 	}
 
-	public void setEndings(Collection<String> endings) {
+	public void setEndings(Collection<Song> endings) {
 		this.endings = endings;
 	}
 

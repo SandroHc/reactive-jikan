@@ -6,6 +6,8 @@
 
 package net.sandrohc.jikan.query.anime;
 
+import java.util.*;
+
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
@@ -15,9 +17,11 @@ import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.tuple;
 
 public class AnimeThemesQueryTest extends QueryTest {
 
+	@SuppressWarnings("SpellCheckingInspection")
 	@Test
 	void fetchAnimeThemes() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
@@ -38,15 +42,19 @@ public class AnimeThemesQueryTest extends QueryTest {
 		assertThat(themes).isNotNull();
 		softly = new SoftAssertions();
 		softly.assertThat(themes.toString()).isNotNull();
-		softly.assertThat(themes.openings).containsExactly(
-				"1: \"crossing field\" by LiSA (eps 2-14)",
-				"2: \"INNOCENCE\" by Aoi Eir (eps 15-24)"
-		);
-		softly.assertThat(themes.endings).containsExactly(
-				"1: \"Yume Sekai (ユメセカイ)\" by Haruka Tomatsu (eps 2-14)",
-				"2: \"Overfly\" by Luna Haruna (eps 15-24)",
-				"3: \"crossing field\" by LiSA (eps 25)"
-		);
+		softly.assertThat(themes.openings)
+				.extracting(s -> s.number, s -> s.name, s -> s.artist, s -> s.episodes)
+				.containsExactly(
+						tuple(1, "crossing field", "LiSA", Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)),
+						tuple(2, "INNOCENCE", "Aoi Eir", Arrays.asList(15, 16, 17, 18, 19, 20, 21, 22, 23, 24))
+				);
+		softly.assertThat(themes.endings)
+				.extracting(s -> s.number, s -> s.name, s -> s.artist, s -> s.episodes)
+				.containsExactly(
+						tuple(1, "Yume Sekai (ユメセカイ)", "Haruka Tomatsu", Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14)),
+						tuple(2, "Overfly", "Luna Haruna", Arrays.asList(15, 16, 17, 18, 19, 20, 21, 22, 23, 24)),
+						tuple(3, "crossing field", "LiSA", Collections.singletonList(25))
+				);
 		softly.assertAll();
 	}
 }

@@ -7,8 +7,11 @@
 package net.sandrohc.jikan.model.user;
 
 import java.io.*;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import net.sandrohc.jikan.serializer.DaysDeserializer;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -18,7 +21,8 @@ public class UserMangaStatistics implements Serializable {
 
 	/** The number of days of manga read. */
 	@JsonProperty("days_read")
-	public double daysRead;
+	@JsonDeserialize(using=DaysDeserializer.class)
+	public Duration daysRead;
 
 	/** The mean score. */
 	@JsonProperty("mean_score")
@@ -57,11 +61,11 @@ public class UserMangaStatistics implements Serializable {
 	public int volumesRead;
 
 
-	public double getDaysRead() {
+	public Duration getDaysRead() {
 		return daysRead;
 	}
 
-	public void setDaysRead(double daysRead) {
+	public void setDaysRead(Duration daysRead) {
 		this.daysRead = daysRead;
 	}
 
@@ -153,7 +157,6 @@ public class UserMangaStatistics implements Serializable {
 
 		UserMangaStatistics that = (UserMangaStatistics) o;
 
-		if (Double.compare(that.daysRead, daysRead) != 0) return false;
 		if (Double.compare(that.meanScore, meanScore) != 0) return false;
 		if (reading != that.reading) return false;
 		if (completed != that.completed) return false;
@@ -163,17 +166,16 @@ public class UserMangaStatistics implements Serializable {
 		if (totalEntries != that.totalEntries) return false;
 		if (reread != that.reread) return false;
 		if (chaptersRead != that.chaptersRead) return false;
-		return volumesRead == that.volumesRead;
+		if (volumesRead != that.volumesRead) return false;
+		return daysRead != null ? daysRead.equals(that.daysRead) : that.daysRead == null;
 	}
-
 
 	@Generated
 	@Override
 	public int hashCode() {
 		int result;
 		long temp;
-		temp = Double.doubleToLongBits(daysRead);
-		result = (int) (temp ^ (temp >>> 32));
+		result = daysRead != null ? daysRead.hashCode() : 0;
 		temp = Double.doubleToLongBits(meanScore);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		result = 31 * result + reading;

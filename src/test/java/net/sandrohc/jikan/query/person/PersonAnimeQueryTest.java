@@ -43,7 +43,7 @@ public class PersonAnimeQueryTest extends QueryTest {
 		PersonRole role = roles.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(role.toString()).isNotNull();
-		softly.assertThat(role.role).isEqualTo("add Theme Song Performance"); // TODO: is this a Jikan parser issue? Raise in appropriate GitHub repo
+		softly.assertThat(role.role).isEqualTo("add Theme Song Performance");
 		softly.assertThat(role.entry.malId).isEqualTo(3080);
 		softly.assertThat(role.entry.url).isEqualTo("https://myanimelist.net/anime/3080/Anime_Tenchou");
 		softly.assertThat(role.entry.name).isEqualTo("Anime Tenchou");

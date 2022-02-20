@@ -29,6 +29,38 @@ public class UserFavorites implements Serializable {
 	public Collection<UserFavoritePerson> people = Collections.emptyList();
 
 
+	public Collection<UserFavoriteAnime> getAnime() {
+		return anime;
+	}
+
+	public void setAnime(Collection<UserFavoriteAnime> anime) {
+		this.anime = anime;
+	}
+
+	public Collection<UserFavoriteManga> getManga() {
+		return manga;
+	}
+
+	public void setManga(Collection<UserFavoriteManga> manga) {
+		this.manga = manga;
+	}
+
+	public Collection<UserFavoriteCharacter> getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(Collection<UserFavoriteCharacter> characters) {
+		this.characters = characters;
+	}
+
+	public Collection<UserFavoritePerson> getPeople() {
+		return people;
+	}
+
+	public void setPeople(Collection<UserFavoritePerson> people) {
+		this.people = people;
+	}
+
 	@Generated
 	@Override
 	public boolean equals(Object o) {

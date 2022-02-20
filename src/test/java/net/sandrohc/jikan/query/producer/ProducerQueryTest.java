@@ -10,7 +10,7 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
-import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
@@ -27,7 +27,7 @@ public class ProducerQueryTest extends QueryTest {
 
 		/* Act */
 		ProducerQuery query = jikan.query().producer().list();
-		Collection<EntityWithCount> results = query.execute().collectList().block();
+		Collection<ProducerWithCount> results = query.execute().collectList().block();
 
 		/* Assert */
 		SoftAssertions softly;
@@ -40,7 +40,7 @@ public class ProducerQueryTest extends QueryTest {
 		assertThat(results).isNotNull();
 		assertThat(results).hasSize(1);
 
-		EntityWithCount producer = results.iterator().next();
+		ProducerWithCount producer = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(producer.toString()).isNotNull();
 		softly.assertThat(producer.malId).isEqualTo(1);

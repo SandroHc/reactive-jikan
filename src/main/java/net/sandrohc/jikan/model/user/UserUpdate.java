@@ -21,7 +21,7 @@ public class UserUpdate implements Serializable {
     public double score;
 
     /** The status, e.g. 'Watching', 'Reading'. */
-    public String status; // TODO: convert to enum
+    public String status;
 
     /** The number of episodes/chapters watched by the user. */
     @JsonAlias({ "episodes_seen", "chapters_read" })

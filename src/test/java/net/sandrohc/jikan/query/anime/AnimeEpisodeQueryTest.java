@@ -44,7 +44,7 @@ public class AnimeEpisodeQueryTest extends QueryTest {
 		softly.assertThat(episode.title).isEqualTo("The World of Swords");
 		softly.assertThat(episode.titleJapanese).isEqualTo("剣の世界");
 		softly.assertThat(episode.titleRomanji).isEqualTo("Ken no Sekai");
-		softly.assertThat(episode.duration).isEqualTo(1440);
+		softly.assertThat(episode.duration).isEqualTo(Duration.ofMinutes(24));
 		softly.assertThat(episode.aired).isEqualTo(LocalDate.of(2012, Month.JULY, 7).atTime(15, 0).atOffset(ZoneOffset.UTC));
 		softly.assertThat(episode.filler).isFalse();
 		softly.assertThat(episode.recap).isFalse();

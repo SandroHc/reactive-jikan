@@ -10,10 +10,10 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
-import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.genre.*;
-import net.sandrohc.jikan.query.genre.GenreAnimeQuery;
 import net.sandrohc.jikan.query.QueryTest;
+import net.sandrohc.jikan.query.genre.GenreAnimeQuery;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -31,7 +31,7 @@ public class AnimeGenreQueryTest extends QueryTest {
 
 		/* Act */
 		GenreAnimeQuery query = jikan.query().anime().genres().type(GenreType.GENRES);
-		Collection<EntityWithCount> results = query.execute().collectList().block();
+		Collection<GenreWithCount> results = query.execute().collectList().block();
 
 		/* Assert */
 		SoftAssertions softly;
@@ -44,7 +44,7 @@ public class AnimeGenreQueryTest extends QueryTest {
 		assertThat(results).isNotNull();
 		assertThat(results).hasSize(1);
 
-		EntityWithCount gender = results.iterator().next();
+		GenreWithCount gender = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(gender.toString()).isNotNull();
 		softly.assertThat(gender.malId).isEqualTo(1);

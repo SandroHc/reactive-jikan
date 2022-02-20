@@ -7,20 +7,27 @@
 package net.sandrohc.jikan.model.anime;
 
 import java.io.*;
+import java.time.*;
 
-import net.sandrohc.jikan.model.enums.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
+import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.utils.Generated;
 
 public class AnimeBroadcast implements Serializable {
 
 	/** The day of the broadcast, e.g. 'Saturdays'. */
-	public DayOfWeek day; // TODO: Convert to Java's DayOfWeek?
+	public DayOfWeek day;
 
 	/** The time of the broadcast, e.g. '12:00'. */
-	public String time; // TODO: Convert string to OffsetTime?
+	@JsonDeserialize(using=LocalTimeDeserializer.class)
+	public LocalTime time;
 
 	/** The timezone of the broadcast, e.g. 'Asia/Tokyo'. See <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List">here</a> for a list of timezone names. */
-	public String timezone; // TODO: Convert string to TimeZone?
+	public ZoneId timezone;
+
+	public AnimeBroadcast() {
+	}
 
 	/** The summary of the broadcast, e.g. 'Saturdays at 01:00 (JST)' */
 	public String string;
@@ -34,19 +41,19 @@ public class AnimeBroadcast implements Serializable {
 		this.day = day;
 	}
 
-	public String getTime() {
+	public LocalTime getTime() {
 		return time;
 	}
 
-	public void setTime(String time) {
+	public void setTime(LocalTime time) {
 		this.time = time;
 	}
 
-	public String getTimezone() {
+	public ZoneId getTimezone() {
 		return timezone;
 	}
 
-	public void setTimezone(String timezone) {
+	public void setTimezone(ZoneId timezone) {
 		this.timezone = timezone;
 	}
 

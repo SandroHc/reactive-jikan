@@ -20,7 +20,6 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getAnimeMoreInfo">Jikan API docs - getAnimeMoreInfo</a>
  */
-// TODO: check if response matches DTO - https://api.jikan.moe/v4/anime/1337/moreinfo
 public class AnimeMoreInfoQuery extends Query<DataHolder<MoreInfo>, Mono<MoreInfo>> {
 
 	/** The anime ID. */

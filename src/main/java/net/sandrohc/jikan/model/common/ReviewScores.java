@@ -22,7 +22,7 @@ public class ReviewScores implements Serializable {
 	public int story;
 
 	/** The score for the art. Exclusive to manga. */
-	public int art; // TODO: merge with 'animation'?
+	public int art;
 
 	/** The score for the animation. Exclusive to anime. */
 	public int animation;

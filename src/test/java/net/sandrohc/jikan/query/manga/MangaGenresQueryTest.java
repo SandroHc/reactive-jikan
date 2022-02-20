@@ -10,10 +10,10 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
-import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.genre.*;
-import net.sandrohc.jikan.query.genre.GenreMangaQuery;
 import net.sandrohc.jikan.query.QueryTest;
+import net.sandrohc.jikan.query.genre.GenreMangaQuery;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -31,7 +31,7 @@ public class MangaGenresQueryTest extends QueryTest {
 
 		/* Act */
 		GenreMangaQuery query = jikan.query().manga().genres().type(GenreType.GENRES);
-		Collection<EntityWithCount> results = query.execute().collectList().block();
+		Collection<GenreWithCount> results = query.execute().collectList().block();
 
 		/* Assert */
 		SoftAssertions softly;
@@ -44,7 +44,7 @@ public class MangaGenresQueryTest extends QueryTest {
 		assertThat(results).isNotNull();
 		assertThat(results).hasSize(1);
 
-		EntityWithCount result = results.iterator().next();
+		GenreWithCount result = results.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(results).hasSize(1);
 		softly.assertThat(result.toString()).isNotNull();

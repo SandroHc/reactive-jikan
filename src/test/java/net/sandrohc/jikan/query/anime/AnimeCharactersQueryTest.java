@@ -45,10 +45,9 @@ public class AnimeCharactersQueryTest extends QueryTest {
 		CharacterBasic character = characters.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(character.toString()).isNotNull();
-		softly.assertThat(character.role).isEqualTo("Main");
+		softly.assertThat(character.role).isEqualTo(CharacterRole.MAIN);
 		softly.assertThat(character.character.malId).isEqualTo(36765);
 		softly.assertThat(character.character.name).isEqualTo("Kirigaya, Kazuto");
-		softly.assertThat(character.role).isEqualTo("Main");
 		softly.assertThat(character.voiceActors)
 				.extracting(va -> va.person.malId, va -> va.person.name, va -> va.language)
 				.containsExactlyInAnyOrder(

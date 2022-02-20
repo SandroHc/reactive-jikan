@@ -7,8 +7,11 @@
 package net.sandrohc.jikan.model.user;
 
 import java.io.*;
+import java.time.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import net.sandrohc.jikan.serializer.DaysDeserializer;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -18,7 +21,8 @@ public class UserAnimeStatistics implements Serializable {
 
 	/** The number of days of anime watched. */
 	@JsonProperty("days_watched")
-	public double daysWatched; // TODO: convert to TemporalAmount
+	@JsonDeserialize(using=DaysDeserializer.class)
+	public Duration daysWatched;
 
 	/** The mean score. */
 	@JsonProperty("mean_score")
@@ -53,11 +57,11 @@ public class UserAnimeStatistics implements Serializable {
 	public int episodesWatched;
 
 
-	public double getDaysWatched() {
+	public Duration getDaysWatched() {
 		return daysWatched;
 	}
 
-	public void setDaysWatched(double daysWatched) {
+	public void setDaysWatched(Duration daysWatched) {
 		this.daysWatched = daysWatched;
 	}
 
@@ -141,7 +145,6 @@ public class UserAnimeStatistics implements Serializable {
 
 		UserAnimeStatistics that = (UserAnimeStatistics) o;
 
-		if (Double.compare(that.daysWatched, daysWatched) != 0) return false;
 		if (Double.compare(that.meanScore, meanScore) != 0) return false;
 		if (watching != that.watching) return false;
 		if (completed != that.completed) return false;
@@ -150,7 +153,8 @@ public class UserAnimeStatistics implements Serializable {
 		if (planToWatch != that.planToWatch) return false;
 		if (totalEntries != that.totalEntries) return false;
 		if (rewatched != that.rewatched) return false;
-		return episodesWatched == that.episodesWatched;
+		if (episodesWatched != that.episodesWatched) return false;
+		return daysWatched != null ? daysWatched.equals(that.daysWatched) : that.daysWatched == null;
 	}
 
 	@Generated
@@ -158,8 +162,7 @@ public class UserAnimeStatistics implements Serializable {
 	public int hashCode() {
 		int result;
 		long temp;
-		temp = Double.doubleToLongBits(daysWatched);
-		result = (int) (temp ^ (temp >>> 32));
+		result = daysWatched != null ? daysWatched.hashCode() : 0;
 		temp = Double.doubleToLongBits(meanScore);
 		result = 31 * result + (int) (temp ^ (temp >>> 32));
 		result = 31 * result + watching;

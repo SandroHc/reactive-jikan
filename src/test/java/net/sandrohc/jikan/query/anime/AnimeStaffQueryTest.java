@@ -11,6 +11,7 @@ import java.util.*;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
@@ -45,7 +46,7 @@ public class AnimeStaffQueryTest extends QueryTest {
 		softly.assertThat(staff.toString()).isNotNull();
 		softly.assertThat(staff.person.malId).isEqualTo(14031);
 		softly.assertThat(staff.person.name).isEqualTo("Iwakami, Atsuhiro");
-		softly.assertThat(staff.positions).containsExactlyInAnyOrder("Producer");
+		softly.assertThat(staff.positions).containsExactlyInAnyOrder(Position.PRODUCER);
 		softly.assertAll();
 	}
 }
