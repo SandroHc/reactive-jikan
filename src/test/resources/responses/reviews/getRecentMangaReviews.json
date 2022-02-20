@@ -1,0 +1,53 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": 435554,
+      "url": "https:\/\/myanimelist.net\/reviews.php?id=435554",
+      "type": "manga",
+      "votes": 0,
+      "date": "2022-02-18T23:45:00+00:00",
+      "review": "i solely like this manga because it is the only one i found that did not make the big boobed girl a freaking sex symbol or the butt of the joke, the characters may be mediocre and lazy, and i also see similarities with komi san manga, but overall like it for that sole reason. i do know people in relationships who are very shy to interact but love their partner just as much! not to this extent , but yeah, i like it!! also BIG love to my short king again their size diff is not the butt of the joke. good supporting charactersand overall fluff is very cute!!",
+      "chapters_read": 38,
+      "scores": {
+        "overall": 5,
+        "story": 4,
+        "art": 7,
+        "character": 4,
+        "enjoyment": 6
+      },
+      "entry": {
+        "mal_id": 132519,
+        "url": "https:\/\/myanimelist.net\/manga\/132519\/Sekimen_Shinaide_Sekime-san",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109.jpg?s=725e818b4bec9a5e617f1d6ea1d47bfe",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109t.jpg?s=725e818b4bec9a5e617f1d6ea1d47bfe",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109l.jpg?s=725e818b4bec9a5e617f1d6ea1d47bfe"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109.webp?s=725e818b4bec9a5e617f1d6ea1d47bfe",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109t.webp?s=725e818b4bec9a5e617f1d6ea1d47bfe",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/3\/244109l.webp?s=725e818b4bec9a5e617f1d6ea1d47bfe"
+          }
+        },
+        "title": "Sekimen Shinaide Sekime-san"
+      },
+      "user": {
+        "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+        "username": "USER_1",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/14569386.jpg?t=1645258200"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/14569386.webp?t=1645258200"
+          }
+        }
+      }
+    }
+  ]
+}

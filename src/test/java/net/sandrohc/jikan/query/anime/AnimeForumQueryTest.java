@@ -12,22 +12,25 @@ import java.util.*;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.common.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.model.enums.*;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
+import org.mockserver.model.Parameter;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnimeForumQueryTest extends RequestTest {
+public class AnimeForumQueryTest extends QueryTest {
 
 	@Test
 	void fetchAnimeForum() throws JikanUrlException, JikanQueryException {
 		/* Arrange */
-		mockFromFile(mockServer, "/anime/11757/forum", "anime/getAnimeForum.json");
+		mockFromFile(mockServer, "/anime/11757/forum", "anime/getAnimeForum.json",
+				Parameter.param("filter", "all"));
 
 		/* Act */
-		AnimeForumQuery query = jikan.query().anime().forum(11757);
+		AnimeForumQuery query = jikan.query().anime().forum(11757).type(ForumTopicType.ALL);
 		Collection<ForumTopic> forumTopics = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +38,7 @@ public class AnimeForumQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/forum");
+		assertThat(query.getUrl().build()).isEqualTo("/anime/11757/forum?filter=all");
 
 		// Topics
 		assertThat(forumTopics).isNotNull();

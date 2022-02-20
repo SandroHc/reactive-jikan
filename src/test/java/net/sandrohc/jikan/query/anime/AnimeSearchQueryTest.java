@@ -13,7 +13,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -21,32 +21,46 @@ import org.mockserver.model.Parameter;
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnimeSearchQueryTest extends RequestTest {
+public class AnimeSearchQueryTest extends QueryTest {
 
 	@Test
 	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/anime", "anime/getAnimeSearch.json",
+				Parameter.param("type", "tv"),
 				Parameter.param("score", "1.0"),
+				Parameter.param("min_score", "2.0"),
+				Parameter.param("max_score", "3.0"),
 				Parameter.param("status", "complete"),
 				Parameter.param("rating", "pg"),
+				Parameter.param("sfw", "true"),
 				Parameter.param("genres[]", "1,2"),
+				Parameter.param("genres_exclude[]", "9,12"),
 				Parameter.param("order_by", "mal_id"),
 				Parameter.param("sort", "asc"),
+				Parameter.param("letter", "abc"),
+				Parameter.param("producer[]", "1,2"),
 				Parameter.param("page", "1"),
-				Parameter.param("limit", "1"),
-				Parameter.param("q", "test"));
+				Parameter.param("limit", "2"),
+				Parameter.param("q", "name"));
 
 		/* Act */
 		AnimeSearchQuery query = jikan.query().anime().search()
-				.query("test")
+				.query("name")
 				.page(1)
-				.limit(1)
-				.genres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE)
+				.limit(2)
+				.type(AnimeType.TV)
+				.score(1.0D)
+				.minimumScore(2.0D)
+				.maximumScore(3.0D)
 				.status(AnimeStatus.COMPLETED)
-				.orderBy(AnimeOrderBy.MAL_ID, SortOrder.ASCENDING)
 				.rating(AgeRating.PG)
-				.score(1.0D);
+				.safeForWork(true)
+				.genres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE)
+				.excludeGenres(AnimeGenre.ECCHI, AnimeGenre.HENTAI)
+				.orderBy(AnimeOrderBy.MAL_ID, SortOrder.ASCENDING)
+				.suffix("abc")
+				.producers(1, 2);
 		Collection<Anime> results = query.execute().collectList().block();
 
 		/* Assert */
@@ -54,7 +68,7 @@ public class AnimeSearchQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo("/anime?score=1.0&status=complete&rating=pg&genres[]=1,2&order_by=mal_id&sort=asc&page=1&limit=1&q=test");
+		assertThat(query.getUrl().build()).isEqualTo("/anime?type=tv&score=1.0&min_score=2.0&max_score=3.0&status=complete&rating=pg&sfw=true&genres[]=1,2&genres_exclude[]=9,12&order_by=mal_id&sort=asc&letter=abc&producer[]=1,2&page=1&limit=2&q=name");
 
 		// Search Results
 		assertThat(results).isNotNull();

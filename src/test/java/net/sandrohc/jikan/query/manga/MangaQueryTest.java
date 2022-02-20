@@ -12,7 +12,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
@@ -20,7 +20,7 @@ import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class MangaQueryTest extends RequestTest {
+public class MangaQueryTest extends QueryTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test

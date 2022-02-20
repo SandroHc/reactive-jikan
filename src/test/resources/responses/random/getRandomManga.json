@@ -1,0 +1,89 @@
+{
+  "data": {
+    "mal_id": 131611,
+    "url": "https:\/\/myanimelist.net\/manga\/131611\/Oda-san_to_no_Omoide_Manga",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222.jpg",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222t.jpg",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222l.jpg"
+      },
+      "webp": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222.webp",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222t.webp",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/238222l.webp"
+      }
+    },
+    "title": "Oda-san to no Omoide Manga!",
+    "title_english": null,
+    "title_japanese": "\u5c3e\u7530\u3055\u3093\u3068\u306e\u601d\u3044\u51fa\u6f2b\u753b!",
+    "title_synonyms": [
+      "A Manga Of My Memories With Oda-san!",
+      "Memories with Oda-san Manga!"
+    ],
+    "type": "One-shot",
+    "chapters": 1,
+    "volumes": null,
+    "status": "Finished",
+    "publishing": false,
+    "published": {
+      "from": "2017-07-15T00:00:00+00:00",
+      "to": null,
+      "prop": {
+        "from": {
+          "day": 15,
+          "month": 7,
+          "year": 2017
+        },
+        "to": {
+          "day": null,
+          "month": null,
+          "year": null
+        }
+      },
+      "string": "Jul 15, 2017"
+    },
+    "scored": null,
+    "scored_by": null,
+    "rank": 32940,
+    "popularity": 46949,
+    "members": 41,
+    "favorites": 1,
+    "synopsis": "A one-shot by the author of Toriko to commemorate the 20th anniversary of One Piece.",
+    "background": null,
+    "authors": [
+      {
+        "mal_id": 5417,
+        "type": "people",
+        "name": "Shimabukuro, Mitsutoshi",
+        "url": "https:\/\/myanimelist.net\/people\/5417\/Mitsutoshi_Shimabukuro"
+      }
+    ],
+    "serializations": [
+      {
+        "mal_id": 83,
+        "type": "manga",
+        "name": "Shounen Jump (Weekly)",
+        "url": "https:\/\/myanimelist.net\/manga\/magazine\/83\/Shounen_Jump_Weekly"
+      }
+    ],
+    "genres": [
+      {
+        "mal_id": 4,
+        "type": "manga",
+        "name": "Comedy",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/4\/Comedy"
+      }
+    ],
+    "explicit_genres": [],
+    "themes": [],
+    "demographics": [
+      {
+        "mal_id": 27,
+        "type": "manga",
+        "name": "Shounen",
+        "url": "https:\/\/myanimelist.net\/manga\/genre\/27\/Shounen"
+      }
+    ]
+  }
+}

@@ -13,7 +13,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -21,33 +21,45 @@ import org.mockserver.model.Parameter;
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MangaSearchQueryTest extends RequestTest {
+public class MangaSearchQueryTest extends QueryTest {
 
 	@Test
 	void fetchMangaSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/manga", "manga/getMangaSearch.json",
-				Parameter.param("q", "test"),
-				Parameter.param("page", "1"),
-				Parameter.param("limit", "1"),
-				Parameter.param("genre[]", "1,2"),
-				Parameter.param("status", "completed"),
-				Parameter.param("orderBy", "id"),
-				Parameter.param("sort", "asc"),
-				Parameter.param("rated", "pg"),
+				Parameter.param("type", "manga"),
 				Parameter.param("score", "1.0"),
-				Parameter.param("startDate", "2020-01-01"),
-				Parameter.param("endDate", "2020-12-31"));
+				Parameter.param("min_score", "2.0"),
+				Parameter.param("max_score", "3.0"),
+				Parameter.param("status", "complete"),
+				Parameter.param("sfw", "true"),
+				Parameter.param("genres[]", "1,2"),
+				Parameter.param("genres_exclude[]", "9,12"),
+				Parameter.param("order_by", "mal_id"),
+				Parameter.param("sort", "asc"),
+				Parameter.param("letter", "abc"),
+				Parameter.param("magazine[]", "1,2"),
+				Parameter.param("page", "1"),
+				Parameter.param("limit", "2"),
+				Parameter.param("q", "name")
+		);
 
 		/* Act */
 		MangaSearchQuery query = jikan.query().manga().search()
-				.query("test")
+				.query("name")
 				.page(1)
-				.limit(1)
-				.genres(MangaGenre.ACTION, MangaGenre.ADVENTURE)
+				.limit(2)
+				.type(MangaType.MANGA)
+				.score(1.0D)
+				.minimumScore(2.0D)
+				.maximumScore(3.0D)
 				.status(MangaStatus.COMPLETED)
+				.safeForWork(true)
+				.genres(MangaGenre.ACTION, MangaGenre.ADVENTURE)
+				.excludeGenres(MangaGenre.ECCHI, MangaGenre.HENTAI)
 				.orderBy(MangaOrderBy.MAL_ID, SortOrder.ASCENDING)
-				.score(1.0D);
+				.suffix("abc")
+				.magazines(1, 2);
 		Collection<Manga> results = query.execute().collectList().block();
 
 		/* Assert */
@@ -55,7 +67,7 @@ public class MangaSearchQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo("/manga?score=1.0&status=complete&genres[]=1,2&order_by=mal_id&sort=asc&page=1&limit=1&q=test");
+		assertThat(query.getUrl().build()).isEqualTo("/manga?type=manga&score=1.0&min_score=2.0&max_score=3.0&status=complete&sfw=true&genres[]=1,2&genres_exclude[]=9,12&order_by=mal_id&sort=asc&letter=abc&magazine[]=1,2&page=1&limit=2&q=name");
 
 		// Results
 		assertThat(results).isNotNull();

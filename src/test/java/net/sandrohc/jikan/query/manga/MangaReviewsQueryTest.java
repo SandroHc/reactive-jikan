@@ -15,14 +15,14 @@ import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.user.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class MangaReviewsQueryTest extends RequestTest {
+public class MangaReviewsQueryTest extends QueryTest {
 
 	@Test
 	void fetchMangaReviews() throws JikanQueryException, JikanUrlException {

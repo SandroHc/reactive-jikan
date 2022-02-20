@@ -1,0 +1,53 @@
+{
+  "pagination": {
+    "last_visible_page": 20,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": "22135-31646",
+      "entry": [
+        {
+          "mal_id": 22135,
+          "url": "https:\/\/myanimelist.net\/anime\/22135\/Ping_Pong_the_Animation",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041.jpg",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041t.jpg",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041l.jpg"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041.webp",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041t.webp",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/58041l.webp"
+            }
+          },
+          "title": "Ping Pong the Animation"
+        },
+        {
+          "mal_id": 31646,
+          "url": "https:\/\/myanimelist.net\/anime\/31646\/3-gatsu_no_Lion",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898.jpg",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898t.jpg",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898l.jpg"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898.webp",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898t.webp",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/82898l.webp"
+            }
+          },
+          "title": "3-gatsu no Lion"
+        }
+      ],
+      "content": "Another hidden gem with great character dynamics and explores a rather underhyped sport",
+      "date": "2022-02-20T14:53:29+00:00",
+      "user": {
+        "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+        "username": "USER_1"
+      }
+    }
+  ]
+}

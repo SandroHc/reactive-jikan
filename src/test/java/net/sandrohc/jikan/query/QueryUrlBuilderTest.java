@@ -10,13 +10,12 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.test.RequestTest;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class QueryUrlBuilderTest extends RequestTest {
+public class QueryUrlBuilderTest extends QueryTest {
 
 	@Test
 	void emptyUrl() throws JikanUrlException {

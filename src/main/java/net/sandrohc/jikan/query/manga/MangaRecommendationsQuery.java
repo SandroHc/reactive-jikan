@@ -21,7 +21,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getMangaRecommendations">Jikan API docs - getMangaRecommendations</a>
  */
-public class MangaRecommendationsQuery extends Query<DataListHolder<Recommendation>, Flux<Recommendation>> {
+public class MangaRecommendationsQuery extends Query<DataListHolder<RecommendationSimple>, Flux<RecommendationSimple>> {
 
 	/** The manga ID. */
 	private final int id;
@@ -37,7 +37,7 @@ public class MangaRecommendationsQuery extends Query<DataListHolder<Recommendati
 	}
 
 	@Override
-	public Flux<Recommendation> process(Mono<DataListHolder<Recommendation>> content) {
+	public Flux<RecommendationSimple> process(Mono<DataListHolder<RecommendationSimple>> content) {
 		return content.flatMapMany(results -> Flux.fromIterable(results.data));
 	}
 }

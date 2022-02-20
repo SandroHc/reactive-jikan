@@ -7,8 +7,12 @@
 package net.sandrohc.jikan.model.common;
 
 import java.io.*;
+import java.time.*;
+import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.user.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -16,43 +20,62 @@ import net.sandrohc.jikan.utils.Generated;
  */
 public class Recommendation implements Serializable {
 
+    /** The MAL ID. */
+    @JsonProperty("mal_id")
+    public String malId;
+
     /** The recommended anime/manga's details. */
-    public EntityWithImage entry;
+    public List<EntityWithImage> entry = Collections.emptyList();
 
-    /** The URL to the recommendation. */
-    public String url;
+    /** The recommendation content. */
+    public String content;
 
-    /** The number of votes this recommendation has received. */
-    public int votes;
+    /** The date of the recommendation. */
+    public OffsetDateTime date;
+
+    /** The user that did the recommendation. */
+    public UserSimple user;
 
 
-    public EntityWithImage getEntry() {
-        return entry;
+    public String getMalId() {
+        return malId;
     }
 
-    public void setEntry(EntityWithImage entry) {
+    public void setMalId(String malId) {
+        this.malId = malId;
+    }
+
+    public void setEntry(List<EntityWithImage> entry) {
         this.entry = entry;
     }
 
-    public String getUrl() {
-        return url;
+    public String getContent() {
+        return content;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public int getVotes() {
-        return votes;
+    public OffsetDateTime getDate() {
+        return date;
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public void setDate(OffsetDateTime date) {
+        this.date = date;
+    }
+
+    public UserSimple getUser() {
+        return user;
+    }
+
+    public void setUser(UserSimple user) {
+        this.user = user;
     }
 
     @Generated
     @Override
     public String toString() {
-        return "Recommendation[entry=" + entry + ", votes=" + votes + ']';
+        return "Recommendation[entry=" + entry + ", content='" + content + "']";
     }
 }

@@ -1,0 +1,17 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "year": 2022,
+      "seasons": [
+        "winter",
+        "spring",
+        "summer",
+        "fall"
+      ]
+    }
+  ]
+}

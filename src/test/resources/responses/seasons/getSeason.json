@@ -1,0 +1,175 @@
+{
+  "pagination": {
+    "last_visible_page": 2,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": 38883,
+      "url": "https:\/\/myanimelist.net\/anime\/38883\/Haikyuu__To_the_Top",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367.jpg",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367t.jpg",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367l.jpg"
+        },
+        "webp": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367.webp",
+          "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367t.webp",
+          "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1813\/105367l.webp"
+        }
+      },
+      "trailer": {
+        "youtube_id": "gJv9fFJmnCA",
+        "url": "https:\/\/www.youtube.com\/watch?v=gJv9fFJmnCA",
+        "embed_url": "https:\/\/www.youtube.com\/embed\/gJv9fFJmnCA?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https:\/\/img.youtube.com\/vi\/gJv9fFJmnCA\/default.jpg",
+          "small_image_url": "https:\/\/img.youtube.com\/vi\/gJv9fFJmnCA\/sddefault.jpg",
+          "medium_image_url": "https:\/\/img.youtube.com\/vi\/gJv9fFJmnCA\/mqdefault.jpg",
+          "large_image_url": "https:\/\/img.youtube.com\/vi\/gJv9fFJmnCA\/hqdefault.jpg",
+          "maximum_image_url": "https:\/\/img.youtube.com\/vi\/gJv9fFJmnCA\/maxresdefault.jpg"
+        }
+      },
+      "title": "Haikyuu!!: To the Top",
+      "title_english": null,
+      "title_japanese": "\u30cf\u30a4\u30ad\u30e5\u30fc!! TO THE TOP",
+      "title_synonyms": [
+        "Haikyuu!! (2020)",
+        "Haikyuu!! Fourth Season",
+        "Haikyuu!! 4th Season"
+      ],
+      "type": "TV",
+      "source": "Manga",
+      "episodes": 13,
+      "status": "Finished Airing",
+      "airing": false,
+      "aired": {
+        "from": "2020-01-11T00:00:00+00:00",
+        "to": "2020-04-04T00:00:00+00:00",
+        "prop": {
+          "from": {
+            "day": 11,
+            "month": 1,
+            "year": 2020
+          },
+          "to": {
+            "day": 4,
+            "month": 4,
+            "year": 2020
+          }
+        },
+        "string": "Jan 11, 2020 to Apr 4, 2020"
+      },
+      "duration": "24 min per ep",
+      "rating": "PG-13 - Teens 13 or older",
+      "score": 8.35,
+      "scored_by": 434711,
+      "rank": 188,
+      "popularity": 186,
+      "members": 728416,
+      "favorites": 4480,
+      "synopsis": "After their triumphant victory over Shiratorizawa Academy, the Karasuno High School volleyball team has earned their long-awaited ticket to nationals. As preparations begin, genius setter Tobio Kageyama is invited to the All-Japan Youth Training Camp to play alongside fellow nationally recognized players. Meanwhile, Kei Tsukishima is invited to a special rookie training camp for first-years within the Miyagi Prefecture. Not receiving any invitations himself, the enthusiastic Shouyou Hinata feels left behind. However, Hinata does not back down. Transforming his frustration into self-motivation, he boldly decides to sneak himself into the same rookie training camp as Tsukishima. Even though Hinata only lands himself a job as the ball boy, he comes to see this as a golden opportunity. He begins to not only reflect on his skills as a volleyball player but also analyze the plethora of information available on the court and how he can apply it. As the much-anticipated national tournament approaches, the members of Karasuno's volleyball team attempt to overcome their weak points and refine their skills, all while aiming for the top! [Written by MAL Rewrite]",
+      "background": null,
+      "season": "winter",
+      "year": 2020,
+      "broadcast": {
+        "day": "Saturdays",
+        "time": "01:25",
+        "timezone": "Asia\/Tokyo",
+        "string": "Saturdays at 01:25 (JST)"
+      },
+      "producers": [
+        {
+          "mal_id": 53,
+          "type": "anime",
+          "name": "Dentsu",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/53\/Dentsu"
+        },
+        {
+          "mal_id": 143,
+          "type": "anime",
+          "name": "Mainichi Broadcasting System",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/143\/Mainichi_Broadcasting_System"
+        },
+        {
+          "mal_id": 166,
+          "type": "anime",
+          "name": "Movic",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/166\/Movic"
+        },
+        {
+          "mal_id": 757,
+          "type": "anime",
+          "name": "Sony Music Entertainment",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/757\/Sony_Music_Entertainment"
+        },
+        {
+          "mal_id": 1143,
+          "type": "anime",
+          "name": "TOHO animation",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/1143\/TOHO_animation"
+        },
+        {
+          "mal_id": 1365,
+          "type": "anime",
+          "name": "Shueisha",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/1365\/Shueisha"
+        }
+      ],
+      "licensors": [
+        {
+          "mal_id": 1468,
+          "type": "anime",
+          "name": "Crunchyroll",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/1468\/Crunchyroll"
+        }
+      ],
+      "studios": [
+        {
+          "mal_id": 10,
+          "type": "anime",
+          "name": "Production I.G",
+          "url": "https:\/\/myanimelist.net\/anime\/producer\/10\/Production_IG"
+        }
+      ],
+      "genres": [
+        {
+          "mal_id": 4,
+          "type": "anime",
+          "name": "Comedy",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/4\/Comedy"
+        },
+        {
+          "mal_id": 8,
+          "type": "anime",
+          "name": "Drama",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/8\/Drama"
+        },
+        {
+          "mal_id": 30,
+          "type": "anime",
+          "name": "Sports",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/30\/Sports"
+        }
+      ],
+      "explicit_genres": [],
+      "themes": [
+        {
+          "mal_id": 23,
+          "type": "anime",
+          "name": "School",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/23\/School"
+        }
+      ],
+      "demographics": [
+        {
+          "mal_id": 27,
+          "type": "anime",
+          "name": "Shounen",
+          "url": "https:\/\/myanimelist.net\/anime\/genre\/27\/Shounen"
+        }
+      ]
+    }
+  ]
+}

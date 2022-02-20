@@ -11,23 +11,26 @@ import java.util.*;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.genre.*;
 import net.sandrohc.jikan.query.genre.GenreAnimeQuery;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
+import org.mockserver.model.Parameter;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AnimeGenreQueryTest extends RequestTest {
+public class AnimeGenreQueryTest extends QueryTest {
 
 	@Test
 	void fetchAnimeGenre() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
-		mockFromFile(mockServer, "/genres/anime", "genres/getAnimeGenres.json");
+		mockFromFile(mockServer, "/genres/anime", "genres/getAnimeGenres.json",
+				Parameter.param("filter", "genres"));
 
 		/* Act */
-		GenreAnimeQuery query = jikan.query().anime().genres();
+		GenreAnimeQuery query = jikan.query().anime().genres().type(GenreType.GENRES);
 		Collection<EntityWithCount> results = query.execute().collectList().block();
 
 		/* Assert */
@@ -35,7 +38,7 @@ public class AnimeGenreQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo("/genres/anime");
+		assertThat(query.getUrl().build()).isEqualTo("/genres/anime?filter=genres");
 
 		// Results
 		assertThat(results).isNotNull();

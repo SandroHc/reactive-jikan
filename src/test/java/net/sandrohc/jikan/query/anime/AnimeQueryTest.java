@@ -15,7 +15,7 @@ import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.season.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
@@ -23,7 +23,7 @@ import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.tuple;
 
-public class AnimeQueryTest extends RequestTest {
+public class AnimeQueryTest extends QueryTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test

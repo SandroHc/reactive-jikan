@@ -1,0 +1,53 @@
+{
+  "pagination": {
+    "last_visible_page": 20,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "mal_id": "2-656",
+      "entry": [
+        {
+          "mal_id": 2,
+          "url": "https:\/\/myanimelist.net\/manga\/2\/Berserk",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897.jpg",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897t.jpg",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897l.jpg"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897.webp",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897t.webp",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/1\/157897l.webp"
+            }
+          },
+          "title": "Berserk"
+        },
+        {
+          "mal_id": 656,
+          "url": "https:\/\/myanimelist.net\/manga\/656\/Vagabond",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787.jpg",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787t.jpg",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787l.jpg"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787.webp",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787t.webp",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/181787l.webp"
+            }
+          },
+          "title": "Vagabond"
+        }
+      ],
+      "content": "Both has a good story and artstyle",
+      "date": "2022-02-20T05:31:36+00:00",
+      "user": {
+        "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+        "username": "USER_1"
+      }
+    }
+  ]
+}

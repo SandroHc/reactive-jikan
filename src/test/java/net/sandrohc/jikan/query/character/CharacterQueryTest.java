@@ -9,14 +9,14 @@ package net.sandrohc.jikan.query.character;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.character.Character;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CharacterQueryTest extends RequestTest {
+public class CharacterQueryTest extends QueryTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test

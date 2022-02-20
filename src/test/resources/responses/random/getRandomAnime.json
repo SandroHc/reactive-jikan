@@ -1,0 +1,116 @@
+{
+  "data": {
+    "mal_id": 44026,
+    "url": "https:\/\/myanimelist.net\/anime\/44026\/Zannen_na_Ikimono_Jiten_2019",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202.jpg",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202t.jpg",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202l.jpg"
+      },
+      "webp": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202.webp",
+        "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202t.webp",
+        "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1957\/110202l.webp"
+      }
+    },
+    "trailer": {
+      "youtube_id": null,
+      "url": null,
+      "embed_url": null,
+      "images": {
+        "image_url": null,
+        "small_image_url": null,
+        "medium_image_url": null,
+        "large_image_url": null,
+        "maximum_image_url": null
+      }
+    },
+    "title": "Zannen na Ikimono Jiten (2019)",
+    "title_english": null,
+    "title_japanese": "\u3056\u3093\u306d\u3093\u306a\u3044\u304d\u3082\u306e\u4e8b\u5178 (2019)",
+    "title_synonyms": [
+      "Encyclopedia of Pitiful Creatures (2019)"
+    ],
+    "type": "TV",
+    "source": "Picture book",
+    "episodes": 8,
+    "status": "Finished Airing",
+    "airing": false,
+    "aired": {
+      "from": "2019-07-29T00:00:00+00:00",
+      "to": "2019-08-07T00:00:00+00:00",
+      "prop": {
+        "from": {
+          "day": 29,
+          "month": 7,
+          "year": 2019
+        },
+        "to": {
+          "day": 7,
+          "month": 8,
+          "year": 2019
+        }
+      },
+      "string": "Jul 29, 2019 to Aug 7, 2019"
+    },
+    "duration": "5 min per ep",
+    "rating": "G - All Ages",
+    "score": null,
+    "scored_by": null,
+    "rank": 14865,
+    "popularity": 17664,
+    "members": 142,
+    "favorites": 0,
+    "synopsis": null,
+    "background": null,
+    "season": "summer",
+    "year": 2019,
+    "broadcast": {
+      "day": null,
+      "time": null,
+      "timezone": null,
+      "string": "Unknown"
+    },
+    "producers": [
+      {
+        "mal_id": 111,
+        "type": "anime",
+        "name": "NHK",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/111\/NHK"
+      },
+      {
+        "mal_id": 866,
+        "type": "anime",
+        "name": "Fanworks",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/866\/Fanworks"
+      }
+    ],
+    "licensors": [],
+    "studios": [
+      {
+        "mal_id": 1797,
+        "type": "anime",
+        "name": "NHK Enterprises",
+        "url": "https:\/\/myanimelist.net\/anime\/producer\/1797\/NHK_Enterprises"
+      }
+    ],
+    "genres": [
+      {
+        "mal_id": 4,
+        "type": "anime",
+        "name": "Comedy",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/4\/Comedy"
+      },
+      {
+        "mal_id": 36,
+        "type": "anime",
+        "name": "Slice of Life",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/36\/Slice_of_Life"
+      }
+    ],
+    "explicit_genres": [],
+    "themes": [],
+    "demographics": []
+  }
+}

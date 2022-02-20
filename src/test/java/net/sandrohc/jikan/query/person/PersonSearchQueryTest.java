@@ -11,8 +11,9 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
+import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.person.*;
-import net.sandrohc.jikan.test.RequestTest;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import org.mockserver.model.Parameter;
@@ -20,21 +21,27 @@ import org.mockserver.model.Parameter;
 import static net.sandrohc.jikan.test.MockUtils.mockFromFile;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PersonSearchQueryTest extends RequestTest {
+public class PersonSearchQueryTest extends QueryTest {
 
 	@Test
 	void fetchPersonSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/people", "people/getPeopleSearch.json",
-				Parameter.param("q", "asuna"),
+				Parameter.param("order_by", "mal_id"),
+				Parameter.param("sort", "asc"),
+				Parameter.param("letter", "abc"),
 				Parameter.param("page", "1"),
-				Parameter.param("limit", "1"));
+				Parameter.param("limit", "1"),
+				Parameter.param("q", "name")
+		);
 
 		/* Act */
 		PersonSearchQuery query = jikan.query().person().search()
-				.query("asuna")
+				.query("name")
 				.page(1)
-				.limit(1);
+				.limit(1)
+				.orderBy(PersonOrderBy.MAL_ID, SortOrder.ASCENDING)
+				.suffix("abc");
 		Collection<Person> results = query.execute().collectList().block();
 
 		/* Assert */
@@ -42,7 +49,7 @@ public class PersonSearchQueryTest extends RequestTest {
 
 		// Query
 		assertThat(query.toString()).isNotNull();
-		assertThat(query.getUrl().build()).isEqualTo("/people?page=1&limit=1&q=asuna");
+		assertThat(query.getUrl().build()).isEqualTo("/people?order_by=mal_id&sort=asc&letter=abc&page=1&limit=1&q=name");
 
 		// Results
 		assertThat(results).isNotNull();

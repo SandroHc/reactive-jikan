@@ -1,0 +1,20 @@
+{
+  "data": {
+    "mal_id": 10933025,
+    "username": "USER_1",
+    "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+    "images": {
+      "jpg": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/10933025.jpg?t=1623223200"
+      },
+      "webp": {
+        "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/10933025.webp?t=1623223200"
+      }
+    },
+    "last_online": "2021-06-09T07:22:08+00:00",
+    "gender": "Male",
+    "birthday": "2004-11-28T00:00:00+00:00",
+    "location": "Bucharest, Romania",
+    "joined": "2020-12-01T00:00:00+00:00"
+  }
+}

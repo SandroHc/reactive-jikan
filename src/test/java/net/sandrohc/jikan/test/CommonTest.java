@@ -1,15 +1,20 @@
 package net.sandrohc.jikan.test;
 
 import java.time.*;
+import java.util.*;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.cache.CaffeineJikanCache;
+import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.*;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.Query;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
+import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
 import reactor.core.publisher.Mono;
@@ -17,18 +22,21 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.test.MockUtils.mock;
 import static net.sandrohc.jikan.test.MockUtils.mockError;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class CommonTest extends RequestTest {
+public class CommonTest extends QueryTest {
 
 	@Test
 	void testBuilder() {
+		JikanCache cache = new TestJikanCache();
+
 		Jikan jikan = new Jikan.JikanBuilder()
 				.debug(true)
 				.baseUrl("https://example.com")
 				.userAgent("user-agent")
 				.maxRetries(10)
+				.cache(cache)
 				.build();
 
 		SoftAssertions softly = new SoftAssertions();
@@ -36,6 +44,8 @@ public class CommonTest extends RequestTest {
 		softly.assertThat(jikan.baseUrl).isEqualTo("https://example.com");
 		softly.assertThat(jikan.userAgent).isEqualTo("user-agent");
 		softly.assertThat(jikan.maxRetries).isEqualTo(10);
+		softly.assertThat(jikan.cache).isInstanceOf(TestJikanCache.class);
+		softly.assertThat(jikan.cache).isEqualTo(cache);
 		softly.assertAll();
 	}
 
@@ -47,19 +57,23 @@ public class CommonTest extends RequestTest {
 		softly.assertThat(jikan.debug).isFalse();
 		softly.assertThat(jikan.baseUrl).isEqualTo("https://api.jikan.moe/v4");
 		softly.assertThat(jikan.userAgent).isEqualTo("reactive-jikan/development");
+		softly.assertThat(jikan.maxRetries).isEqualTo(3);
+		softly.assertThat(jikan.cache).isInstanceOf(CaffeineJikanCache.class);
 		softly.assertAll();
 	}
 
 	@Test
 	void testBadRequest() {
 		mockError(mockServer, HttpResponseStatus.BAD_REQUEST);
-		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
+		assertThatThrownBy(() -> jikan.query().anime().get(1).execute().block())
+				.getRootCause().isInstanceOf(JikanResponseException.class);
 	}
 
 	@Test
 	void testTooManyRequests() {
 		mockError(mockServer, HttpResponseStatus.TOO_MANY_REQUESTS);
-		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
+		assertThatThrownBy(() -> jikan.query().anime().get(1).execute().block())
+				.getRootCause().isInstanceOf(JikanThrottleException.class);
 	}
 
 	@Test
@@ -73,7 +87,9 @@ public class CommonTest extends RequestTest {
 	@Test
 	void testInvalidJson() {
 		mock(mockServer, "/anime/1", "{ invalid }");
-		assertThrows(Exception.class, () -> jikan.query().anime().get(1).execute().block());
+		assertThatThrownBy(() -> jikan.query().anime().get(1).execute().block())
+				.getCause().isInstanceOf(JikanResponseException.class)
+				.getRootCause().isInstanceOf(JsonParseException.class);
 	}
 
 	@SuppressWarnings("AssertBetweenInconvertibleTypes")
@@ -220,6 +236,17 @@ public class CommonTest extends RequestTest {
 		@Override
 		public QueryUrlBuilder getUrl() {
 			return QueryUrlBuilder.create();
+		}
+	}
+
+	private static class TestJikanCache implements JikanCache {
+		@Override
+		public void put(String key, Object value, OffsetDateTime expires) {
+		}
+
+		@Override
+		public Optional<Object> get(String key) {
+			return Optional.empty();
 		}
 	}
 }
