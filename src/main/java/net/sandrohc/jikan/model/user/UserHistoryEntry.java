@@ -20,7 +20,7 @@ public class UserHistoryEntry implements Serializable {
 	/** The entry. */
 	public EntityWithType entry;
 
-	/** The number of episodes/chapters read. */
+	/** The total number of episodes/chapters read. */
 	public int increment;
 
 	/** The date of the update. */

@@ -1,0 +1,74 @@
+{
+  "data": {
+    "anime": [
+      {
+        "mal_id": 467,
+        "url": "https:\/\/myanimelist.net\/anime\/467\/Koukaku_Kidoutai__Stand_Alone_Complex",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857.jpg?s=7ca16b8efc53482914b36a636cd82290",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857t.jpg?s=7ca16b8efc53482914b36a636cd82290",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857l.jpg?s=7ca16b8efc53482914b36a636cd82290"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857.webp?s=7ca16b8efc53482914b36a636cd82290",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857t.webp?s=7ca16b8efc53482914b36a636cd82290",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/11\/50857l.webp?s=7ca16b8efc53482914b36a636cd82290"
+          }
+        },
+        "title": "Koukaku Kidoutai: Stand Alone Complex",
+        "type": "TV",
+        "start_year": 2002
+      }
+    ],
+    "manga": [
+      {
+        "mal_id": 1315,
+        "url": "https:\/\/myanimelist.net\/manga\/1315\/Boogiepop_Series",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765.jpg?s=65b626c4a86f544d07abdc3a12f8443f",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765t.jpg?s=65b626c4a86f544d07abdc3a12f8443f",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765l.jpg?s=65b626c4a86f544d07abdc3a12f8443f"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765.webp?s=65b626c4a86f544d07abdc3a12f8443f",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765t.webp?s=65b626c4a86f544d07abdc3a12f8443f",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/208765l.webp?s=65b626c4a86f544d07abdc3a12f8443f"
+          }
+        },
+        "title": "Boogiepop Series",
+        "type": "Light Novel",
+        "start_year": 1998
+      }
+    ],
+    "characters": [
+      {
+        "mal_id": 4808,
+        "url": "https:\/\/myanimelist.net\/character\/4808\/Tachikoma",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/characters\/15\/98448.jpg?s=052e665f7c1d9ff3f4245d6dcbd38dda"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/characters\/15\/98448.webp?s=052e665f7c1d9ff3f4245d6dcbd38dda",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/characters\/15\/98448t.webp?s=052e665f7c1d9ff3f4245d6dcbd38dda"
+          }
+        },
+        "name": "Tachikoma"
+      }
+    ],
+    "people": [
+      {
+        "mal_id": 4097,
+        "url": "https:\/\/myanimelist.net\/people\/4097\/Mamoru_Oshii",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/voiceactors\/3\/40198.jpg?s=c042e64ff48b9c5b3afdb30a6e1bc970"
+          }
+        },
+        "name": "Oshii, Mamoru"
+      }
+    ]
+  }
+}

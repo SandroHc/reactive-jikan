@@ -1,0 +1,56 @@
+{
+  "data": {
+    "anime": [
+      {
+        "entry": {
+          "mal_id": 21,
+          "url": "https:\/\/myanimelist.net\/anime\/21\/One_Piece",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245.jpg?s=863b16ac7b76f7783ac11f165012ea8c",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245t.jpg?s=863b16ac7b76f7783ac11f165012ea8c",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245l.jpg?s=863b16ac7b76f7783ac11f165012ea8c"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245.webp?s=863b16ac7b76f7783ac11f165012ea8c",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245t.webp?s=863b16ac7b76f7783ac11f165012ea8c",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/6\/73245l.webp?s=863b16ac7b76f7783ac11f165012ea8c"
+            }
+          },
+          "title": "One Piece"
+        },
+        "score": 10,
+        "status": "Watching",
+        "episodes_seen": null,
+        "episodes_total": null,
+        "date": "2022-02-17T07:45:00+00:00"
+      }
+    ],
+    "manga": [
+      {
+        "entry": {
+          "mal_id": 17465,
+          "url": "https:\/\/myanimelist.net\/manga\/17465\/Omoide_Emanon",
+          "images": {
+            "jpg": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581.jpg?s=7794a169b8dc1765d0e464ad79f629c8",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581t.jpg?s=7794a169b8dc1765d0e464ad79f629c8",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581l.jpg?s=7794a169b8dc1765d0e464ad79f629c8"
+            },
+            "webp": {
+              "image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581.webp?s=7794a169b8dc1765d0e464ad79f629c8",
+              "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581t.webp?s=7794a169b8dc1765d0e464ad79f629c8",
+              "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/manga\/2\/56581l.webp?s=7794a169b8dc1765d0e464ad79f629c8"
+            }
+          },
+          "title": "Omoide Emanon"
+        },
+        "score": 9,
+        "status": "Completed",
+        "chapters_read": 9,
+        "chapters_total": 9,
+        "date": "2021-12-10T07:53:00+00:00"
+      }
+    ]
+  }
+}

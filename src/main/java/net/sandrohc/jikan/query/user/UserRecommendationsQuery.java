@@ -6,7 +6,6 @@
 
 package net.sandrohc.jikan.query.user;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.common.*;
@@ -22,7 +21,7 @@ import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getUserRecommendations">Jikan API docs - getUserRecommendations</a>
  */
-public class UserRecommendationsQuery extends PageableQuery<DataListHolderWithPagination<Recommendation>, Flux<Recommendation>, UserRecommendationsQuery> {
+public class UserRecommendationsQuery extends PageableQuery<DataListHolderWithPagination<RecommendationMultiple>, Flux<RecommendationMultiple>, UserRecommendationsQuery> {
 
 	/** The user name. */
 	protected final String username;
@@ -38,7 +37,7 @@ public class UserRecommendationsQuery extends PageableQuery<DataListHolderWithPa
 	}
 
 	@Override
-	public Flux<Recommendation> process(Mono<DataListHolderWithPagination<Recommendation>> content) {
+	public Flux<RecommendationMultiple> process(Mono<DataListHolderWithPagination<RecommendationMultiple>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
 	}
 }

@@ -6,7 +6,6 @@
 
 package net.sandrohc.jikan.query.user;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
@@ -18,11 +17,11 @@ import reactor.core.publisher.Mono;
 import static net.sandrohc.jikan.query.QueryUrlBuilder.create;
 
 /**
- * Query for the user recent history.
+ * Query for the user recent anime/manga history.
  *
  * @see <a href="https://docs.api.jikan.moe/#operation/getUserHistory">Jikan API docs - getUserHistory</a>
  */
-public abstract class UserHistoryQuery extends Query<DataListHolder<UserHistoryEntry>, Flux<UserHistoryEntry>> {
+public class UserHistoryQuery extends Query<DataListHolder<UserHistoryEntry>, Flux<UserHistoryEntry>> {
 
 	/** The history type. */
 	protected final String type;

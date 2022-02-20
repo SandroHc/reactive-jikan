@@ -6,7 +6,6 @@
 
 package net.sandrohc.jikan.query.user;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.user.*;
@@ -57,7 +56,7 @@ public class UserSearchQuery extends QueryableQuery<DataListHolderWithPagination
 	@Override
 	public QueryUrlBuilder getInnerUrl() {
 		return create()
-				.path("/anime")
+				.path("/users")
 				.param("gender", gender, UserGender::getSearch)
 				.param("location", location)
 				.param("maxAge", maxAge)

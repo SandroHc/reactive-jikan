@@ -1,0 +1,24 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "user": {
+        "username": "USER_1",
+        "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/4040761.jpg?t=1645315200"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/userimages\/4040761.webp?t=1645315200"
+          }
+        }
+      },
+      "last_online": "2022-02-19T23:56:55+00:00",
+      "friends_since": "2021-03-14T09:13:00+00:00"
+    }
+  ]
+}

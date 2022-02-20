@@ -1,0 +1,29 @@
+{
+  "data": {
+    "anime": {
+      "days_watched": 594.5,
+      "mean_score": 3.62,
+      "watching": 4,
+      "completed": 3211,
+      "on_hold": 16,
+      "dropped": 1121,
+      "plan_to_watch": 28,
+      "total_entries": 4380,
+      "rewatched": 422,
+      "episodes_watched": 34987
+    },
+    "manga": {
+      "days_read": 13.4,
+      "mean_score": 7.11,
+      "reading": 4,
+      "completed": 24,
+      "on_hold": 7,
+      "dropped": 0,
+      "plan_to_read": 3,
+      "total_entries": 38,
+      "reread": 1,
+      "chapters_read": 1515,
+      "volumes_read": 179
+    }
+  }
+}

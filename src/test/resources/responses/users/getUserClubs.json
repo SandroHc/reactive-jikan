@@ -1,0 +1,18 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "mal_id": 669,
+      "name": "AnimePT",
+      "url": "https:\/\/myanimelist.net\/clubs.php?cid=669"
+    },
+    {
+      "mal_id": 18051,
+      "name": "One Piece",
+      "url": "https:\/\/myanimelist.net\/clubs.php?cid=18051"
+    }
+  ]
+}

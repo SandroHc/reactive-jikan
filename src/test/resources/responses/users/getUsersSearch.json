@@ -1,0 +1,21 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "username": "USER_1",
+      "url": "https:\/\/myanimelist.net\/profile\/USER_1",
+      "images": {
+        "jpg": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/questionmark_50.gif"
+        },
+        "webp": {
+          "image_url": "https:\/\/cdn.myanimelist.net\/images\/questionmark_50.gif"
+        }
+      },
+      "last_online": "2022-02-16T19:52:20+00:00"
+    }
+  ]
+}
