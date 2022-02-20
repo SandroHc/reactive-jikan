@@ -9,7 +9,6 @@ package net.sandrohc.jikan.query.manga;
 import java.time.*;
 import java.util.*;
 
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.enums.*;
@@ -25,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MangaSearchQueryTest extends RequestTest {
 
 	@Test
-	void fetchMangaSearch() throws JikanInvalidArgumentException, JikanQueryException, JikanUrlException {
+	void fetchMangaSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/manga", "manga/getMangaSearch.json",
 				Parameter.param("q", "test"),

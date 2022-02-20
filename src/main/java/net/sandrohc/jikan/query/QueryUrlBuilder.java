@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
 import java.util.function.*;
+import java.util.stream.*;
 
 import net.sandrohc.jikan.exception.JikanUrlException;
 import org.slf4j.*;
@@ -70,30 +71,40 @@ public class QueryUrlBuilder {
 		if (params.length() > 0)
 			params.append('&');
 
-		// TODO: support arrays
-		// TODO: url-encode key and value
+		params.append(key);
+
 		if (value instanceof Collection) {
-			params.append(key).append("[]=");
-
-			boolean isFirstValue = true;
-			for (Object val : ((Collection<?>) value)) {
-				if (isFirstValue) {
-					isFirstValue = false;
-				} else {
-					params.append(',');
-				}
-
-				params.append(val);
-			}
+			appendList(((Collection<?>) value).iterator());
+		} else if (value instanceof int[]) {
+			appendList(IntStream.of(((int[]) value)).iterator());
+		} else if (value instanceof long[]) {
+			appendList(LongStream.of(((long[]) value)).iterator());
+		} else if (value instanceof double[]) {
+			appendList(DoubleStream.of(((double[]) value)).iterator());
+		} else if (value instanceof Object[]) {
+			appendList(Stream.of(((Object[]) value)).iterator());
 		} else {
-			params.append(key).append('=').append(value);
+			params.append('=').append(value);
 		}
 
 		return this;
 	}
 
-	// TODO: confirm that URI query params conform to RFC3986 - http://tools.ietf.org/html/rfc3986#section-2.1 (percent encoding)
-	//  Currently doing on QueryableQuery: URLEncoder.encode(query, StandardCharsets.UTF_8.name()).replaceAll("\\+", "%20")
+	private <T> void appendList(Iterator<T> iterator) {
+		params.append("[]=");
+
+		boolean isFirstValue = true;
+		while (iterator.hasNext()) {
+			if (isFirstValue) {
+				isFirstValue = false;
+			} else {
+				params.append(',');
+			}
+
+			params.append(iterator.next());
+		}
+	}
+
 	public String build() throws JikanUrlException {
 		String query = this.params.length() > 0 ? this.params.toString() : null;
 		try {

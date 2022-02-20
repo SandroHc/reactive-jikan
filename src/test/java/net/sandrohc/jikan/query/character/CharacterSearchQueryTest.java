@@ -8,7 +8,6 @@ package net.sandrohc.jikan.query.character;
 
 import java.util.*;
 
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.character.Character;
@@ -24,7 +23,7 @@ public class CharacterSearchQueryTest extends RequestTest {
 
 	@SuppressWarnings("SpellCheckingInspection")
 	@Test
-	void fetchCharacterSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
+	void fetchCharacterSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/characters", "characters/getCharactersSearch.json",
 				Parameter.param("q", "test"),

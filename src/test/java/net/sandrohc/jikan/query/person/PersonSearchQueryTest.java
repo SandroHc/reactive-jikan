@@ -9,7 +9,6 @@ package net.sandrohc.jikan.query.person;
 import java.time.*;
 import java.util.*;
 
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.person.*;
@@ -24,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PersonSearchQueryTest extends RequestTest {
 
 	@Test
-	void fetchPersonSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
+	void fetchPersonSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/people", "people/getPeopleSearch.json",
 				Parameter.param("q", "asuna"),

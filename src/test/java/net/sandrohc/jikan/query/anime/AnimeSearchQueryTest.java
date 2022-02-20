@@ -9,7 +9,6 @@ package net.sandrohc.jikan.query.anime;
 import java.time.*;
 import java.util.*;
 
-import net.sandrohc.jikan.exception.JikanInvalidArgumentException;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
@@ -25,7 +24,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AnimeSearchQueryTest extends RequestTest {
 
 	@Test
-	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException, JikanInvalidArgumentException {
+	void fetchAnimeSearch() throws JikanQueryException, JikanUrlException {
 		/* Arrange */
 		mockFromFile(mockServer, "/anime", "anime/getAnimeSearch.json",
 				Parameter.param("score", "1.0"),
