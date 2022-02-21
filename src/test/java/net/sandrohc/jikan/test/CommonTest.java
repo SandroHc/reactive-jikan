@@ -6,6 +6,7 @@ import java.util.*;
 import com.fasterxml.jackson.core.JsonParseException;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
+import net.sandrohc.jikan.cache.DisabledJikanCache;
 import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.*;
 import net.sandrohc.jikan.model.*;
@@ -61,7 +62,7 @@ public class CommonTest extends QueryTest {
 		softly.assertThat(jikan.baseUrl).isEqualTo("https://api.jikan.moe/v4");
 		softly.assertThat(jikan.userAgent).isEqualTo("reactive-jikan/development");
 		softly.assertThat(jikan.maxRetries).isEqualTo(3);
-		softly.assertThat(jikan.cache).isInstanceOf(CaffeineJikanCache.class);
+		softly.assertThat(jikan.cache).isInstanceOf(DisabledJikanCache.class);
 		softly.assertAll();
 	}
 
