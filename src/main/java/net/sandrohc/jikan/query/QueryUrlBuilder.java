@@ -113,4 +113,9 @@ public class QueryUrlBuilder {
 			throw new JikanUrlException(path, query, e);
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "QueryUrlBuilder[path='" + path + "', params='" + params + "']";
+	}
 }

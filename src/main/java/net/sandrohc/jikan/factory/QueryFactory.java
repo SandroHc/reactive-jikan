@@ -148,14 +148,13 @@ public class QueryFactory extends Factory {
 		return new SeasonQueryFactory(this.jikan);
 	}
 
-	// TODO: implement watch queries
-//	/**
-//	 * All watch-related queries.
-//	 *
-//	 * @return the watch query factory
-//	 * @see <a href="https://docs.api.jikan.moe/#tag/watch">Jikan API docs - watch</a>
-//	 */
-//	public WatchQueryFactory watch() {
-//		return new WatchQueryFactory(this.jikan);
-//	}
+	/**
+	 * All watch-related queries.
+	 *
+	 * @return the watch query factory
+	 * @see <a href="https://docs.api.jikan.moe/#tag/watch">Jikan API docs - watch</a>
+	 */
+	public WatchQueryFactory watch() {
+		return new WatchQueryFactory(this.jikan);
+	}
 }

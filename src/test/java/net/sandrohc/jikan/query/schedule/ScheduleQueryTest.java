@@ -55,7 +55,7 @@ public class ScheduleQueryTest extends QueryTest {
 		softly.assertThat(anime.titleJapanese).isEqualTo("自主制作アニメ");
 		softly.assertThat(anime.titleSynonyms).containsExactlyInAnyOrder("自主制作アニメ");
 		softly.assertThat(anime.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(anime.source).isEqualTo(AnimeSource.ORIGINAL);
+		softly.assertThat(anime.source).isEqualTo("Original");
 		softly.assertThat(anime.episodes).isNull();
 		softly.assertThat(anime.status).isEqualTo(AnimeStatus.AIRING);
 		softly.assertThat(anime.airing).isTrue();

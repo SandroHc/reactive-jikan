@@ -71,7 +71,7 @@ public class AnimeQueryTest extends QueryTest {
 		softly.assertThat(anime.titleJapanese).isEqualTo("ソードアート・オンライン");
 		softly.assertThat(anime.titleSynonyms).containsExactlyInAnyOrder("S.A.O", "SAO");
 		softly.assertThat(anime.type).isEqualTo(AnimeType.TV);
-		softly.assertThat(anime.source).isEqualTo(AnimeSource.LIGHT_NOVEL);
+		softly.assertThat(anime.source).isEqualTo("Light novel");
 		softly.assertThat(anime.episodes).isEqualTo(25);
 		softly.assertThat(anime.status).isEqualTo(AnimeStatus.COMPLETED);
 		softly.assertThat(anime.airing).isFalse();

@@ -4,15 +4,14 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.io.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
-public class AnimeTrailer implements Serializable {
+public class Trailer implements Serializable {
 
 	/** The YouTube ID. */
 	@JsonProperty("youtube_id")
@@ -67,7 +66,7 @@ public class AnimeTrailer implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		AnimeTrailer that = (AnimeTrailer) o;
+		Trailer that = (Trailer) o;
 
 		return youtubeId != null ? youtubeId.equals(that.youtubeId) : that.youtubeId == null;
 	}

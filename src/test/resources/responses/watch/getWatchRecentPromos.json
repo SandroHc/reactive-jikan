@@ -1,0 +1,40 @@
+{
+  "pagination": {
+    "last_visible_page": 2,
+    "has_next_page": true
+  },
+  "data": [
+    {
+      "title": "Character PV (Meguru Bachira ver.)",
+      "entry": {
+        "mal_id": 49596,
+        "url": "https:\/\/myanimelist.net\/anime\/49596\/Blue_Lock",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081.jpg",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081t.jpg",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081l.jpg"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081.webp",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081t.webp",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1418\/117081l.webp"
+          }
+        },
+        "title": "Blue Lock"
+      },
+      "trailer": {
+        "youtube_id": "1-yxNeFzp6E",
+        "url": "https:\/\/www.youtube.com\/watch?v=1-yxNeFzp6E",
+        "embed_url": "https:\/\/www.youtube.com\/embed\/1-yxNeFzp6E?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https:\/\/img.youtube.com\/vi\/1-yxNeFzp6E\/default.jpg",
+          "small_image_url": "https:\/\/img.youtube.com\/vi\/1-yxNeFzp6E\/sddefault.jpg",
+          "medium_image_url": "https:\/\/img.youtube.com\/vi\/1-yxNeFzp6E\/mqdefault.jpg",
+          "large_image_url": "https:\/\/img.youtube.com\/vi\/1-yxNeFzp6E\/hqdefault.jpg",
+          "maximum_image_url": "https:\/\/img.youtube.com\/vi\/1-yxNeFzp6E\/maxresdefault.jpg"
+        }
+      }
+    }
+  ]
+}

@@ -9,6 +9,7 @@ package net.sandrohc.jikan.query.anime;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.*;
@@ -43,7 +44,7 @@ public class AnimeVideosQueryTest extends QueryTest {
 		softly.assertAll();
 
 		// Promo Videos
-		AnimeVideosPromo promo = videos.promo.iterator().next();
+		Promo promo = videos.promo.iterator().next();
 		softly = new SoftAssertions();
 		softly.assertThat(promo.toString()).isNotNull();
 		softly.assertThat(promo.title).isEqualTo("PV English dub version");

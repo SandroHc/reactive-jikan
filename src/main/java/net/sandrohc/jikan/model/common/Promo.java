@@ -4,7 +4,7 @@
  * @author Sandro Marques <sandro123iv@gmail.com>
  */
 
-package net.sandrohc.jikan.model.anime;
+package net.sandrohc.jikan.model.common;
 
 import java.io.*;
 
@@ -13,13 +13,13 @@ import net.sandrohc.jikan.utils.Generated;
 /**
  * A promotional video.
  */
-public class AnimeVideosPromo implements Serializable {
+public class Promo implements Serializable {
 
 	/** The promotional video title. */
 	public String title;
 
 	/** The promotional video trailer. */
-	public AnimeTrailer trailer;
+	public Trailer trailer;
 
 
 	public String getTitle() {
@@ -30,11 +30,11 @@ public class AnimeVideosPromo implements Serializable {
 		this.title = title;
 	}
 
-	public AnimeTrailer getTrailer() {
+	public Trailer getTrailer() {
 		return trailer;
 	}
 
-	public void setTrailer(AnimeTrailer trailer) {
+	public void setTrailer(Trailer trailer) {
 		this.trailer = trailer;
 	}
 
@@ -44,7 +44,7 @@ public class AnimeVideosPromo implements Serializable {
 		if (this == o) return true;
 		if (o == null || getClass() != o.getClass()) return false;
 
-		AnimeVideosPromo that = (AnimeVideosPromo) o;
+		Promo that = (Promo) o;
 
 		if (title != null ? !title.equals(that.title) : that.title != null) return false;
 		return trailer != null ? trailer.equals(that.trailer) : that.trailer == null;

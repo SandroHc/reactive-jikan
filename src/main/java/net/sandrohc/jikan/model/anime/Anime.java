@@ -31,7 +31,7 @@ public class Anime extends MalEntity {
 	public Images images;
 
 	/** The trailer. */
-	public AnimeTrailer trailer;
+	public Trailer trailer;
 
 	/** The official title. */
 	public String title;
@@ -52,7 +52,7 @@ public class Anime extends MalEntity {
 	public AnimeType type;
 
 	/** The source material. */
-	public AnimeSource source;
+	public String source;
 
 	/** The number of episodes. Can be {@code null} if it is unknown. */
 	public Integer episodes;
@@ -147,11 +147,11 @@ public class Anime extends MalEntity {
 		this.images = images;
 	}
 
-	public AnimeTrailer getTrailer() {
+	public Trailer getTrailer() {
 		return trailer;
 	}
 
-	public void setTrailer(AnimeTrailer trailer) {
+	public void setTrailer(Trailer trailer) {
 		this.trailer = trailer;
 	}
 
@@ -195,11 +195,11 @@ public class Anime extends MalEntity {
 		this.type = type;
 	}
 
-	public AnimeSource getSource() {
+	public String getSource() {
 		return source;
 	}
 
-	public void setSource(AnimeSource source) {
+	public void setSource(String source) {
 		this.source = source;
 	}
 

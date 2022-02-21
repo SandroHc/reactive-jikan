@@ -1,0 +1,40 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "title": "PV 1",
+      "entry": {
+        "mal_id": 16498,
+        "url": "https:\/\/myanimelist.net\/anime\/16498\/Shingeki_no_Kyojin",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347.jpg",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347t.jpg",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347l.jpg"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347.webp",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347t.webp",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/10\/47347l.webp"
+          }
+        },
+        "title": "Shingeki no Kyojin"
+      },
+      "trailer": {
+        "youtube_id": "KKzmOh4SuBc",
+        "url": "https:\/\/www.youtube.com\/watch?v=KKzmOh4SuBc",
+        "embed_url": "https:\/\/www.youtube.com\/embed\/KKzmOh4SuBc?enablejsapi=1&wmode=opaque&autoplay=1",
+        "images": {
+          "image_url": "https:\/\/img.youtube.com\/vi\/KKzmOh4SuBc\/default.jpg",
+          "small_image_url": "https:\/\/img.youtube.com\/vi\/KKzmOh4SuBc\/sddefault.jpg",
+          "medium_image_url": "https:\/\/img.youtube.com\/vi\/KKzmOh4SuBc\/mqdefault.jpg",
+          "large_image_url": "https:\/\/img.youtube.com\/vi\/KKzmOh4SuBc\/hqdefault.jpg",
+          "maximum_image_url": "https:\/\/img.youtube.com\/vi\/KKzmOh4SuBc\/maxresdefault.jpg"
+        }
+      }
+    }
+  ]
+}

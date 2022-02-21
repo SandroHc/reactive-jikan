@@ -9,6 +9,7 @@ package net.sandrohc.jikan.model.anime;
 import java.io.*;
 import java.util.*;
 
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
@@ -17,17 +18,17 @@ import net.sandrohc.jikan.utils.Generated;
 public class AnimeVideos implements Serializable {
 
 	/** The promotional videos. */
-	public List<AnimeVideosPromo> promo = Collections.emptyList();
+	public List<Promo> promo = Collections.emptyList();
 
 	/** The episode videos. */
 	public List<AnimeVideosEpisode> episodes = Collections.emptyList();
 
 
-	public List<AnimeVideosPromo> getPromo() {
+	public List<Promo> getPromo() {
 		return promo;
 	}
 
-	public void setPromo(List<AnimeVideosPromo> promo) {
+	public void setPromo(List<Promo> promo) {
 		this.promo = promo;
 	}
 

@@ -1,0 +1,42 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "entry": {
+        "mal_id": 1,
+        "url": "https:\/\/myanimelist.net\/anime\/1\/Cowboy_Bebop",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/icon-banned-youtube-rect.png"
+          }
+        },
+        "title": "Cowboy Bebop"
+      },
+      "episodes": [
+        {
+          "mal_id": 26,
+          "url": "https:\/\/myanimelist.net\/anime\/1\/Cowboy_Bebop\/episode\/26",
+          "title": "Episode 26",
+          "premium": false
+        },
+        {
+          "mal_id": 25,
+          "url": "https:\/\/myanimelist.net\/anime\/1\/Cowboy_Bebop\/episode\/25",
+          "title": "Episode 25",
+          "premium": false
+        }
+      ],
+      "region_locked": true
+    }
+  ]
+}

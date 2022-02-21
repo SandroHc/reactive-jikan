@@ -1,0 +1,42 @@
+{
+  "pagination": {
+    "last_visible_page": 1,
+    "has_next_page": false
+  },
+  "data": [
+    {
+      "entry": {
+        "mal_id": 41946,
+        "url": "https:\/\/myanimelist.net\/anime\/41946\/Shuumatsu_no_Harem",
+        "images": {
+          "jpg": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296.jpg",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296t.jpg",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296l.jpg"
+          },
+          "webp": {
+            "image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296.webp",
+            "small_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296t.webp",
+            "large_image_url": "https:\/\/cdn.myanimelist.net\/images\/anime\/1491\/117296l.webp"
+          }
+        },
+        "title": "Shuumatsu no Harem"
+      },
+      "episodes": [
+        {
+          "mal_id": 7,
+          "url": "https:\/\/myanimelist.net\/anime\/41946\/Shuumatsu_no_Harem\/episode\/7",
+          "title": "Episode 7",
+          "premium": true
+        },
+        {
+          "mal_id": 6,
+          "url": "https:\/\/myanimelist.net\/anime\/41946\/Shuumatsu_no_Harem\/episode\/6",
+          "title": "Episode 6",
+          "premium": true
+        }
+      ],
+      "region_locked": false
+    }
+  ]
+}
