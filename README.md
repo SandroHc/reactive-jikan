@@ -11,7 +11,7 @@ A fast and fully-typed API wrapper for the [Jikan API](https://jikan.moe) V4, wi
 | API version | reactive-jikan version |
 | ----------- |----------------------- |
 | [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/1.1.0/jar) |
-| [V4](https://docs.api.jikan.moe/) | [2.0.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.0.0) |
+| [V4](https://docs.api.jikan.moe/)   | [2.0.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.0.0/jar) |
 
 
 ## Installation
