@@ -12,13 +12,13 @@ import java.nio.file.*;
 import java.time.*;
 import java.time.format.*;
 import java.time.temporal.*;
+import java.util.function.*;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import io.netty.handler.codec.http.HttpHeaderNames;
 import io.netty.handler.codec.http.HttpHeaderValues;
-import net.sandrohc.jikan.cache.CaffeineJikanCache;
 import net.sandrohc.jikan.cache.DisabledJikanCache;
 import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.JikanQueryException;
@@ -62,16 +62,19 @@ public class Jikan {
 		log.trace(JIKAN_MARKER, "Preparing Jikan instance with parameters: debug=" + debug + ", baseUrl='" + baseUrl +
 				"', userAgent='" + userAgent + "', maxRetries=" + maxRetries);
 
-		this.httpClient = HttpClient.create()
+		HttpClient httpClient = HttpClient.create()
 				.baseUrl(this.baseUrl)
 				.headers(h -> h
 						.add(HttpHeaderNames.ACCEPT, HttpHeaderValues.APPLICATION_JSON)
 						.add(HttpHeaderNames.USER_AGENT, this.userAgent));
 
-		this.objectMapper = new ObjectMapper()
+		ObjectMapper objectMapper = new ObjectMapper()
 				.registerModules(new JavaTimeModule(), new JikanModule())
 				.enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)
 				.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
+
+		this.httpClient = builder.httpClientCustomizer.apply(httpClient);
+		this.objectMapper = builder.objectMapperCustomizer.apply(objectMapper);
 	}
 
 	/**
@@ -160,6 +163,7 @@ public class Jikan {
 				", baseUrl='" + baseUrl + '\'' +
 				", userAgent='" + userAgent + '\'' +
 				", maxRetries=" + maxRetries +
+				", cache=" + cache +
 				']';
 	}
 
@@ -173,7 +177,9 @@ public class Jikan {
 		private String userAgent = getDefaultUserAgent();
 		private boolean debug  = false;
 		private int maxRetries = 3;
-		private JikanCache cache = new CaffeineJikanCache();
+		private JikanCache cache = new DisabledJikanCache();
+		private Function<HttpClient, HttpClient> httpClientCustomizer = httpClient1 -> httpClient1;
+		private Function<ObjectMapper, ObjectMapper> objectMapperCustomizer = objectMapper1 -> objectMapper1;
 
 		public JikanBuilder() {
 		}
@@ -228,21 +234,43 @@ public class Jikan {
 
 		/**
 		 * Defines the caching implementation to use.
-		 * <p>
-		 * Available implementations are:
-		 * <ul>
-		 *     <li>{@link CaffeineJikanCache}</li>
-		 *     <li>{@link DisabledJikanCache}</li>
-		 * </ul>
 		 *
 		 * @param cache the cache implementation, or {@code null} to disable caching
 		 * @return the builder
+		 * @see <a href="https://github.com/SandroHc/reactive-jikan#caching">https://github.com/SandroHc/reactive-jikan#caching</a>
+		 *      for an example of a caching implementation
 		 */
 		public JikanBuilder cache(JikanCache cache) {
 			if (cache == null)
 				cache = new DisabledJikanCache();
 
 			this.cache = cache;
+			return this;
+		}
+
+		/**
+		 * Customize or replace the HTTP Client used by Jikan.
+		 *
+		 * @param httpClientCustomizer the customizer function
+		 * @return the builder
+		 */
+		public JikanBuilder httpClientCustomizer(Function<HttpClient, HttpClient> httpClientCustomizer) {
+			if (httpClientCustomizer == null)
+				httpClientCustomizer = httpClient1 -> httpClient1;
+			this.httpClientCustomizer = httpClientCustomizer;
+			return this;
+		}
+
+		/**
+		 * Customize or replace the JSON Object Mapper used by Jikan.
+		 *
+		 * @param objectMapperCustomizer the customizer function
+		 * @return the builder
+		 */
+		public JikanBuilder objectMapperCustomizer(Function<ObjectMapper, ObjectMapper> objectMapperCustomizer) {
+			if (objectMapperCustomizer == null)
+				objectMapperCustomizer = objectMapper1 -> objectMapper1;
+			this.objectMapperCustomizer = objectMapperCustomizer;
 			return this;
 		}
 

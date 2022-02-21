@@ -12,11 +12,12 @@ import java.util.*;
 /**
  * Cache abstraction for the Jikan requests.
  * <p>
- * The cache implementation is left to the developer, as to better suit their needs.
- * A caching library - like <a href="https://github.com/ben-manes/caffeine">Caffeine</a> - is recommended.
+ * The cache implementation is left to the developer, as to better suit their needs. Please see
+ * <a href="https://github.com/SandroHc/reactive-jikan#caching">https://github.com/SandroHc/reactive-jikan#caching</a>
+ * for an example of a caching implementation.
  *
  * @see <a href="https://github.com/SandroHc/reactive-jikan#caching">https://github.com/SandroHc/reactive-jikan#caching</a>
- *      - example for a caching implementation
+ *      for an example of a caching implementation
  */
 public interface JikanCache {
 

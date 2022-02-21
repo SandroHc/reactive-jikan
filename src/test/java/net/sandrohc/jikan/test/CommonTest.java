@@ -6,7 +6,6 @@ import java.util.*;
 import com.fasterxml.jackson.core.JsonParseException;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import net.sandrohc.jikan.Jikan;
-import net.sandrohc.jikan.cache.CaffeineJikanCache;
 import net.sandrohc.jikan.cache.JikanCache;
 import net.sandrohc.jikan.exception.*;
 import net.sandrohc.jikan.model.*;
@@ -31,15 +30,19 @@ public class CommonTest extends QueryTest {
 	void testBuilder() {
 		JikanCache cache = new TestJikanCache();
 
-		Jikan jikan = new Jikan.JikanBuilder()
+		Jikan.JikanBuilder builder = new Jikan.JikanBuilder()
 				.debug(true)
 				.baseUrl("https://example.com")
 				.userAgent("user-agent")
 				.maxRetries(10)
-				.cache(cache)
-				.build();
+				.cache(cache);
+
+		Jikan jikan = builder.build();
 
 		SoftAssertions softly = new SoftAssertions();
+		softly.assertThat(builder).isNotNull();
+		softly.assertThat(builder.toString()).isNotNull();
+		softly.assertThat(jikan.toString()).isNotNull();
 		softly.assertThat(jikan.debug).isTrue();
 		softly.assertThat(jikan.baseUrl).isEqualTo("https://example.com");
 		softly.assertThat(jikan.userAgent).isEqualTo("user-agent");

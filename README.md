@@ -11,7 +11,7 @@ A fast and fully-typed API wrapper for the [Jikan API](https://jikan.moe) V4, wi
 | API version | reactive-jikan version |
 | ----------- |----------------------- |
 | [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/1.1.0/jar) |
-| [V4](https://docs.api.jikan.moe/)   | [2.0.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.0.0/jar) |
+| [V4](https://docs.api.jikan.moe/)   | [2.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.1.0/jar) |
 
 
 ## Installation
@@ -21,7 +21,7 @@ Add the following dependency to your build file.
 If using Gradle (`build.gradle`):
 ```groovy
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:2.0.0'
+    implementation 'net.sandrohc:reactive-jikan:2.1.0'
 }
 ```
 
@@ -30,7 +30,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>2.0.0</version>
+    <version>2.1.0</version>
 </dependency>
 ```
 
@@ -64,16 +64,68 @@ Collection<Anime> results = jikan.query().anime().search()
 		.block();
 ```
 
-## Caching
+## Android
 
-Caching comes **enabled** by default. It is possible to customize it by providing an implementation of `JikanCache` to the `Jikan` instance.
-
-Here is an example using [Caffeine](https://github.com/ben-manes/caffeine) as the cache library:
+The following changes are necessary to use this library on Android.
 
 ```java
-JikanCache cache = new CaffeineJikanCache(Caffeine.newBuilder().maximumSize(1_000_000));
-JikanBuilder builder = new JikanBuilder().cache(cache);
-Jikan jikan = new Jikan(builder);
+Jikan jikan = new Jikan.JikanBuilder()
+        .httpClientCustomizer(httpClient -> httpClient.resolver(DefaultAddressResolverGroup.INSTANCE))
+        .build();
+```
+
+## Caching
+
+Caching comes **disabled** by default. To enable it, please provide an implementation of `JikanCache` to the `Jikan` instance.
+
+The following is an example using [Caffeine](https://github.com/ben-manes/caffeine) as the cache library. Beware that Caffeine is not supported in Android!
+
+```java
+// build.gradle
+dependencies {
+	implementation 'com.github.ben-manes.caffeine:caffeine:2.9.3'
+}
+
+// App.java
+JikanCache jikanCache = new JikanCache() {
+    protected final Cache<String, JikanValueHolder> cache = Caffeine.newBuilder().maximumSize(10_000).expireAfter(new JikanExpiry()).build();
+
+    public void put(String key, Object value, OffsetDateTime expires) {
+        cache.put(key, new JikanValueHolder(value, expires));
+    }
+
+    public Optional<Object> get(String key) {
+        return Optional.ofNullable(cache.getIfPresent(key)).map(holder -> holder.value);
+    }
+
+    class JikanValueHolder {
+        public final Object value;
+        public final long expireTime;
+
+        public JikanValueHolder(Object value, OffsetDateTime expires) {
+            this.value = value;
+            this.expireTime = TimeUnit.SECONDS.toNanos(expires.toEpochSecond());
+        }
+    }
+
+    class JikanExpiry implements Expiry<String, JikanValueHolder> {
+        public long expireAfterCreate(String key, JikanValueHolder value, long currentTime) {
+            return value.expireTime;
+        }
+
+        public long expireAfterUpdate(String key, JikanValueHolder value, long currentTime, long currentDuration) {
+            return currentDuration; // Do not modify expire date
+        }
+
+        public long expireAfterRead(String key, JikanValueHolder value, long currentTime, long currentDuration) {
+            return currentDuration; // Do not modify expire date
+        }
+    }
+};
+
+Jikan jikan = new Jikan.JikanBuilder()
+        .cache(jikanCache)
+        .build();
 ```
 
 ## Endpoints

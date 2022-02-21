@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'net.sandrohc'
-version '2.0.0'
+version '2.1.0'
 
 ext.isReleaseVersion = !version.endsWith('SNAPSHOT')
 
@@ -39,7 +39,7 @@ repositories {
 
 dependencies {
     // Project Reactor
-    api 'io.projectreactor.netty:reactor-netty:1.0.15'
+    api 'io.projectreactor.netty:reactor-netty:1.0.16'
 
     // Jackson (JSON serializer)
     api 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
@@ -47,9 +47,6 @@ dependencies {
 
     // Logging
     api 'org.slf4j:slf4j-api:1.7.36'
-
-    // Cache
-    api 'com.github.ben-manes.caffeine:caffeine:2.9.3'
 
     // Tests
     testRuntimeOnly 'ch.qos.logback:logback-classic:1.2.10'
