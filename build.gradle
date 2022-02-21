@@ -6,7 +6,7 @@ plugins {
 }
 
 group 'net.sandrohc'
-version '2.0.0-SNAPSHOT'
+version '2.0.0'
 
 ext.isReleaseVersion = !version.endsWith('SNAPSHOT')
 
@@ -101,7 +101,7 @@ publishing {
             from components.java
             pom {
                 name = 'Reactive Jikan'
-                description = 'API wrapper for Jikan - an unofficial MyAnimeList API - with the power of Project Reactor and reactive streams. ⚡'
+                description = 'A fast and fully-typed API wrapper for Jikan - an unofficial MyAnimeList API - with the power of Project Reactor and reactive streams. ⚡'
                 url = 'https://github.com/SandroHc/reactive-jikan'
                 licenses {
                     license {
