@@ -6,13 +6,16 @@
 
 package net.sandrohc.jikan.query.anime;
 
+import java.util.*;
+import java.util.stream.*;
+
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
-import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -32,8 +35,8 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	protected AnimeStatus status;
 	protected AgeRating ageRating;
 	protected Boolean sfw;
-	protected AnimeGenre[] genres;
-	protected AnimeGenre[] genresExclude;
+	protected Genre[] genres;
+	protected Genre[] genresExclude;
 	protected AnimeOrderBy orderBy;
 	protected SortOrder sort;
 	protected String suffix;
@@ -79,12 +82,12 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 		return this;
 	}
 
-	public AnimeSearchQuery genres(AnimeGenre... genres) {
+	public AnimeSearchQuery genres(Genre... genres) {
 		this.genres = genres;
 		return this;
 	}
 
-	public AnimeSearchQuery excludeGenres(AnimeGenre... excludeGenres) {
+	public AnimeSearchQuery excludeGenres(Genre... excludeGenres) {
 		this.genresExclude = excludeGenres;
 		return this;
 	}
@@ -116,8 +119,8 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 				.param("status", status, AnimeStatus::getSearch)
 				.param("rating", ageRating, AgeRating::getSearch)
 				.param("sfw", sfw)
-				.param("genres", genres, EnumUtil::enumsToOrdinals)
-				.param("genres_exclude", genresExclude, EnumUtil::enumsToOrdinals)
+				.param("genres", genres, AnimeSearchQuery::extractGenreIds)
+				.param("genres_exclude", genresExclude, AnimeSearchQuery::extractGenreIds)
 				.param("order_by", orderBy, AnimeOrderBy::getSearch)
 				.param("sort", sort, SortOrder::getSearch)
 				.param("letter", suffix)
@@ -127,5 +130,14 @@ public class AnimeSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	@Override
 	public Flux<Anime> process(Mono<DataListHolderWithPagination<Anime>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
+	}
+
+	protected static Collection<Integer> extractGenreIds(Genre[] genres) {
+		if (genres == null)
+			return Collections.emptyList();
+
+		return Collections.unmodifiableCollection(Arrays.stream(genres)
+				.map(Genre::animeId)
+				.collect(Collectors.toCollection(TreeSet::new)));
 	}
 }

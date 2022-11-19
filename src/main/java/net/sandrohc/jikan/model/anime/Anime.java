@@ -118,14 +118,14 @@ public class Anime extends MalEntity {
 	public Collection<Studio> studios = Collections.emptyList();
 
 	/** The genres. */
-	public Collection<GenreEntity<AnimeGenre>> genres = Collections.emptyList();
+	public Collection<GenreEntity> genres = Collections.emptyList();
 
 	/** The explicit genres. */
 	@JsonAlias("explicit_genres")
-	public Collection<GenreEntity<AnimeGenre>> explicitGenres = Collections.emptyList();
+	public Collection<GenreEntity> explicitGenres = Collections.emptyList();
 
 	/** The themes. */
-	public Collection<GenreEntity<AnimeGenre>> themes = Collections.emptyList();
+	public Collection<GenreEntity> themes = Collections.emptyList();
 
 	/** The demographics. */
 	public Collection<EntityWithType> demographics = Collections.emptyList();
@@ -363,27 +363,27 @@ public class Anime extends MalEntity {
 		this.studios = studios;
 	}
 
-	public Collection<GenreEntity<AnimeGenre>> getGenres() {
+	public Collection<GenreEntity> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(Collection<GenreEntity<AnimeGenre>> genres) {
+	public void setGenres(Collection<GenreEntity> genres) {
 		this.genres = genres;
 	}
 
-	public Collection<GenreEntity<AnimeGenre>> getExplicitGenres() {
+	public Collection<GenreEntity> getExplicitGenres() {
 		return explicitGenres;
 	}
 
-	public void setExplicitGenres(Collection<GenreEntity<AnimeGenre>> explicitGenres) {
+	public void setExplicitGenres(Collection<GenreEntity> explicitGenres) {
 		this.explicitGenres = explicitGenres;
 	}
 
-	public Collection<GenreEntity<AnimeGenre>> getThemes() {
+	public Collection<GenreEntity> getThemes() {
 		return themes;
 	}
 
-	public void setThemes(Collection<GenreEntity<AnimeGenre>> themes) {
+	public void setThemes(Collection<GenreEntity> themes) {
 		this.themes = themes;
 	}
 

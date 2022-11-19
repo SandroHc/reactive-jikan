@@ -13,6 +13,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.QueryTest;
@@ -80,7 +81,7 @@ public class ScheduleQueryTest extends QueryTest {
 		softly.assertThat(anime.producers).extracting(Entity::getMalId, Entity::getName).containsExactlyInAnyOrder();
 		softly.assertThat(anime.licensors).extracting(Entity::getMalId, Entity::getName).containsExactlyInAnyOrder();
 		softly.assertThat(anime.studios).extracting(Entity::getMalId, Entity::getName).containsExactlyInAnyOrder();
-		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.BOYS_LOVE);
+		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(Genre.BOYS_LOVE);
 		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder();
 		softly.assertThat(anime.demographics).containsExactlyInAnyOrder();
 		softly.assertAll();

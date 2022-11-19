@@ -11,6 +11,7 @@ import java.util.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.QueryTest;
@@ -55,8 +56,8 @@ public class MangaSearchQueryTest extends QueryTest {
 				.maximumScore(3.0D)
 				.status(MangaStatus.COMPLETED)
 				.safeForWork(true)
-				.genres(MangaGenre.ACTION, MangaGenre.ADVENTURE)
-				.excludeGenres(MangaGenre.ECCHI, MangaGenre.HENTAI)
+				.genres(Genre.ACTION, Genre.ADVENTURE)
+				.excludeGenres(Genre.ECCHI, Genre.HENTAI)
 				.orderBy(MangaOrderBy.MAL_ID, SortOrder.ASCENDING)
 				.suffix("abc")
 				.magazines(1, 2);
@@ -96,10 +97,10 @@ public class MangaSearchQueryTest extends QueryTest {
 	@Test
 	void fetchMangaSearch_excludeGenres() throws JikanUrlException {
 		MangaSearchQuery query = jikan.query().manga().search()
-				.excludeGenres(MangaGenre.ACTION, MangaGenre.ADVENTURE);
+				.excludeGenres(Genre.ACTION, Genre.ADVENTURE);
 
 		assertThat(query.genres).isNull();
-		assertThat(query.genresExclude).containsExactlyInAnyOrder(MangaGenre.ACTION, MangaGenre.ADVENTURE);
+		assertThat(query.genresExclude).containsExactlyInAnyOrder(Genre.ACTION, Genre.ADVENTURE);
 
 		assertThat(query.getUrl().build()).isEqualTo("/manga?genres_exclude[]=1,2");
 	}
