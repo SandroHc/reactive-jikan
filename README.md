@@ -8,10 +8,10 @@ A fast and fully-typed API wrapper for the [Jikan API](https://jikan.moe) V4, wi
 
 ## Supported versions
 
-| API version | reactive-jikan version |
-| ----------- |----------------------- |
+| API version                         | reactive-jikan version                                                           |
+|-------------------------------------|----------------------------------------------------------------------------------|
 | [V3](https://jikan.docs.apiary.io/) | [1.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/1.1.0/jar) |
-| [V4](https://docs.api.jikan.moe/)   | [2.1.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.1.0/jar) |
+| [V4](https://docs.api.jikan.moe/)   | [2.2.0](https://search.maven.org/artifact/net.sandrohc/reactive-jikan/2.2.0/jar) |
 
 
 ## Installation
@@ -21,7 +21,7 @@ Add the following dependency to your build file.
 If using Gradle (`build.gradle`):
 ```groovy
 dependencies {
-    implementation 'net.sandrohc:reactive-jikan:2.1.0'
+    implementation 'net.sandrohc:reactive-jikan:2.2.0'
 }
 ```
 
@@ -30,7 +30,7 @@ If using Maven (`pom.xml`):
 <dependency>
     <groupId>net.sandrohc</groupId>
     <artifactId>reactive-jikan</artifactId>
-    <version>2.1.0</version>
+    <version>2.2.0</version>
 </dependency>
 ```
 
