@@ -111,7 +111,7 @@ public class AnimeQueryTest extends QueryTest {
 						tuple(56, "A-1 Pictures")
 				);
 		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.ACTION, AnimeGenre.ADVENTURE, AnimeGenre.FANTASY, AnimeGenre.ROMANCE);
-		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.GAME);
+		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.LOVE_POLYGON, AnimeGenre.VIDEO_GAME);
 		softly.assertThat(anime.demographics).map(Entity::getName).containsExactlyInAnyOrder("Shounen");
 		softly.assertAll();
 	}

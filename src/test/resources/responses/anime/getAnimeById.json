@@ -27,6 +27,29 @@
         "maximum_image_url": "https:\/\/img.youtube.com\/vi\/6ohYYtxfDCg\/maxresdefault.jpg"
       }
     },
+    "approved": true,
+    "titles": [
+      {
+        "type": "Default",
+        "title": "Sword Art Online"
+      },
+      {
+        "type": "Synonym",
+        "title": "S.A.O"
+      },
+      {
+        "type": "Synonym",
+        "title": "SAO"
+      },
+      {
+        "type": "Japanese",
+        "title": "\u30bd\u30fc\u30c9\u30a2\u30fc\u30c8\u30fb\u30aa\u30f3\u30e9\u30a4\u30f3"
+      },
+      {
+        "type": "English",
+        "title": "Sword Art Online"
+      }
+    ],
     "title": "Sword Art Online",
     "title_english": "Sword Art Online",
     "title_japanese": "\u30bd\u30fc\u30c9\u30a2\u30fc\u30c8\u30fb\u30aa\u30f3\u30e9\u30a4\u30f3",
@@ -133,10 +156,16 @@
     "explicit_genres": [],
     "themes": [
       {
-        "mal_id": 11,
+        "mal_id": 64,
         "type": "anime",
-        "name": "Game",
-        "url": "https:\/\/myanimelist.net\/anime\/genre\/11\/Game"
+        "name": "Love Polygon",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/64\/Love_Polygon"
+      },
+      {
+        "mal_id": 79,
+        "type": "anime",
+        "name": "Video Game",
+        "url": "https:\/\/myanimelist.net\/anime\/genre\/79\/Video_Game"
       }
     ],
     "demographics": [
