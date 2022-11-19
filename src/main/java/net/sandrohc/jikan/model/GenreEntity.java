@@ -6,23 +6,20 @@
 
 package net.sandrohc.jikan.model;
 
-import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
-import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.utils.Generated;
 
 /**
  * The base object for anime/manga genre with a type, name and URL.
- *
- * @param <T> the type of genre, either {@linkplain AnimeGenre} or {@linkplain MangaGenre}
  */
-public class GenreEntity<T> extends MalEntity {
+public class GenreEntity extends MalEntity {
 
 	/** The genre type. */
 	public Type type;
 
 	/** The genre name. */
-	public T name;
+	public Genre name;
 
 	/** The URL to the genre page on MyAnimeList. */
 	public String url;
@@ -36,11 +33,11 @@ public class GenreEntity<T> extends MalEntity {
 		this.type = type;
 	}
 
-	public T getName() {
+	public Genre getName() {
 		return name;
 	}
 
-	public void setName(T name) {
+	public void setName(Genre name) {
 		this.name = name;
 	}
 

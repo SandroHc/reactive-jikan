@@ -10,6 +10,7 @@ import java.time.*;
 
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.QueryTest;
@@ -79,10 +80,10 @@ public class MangaQueryTest extends QueryTest {
 		softly.assertThat(manga.genres)
 				.extracting(g -> g.malId, g -> g.type, g -> g.name, g -> g.url)
 				.containsExactlyInAnyOrder(
-						tuple(1, Type.MANGA, MangaGenre.ACTION, "https://myanimelist.net/manga/genre/1/Action"),
-						tuple(8, Type.MANGA, MangaGenre.DRAMA, "https://myanimelist.net/manga/genre/8/Drama"),
-						tuple(10, Type.MANGA, MangaGenre.FANTASY, "https://myanimelist.net/manga/genre/10/Fantasy"),
-						tuple(7, Type.MANGA, MangaGenre.MYSTERY, "https://myanimelist.net/manga/genre/7/Mystery")
+						tuple(1, Type.MANGA, Genre.ACTION, "https://myanimelist.net/manga/genre/1/Action"),
+						tuple(8, Type.MANGA, Genre.DRAMA, "https://myanimelist.net/manga/genre/8/Drama"),
+						tuple(10, Type.MANGA, Genre.FANTASY, "https://myanimelist.net/manga/genre/10/Fantasy"),
+						tuple(7, Type.MANGA, Genre.MYSTERY, "https://myanimelist.net/manga/genre/7/Mystery")
 				);
 		softly.assertThat(manga.explicitGenres)
 				.extracting(g -> g.malId, g -> g.type, g -> g.name, g -> g.url)

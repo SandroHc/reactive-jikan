@@ -12,6 +12,7 @@ import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.*;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.enums.DayOfWeek;
 import net.sandrohc.jikan.model.season.*;
@@ -110,8 +111,8 @@ public class AnimeQueryTest extends QueryTest {
 				.containsExactlyInAnyOrder(
 						tuple(56, "A-1 Pictures")
 				);
-		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.ACTION, AnimeGenre.ADVENTURE, AnimeGenre.FANTASY, AnimeGenre.ROMANCE);
-		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder(AnimeGenre.LOVE_POLYGON, AnimeGenre.VIDEO_GAME);
+		softly.assertThat(anime.genres).map(GenreEntity::getName).containsExactlyInAnyOrder(Genre.ACTION, Genre.ADVENTURE, Genre.FANTASY, Genre.ROMANCE);
+		softly.assertThat(anime.themes).map(GenreEntity::getName).containsExactlyInAnyOrder(Genre.LOVE_POLYGON, Genre.VIDEO_GAME);
 		softly.assertThat(anime.demographics).map(Entity::getName).containsExactlyInAnyOrder("Shounen");
 		softly.assertAll();
 	}

@@ -6,13 +6,16 @@
 
 package net.sandrohc.jikan.query.manga;
 
+import java.util.*;
+import java.util.stream.*;
+
 import net.sandrohc.jikan.Jikan;
 import net.sandrohc.jikan.model.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.model.manga.*;
 import net.sandrohc.jikan.query.QueryUrlBuilder;
 import net.sandrohc.jikan.query.QueryableQuery;
-import net.sandrohc.jikan.utils.EnumUtil;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -31,8 +34,8 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	protected Double maximumScore;
 	protected MangaStatus status;
 	protected Boolean sfw;
-	protected MangaGenre[] genres;
-	protected MangaGenre[] genresExclude;
+	protected Genre[] genres;
+	protected Genre[] genresExclude;
 	protected MangaOrderBy orderBy;
 	protected SortOrder sort;
 	protected String suffix;
@@ -73,12 +76,12 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 		return this;
 	}
 
-	public MangaSearchQuery genres(MangaGenre... genres) {
+	public MangaSearchQuery genres(Genre... genres) {
 		this.genres = genres;
 		return this;
 	}
 
-	public MangaSearchQuery excludeGenres(MangaGenre... excludeGenres) {
+	public MangaSearchQuery excludeGenres(Genre... excludeGenres) {
 		this.genresExclude = excludeGenres;
 		return this;
 	}
@@ -109,8 +112,8 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 				.param("max_score", maximumScore)
 				.param("status", status, MangaStatus::getSearch)
 				.param("sfw", sfw)
-				.param("genres", genres, EnumUtil::enumsToOrdinals)
-				.param("genres_exclude", genresExclude, EnumUtil::enumsToOrdinals)
+				.param("genres", genres, MangaSearchQuery::extractGenreIds)
+				.param("genres_exclude", genresExclude, MangaSearchQuery::extractGenreIds)
 				.param("order_by", orderBy, MangaOrderBy::getSearch)
 				.param("sort", sort, SortOrder::getSearch)
 				.param("letter", suffix)
@@ -120,5 +123,14 @@ public class MangaSearchQuery extends QueryableQuery<DataListHolderWithPaginatio
 	@Override
 	public Flux<Manga> process(Mono<DataListHolderWithPagination<Manga>> content) {
 		return content.flatMapMany(holder -> Flux.fromIterable(holder.data));
+	}
+
+	protected static Collection<Integer> extractGenreIds(Genre[] genres) {
+		if (genres == null)
+			return Collections.emptyList();
+
+		return Collections.unmodifiableCollection(Arrays.stream(genres)
+				.map(Genre::mangaId)
+				.collect(Collectors.toCollection(TreeSet::new)));
 	}
 }

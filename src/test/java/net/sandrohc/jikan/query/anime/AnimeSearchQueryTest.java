@@ -12,6 +12,7 @@ import java.util.*;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.anime.*;
+import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.enums.*;
 import net.sandrohc.jikan.query.QueryTest;
 import org.assertj.core.api.SoftAssertions;
@@ -56,8 +57,8 @@ public class AnimeSearchQueryTest extends QueryTest {
 				.status(AnimeStatus.COMPLETED)
 				.rating(AgeRating.PG)
 				.safeForWork(true)
-				.genres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE)
-				.excludeGenres(AnimeGenre.ECCHI, AnimeGenre.HENTAI)
+				.genres(Genre.ACTION, Genre.ADVENTURE)
+				.excludeGenres(Genre.ECCHI, Genre.HENTAI)
 				.orderBy(AnimeOrderBy.MAL_ID, SortOrder.ASCENDING)
 				.suffix("abc")
 				.producers(1, 2);
@@ -97,10 +98,10 @@ public class AnimeSearchQueryTest extends QueryTest {
 	@Test
 	void fetchAnimeSearch_excludeGenres() throws JikanUrlException {
 		AnimeSearchQuery query = jikan.query().anime().search()
-				.excludeGenres(AnimeGenre.ACTION, AnimeGenre.ADVENTURE);
+				.excludeGenres(Genre.ACTION, Genre.ADVENTURE);
 
 		assertThat(query.genres).isNull();
-		assertThat(query.genresExclude).containsExactlyInAnyOrder(AnimeGenre.ACTION, AnimeGenre.ADVENTURE);
+		assertThat(query.genresExclude).containsExactlyInAnyOrder(Genre.ACTION, Genre.ADVENTURE);
 
 		assertThat(query.getUrl().build()).isEqualTo("/anime?genres_exclude[]=1,2");
 	}

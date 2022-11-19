@@ -86,11 +86,11 @@ public class Manga extends MalEntity {
 	public List<EntityWithType> serializations = Collections.emptyList();
 
 	/** The genres. */
-	public List<GenreEntity<MangaGenre>> genres = Collections.emptyList();
+	public List<GenreEntity> genres = Collections.emptyList();
 
 	/** The explicit genres. */
 	@JsonAlias("explicit_genres")
-	public List<GenreEntity<MangaGenre>> explicitGenres = Collections.emptyList();
+	public List<GenreEntity> explicitGenres = Collections.emptyList();
 
 	/** The themes. */
 	public List<EntityWithType> themes = Collections.emptyList();
@@ -267,19 +267,19 @@ public class Manga extends MalEntity {
 		this.serializations = serializations;
 	}
 
-	public List<GenreEntity<MangaGenre>> getGenres() {
+	public List<GenreEntity> getGenres() {
 		return genres;
 	}
 
-	public void setGenres(List<GenreEntity<MangaGenre>> genres) {
+	public void setGenres(List<GenreEntity> genres) {
 		this.genres = genres;
 	}
 
-	public List<GenreEntity<MangaGenre>> getExplicitGenres() {
+	public List<GenreEntity> getExplicitGenres() {
 		return explicitGenres;
 	}
 
-	public void setExplicitGenres(List<GenreEntity<MangaGenre>> explicitGenres) {
+	public void setExplicitGenres(List<GenreEntity> explicitGenres) {
 		this.explicitGenres = explicitGenres;
 	}
 

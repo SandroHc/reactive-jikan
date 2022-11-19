@@ -12,7 +12,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import net.sandrohc.jikan.exception.JikanQueryException;
 import net.sandrohc.jikan.exception.JikanUrlException;
 import net.sandrohc.jikan.model.*;
-import net.sandrohc.jikan.model.anime.*;
 import net.sandrohc.jikan.model.common.*;
 import net.sandrohc.jikan.model.genre.*;
 import net.sandrohc.jikan.query.QueryTest;
@@ -141,12 +140,12 @@ public class AnimeGenreQueryTest extends QueryTest {
 
 		// Check if there is an enum value for all genres
 		for (GenreWithCount genre : results) {
-			AnimeGenre deserializedGenre = jikan.objectMapper.readValue("\"" + genre.getName() + "\"", AnimeGenre.class);
+			Genre deserializedGenre = jikan.objectMapper.readValue("\"" + genre.getName() + "\"", Genre.class);
 
 			softly = new SoftAssertions();
 			softly.assertThat(deserializedGenre).as("failed to deserialize: " + genre).isNotNull();
-			softly.assertThat(deserializedGenre).as("no enum match: " + genre).isNotEqualTo(AnimeGenre.UNKNOWN);
-			softly.assertThat(deserializedGenre.id()).as("mismatched ID: " + genre).isEqualTo(genre.malId);
+			softly.assertThat(deserializedGenre).as("no enum match: " + genre).isNotEqualTo(Genre.UNKNOWN);
+			softly.assertThat(deserializedGenre.animeId()).as("mismatched ID: " + genre).isEqualTo(genre.malId);
 			softly.assertThat(deserializedGenre.displayName()).as("mismatched name: " + genre).isEqualTo(genre.name);
 			softly.assertAll();
 		}
